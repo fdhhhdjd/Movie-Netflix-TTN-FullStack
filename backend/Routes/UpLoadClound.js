@@ -17,19 +17,18 @@ router.post("/upload", auth, (req, res) => {
       return res.status(400).json({ msg: "No files were uploaded." });
 
     const file = req.files.file;
-    if (file.size > 1024 * 1024) {
-      removeTmp(file.tempFilePath);
-      return res.status(400).json({ msg: "Size too large" });
-    }
+    // if (file.size > 1024 * 1024) {
+    //   removeTmp(file.tempFilePath);
+    //   return res.status(400).json({ msg: "Size too large" });
+    // }
 
     if (file.mimetype !== "image/jpeg" && file.mimetype !== "image/png") {
       removeTmp(file.tempFilePath);
       return res.status(400).json({ msg: "File format is incorrect." });
     }
-
     cloudinary.v2.uploader.upload(
       file.tempFilePath,
-      { folder: "post" },
+      { folder: "post", resource_type: "auto" },
       async (err, result) => {
         if (err) throw err;
 
@@ -48,11 +47,15 @@ router.post("/destroy", auth, (req, res) => {
     const { public_id } = req.body;
     if (!public_id) return res.status(400).json({ msg: "No images Selected" });
 
-    cloudinary.v2.uploader.destroy(public_id, async (err, result) => {
-      if (err) throw err;
+    cloudinary.v2.uploader.destroy(
+      public_id,
+      { resource_type: "video", invalidate: true },
+      async (err, result) => {
+        if (err) throw err;
 
-      res.json({ msg: "Deleted Image" });
-    });
+        res.json({ msg: "Deleted Image" });
+      }
+    );
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }
