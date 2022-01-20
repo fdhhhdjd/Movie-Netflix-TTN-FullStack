@@ -1,0 +1,15 @@
+const userCtrl = require("../Controllers/authController");
+const auth = require("../middleware/auth");
+const authAdmin = require("../middleware/authAdmin");
+const router = require("express").Router();
+router.post("/register", userCtrl.register);
+router.post("/login", userCtrl.login);
+router.post("/loginGoogle", userCtrl.LoginGoogle);
+router.get("/refresh_token", userCtrl.refreshToken);
+router.get("/logout", userCtrl.logout);
+router.patch("/changePassword", auth, userCtrl.ChangePassword);
+router.post("/forget", userCtrl.ForgetPassword);
+router.put("/password/reset/:token", userCtrl.resetPassword);
+router.get("/profile", auth, userCtrl.profile);
+router.patch("/profile/:id", auth, userCtrl.UploadProfile);
+module.exports = router;
