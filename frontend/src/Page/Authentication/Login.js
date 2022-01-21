@@ -7,6 +7,7 @@ import { logo } from "../../imports/image";
 const Login = () => {
   const navigator = useNavigate();
   const HandleGoogle = (response) => {};
+
   return (
     <>
       <AuthenticationStyle />
