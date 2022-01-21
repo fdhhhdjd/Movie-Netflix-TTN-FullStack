@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { backgroundWelcome } from "../../imports/image";
 export const HeaderWelcomeStyle = createGlobalStyle`
   h1,
   h2,
@@ -25,7 +26,7 @@ export const HeaderWelcomeStyle = createGlobalStyle`
     width: 100%;
     height: 93vh;
     position: relative;
-    background: url("https://i.ibb.co/vXqDmnh/background.jpg") no-repeat center
+    background: url(${backgroundWelcome}) no-repeat center
       center/cover;
   }
 
@@ -45,7 +46,7 @@ export const HeaderWelcomeStyle = createGlobalStyle`
   .showcase-top {
     position: relative;
     z-index: 2;
-    height: 90px;
+    height: 7rem;
   }
 
   .showcase-top img {
@@ -120,7 +121,7 @@ export const HeaderWelcomeStyle = createGlobalStyle`
   }
 
   .btn-xl {
-    font-size: 3rem;
+    font-size: 2.2rem;
     padding: 1.5rem 2.1rem;
     text-transform: uppercase;
   }

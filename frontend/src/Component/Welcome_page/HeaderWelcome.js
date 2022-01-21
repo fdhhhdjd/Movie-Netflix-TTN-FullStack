@@ -1,16 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MetaData } from "../../imports";
 import { HeaderWelcomeStyle } from "../../Style/Welcome/HeaderWelcomeStyle";
 import logo from "../../Image/logo.png";
+
 const HeaderWelcome = () => {
+  const navigator = useNavigate();
   return (
     <>
       <HeaderWelcomeStyle />
       <MetaData title="Welcome-Movie-TTN" />
       <header className="showcase">
         <div className="showcase-top">
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="logo" style={{ cursor: "pointer" }} />
           <Link to="/login" className="btn btn-rounded">
             Sign In
           </Link>

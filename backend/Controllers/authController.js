@@ -15,12 +15,14 @@ const userCtrl = {
       const user = await Users.findOne({ email });
       if (user)
         return res.json({
+          status: 400,
           success: false,
           msg: "The email already exists.",
         });
 
       if (password.length < 6)
         return res.json({
+          status: 400,
           success: false,
           msg: "Password is at least 6 characters long.",
         });
@@ -47,6 +49,7 @@ const userCtrl = {
       });
 
       res.json({
+        status: 200,
         success: true,
         accesstoken,
         msg: "Register Successfully 😍!!",
@@ -66,6 +69,7 @@ const userCtrl = {
         const accesstoken = createAccessToken({ id: user.id });
 
         res.json({
+          status: 200,
           success: true,
           msg: "Login Successfully 😉",
           refreshtoken: accesstoken,
@@ -81,11 +85,19 @@ const userCtrl = {
 
       const user = await Users.findOne({ email });
       if (!user)
-        return res.json({ success: false, msg: "User does not exist." });
+        return res.json({
+          status: 400,
+          success: false,
+          msg: "User does not exist.",
+        });
 
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch)
-        return res.json({ success: false, msg: "Incorrect password." });
+        return res.json({
+          status: 400,
+          success: false,
+          msg: "Incorrect password.",
+        });
 
       // If login success , create access token and refresh token
       const accessToken = createAccessToken({ id: user._id });
@@ -98,6 +110,7 @@ const userCtrl = {
       });
 
       res.json({
+        status: 200,
         success: true,
         accessToken,
         msg: "Login Successfully 😍 !",
@@ -109,7 +122,11 @@ const userCtrl = {
   logout: async (req, res) => {
     try {
       res.clearCookie("refreshtoken", { path: "/user/refresh_token" });
-      return res.json({ msg: "Logged out success" });
+      return res.json({
+        status: 200,
+        success: true,
+        msg: "Logged out success",
+      });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
@@ -117,8 +134,14 @@ const userCtrl = {
   profile: async (req, res) => {
     try {
       const user = await Users.findById(req.user.id).select("-password");
-      if (!user) return res.json({ msg: "User does not exist." });
+      if (!user)
+        return res.json({
+          status: 400,
+          success: false,
+          msg: "User does not exist.",
+        });
       res.json({
+        status: 200,
         success: true,
         user,
       });
@@ -128,17 +151,27 @@ const userCtrl = {
   },
   UploadProfile: async (req, res) => {
     try {
-      const { name, image } = req.body;
-      if (!image) return res.json({ msg: "No image upload" });
+      const { FullName, name, image, phone_number, sex, date } = req.body;
+      if (!image)
+        return res.json({
+          status: 400,
+          success: false,
+          msg: "No image upload",
+        });
 
       await Users.findOneAndUpdate(
         { _id: req.params.id },
         {
+          FullName,
           name,
           image,
+          phone_number,
+          sex,
+          date,
         }
       );
       res.json({
+        status: 200,
         success: true,
         msg: "Updated Profile Successfully !",
       });
@@ -152,21 +185,26 @@ const userCtrl = {
       const { password, oldPassword, confirmPassword } = req.body;
       if (!password)
         return res.json({
+          status: 400,
+
           success: false,
           msg: "Password are not empty.",
         });
       if (!confirmPassword)
         return res.json({
+          status: 400,
           success: false,
           msg: " Confirm are not empty.",
         });
       if (!oldPassword)
         return res.json({
+          status: 400,
           success: false,
           msg: "Old Password are not empty.",
         });
       if (password.length < 6)
         return res.json({
+          status: 400,
           success: false,
           msg: "Password is at least 6 characters long.",
         });
@@ -175,12 +213,14 @@ const userCtrl = {
       ).test(password);
       if (!reg) {
         return res.json({
+          status: 400,
           success: false,
           msg: "Includes 8 characters, uppercase, lowercase and some and special characters.",
         });
       }
       if (confirmPassword !== password) {
         return res.json({
+          status: 400,
           success: false,
           msg: "Password and confirm password does not match!",
         });
@@ -188,6 +228,7 @@ const userCtrl = {
       const isMatch = await bcrypt.compare(oldPassword, user.password);
       if (!isMatch)
         return res.json({
+          status: 400,
           success: false,
           msg: " OldPassword Incorrect",
         });
@@ -199,6 +240,7 @@ const userCtrl = {
         { new: true }
       );
       return res.json({
+        status: 200,
         success: true,
         msg: "Change Password Successfully 😂!",
       });
@@ -211,12 +253,14 @@ const userCtrl = {
     const { email } = req.body;
     if (!email) {
       res.json({
+        status: 400,
         success: false,
         msg: "Email are not empty. ",
       });
     }
     if (!user) {
       res.json({
+        status: 400,
         success: false,
         msg: "Account Not Exit",
       });
@@ -238,6 +282,7 @@ const userCtrl = {
       });
 
       res.status(200).json({
+        status: 200,
         success: true,
         msg: `Email sent to ${user.email} successfully`,
       });
@@ -262,13 +307,18 @@ const userCtrl = {
 
     if (!user) {
       return res.json({
+        status: 400,
         success: false,
         msg: "Reset Password Token is invalid or has been expired",
       });
     }
 
     if (req.body.password !== req.body.confirmPassword) {
-      return res.json({ success: false, msg: "Password does not password" });
+      return res.json({
+        status: 400,
+        success: false,
+        msg: "Password does not password",
+      });
     }
 
     user.password = req.body.password;
@@ -281,7 +331,8 @@ const userCtrl = {
       { password: passwords },
       { new: true }
     );
-    res.status(200).json({
+    res.json({
+      status: 200,
       success: true,
       msg: "Reset successfully",
     });
@@ -332,6 +383,7 @@ const userCtrl = {
                 newUser.save((err, data) => {
                   if (err) {
                     return res.json({
+                      status: 400,
                       msg: "Account Not Exist",
                     });
                   }
@@ -345,6 +397,7 @@ const userCtrl = {
                   });
                   const { _id, name, email, image } = newUser;
                   res.json({
+                    status: 200,
                     success: true,
                     token,
                     user: { _id, name, email, image },

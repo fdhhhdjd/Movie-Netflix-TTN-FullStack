@@ -5,6 +5,11 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const UserSchema = new mongoose.Schema(
   {
+    FullName: {
+      type: String,
+      required: false,
+      trim: true,
+    },
     name: {
       type: String,
       required: true,
@@ -29,6 +34,21 @@ const UserSchema = new mongoose.Schema(
         public_id: "121313112",
         url: "https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png",
       },
+    },
+    phone_number: {
+      type: Number,
+      required: false,
+      trim: true,
+    },
+    sex: {
+      type: Number,
+      required: false,
+      trim: true,
+    },
+    date: {
+      type: String,
+      required: false,
+      trim: true,
     },
     createdAt: {
       type: Date,

@@ -1,4 +1,6 @@
 import { createGlobalStyle } from "styled-components";
+import { background } from "../../imports/image";
+
 export const ForgetStyle = createGlobalStyle`
 .login {
     width: 100vw;
@@ -8,7 +10,7 @@ export const ForgetStyle = createGlobalStyle`
         rgba(0, 0, 0, 0) 0%,
         rgba(0, 0, 0, 1) 100%
       ),
-      url("http://mppmduse2pmpovwapp.azurewebsites.net/wp-content/uploads/2019/09/netflix-background-9.jpg");
+      url(${background});
     background-size: cover;
     position: relative;
   

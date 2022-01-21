@@ -51,9 +51,9 @@ const Tab = ({ activeTabName, onClickTab }) => {
             >
               <div className="tab-1-content-inner">
                 <div>
-                  <p className="text-lg">Xem Free 30 Day </p>
+                  <p className="text-lg">Movie-TTN-Dev </p>
                   <Link to="/login" className="btn btn-lg">
-                    watch Free 30 day
+                    Watch Free 30 day
                   </Link>
                 </div>
                 <img
@@ -79,7 +79,7 @@ const Tab = ({ activeTabName, onClickTab }) => {
                   What tv shows and movie anywhere,anytime{" "}
                 </p>
                 <Link to="/login" className="btn btn-lg">
-                  watch Free 30 day
+                  Watch Free 30 day
                 </Link>
               </div>
               <div className="tab-2-content-bottom">
