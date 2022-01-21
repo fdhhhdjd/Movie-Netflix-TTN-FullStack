@@ -14,6 +14,7 @@ function App() {
           <Route path="/signup" element={<Register />} />
           <Route path="/forget" element={<Forget />} />
           <Route path="/" element={<Welcome />} />
+          <Route path="/home" element={<Home />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

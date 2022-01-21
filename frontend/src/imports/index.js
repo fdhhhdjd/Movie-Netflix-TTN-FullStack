@@ -10,3 +10,4 @@ export { default as MetaData } from "../Page/MetaData/MetaData";
 export { default as HeaderWelcome } from "../Component/Welcome_page/HeaderWelcome";
 export { default as TabComponent } from "../Component/Welcome_page/TabComponent";
 export { default as Tab } from "../Component/Welcome_page/Tab";
+export { default as Header } from "../Component/Header/Header";

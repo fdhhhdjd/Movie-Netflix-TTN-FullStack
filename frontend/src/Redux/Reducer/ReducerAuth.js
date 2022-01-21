@@ -91,7 +91,7 @@ const AuthReducer = (state = initialState, action) => {
         forgetPassword: [],
       };
     case types.LOGIN_API_FAIL:
-    case types.LOGIN_GOOGLE_SUCCESS:
+    case types.LOGIN_GOOGLE_FAIL:
     case types.REFRESH_TOKEN_ADMIN_FAIL:
     case types.REFRESH_TOKEN_ADMIN_FAIL:
     case types.LOGOUT_API_FAIL:
