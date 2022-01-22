@@ -1,15 +1,15 @@
 const Users = require('../Model/userModel');
 
-const authAdmin = async (req, res, next) => {
+const authCustomer = async (req, res, next) => {
   try {
     // Get user information by id
     const user = await Users.findOne({
       _id: req.user.id,
     });
-    if (user.role === 0)
+    if (user.role === 1)
       return res.status(400).json({
         status: 400,
-        msg: 'Admin resources access denied',
+        msg: 'Customer resources access denied',
       });
 
     next();
@@ -21,4 +21,4 @@ const authAdmin = async (req, res, next) => {
   }
 };
 
-module.exports = authAdmin;
+module.exports = authCustomer;
