@@ -7,11 +7,6 @@ const UserSchema = new mongoose.Schema(
   {
     fullname: {
       type: String,
-      required: false,
-      trim: true,
-    },
-    name: {
-      type: String,
       required: true,
       trim: true,
     },
@@ -45,12 +40,16 @@ const UserSchema = new mongoose.Schema(
       required: false,
       trim: true,
     },
-    date: {
+    date_of_birth: {
       type: String,
       required: false,
       trim: true,
     },
     createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+    updatedAt: {
       type: Date,
       default: Date.now,
     },

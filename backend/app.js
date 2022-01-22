@@ -17,13 +17,19 @@ app.use(
 );
 
 //!router import
-const auth = require("./Routes/authRoute.js");
+const customer = require("./Routes/customerRoute.js");
 const upload = require("./Routes/UploadCloud.js");
+
 //!Link router Main
-app.use("/api/auth", auth);
+
+//Auhthenticate customer
+app.use("/api/auth/customer", customer);
+
+//upload
 app.use("/api", upload);
 
 app.use(express.static(path.join(__dirname, "../frontend/build")));
+
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
 });
