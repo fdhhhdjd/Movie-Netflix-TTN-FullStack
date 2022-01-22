@@ -37,10 +37,22 @@ export const AuthenticationStyle = createGlobalStyle`
       align-items: center;
       justify-content: center;
       color: white;
-  
+  .loginButton1{
+    height: 40px;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .loginButton2{
+    text-align: center;
+  }
       form {
         width: 350px;
-        height: 400px;
+        height: 360px;
         padding: 30px;
         border-radius: 5px;
         background-color: #0b0b0b;
@@ -78,8 +90,9 @@ export const AuthenticationStyle = createGlobalStyle`
           font-size: 18px;
           font-weight: 500;
           cursor: pointer;
-        }
-  
+        },
+     
+
         span {
           color: lightgray;
           b {

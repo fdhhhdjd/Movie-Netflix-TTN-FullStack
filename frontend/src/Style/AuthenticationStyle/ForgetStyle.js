@@ -48,7 +48,9 @@ export const ForgetStyle = createGlobalStyle`
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-  
+        .loginButton1{
+          text-align: center;
+        }
         input {
           height: 40px;
           border-radius: 5px;

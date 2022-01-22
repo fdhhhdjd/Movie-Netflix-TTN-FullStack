@@ -2,7 +2,7 @@ import React from "react";
 import { tabLabels } from "../../utils/ContentWelcome";
 import { Link } from "react-router-dom";
 import { TabStyle } from "../../Style/Welcome/TabStyle";
-
+import { one, two, three, four } from "../../imports/image";
 const Tab = ({ activeTabName, onClickTab }) => {
   const { CANCEL_AT_ANY_TIME, WATCH_ANYWHERE, PICK_YOUR_PRICE } = tabLabels;
   const renderTabTitle = (tabTitle, isActive, icon, id) => (
@@ -56,10 +56,7 @@ const Tab = ({ activeTabName, onClickTab }) => {
                     Watch Free 30 day
                   </Link>
                 </div>
-                <img
-                  src="https://i.ibb.co/J2xDJV7/tab-content-1.png"
-                  alt="logo"
-                />
+                <img src={one} alt="logo" />
               </div>
             </div>
           </div>
@@ -84,30 +81,21 @@ const Tab = ({ activeTabName, onClickTab }) => {
               </div>
               <div className="tab-2-content-bottom">
                 <div>
-                  <img
-                    src="https://i.ibb.co/DpdN7Gn/tab-content-2-1.png"
-                    alt="logo"
-                  />
+                  <img src={two} alt="logo" />
                   <p className="text-md">What on your TVs</p>
                   <p className="text-dark">
                     Smart Tvs,tablet,Xbox,chrome,Apple, play and more
                   </p>
                 </div>
                 <div>
-                  <img
-                    src="https://i.ibb.co/R3r1SPX/tab-content-2-2.png"
-                    alt="logo"
-                  />
+                  <img src={three} alt="logo" />
                   <p className="text-md">What on your Smart sand tablet</p>
                   <p className="text-dark">
                     Available one phone and tablet,wherever you go.
                   </p>
                 </div>
                 <div>
-                  <img
-                    src="https://i.ibb.co/gDhnwWn/tab-content-2-3.png"
-                    alt="logo"
-                  />
+                  <img src={four} alt="logo" />
                   <p className="text-md">What on your Laptop</p>
                   <p className="text-dark">What right on MovieDev.com</p>
                 </div>

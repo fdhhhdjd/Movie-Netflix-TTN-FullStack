@@ -1,4 +1,8 @@
 import logo from "../Image/logo.png";
 import background from "../Image/background.jpg";
 import backgroundWelcome from "../Image/backgroundwellcome.jpg";
-export { logo, background, backgroundWelcome };
+import one from "../Image/Welcome/1.png";
+import two from "../Image/Welcome/2.png";
+import three from "../Image/Welcome/3.png";
+import four from "../Image/Welcome/4.png";
+export { logo, background, backgroundWelcome, one, two, three, four };

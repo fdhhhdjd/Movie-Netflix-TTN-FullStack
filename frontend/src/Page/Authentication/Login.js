@@ -93,17 +93,26 @@ const Login = () => {
               name="password"
               id="password"
             />
-            <i
-              className="fa fa-eye-slash"
-              onClick={handleIsLock}
-              style={{ cursor: "pointer" }}
-            />
+            {isLock ? (
+              <i
+                className="fa fa-eye-slash"
+                onClick={handleIsLock}
+                style={{ cursor: "pointer" }}
+              />
+            ) : (
+              <i
+                className="fa fa-eye"
+                onClick={handleIsLock}
+                style={{ cursor: "pointer" }}
+              />
+            )}
+
             <span style={{ color: "red" }}>
               {errors.password?.type === "required" &&
                 "Mời bạn nhập đầy đủ mật khẩu. "}
             </span>
             {loading ? (
-              <span className="loginButton1">
+              <span className="loginButton2">
                 <LoadingSmall />
               </span>
             ) : (
@@ -112,14 +121,14 @@ const Login = () => {
             <span>
               New to Netflix ? &nbsp;
               <b
-                onClick={() => navigator("/signup")}
+                onClick={() => navigate("/signup")}
                 style={{ cursor: "pointer" }}
               >
                 Sign up now
               </b>
               &nbsp; Or &nbsp;
               <b
-                onClick={() => navigator("/forget")}
+                onClick={() => navigate("/forget")}
                 style={{ cursor: "pointer" }}
               >
                 Forget

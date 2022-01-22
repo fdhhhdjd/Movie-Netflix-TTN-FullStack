@@ -1,11 +1,43 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
-import { useNavigate } from "react-router-dom";
-import GoogleLogin from "react-google-login";
 import { MetaData } from "../../imports/index";
 import { logo } from "../../imports/image";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import swal from "sweetalert";
+import { clearErrors, ResetPassInitiate } from "../../Redux/Action/ActionAuth";
+const initialState = {
+  password: "",
+  confirmPassword: "",
+};
 const Reset = () => {
-  const navigator = useNavigate();
+  const [state, setState] = useState(initialState);
+  const { resetPassword } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { token } = useParams();
+  const { password, confirmPassword } = state;
+  const handleChangeInput = (e) => {
+    const { name, value } = e.target;
+    setState({ ...state, [name]: value });
+  };
+  const handleReset = (e) => {
+    e.preventDefault();
+    dispatch(ResetPassInitiate(token, password, confirmPassword));
+  };
+  useEffect(() => {
+    if (resetPassword.success === true) {
+      swal(`${resetPassword.msg}`, {
+        icon: "success",
+      });
+      dispatch(clearErrors());
+    } else if (resetPassword.success === false) {
+      swal(`${resetPassword.msg}`, {
+        icon: "error",
+      });
+      dispatch(clearErrors());
+    }
+  }, [resetPassword]);
   return (
     <>
       <AuthenticationStyle />
@@ -17,26 +49,41 @@ const Reset = () => {
           </div>
         </div>
         <div className="container">
-          <form>
-            <h1>Reset</h1>
-            <input type="password" placeholder="New Password" />
-            <span style={{ color: "red" }}>
-              Error opassssssssssssssssssssss
-            </span>
-            <input type="password" placeholder="Confirm Password" />
-            <span style={{ color: "red" }}>
-              Error opassssssssssssssssssssss
-            </span>
-            <button className="loginButton">Sign In</button>
-            <span>
-              New Password Netflix ? &nbsp;
-              <b>Thank For Love you 😇</b>
-            </span>
-            <small>
-              This page is protected by Google reCAPTCHA to ensure you're not a
-              bot. <b>Learn more</b>.
-            </small>
-          </form>
+          {resetPassword && resetPassword.success === true ? (
+            <button className="loginButton1" onClick={() => navigate("/login")}>
+              Thank Please Login Account 🥰
+            </button>
+          ) : (
+            <form onSubmit={handleReset}>
+              <h1>Reset</h1>
+              <input
+                type="password"
+                placeholder="New Password"
+                name="password"
+                value={password}
+                onChange={handleChangeInput}
+              />
+
+              <input
+                type="password"
+                type="password"
+                placeholder="confirmPassword"
+                name="confirmPassword"
+                value={confirmPassword}
+                onChange={handleChangeInput}
+              />
+
+              <button className="loginButton">Reset</button>
+              <span>
+                New Password Netflix ? &nbsp;
+                <b>Thank For Love you 😇</b>
+              </span>
+              <small>
+                This page is protected by Google reCAPTCHA to ensure you're not
+                a bot. <b>Learn more</b>.
+              </small>
+            </form>
+          )}
         </div>
       </div>
     </>

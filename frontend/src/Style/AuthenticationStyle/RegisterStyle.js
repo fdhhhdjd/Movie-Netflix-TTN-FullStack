@@ -48,19 +48,27 @@ export const RegisterStyle = createGlobalStyle`
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-  
+        .loginButton1{
+          text-align: center;
+        }
         input {
           height: 40px;
           border-radius: 5px;
           background-color: gray;
           color: white;
           padding-left: 10px;
+          position:relative;
   
           &::placeholder {
             color: lightgray;
           }
+         
         }
-  
+        .fa{
+          position:absolute;
+          margin-left: 20rem;
+          margin-bottom:1.4rem
+        }
         button {
           height: 40px;
           border-radius: 5px;

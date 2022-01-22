@@ -1,11 +1,21 @@
 import React from "react";
-import { Header } from "../../imports";
-
+import { Footer, Header, Watch } from "../../imports";
+import { Feature, List, MetaData } from "../../imports/index";
+import { HomeStyle } from "../../Style/StyleHome/HomeStyle";
 const Home = () => {
   return (
     <>
-      <h1>Home</h1>
-      <Header />
+      <HomeStyle />
+      <MetaData title={`Home-Page-Movie`} />
+      <div className="home">
+        <Header />
+        <Feature type="movie" />
+        <List />
+        <List />
+        <List />
+      </div>
+      <Watch />
+      <Footer />
     </>
   );
 };
