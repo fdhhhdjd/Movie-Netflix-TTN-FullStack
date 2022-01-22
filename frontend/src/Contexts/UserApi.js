@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import swal from "sweetalert";
 const UserApi = (token) => {
   const dispatch = useDispatch();
-  console.log(token, "oook");
   useEffect(() => {
     if (token.length > 0) {
       dispatch(ProfileInitiate(token));

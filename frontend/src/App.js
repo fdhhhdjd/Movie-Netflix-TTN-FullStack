@@ -30,7 +30,7 @@ function App() {
             }
           />
           <Route
-            path="/password/reset/:token"
+            path="/customer/password/reset/:token"
             element={
               <UserRoutes>
                 <Reset />

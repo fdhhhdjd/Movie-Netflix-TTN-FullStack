@@ -111,27 +111,31 @@ export const GetProfileFail = (error) => ({
 });
 
 //!Register
-export const RegisterInitiate = (name, email, password) => async (dispatch) => {
-  try {
-    dispatch(RegisterStart());
+export const RegisterInitiate =
+  (fullname, email, password) => async (dispatch) => {
+    try {
+      dispatch(RegisterStart());
 
-    const { data } = await axios.post(`/api/auth/register`, {
-      name,
-      email,
-      password,
-    });
+      const { data } = await axios.post(`/api/auth/customer/register`, {
+        fullname,
+        email,
+        password,
+      });
 
-    dispatch(RegisterSuccess(data));
-  } catch (error) {
-    dispatch(RegisterFail(error));
-  }
-};
+      dispatch(RegisterSuccess(data));
+    } catch (error) {
+      dispatch(RegisterFail(error));
+    }
+  };
 //!Login
 export const loginInitiate = (email, password) => async (dispatch) => {
   try {
     dispatch(LoginStart());
 
-    const { data } = await axios.post(`/api/auth/login`, { email, password });
+    const { data } = await axios.post(`/api/auth/customer/login`, {
+      email,
+      password,
+    });
 
     dispatch(LoginSuccess(data));
   } catch (error) {
@@ -160,7 +164,7 @@ export const LogoutInitiate = () => async (dispatch) => {
   try {
     dispatch(LogoutStart());
 
-    await axios.get(`/api/auth/logout`);
+    await axios.get(`/api/auth/customer/logout`);
     dispatch(
       LogoutSuccess(
         localStorage.removeItem("firstLogin"),
@@ -177,7 +181,7 @@ export const ForgetAdminInitiate = (email) => async (dispatch) => {
   try {
     dispatch(ForgetStart());
 
-    const { data } = await axios.post("/api/auth/forget", {
+    const { data } = await axios.post("/api/auth/customer/forget", {
       email,
     });
 
@@ -192,10 +196,13 @@ export const ResetPassInitiate =
     try {
       dispatch(ResetPassStart());
 
-      const { data } = await axios.put(`/api/auth/password/reset/${token}`, {
-        password,
-        confirmPassword,
-      });
+      const { data } = await axios.put(
+        `/api/auth/customer/password/reset/${token}`,
+        {
+          password,
+          confirmPassword,
+        }
+      );
 
       dispatch(ResetPassSuccess(data));
     } catch (error) {
@@ -208,7 +215,7 @@ export const RefreshTokenInitiate = (token) => async (dispatch) => {
   try {
     dispatch(RefreshTokenStart());
 
-    const { data } = await axios.get(`/api/auth/refresh_token`, {
+    const { data } = await axios.get(`/api/auth/customer/refresh_token`, {
       headers: { Authorization: token },
     });
 
@@ -222,7 +229,7 @@ export const ProfileInitiate = (token) => async (dispatch) => {
   try {
     dispatch(GetProfileStart());
 
-    const { data } = await axios.get(`/api/auth/profile`, {
+    const { data } = await axios.get(`/api/auth/customer/profile`, {
       headers: { Authorization: token },
     });
 
@@ -239,7 +246,7 @@ export const ChangeAdminInitiate =
     try {
       dispatch(ChangePasswordAdminStart());
       const { data } = await axios.patch(
-        `/api/auth/changePassword`,
+        `/api/auth/customer/changePassword`,
         { ...state },
         {
           headers: { Authorization: token },

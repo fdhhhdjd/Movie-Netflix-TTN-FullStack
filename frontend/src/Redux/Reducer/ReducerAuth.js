@@ -50,7 +50,7 @@ const AuthReducer = (state = initialState, action) => {
         loading: false,
         logout: true,
         refreshToken: action.payload,
-        refreshTokens: action.payload.refreshtoken,
+        refreshTokens: action.payload.accessToken,
       };
     case types.GET_PROFILE_SUCCESS:
       return {

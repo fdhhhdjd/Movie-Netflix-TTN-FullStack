@@ -10,10 +10,10 @@ import swal from "sweetalert";
 import { toast } from "react-toastify";
 const initialState = {
   fullname: "",
-  name: "",
+
   phone_number: "",
   sex: "",
-  date: "",
+  date_of_birth: "",
 };
 const EditProfile = () => {
   const state = useContext(GlobalState);
@@ -47,7 +47,7 @@ const EditProfile = () => {
       });
     try {
       await axios.patch(
-        `/api/auth/profile/${user._id}`,
+        `/api/auth/customer/profile/update`,
         { ...user, image: images },
         {
           headers: {
@@ -59,6 +59,7 @@ const EditProfile = () => {
         icon: "success",
       });
       setCallback(!callback);
+      navigate("/profile");
     } catch (error) {
       alert(error.response.data.msg);
     }
@@ -166,17 +167,7 @@ const EditProfile = () => {
                     onChange={handleChangeInput}
                   />
                 </div>
-                <div className="newUserItem">
-                  <label htmlFor="hoten">Full Name</label>
-                  <input
-                    type="text"
-                    placeholder="John Smith"
-                    id="name"
-                    name="name"
-                    value={user.name}
-                    onChange={handleChangeInput}
-                  />
-                </div>
+
                 <div className="newUserItem">
                   <label htmlFor="email">Email</label>
                   <input
@@ -207,9 +198,9 @@ const EditProfile = () => {
                     type="date"
                     data-date=""
                     data-date-format="DD MMMM YYYY"
-                    name="date"
-                    id="date"
-                    value={user.date}
+                    name="date_of_birth"
+                    id="date_of_birth"
+                    value={user.date_of_birth}
                     onChange={handleChangeInput}
                   />
                 </div>

@@ -23,8 +23,8 @@ const Register = () => {
   const dispatch = useDispatch();
   const { authRegister, loading } = useSelector((state) => state.auth);
   const handleSubmitForm = (data) => {
-    const { email, name, password } = data;
-    dispatch(RegisterInitiate(name, email, password));
+    const { email, fullname, password } = data;
+    dispatch(RegisterInitiate(fullname, email, password));
   };
 
   useEffect(() => {
@@ -51,16 +51,16 @@ const Register = () => {
           <form onSubmit={handleSubmit(handleSubmitForm)}>
             <h1>Register</h1>
             <input
-              {...register("name", { required: true, maxLength: 20 })}
+              {...register("fullname", { required: true, maxLength: 20 })}
               type="text"
               placeholder="UserName"
-              name="name"
-              id="name"
+              name="fullname"
+              id="fullname"
             />
             <span style={{ color: "red" }}>
-              {errors.name?.type === "required" &&
+              {errors.fullname?.type === "required" &&
                 "Mời bạn nhập đầy đủ tên vào!"}
-              {errors?.name?.type === "maxLength" &&
+              {errors?.fullname?.type === "maxLength" &&
                 "Tên của bạn không được quá 20 kí tự"}
             </span>
             <input

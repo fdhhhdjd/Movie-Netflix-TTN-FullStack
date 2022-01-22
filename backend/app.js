@@ -25,7 +25,7 @@ const upload = require("./Routes/UploadCloud.js");
 //Auhthenticate customer
 app.use("/api/auth/customer", customer);
 
-//upload
+//!upload
 app.use("/api", upload);
 
 app.use(express.static(path.join(__dirname, "../frontend/build")));

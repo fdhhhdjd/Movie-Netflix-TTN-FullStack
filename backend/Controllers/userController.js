@@ -1,9 +1,9 @@
-const Users = require('../Model/userModel');
-const bcrypt = require('bcrypt');
-const crypto = require('crypto');
-const jwt = require('jsonwebtoken');
-const { OAuth2Client } = require('google-auth-library');
-const sendEmail = require('./SendEmail');
+const Users = require("../Model/userModel");
+const bcrypt = require("bcrypt");
+const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
+const { OAuth2Client } = require("google-auth-library");
+const sendEmail = require("./SendEmail");
 const CLIENT_ID = process.env.GOOGLE_CLIENT_IDS;
 const client = new OAuth2Client(CLIENT_ID);
 
@@ -16,28 +16,28 @@ const userCtrl = {
 
       const user = await Users.findOne({ email });
       if (user)
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
-          msg: 'The email already exists.',
+          msg: "The email already exists.",
         });
 
       if (password.length < 6)
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
-          msg: 'Password is at least 6 characters long.',
+          msg: "Password is at least 6 characters long.",
         });
 
       //kiểm tra format password
       let reg = new RegExp(
-        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$'
+        "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$"
       ).test(password);
       if (!reg) {
-        return res.status(400).json({
+        return res.json({
           status: 400,
           message:
-            'Password must contain at least one number and one uppercase and lowercase and special letter, and at least 6 or more characters ',
+            "Password must contain at least one number and one uppercase and lowercase and special letter, and at least 6 or more characters ",
         });
       }
 
@@ -59,10 +59,10 @@ const userCtrl = {
       const accesstoken = createAccessToken({ id: newUser._id, role: 0 });
       const refreshtoken = createRefreshToken({ id: newUser._id, role: 0 });
 
-      res.cookie('refreshtoken', refreshtoken, {
+      res.cookie("refreshtoken", refreshtoken, {
         httpOnly: true,
         // path: '/api/auth/refresh_token',
-        path: '/',
+        path: "/",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
       });
 
@@ -70,10 +70,10 @@ const userCtrl = {
         status: 200,
         success: true,
         accesstoken,
-        msg: 'Register Successfully 😍!!',
+        msg: "Register Successfully 😍!!",
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         msg: err.message,
       });
@@ -84,17 +84,17 @@ const userCtrl = {
   refreshToken: (req, res) => {
     try {
       const rf_token = req.cookies.refreshtoken;
-      if (!rf_token) return res.json({ msg: 'Please Login or Register' });
+      if (!rf_token) return res.json({ msg: "Please Login or Register" });
 
       jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-        if (err) return res.json({ msg: 'Please Login or Register' });
+        if (err) return res.json({ msg: "Please Login or Register" });
 
         const accesstoken = createAccessToken({ id: user.id, role: user.role });
 
         res.json({
           status: 200,
           success: true,
-          msg: 'Login Successfully 😉',
+          msg: "Login Successfully 😉",
           accessToken: accesstoken,
         });
       });
@@ -110,28 +110,28 @@ const userCtrl = {
 
       const user = await Users.findOne({ email: email, role: 0 });
       if (!user)
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
-          msg: 'User does not exist.',
+          msg: "User does not exist.",
         });
 
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch)
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
-          msg: 'Incorrect password.',
+          msg: "Incorrect password.",
         });
 
       // If login success , create access token and refresh token
       const accessToken = createAccessToken({ id: user._id, role: 0 });
       const refreshtoken = createRefreshToken({ id: user._id, role: 0 });
 
-      res.cookie('refreshtoken', refreshtoken, {
+      res.cookie("refreshtoken", refreshtoken, {
         httpOnly: true,
         // path: '/api/auth/refresh_token',
-        path: '/',
+        path: "/",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
       });
 
@@ -139,10 +139,10 @@ const userCtrl = {
         status: 200,
         success: true,
         accessToken,
-        msg: 'Login Successfully 😍 !',
+        msg: "Login Successfully 😍 !",
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         msg: err.message,
       });
@@ -153,14 +153,14 @@ const userCtrl = {
   logout: async (req, res) => {
     try {
       // res.clearCookie('refreshtoken', { path: '/user/refresh_token' });
-      res.clearCookie('refreshtoken');
+      res.clearCookie("refreshtoken");
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Logged out success',
+        msg: "Logged out success",
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         msg: err.message,
       });
@@ -170,12 +170,12 @@ const userCtrl = {
   //xem profile
   profile: async (req, res) => {
     try {
-      const user = await Users.findById(req.user.id).select('-password');
+      const user = await Users.findById(req.user.id).select("-password");
       if (!user)
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
-          msg: 'User does not exist.',
+          msg: "User does not exist.",
         });
       res.status(200).json({
         status: 200,
@@ -183,7 +183,7 @@ const userCtrl = {
         user,
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         msg: err.message,
       });
@@ -195,10 +195,10 @@ const userCtrl = {
     try {
       const { fullname, image, phone_number, sex, date_of_birth } = req.body;
       if (!image)
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
-          msg: 'No image upload',
+          msg: "No image upload",
         });
 
       await Users.findOneAndUpdate(
@@ -214,10 +214,10 @@ const userCtrl = {
       res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Updated Profile Successfully !',
+        msg: "Updated Profile Successfully !",
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         msg: err.message,
       });
@@ -227,59 +227,59 @@ const userCtrl = {
   //chỉnh sửa mật khẩu
   ChangePassword: async (req, res) => {
     try {
-      const user = await Users.findById(req.user.id).select('+password');
+      const user = await Users.findById(req.user.id).select("+password");
       const { password, oldPassword, confirmPassword } = req.body;
       if (!password)
         return res.json({
           status: 400,
           success: false,
-          msg: 'Password are not empty.',
+          msg: "Password are not empty.",
         });
 
       if (!confirmPassword)
         return res.json({
           status: 400,
           success: false,
-          msg: ' Confirm are not empty.',
+          msg: " Confirm are not empty.",
         });
 
       if (!oldPassword)
         return res.json({
           status: 400,
           success: false,
-          msg: 'Old Password are not empty.',
+          msg: "Old Password are not empty.",
         });
 
       if (password.length < 6)
         return res.json({
           status: 400,
           success: false,
-          msg: 'Password is at least 6 characters long.',
+          msg: "Password is at least 6 characters long.",
         });
 
       let reg = new RegExp(
-        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$'
+        "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$"
       ).test(password);
       if (!reg) {
         return res.json({
           status: 400,
           success: false,
-          msg: 'Includes 6 characters, uppercase, lowercase and some and special characters.',
+          msg: "Includes 6 characters, uppercase, lowercase and some and special characters.",
         });
       }
       if (confirmPassword !== password) {
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
-          msg: 'Password and confirm password does not match!',
+          msg: "Password and confirm password does not match!",
         });
       }
       const isMatch = await bcrypt.compare(oldPassword, user.password);
       if (!isMatch)
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
-          msg: ' Old Password Incorrect',
+          msg: " Old Password Incorrect",
         });
       const salt = await bcrypt.genSalt(10);
       const passwordHash = await bcrypt.hash(password, salt);
@@ -291,10 +291,10 @@ const userCtrl = {
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Change Password Successfully 😂!',
+        msg: "Change Password Successfully 😂!",
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         msg: err.message,
       });
@@ -306,27 +306,27 @@ const userCtrl = {
     const user = await Users.findOne({ email: req.body.email, role: 0 });
     const { email } = req.body;
     if (!email) {
-      res.status(400).json({
+      res.json({
         status: 400,
         success: false,
-        msg: 'Email are not empty. ',
+        msg: "Email are not empty. ",
       });
     }
     if (!user) {
-      res.status(400).json({
+      res.json({
         status: 400,
         success: false,
-        msg: 'Account Not Exit',
+        msg: "Account Not Exit",
       });
     }
     const resetToken = user.getResetPasswordToken();
 
     await user.save({ validateBeforeSave: false });
 
-    const resetPasswordUrl = `${req.protocol}://${req.get(
-      'host'
-    )}/customer/password/reset/${resetToken}`;
-    // const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+    // const resetPasswordUrl = `${req.protocol}://${req.get(
+    //   "host"
+    // )}/customer/password/reset/${resetToken}`;
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}/customer/password/reset/${resetToken}`;
     const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
     try {
       await sendEmail({
@@ -354,9 +354,9 @@ const userCtrl = {
     const { password, confirmPassword } = req.body;
 
     const resetPasswordToken = crypto
-      .createHash('sha256')
+      .createHash("sha256")
       .update(req.params.token)
-      .digest('hex');
+      .digest("hex");
 
     const user = await Users.findOne({
       resetPasswordToken,
@@ -364,10 +364,10 @@ const userCtrl = {
     });
 
     if (!user) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         success: false,
-        msg: 'Reset Password Token is invalid or has been expired',
+        msg: "Reset Password Token is invalid or has been expired",
       });
     }
 
@@ -375,39 +375,39 @@ const userCtrl = {
       return res.json({
         status: 400,
         success: false,
-        msg: 'Password are not empty.',
+        msg: "Password are not empty.",
       });
 
     if (!confirmPassword)
       return res.json({
         status: 400,
         success: false,
-        msg: ' Confirm are not empty.',
+        msg: " Confirm are not empty.",
       });
 
     if (password.length < 6)
       return res.json({
         status: 400,
         success: false,
-        msg: 'Password is at least 6 characters long.',
+        msg: "Password is at least 6 characters long.",
       });
 
     let reg = new RegExp(
-      '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$'
+      "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$"
     ).test(password);
     if (!reg) {
       return res.json({
         status: 400,
         success: false,
-        msg: 'Includes 6 characters, uppercase, lowercase and some and special characters.',
+        msg: "Includes 6 characters, uppercase, lowercase and some and special characters.",
       });
     }
 
     if (confirmPassword !== password) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         success: false,
-        msg: 'Password and confirm password does not match!',
+        msg: "Password and confirm password does not match!",
       });
     }
 
@@ -424,7 +424,7 @@ const userCtrl = {
     res.status(200).json({
       status: 200,
       success: true,
-      msg: 'Reset successfully',
+      msg: "Reset successfully",
     });
   },
 
@@ -505,9 +505,9 @@ const userCtrl = {
 };
 
 const createAccessToken = (user) => {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '60m' });
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "60m" });
 };
 const createRefreshToken = (user) => {
-  return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' });
+  return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "7d" });
 };
 module.exports = userCtrl;
