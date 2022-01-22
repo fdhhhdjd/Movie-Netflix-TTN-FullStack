@@ -5,12 +5,7 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const UserSchema = new mongoose.Schema(
   {
-    FullName: {
-      type: String,
-      required: false,
-      trim: true,
-    },
-    name: {
+    fullname: {
       type: String,
       required: true,
       trim: true,
@@ -45,12 +40,16 @@ const UserSchema = new mongoose.Schema(
       required: false,
       trim: true,
     },
-    date: {
+    date_of_birth: {
       type: String,
       required: false,
       trim: true,
     },
     createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+    updatedAt: {
       type: Date,
       default: Date.now,
     },
