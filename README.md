@@ -1,5 +1,17 @@
 1. API dành cho admin
 
+\*Admin:
+
+- Đăng ký tài khoản admin: post --> http://localhost:5000/api/auth/admin/register
+- Đăng nhập tài khoản admin: post --> http://localhost:5000/api/auth/admin/login
+- Đăng xuất tài khoản: get --> http://localhost:5000/api/auth/admin/logout
+- Xem profile: get --> http://localhost:5000/api/auth/admin/profile
+- Chỉnh sửa profile: patch --> http://localhost:5000/api/auth/admin/profile/update
+- Refresh token : get --> http://localhost:5000/api/auth/admin/refresh_token
+- Thay đổi mật khẩu : patch --> http://localhost:5000/api/auth/admin/changePassword
+- Quên mật khẩu tài khoản admin: post --> http://localhost:5000/api/auth/admin/forget
+- Link reset mật khẩu khi quên: put --> http://localhost:5000/api/auth/admin/password/reset/:token
+
 \*Upload:
 
 - Upload video phim : post --> http://localhost:5000/api/uploadVideoFilm
@@ -17,8 +29,8 @@
 - Đăng ký tài khoản khách hàng: post --> http://localhost:5000/api/auth/customer/register
 - Đăng nhập tài khoản khách hàng : post --> http://localhost:5000/api/auth/customer/login
 - Đăng xuất tài khoản: get --> http://localhost:5000/api/auth/customer/logout
-- Xem profile của khách hàng: get --> http://localhost:5000/api/auth/customer/profile
-- Chỉnh sửa profile khách hàng: patch --> http://localhost:5000/api/auth/customer/profile/update
+- Xem profile: get --> http://localhost:5000/api/auth/customer/profile
+- Chỉnh sửa profile: patch --> http://localhost:5000/api/auth/customer/profile/update
 - Refresh token : get --> http://localhost:5000/api/auth/customer/refresh_token
 - Thay đổi mật khẩu : patch --> http://localhost:5000/api/auth/customer/changePassword
 - Quên mật khẩu tài khoản khách hàng: post --> http://localhost:5000/api/auth/customer/forget
