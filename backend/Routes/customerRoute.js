@@ -15,16 +15,16 @@ router.get('/refresh_token', userCtrl.refreshToken);
 //đăng xuất
 router.get('/logout', userCtrl.logout);
 
-//xem profile khách hàng
+//xem profile
 router.get('/profile', auth, authCustomer, userCtrl.profile);
 
-//cập nhập profile khách hàng
+//cập nhập profile
 router.patch('/profile/update', auth, authCustomer, userCtrl.updateProfile);
 
 //thay đổi mật khẩu
 router.patch('/changePassword', auth, authCustomer, userCtrl.ChangePassword);
 
-//quên mật khẩu
+//quên mật khẩu tài khoản khách hàng
 router.post('/forget', userCtrl.forgetPasswordCustomer);
 
 //link reset mật khẩu khi quên mật khẩu
