@@ -36,7 +36,6 @@ const userCtrl = {
       if (!reg) {
         return res.status(400).json({
           status: 400,
-          success: false,
           message:
             'Password must contain at least one number and one uppercase and lowercase and special letter, and at least 6 or more characters ',
         });
@@ -76,84 +75,6 @@ const userCtrl = {
     } catch (err) {
       return res.status(400).json({
         status: 400,
-        success: false,
-        msg: err.message,
-      });
-    }
-  },
-
-  //đăng ký tài khoản admin
-  registerAdmin: async (req, res) => {
-    try {
-      const { fullname, email, password, sex, date_of_birth, phone_number } =
-        req.body;
-
-      const user = await Users.findOne({ email });
-
-      //nếu email tồn tại
-      if (user) {
-        return res.status(400).json({
-          status: 400,
-          success: false,
-          msg: 'The email already exists',
-        });
-      }
-
-      //kiểm tra format pasword
-      let reg = new RegExp(
-        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$'
-      ).test(password);
-      if (!reg) {
-        return res.status(400).json({
-          status: 400,
-          success: false,
-          message:
-            'Password must contain at least one number and one uppercase and lowercase and special letter, and at least 6 or more characters',
-        });
-      }
-
-      //mã hóa mật khẩu
-      const passwordHash = await bcrypt.hash(password, 10);
-      const newUser = new Users({
-        fullname,
-        email,
-        password: passwordHash,
-        role: 1,
-        sex,
-        date_of_birth,
-        phone_number,
-      });
-
-      //lưu thông tin vừa đăng ký vào db
-      await newUser.save();
-
-      //Tạo token cho việc đăng nhập
-      const accesstoken = createAccessToken({
-        id: newUser._id,
-        role: newUser.role,
-      });
-      const refreshtoken = createRefreshToken({
-        id: newUser._id,
-        role: newUser.role,
-      });
-
-      //lưu refresh token vào cookie
-      res.cookie('refreshtoken', refreshtoken, {
-        httpOnly: true,
-        path: '/',
-        maxAge: 7 * 24 * 60 * 60 * 1000, //7d
-      });
-
-      return res.status(200).json({
-        status: 200,
-        success: true,
-        accesstoken,
-        msg: 'Register Successfully 😍!!',
-      });
-    } catch (err) {
-      return res.status(400).json({
-        status: 400,
-        success: false,
         msg: err.message,
       });
     }
@@ -174,15 +95,11 @@ const userCtrl = {
           status: 200,
           success: true,
           msg: 'Login Successfully 😉',
-          accesstoken,
+          accessToken: accesstoken,
         });
       });
     } catch (err) {
-      return res.status(400).json({
-        status: 400,
-        success: false,
-        msg: err.message,
-      });
+      return res.json({ msg: err.message });
     }
   },
 
@@ -208,7 +125,7 @@ const userCtrl = {
         });
 
       // If login success , create access token and refresh token
-      const accesstoken = createAccessToken({ id: user._id, role: 0 });
+      const accessToken = createAccessToken({ id: user._id, role: 0 });
       const refreshtoken = createRefreshToken({ id: user._id, role: 0 });
 
       res.cookie('refreshtoken', refreshtoken, {
@@ -221,65 +138,13 @@ const userCtrl = {
       res.status(200).json({
         status: 200,
         success: true,
-        accesstoken,
+        accessToken,
         msg: 'Login Successfully 😍 !',
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
-        success: false,
         msg: err.message,
-      });
-    }
-  },
-
-  //đăng nhập tài khoản admin
-  loginAdmin: async (req, res) => {
-    try {
-      const { email, password } = req.body;
-
-      //kiểm tra người dùng có phải là admin
-      const user = await Users.findOne({ email, role: 1 });
-      if (!user) {
-        return res.status(400).json({
-          status: 400,
-          success: false,
-          msg: 'User does not exist',
-        });
-      }
-
-      //nếu đúng email thì kiểm tra mật khẩu
-      const match = await bcrypt.compare(password, user.password);
-      if (!match) {
-        return res.status(400).json({
-          status: 400,
-          success: false,
-          msg: 'Incorrect password',
-        });
-      }
-
-      //nếu đăng nhập thành công, tạo token
-      const accesstoken = createAccessToken({ id: user.id, role: user.role });
-      const refreshtoken = createRefreshToken({ id: user.id, role: user.role });
-
-      //lưu vào cookie
-      res.cookie('refreshtoken', refreshtoken, {
-        httpOnly: true,
-        path: '/',
-        maxAge: 7 * 24 * 60 * 60 * 1000, //7d
-      });
-
-      return res.status(200).json({
-        status: 200,
-        success: true,
-        accesstoken,
-        msg: 'Login Successfully 😍 !',
-      });
-    } catch (err) {
-      return res.status(400).json({
-        status: 400,
-        success: false,
-        msg: er.message,
       });
     }
   },
@@ -461,54 +326,6 @@ const userCtrl = {
     const resetPasswordUrl = `${req.protocol}://${req.get(
       'host'
     )}/customer/password/reset/${resetToken}`;
-    // const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
-    const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
-    try {
-      await sendEmail({
-        email: user.email,
-        subject: `Tài Heo Dev Web`,
-        message,
-      });
-
-      return res.status(200).json({
-        status: 200,
-        success: true,
-        msg: `Email sent to ${user.email} successfully`,
-      });
-    } catch (error) {
-      user.resetPasswordToken = undefined;
-      user.resetPasswordExpire = undefined;
-
-      await user.save({ validateBeforeSave: true });
-      console.log(error);
-    }
-  },
-
-  //quên mật khẩu tài khoản admin
-  forgetPasswordAdmin: async (req, res) => {
-    const user = await Users.findOne({ email: req.body.email, role: 1 });
-    const { email } = req.body;
-    if (!email) {
-      res.status(400).json({
-        status: 400,
-        success: false,
-        msg: 'Email are not empty. ',
-      });
-    }
-    if (!user) {
-      res.status(400).json({
-        status: 400,
-        success: false,
-        msg: 'Account Not Exit',
-      });
-    }
-    const resetToken = user.getResetPasswordToken();
-
-    await user.save({ validateBeforeSave: false });
-
-    const resetPasswordUrl = `${req.protocol}://${req.get(
-      'host'
-    )}/admin/password/reset/${resetToken}`;
     // const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
     const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
     try {

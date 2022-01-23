@@ -24,7 +24,7 @@ router.patch('/profile/update', auth, authCustomer, userCtrl.updateProfile);
 //thay đổi mật khẩu
 router.patch('/changePassword', auth, authCustomer, userCtrl.ChangePassword);
 
-//quên mật khẩu tài khoản khách hàng
+//quên mật khẩu
 router.post('/forget', userCtrl.forgetPasswordCustomer);
 
 //link reset mật khẩu khi quên mật khẩu
