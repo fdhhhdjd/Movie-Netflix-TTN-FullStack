@@ -12,7 +12,7 @@ const Tab = ({ activeTabName, onClickTab }) => {
       className={`tab-item ${isActive && "tab-border"}`}
     >
       <i className={icon}></i>
-      <p>{tabTitle}</p>
+      <p>{tabTitle}dasdsadsad</p>
     </div>
   );
   return (
