@@ -14,7 +14,7 @@ router.post('/login', userCtrl.loginAdmin);
 router.get('/refresh_token', userCtrl.refreshToken);
 
 //đăng xuất
-router.get('/logout', userCtrl.logout);
+router.get('/logout', userCtrl.logoutAdmin);
 
 //xem profile
 router.get('/profile', auth, authAdmin, userCtrl.profile);
