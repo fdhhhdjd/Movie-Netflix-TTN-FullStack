@@ -3,6 +3,7 @@ export { default as Register } from "../Page/Authentication/Register";
 export { default as Forget } from "../Page/Authentication/Forget";
 export { default as Reset } from "../Page/Authentication/Reset";
 export { default as Loading } from "../Page/Loading/Loading";
+export { default as LoadingImg } from "../Page/Loading/LoadingImg";
 export { default as LoadingSmall } from "../Page/Loading/LoadingSmall";
 export { default as LoadingAnimation } from "../Page/Loading/LoadingAnimation";
 export { default as NotFound } from "../Page/NotFound/NotFound";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { LoadingSmall, Header, MetaData } from "../../imports/index";
+import { LoadingImg, Header, MetaData } from "../../imports/index";
 import { useContext } from "react";
 import { GlobalState } from "../../Contexts/GlobalState";
 import { EditProfileStyle } from "../../Style/ProfileStyle/EditProfileStyle";
@@ -139,7 +139,7 @@ const EditProfile = () => {
               />
               {loading ? (
                 <div id="file_img">
-                  <LoadingSmall />
+                  <LoadingImg />
                 </div>
               ) : (
                 <div id="file_img" style={styleUpload}>

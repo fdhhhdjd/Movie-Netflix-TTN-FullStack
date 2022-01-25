@@ -4,25 +4,7 @@ const LoadingSmall = () => {
   return (
     <>
       <LoadingSmallStyle />
-      <div className="load-page">
-        <div className="loader">
-          <div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <span className="loader"></span>
     </>
   );
 };
