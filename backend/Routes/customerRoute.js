@@ -13,7 +13,7 @@ router.post('/login', userCtrl.loginCustomer);
 router.get('/refresh_token', userCtrl.refreshToken);
 
 //đăng xuất
-router.get('/logout', userCtrl.logout);
+router.get('/logout', userCtrl.logoutCustomer);
 
 //xem profile
 router.get('/profile', auth, authCustomer, userCtrl.profile);
