@@ -24,7 +24,7 @@ const Profile = () => {
             <div>
               <div>
                 <h4>Full Name</h4>
-                <p>{auth.fullname || "Chưa thêm đầy đủ tên"}</p>
+                <p>{auth.fullname || "Chưa thêm đầy đủ tên !"}</p>
               </div>
               <div>
                 <h4>Email</h4>
@@ -32,7 +32,7 @@ const Profile = () => {
               </div>
               <div>
                 <h4>Phone</h4>
-                <p>0{auth.phone_number || "Chưa thêm số điện thoại"}</p>
+                <p>{auth.phone_number || "Chưa thêm số điện thoại !"}</p>
               </div>
               <div>
                 <h4>Sex</h4>
@@ -45,7 +45,7 @@ const Profile = () => {
               <div>
                 <h4>Date</h4>
 
-                <p>{auth.date_of_birth || "Chưa thêm Ngày sinh"}</p>
+                <p>{auth.date_of_birth || "Chưa thêm Ngày sinh !"}</p>
               </div>
               <div>
                 <h4>Joined On</h4>

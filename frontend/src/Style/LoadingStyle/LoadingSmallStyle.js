@@ -1,35 +1,29 @@
 import { createGlobalStyle } from "styled-components";
 
 export const LoadingSmallStyle = createGlobalStyle`
-.loader {
-    width: 48px;
-    height: 48px;
-    display: inline-block;
-    position: relative;
+.load-page{
+  background: #fff;
+  overflow: hidden;
+}
+.loader{
+  width: 300px;
+  height: 300px;
+  margin: auto;
+}
+.loader div{
+  width: calc(100% - 15px);
+  height: calc(100% - 15px);
+  border: 2px solid #fff;
+  border-top: 2px solid crimson;
+  border-radius: 50%;
+  animation: rotate 10s linear infinite alternate-reverse;
+}
+@keyframes rotate{
+  50%{
+      transform: rotate(80deg);
   }
-  .loader::after,
-  .loader::before {
-    content: '';  
-    box-sizing: border-box;
-    width: 48px;
-    height: 48px;
-    border: 2px solid #FFF;
-    position: absolute;
-    left: 0;
-    top: 0;
-    animation: scaleOut 2s ease-in-out infinite;
+  100%{
+      transform: rotate(360deg);
   }
-  .loader::after {
-    border-color: #FF3D00;
-    animation-delay: 1s;
-  }
-  
-  @keyframes scaleOut {
-    0% {
-      transform: scale(0);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
+}
 `;
