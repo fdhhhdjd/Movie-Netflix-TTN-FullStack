@@ -31,4 +31,7 @@ router.post('/forget', userCtrl.forgetPasswordAdmin);
 //link reset mật khẩu khi quên mật khẩu
 router.put('/password/reset/:token', userCtrl.resetPassword);
 
+//đăng nhập gg tài khoản admin
+router.post('/loginGoogle', userCtrl.LoginGoogleAdmin);
+
 module.exports = router;

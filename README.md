@@ -11,6 +11,7 @@
 - Thay đổi mật khẩu : patch --> http://localhost:5000/api/auth/admin/changePassword
 - Quên mật khẩu tài khoản admin: post --> http://localhost:5000/api/auth/admin/forget
 - Link reset mật khẩu khi quên: put --> http://localhost:5000/api/auth/admin/password/reset/:token
+- Đăng nhập google tài khoản admin: post --> http://localhost:5000/api/auth/admin/loginGoogle
 
 \*Upload:
 
@@ -35,5 +36,6 @@
 - Thay đổi mật khẩu : patch --> http://localhost:5000/api/auth/customer/changePassword
 - Quên mật khẩu tài khoản khách hàng: post --> http://localhost:5000/api/auth/customer/forget
 - Link reset mật khẩu khi quên: put --> http://localhost:5000/api/auth/customer/password/reset/:token
+- Đăng nhập google tài khoản khách hàng: post --> http://localhost:5000/api/auth/customer/loginGoogle
 
 3. API dùng chung (không cần đăng nhập)
