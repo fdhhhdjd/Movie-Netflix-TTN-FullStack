@@ -30,7 +30,7 @@ router.post('/forget', userCtrl.forgetPasswordCustomer);
 //link reset mật khẩu khi quên mật khẩu
 router.put('/password/reset/:token', userCtrl.resetPassword);
 
-//đăng nhập gg chưa sửa
-// router.post('/loginGoogle', userCtrl.LoginGoogle);
+//đăng nhập gg tài khoản khách hàng
+router.post('/loginGoogle', userCtrl.LoginGoogleCustomer);
 
 module.exports = router;
