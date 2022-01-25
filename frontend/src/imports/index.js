@@ -24,3 +24,5 @@ export { default as FeedBack } from "../Page/Feedback/FeedBack";
 export { default as Profile } from "../Component/Profile/Profile";
 export { default as EditProfile } from "../Component/Profile/EditProfile";
 export { default as ChangePassword } from "../Component/Profile/ChangePassword";
+export { default as Movie } from "../Page/Movie/Movie";
+export { default as HeaderMovie } from "../Component/MovieItem/HeaderMovie";

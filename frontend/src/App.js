@@ -14,7 +14,7 @@ import {
   EditProfile,
   ChangePassword,
 } from "./imports/index";
-import { Home, Welcome, Login } from "./imports/LazyRouter";
+import { Home, Welcome, Login, Movie } from "./imports/LazyRouter";
 function App() {
   return (
     <>
@@ -66,6 +66,14 @@ function App() {
             element={
               <UserRoute>
                 <Home />
+              </UserRoute>
+            }
+          />
+          <Route
+            path="/movie"
+            element={
+              <UserRoute>
+                <Movie />
               </UserRoute>
             }
           />

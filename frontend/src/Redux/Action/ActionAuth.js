@@ -147,7 +147,7 @@ export const loginGoogleInitiate = (response) => {
   return async function (dispatch) {
     dispatch(LoginGoogleStart());
     await axios
-      .post("/api/auth/loginGoogle", { tokenId: response.tokenId })
+      .post("/api/auth/customer/loginGoogle", { tokenId: response.tokenId })
       .then((user) => {
         dispatch(
           LoginGoogleSuccess(user.data),

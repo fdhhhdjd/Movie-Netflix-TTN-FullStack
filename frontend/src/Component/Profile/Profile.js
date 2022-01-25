@@ -32,7 +32,7 @@ const Profile = () => {
               </div>
               <div>
                 <h4>Phone</h4>
-                <p>{auth.phone_number || "Chưa thêm số điện thoại"}</p>
+                <p>0{auth.phone_number || "Chưa thêm số điện thoại"}</p>
               </div>
               <div>
                 <h4>Sex</h4>

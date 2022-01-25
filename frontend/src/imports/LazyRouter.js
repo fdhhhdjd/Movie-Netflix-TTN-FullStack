@@ -14,3 +14,8 @@ export const Login = lazy(() => {
     setTimeout(() => resolve(import("../Page/Authentication/Login")), 1000);
   });
 });
+export const Movie = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("../Page/Movie/Movie")), 1000);
+  });
+});
