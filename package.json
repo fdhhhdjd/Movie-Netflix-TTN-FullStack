@@ -26,6 +26,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.4",
     "nodemailer": "^6.7.2",
+    "nodemailer-express-handlebars": "^4.0.0",
     "react-helmet": "^6.1.0",
     "serve": "^13.0.2",
     "stripe": "^8.195.0",
