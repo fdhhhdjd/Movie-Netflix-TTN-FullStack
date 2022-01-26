@@ -92,7 +92,7 @@ const userCtrl = {
 
       //nếu email tồn tại
       if (user) {
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
           msg: 'The email already exists',
@@ -104,7 +104,7 @@ const userCtrl = {
         '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$'
       ).test(password);
       if (!reg) {
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
           message:
@@ -151,7 +151,7 @@ const userCtrl = {
         msg: 'Register Successfully 😍!!',
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         success: false,
         msg: err.message,
@@ -178,7 +178,7 @@ const userCtrl = {
         });
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         success: false,
         msg: err.message,
@@ -241,7 +241,7 @@ const userCtrl = {
       //kiểm tra người dùng có phải là admin
       const user = await Users.findOne({ email, role: 1 });
       if (!user) {
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
           msg: 'User does not exist',
@@ -251,7 +251,7 @@ const userCtrl = {
       //nếu đúng email thì kiểm tra mật khẩu
       const match = await bcrypt.compare(password, user.password);
       if (!match) {
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
           msg: 'Incorrect password',
@@ -269,14 +269,14 @@ const userCtrl = {
         maxAge: 7 * 24 * 60 * 60 * 1000, //7d
       });
 
-      return res.status(200).json({
+      return res.json({
         status: 200,
         success: true,
         accesstoken,
         msg: 'Login Successfully 😍 !',
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         success: false,
         msg: er.message,
@@ -489,14 +489,14 @@ const userCtrl = {
     const user = await Users.findOne({ email: req.body.email, role: 1 });
     const { email } = req.body;
     if (!email) {
-      res.status(400).json({
+      res.json({
         status: 400,
         success: false,
         msg: 'Email are not empty. ',
       });
     }
     if (!user) {
-      res.status(400).json({
+      res.json({
         status: 400,
         success: false,
         msg: 'Account Not Exit',
@@ -506,10 +506,10 @@ const userCtrl = {
 
     await user.save({ validateBeforeSave: false });
 
-    const resetPasswordUrl = `${req.protocol}://${req.get(
-      'host'
-    )}/admin/password/reset/${resetToken}`;
-    // const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+    // const resetPasswordUrl = `${req.protocol}://${req.get(
+    //   'host'
+    // )}/admin/password/reset/${resetToken}`;
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
     const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
     try {
       await sendEmail({
@@ -518,7 +518,7 @@ const userCtrl = {
         message,
       });
 
-      return res.status(200).json({
+      return res.json({
         status: 200,
         success: true,
         msg: `Email sent to ${user.email} successfully`,

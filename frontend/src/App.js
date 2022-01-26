@@ -13,8 +13,10 @@ import {
   Profile,
   EditProfile,
   ChangePassword,
+  ForgetAdmin,
+  ResetAdmin,
 } from "./imports/index";
-import { Home, Welcome, Login } from "./imports/LazyRouter";
+import { Home, Welcome, Login,LoginAdmin,Admin,} from "./imports/LazyRouter";
 function App() {
   return (
     <>
@@ -102,7 +104,42 @@ function App() {
             }
           />
           <Route path="*" element={<NotFound />} />
+        
+        {/* ADMIN */}
+        <Route
+            path="/loginadmin"
+            element={
+              
+                <LoginAdmin />
+              
+            }
+          />
+        <Route
+            path="/admin"
+            element={
+              
+                <Admin />
+              
+            }
+          />
+        <Route
+            path="/forgetadmin"
+            element={
+              
+                <ForgetAdmin />
+              
+            }
+          />
+        <Route
+            path="/password/reset/:token"
+            element={
+              
+                <ResetAdmin />
+              
+            }
+          />
         </Routes>
+
       </Suspense>
     </>
   );

@@ -14,3 +14,14 @@ export const Login = lazy(() => {
     setTimeout(() => resolve(import("../Page/Authentication/Login")), 1000);
   });
 });
+export const LoginAdmin = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("../Page/Admins/LoginAdmin")), 1000);
+  });
+});
+export const Admin = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("../Page/Admins/Admin")), 1000);
+  });
+});
+

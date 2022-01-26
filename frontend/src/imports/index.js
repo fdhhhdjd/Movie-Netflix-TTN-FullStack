@@ -24,3 +24,7 @@ export { default as FeedBack } from "../Page/Feedback/FeedBack";
 export { default as Profile } from "../Component/Profile/Profile";
 export { default as EditProfile } from "../Component/Profile/EditProfile";
 export { default as ChangePassword } from "../Component/Profile/ChangePassword";
+//Admin
+export {default as LoginAdmin} from "../Page/Admins/LoginAdmin";
+export {default as ForgetAdmin} from "../Component/Admins/ForgetAdmin";
+export {default as ResetAdmin} from "../Component/Admins/ResetAdmin";

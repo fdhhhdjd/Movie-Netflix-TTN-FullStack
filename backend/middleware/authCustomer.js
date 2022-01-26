@@ -7,14 +7,14 @@ const authCustomer = async (req, res, next) => {
       _id: req.user.id,
     });
     if (user.role === 1)
-      return res.status(400).json({
+      return res.json({
         status: 400,
         msg: 'Customer resources access denied',
       });
 
     next();
   } catch (err) {
-    return res.status(400).json({
+    return res.json({
       status: 400,
       msg: err.message,
     });
