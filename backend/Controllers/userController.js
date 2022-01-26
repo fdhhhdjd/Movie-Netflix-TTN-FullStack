@@ -6,6 +6,7 @@ const { OAuth2Client } = require('google-auth-library');
 const sendEmail = require('./SendEmail');
 const CLIENT_ID = process.env.GOOGLE_CLIENT_IDS;
 const client = new OAuth2Client(CLIENT_ID);
+const path = require('path');
 
 const userCtrl = {
   //đăng ký tài khoản khách hàng
@@ -480,12 +481,27 @@ const userCtrl = {
       'host'
     )}/customer/password/reset/${resetToken}`;
     // const resetPasswordUrl = `${process.env.FRONTEND_URL}/customer/password/reset/${resetToken}`;
-    const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
+    //const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
     try {
       await sendEmail({
         email: user.email,
-        subject: `Tài Heo Dev Web`,
-        message,
+        subject: `Forgot Password`,
+        template: 'forgot-password',
+        attachments: [
+          {
+            filename: 'netflix.jpg',
+            path: path.resolve('./views', 'images', 'netflix.jpg'),
+            cid: 'netflix_logo',
+          },
+          {
+            filename: 'question.png',
+            path: path.resolve('./views', 'images', 'question.png'),
+            cid: 'question_img',
+          },
+        ],
+        context: {
+          resetPasswordUrl,
+        },
       });
 
       return res.status(200).json({
@@ -528,12 +544,27 @@ const userCtrl = {
       'host'
     )}/admin/password/reset/${resetToken}`;
     // const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
-    const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
+    //const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
     try {
       await sendEmail({
         email: user.email,
-        subject: `Tài Heo Dev Web`,
-        message,
+        subject: `Forgot Password`,
+        template: 'forgot-password',
+        attachments: [
+          {
+            filename: 'netflix.jpg',
+            path: path.resolve('./views', 'images', 'netflix.jpg'),
+            cid: 'netflix_logo',
+          },
+          {
+            filename: 'question.png',
+            path: path.resolve('./views', 'images', 'question.png'),
+            cid: 'question_img',
+          },
+        ],
+        context: {
+          resetPasswordUrl,
+        },
       });
 
       return res.status(200).json({
