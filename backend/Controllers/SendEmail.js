@@ -1,6 +1,7 @@
 const nodeMailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
 const path = require('path');
+const { getMaxListeners } = require('process');
 
 require('dotenv').config();
 const sendEmail = async (options) => {
@@ -10,10 +11,10 @@ const sendEmail = async (options) => {
     secure: false, // use SSL
     service: process.env.SMPT_SERVICE,
     auth: {
-      // user: process.env.SMPT_MAIL,
-      // pass: process.env.SMPT_PASSWORD,
-      user: 'slthinhtu2@gmail.com',
-      pass: 'lhehdoqwrfmgyxzx',
+      // user: 'nguyentientai10@gmail.com',
+      // pass: 'gdvjyxpfixzopsht',
+      user: process.env.SMPT_MAIL,
+      pass: process.env.SMPT_PASSWORD,
     },
     tls: {
       rejectUnauthorized: false,
