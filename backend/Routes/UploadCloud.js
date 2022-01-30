@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const cloudinary = require('cloudinary');
 const auth = require('../middleware/auth');
+const authAdmin = require('../middleware/authAdmin.js');
 const fs = require('fs');
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -9,7 +10,7 @@ cloudinary.config({
 });
 console.log(process.env.CLOUD_NAME, 'cloudinary connect');
 
-// Upload image user
+// Upload ảnh người dùng
 router.post('/uploadImageUser', auth, (req, res) => {
   try {
     console.log(req.files);
@@ -42,7 +43,7 @@ router.post('/uploadImageUser', auth, (req, res) => {
   }
 });
 
-// Delete image user
+// Xóa ảnh người dùng trên cloud
 router.post('/destroyImageUser', auth, (req, res) => {
   try {
     const { public_id } = req.body;
@@ -58,8 +59,8 @@ router.post('/destroyImageUser', auth, (req, res) => {
   }
 });
 
-//upload video film
-router.post('/uploadVideoFilm', auth, (req, res) => {
+//upload video phim
+router.post('/uploadVideoFilm', auth, authAdmin, (req, res) => {
   try {
     console.log(req.files);
     if (!req.files || Object.keys(req.files).length === 0)
@@ -82,8 +83,8 @@ router.post('/uploadVideoFilm', auth, (req, res) => {
   }
 });
 
-//delete video film
-router.post('/destroyVideoFilm', auth, (req, res) => {
+//delete video phim trên cloud
+router.post('/destroyVideoFilm', auth, authAdmin, (req, res) => {
   try {
     const { public_id } = req.body;
     if (!public_id)
@@ -98,6 +99,55 @@ router.post('/destroyVideoFilm', auth, (req, res) => {
         res.json({ msg: 'Deleted Video Film' });
       }
     );
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
+});
+
+// Upload ảnh đạo diễn
+router.post('/uploadImageDirector', auth, authAdmin, (req, res) => {
+  try {
+    console.log(req.files);
+    if (!req.files || Object.keys(req.files).length === 0)
+      return res.status(400).json({ msg: 'No files were uploaded.' });
+
+    const file = req.files.file;
+    if (file.size > 1024 * 1024) {
+      removeTmp(file.tempFilePath);
+      return res.status(400).json({ msg: 'Size too large' });
+    }
+
+    if (file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png') {
+      removeTmp(file.tempFilePath);
+      return res.status(400).json({ msg: 'File format is incorrect.' });
+    }
+    cloudinary.v2.uploader.upload(
+      file.tempFilePath,
+      { folder: 'director' },
+      async (err, result) => {
+        if (err) throw err;
+
+        removeTmp(file.tempFilePath);
+
+        res.json({ public_id: result.public_id, url: result.secure_url });
+      }
+    );
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
+});
+
+// Xóa ảnh người dùng trên cloud
+router.post('/destroyImageDirector', auth, authAdmin, (req, res) => {
+  try {
+    const { public_id } = req.body;
+    if (!public_id) return res.status(400).json({ msg: 'No images Selected' });
+
+    cloudinary.v2.uploader.destroy(public_id, async (err, result) => {
+      if (err) throw err;
+
+      res.json({ msg: 'Deleted Image' });
+    });
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }

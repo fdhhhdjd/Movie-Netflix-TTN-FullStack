@@ -19,6 +19,9 @@ app.use(
 //!router import
 const admin = require('./Routes/adminRoute.js');
 const customer = require('./Routes/customerRoute.js');
+const director = require('./Routes/directorRouter.js');
+const category = require('./Routes/categoryRoute.js');
+const seriesFilm = require('./Routes/seriesFilmRoute.js');
 const upload = require('./Routes/UploadCloud.js');
 
 //!Link router Main
@@ -29,7 +32,16 @@ app.use('/api/auth/admin', admin);
 //Auhthenticate customer
 app.use('/api/auth/customer', customer);
 
-//!upload
+//Director
+app.use('/api/director', director);
+
+//Category
+app.use('/api/category', category);
+
+//Series Film
+app.use('/api/seriesFilm', seriesFilm);
+
+//Upload
 app.use('/api', upload);
 
 app.use(express.static(path.join(__dirname, '../frontend/build')));
