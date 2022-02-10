@@ -22,6 +22,7 @@ const customer = require('./Routes/customerRoute.js');
 const director = require('./Routes/directorRouter.js');
 const category = require('./Routes/categoryRoute.js');
 const seriesFilm = require('./Routes/seriesFilmRoute.js');
+const film = require('./Routes/filmRoute.js');
 const upload = require('./Routes/UploadCloud.js');
 
 //!Link router Main
@@ -40,6 +41,9 @@ app.use('/api/category', category);
 
 //Series Film
 app.use('/api/seriesFilm', seriesFilm);
+
+//Film
+app.use('/api/film', film);
 
 //Upload
 app.use('/api', upload);

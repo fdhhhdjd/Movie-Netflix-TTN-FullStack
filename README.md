@@ -21,6 +21,8 @@
 - Xóa video phim trên cloud : post --> http://localhost:5000/api/destroyVideoFilm
 - Upload ảnh đạo diễn : post --> http://localhost:5000/api/uploadImageDirector
 - Xóa ảnh đạo diễn trên cloud : post --> http://localhost:5000/api/destroyImageDirector
+- Upload ảnh phim : post --> http://localhost:5000/api/uploadImageFilm
+- Xóa ảnh phim : post --> http://localhost:5000/api/destroyImageFilm
 
 \*Director:
 
@@ -43,6 +45,11 @@
 - Tạo thêm 1 tập phim: post --> http://localhost:5000/api/seriesFilm/add
 - Cập nhập 1 tập phim: put --> http://localhost:5000/api/seriesFilm/update/:id
 - Xóa 1 tập phim: delete --> http://localhost:5000/api/seriesFilm/delete/:id
+
+\*Film
+
+- Xem thông tin tất cả bộ phim: get --> http://localhost:5000/api/film/all
+- Thêm thông tin bộ phim: post --> http://localhost:5000/api/film/add
 
 2. API dành cho khách hàng
 
@@ -76,3 +83,7 @@
 \*Series Film
 
 - Xem tất cả tập phim: get --> http://localhost:5000/api/seriesFilm/all
+
+\*Film
+
+- Xem thông tin tất cả bộ phim: get --> http://localhost:5000/api/film/all
