@@ -10,4 +10,16 @@ router.get('/all', auth, filmCtrl.getAllFilm);
 //Thêm thông tin bộ phim
 router.post('/add', auth, authAdmin, filmCtrl.addFilm);
 
+//Chỉnh sửa thông tin bộ phim
+router.patch('/update/:id', auth, authAdmin, filmCtrl.updateFilm);
+
+//Xóa bộ phim
+router.delete('/delete/:id', auth, authAdmin, filmCtrl.deleteFilm);
+
+//Xem thông tin chi tiết bộ phim
+router.get('/detail/:id', auth, filmCtrl.getDetailFilm);
+
+// //lấy ra những bộ phim theo thể loại
+// router.get('/find', auth, filmCtrl.getFilmByCategory);
+
 module.exports = router;
