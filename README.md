@@ -50,6 +50,10 @@
 
 - Xem thông tin tất cả bộ phim: get --> http://localhost:5000/api/film/all
 - Thêm thông tin bộ phim: post --> http://localhost:5000/api/film/add
+- Chỉnh sửa thông tin bộ phim: patch --> http://localhost:5000/api/film/update/:id
+- Xóa bộ phim : delete --> http://localhost:5000/api/film/delete/:id
+- Thông tin chi tiết của bộ phim: get --> http://localhost:5000/api/film/detail/:id
+<!-- - Tìm bộ phim theo thể loại: get : http://localhost:5000/api/film/find?category=62049dda656d8c7511aaab77 -->
 
 2. API dành cho khách hàng
 

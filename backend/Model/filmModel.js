@@ -63,20 +63,20 @@ const FilmSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    favourite: {
-      type: Boolean,
-      default: false,
-    },
-    status: {
-      type: Boolean,
-      default: false,
-    },
-    average_score: {
-      type: Number,
-      min: 0,
-      max: 5,
-      default: 0,
-    },
+    // favourite: {
+    //   type: Boolean,
+    //   default: false,
+    // },
+    // status: {
+    //   type: Boolean,
+    //   default: false,
+    // },
+    // average_score: {
+    //   type: Number,
+    //   min: 0,
+    //   max: 5,
+    //   default: 0,
+    // },
     createdAt: {
       type: Date,
       default: Date.now,
