@@ -1,4 +1,5 @@
 const Films = require('../Model/filmModel.js');
+const mongoose = require('mongoose');
 
 const filmCtrl = {
   //Xem thông tin của tất cả bộ phim
@@ -46,30 +47,60 @@ const filmCtrl = {
     }
   },
 
-  // //Tìm kiếm bộ phim theo thể loại
-  // async getFilmByCategory(req, res) {
-  //   try {
-  //     const categoryId = req.query.category;
-  //     console.log(categoryId);
-  //     const data = await Films.find({ category: [categoryId] })
-  //       .populate('director')
-  //       .populate('category')
-  //       .populate('seriesFilm');
+  //Tìm kiếm bộ phim theo thể loại
+  async getFilmByCategory(req, res) {
+    try {
+      const categoryId = req.params.id;
 
-  //     return res.status(200).json({
-  //       status: 200,
-  //       success: true,
-  //       data,
-  //       msg: 'Get film by category successfully',
-  //     });
-  //   } catch (err) {
-  //     return res.status(400).json({
-  //       status: 400,
-  //       success: false,
-  //       msg: 'Failed to get film by category',
-  //     });
-  //   }
-  // },
+      const data = await Films.find({
+        // category: mongoose.Types.ObjectId(categoryId),
+        category: categoryId,
+      })
+        .populate('director')
+        .populate('category')
+        .populate('seriesFilm');
+
+      return res.status(200).json({
+        status: 200,
+        success: true,
+        data,
+        msg: 'Get film by category successfully',
+      });
+    } catch (err) {
+      return res.status(400).json({
+        status: 400,
+        success: false,
+        msg: 'Failed to get film by category',
+      });
+    }
+  },
+
+  //Tìm kiếm bộ phim theo đạo diễn
+  async getFilmByDirector(req, res) {
+    try {
+      const directorId = req.params.id;
+
+      const data = await Films.find({
+        director: directorId,
+      })
+        .populate('director')
+        .populate('category')
+        .populate('seriesFilm');
+
+      return res.status(200).json({
+        status: 200,
+        success: true,
+        data,
+        msg: 'Get film by director successfully',
+      });
+    } catch (err) {
+      return res.status(400).json({
+        status: 400,
+        success: false,
+        msg: 'Failed to get film by director',
+      });
+    }
+  },
 
   //thêm 1 bộ phim
   async addFilm(req, res) {
