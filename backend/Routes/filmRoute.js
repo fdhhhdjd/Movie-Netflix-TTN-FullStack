@@ -19,7 +19,10 @@ router.delete('/delete/:id', auth, authAdmin, filmCtrl.deleteFilm);
 //Xem thông tin chi tiết bộ phim
 router.get('/detail/:id', auth, filmCtrl.getDetailFilm);
 
-// //lấy ra những bộ phim theo thể loại
-// router.get('/find', auth, filmCtrl.getFilmByCategory);
+//lấy ra những bộ phim theo thể loại
+router.get('/find/category/:id', auth, filmCtrl.getFilmByCategory);
+
+//lấy ra những bộ phim theo đạo diễn
+router.get('/find/director/:id', auth, filmCtrl.getFilmByDirector);
 
 module.exports = router;
