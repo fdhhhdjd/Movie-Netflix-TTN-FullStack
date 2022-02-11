@@ -63,10 +63,6 @@ const FilmSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    // favourite: {
-    //   type: Boolean,
-    //   default: false,
-    // },
     // status: {
     //   type: Boolean,
     //   default: false,
