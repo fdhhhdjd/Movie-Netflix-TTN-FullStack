@@ -48,6 +48,32 @@ const ratingCtrl = {
       });
     }
   },
+
+  // //Lấy ra điểm đánh giá trung bình và số lượt đánh giá của bộ phim
+  // async getAvgScoreAndNumRating(req, res) {
+  //   try {
+  //     const filmId = req.params.filmId;
+  //     const data = await Ratings.find({ film: filmId });
+  //     var avg_score = 0;
+  //     for (var i = 0; i < data.length; i++) {
+  //       avg_score += data[i].score;
+  //     }
+  //     avg_score = (avg_score / data.length).toFixed(1);
+  //     return res.status(200).json({
+  //       status: 200,
+  //       success: true,
+  //       msg: 'Get avg score and num ratings of film successfully',
+  //       avg_score,
+  //       numRatings: data.length,
+  //     });
+  //   } catch (err) {
+  //     return res.status(400).json({
+  //       status: 400,
+  //       success: false,
+  //       msg: 'Failed to get avg score and num ratings',
+  //     });
+  //   }
+  // },
 };
 
 module.exports = ratingCtrl;

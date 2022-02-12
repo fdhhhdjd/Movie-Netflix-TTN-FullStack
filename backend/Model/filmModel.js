@@ -44,35 +44,33 @@ const FilmSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Director',
-        require: true,
+        required: true,
       },
     ],
     category: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
-        require: true,
+        required: true,
       },
     ],
     seriesFilm: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'SeriesFilm',
-      require: true,
+      required: true,
     },
     price: {
       type: Number,
       default: 0,
     },
-    // status: {
-    //   type: Boolean,
-    //   default: false,
-    // },
-    // average_score: {
-    //   type: Number,
-    //   min: 0,
-    //   max: 5,
-    //   default: 0,
-    // },
+    filmLength: {
+      type: String,
+      required: true,
+    },
+    ageLimit: {
+      type: String,
+      required: true,
+    },
     createdAt: {
       type: Date,
       default: Date.now,

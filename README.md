@@ -52,13 +52,17 @@
 - Thêm thông tin bộ phim: post --> http://localhost:5000/api/film/add
 - Chỉnh sửa thông tin bộ phim: patch --> http://localhost:5000/api/film/update/:id
 - Xóa bộ phim : delete --> http://localhost:5000/api/film/delete/:id
-- Thông tin chi tiết của bộ phim: get --> http://localhost:5000/api/film/detail/:id
+- Thông tin chi tiết của bộ phim và thông tin đánh giá của bộ phim: get --> http://localhost:5000/api/film/detail/:id
 - Tìm bộ phim theo thể loại: get --> http://localhost:5000/api/film/find/category/:id
 - Tìm bộ phim theo đạo diễn: get --> http://localhost:5000/api/film/find/director/:id
 
 \*Favourite
 
 - Xem danh sách yêu thích của toàn bộ người dùng: get --> http://localhost:5000/api/favourite/all
+
+\*Rating
+
+- Xem đánh giá của toàn bộ người dùng: get --> http://localhost:5000/api/rating/all
 
 2. API dành cho khách hàng
 
@@ -96,7 +100,7 @@
 \*Film
 
 - Xem thông tin tất cả bộ phim: get --> http://localhost:5000/api/film/all
-- Thông tin chi tiết của bộ phim: get --> http://localhost:5000/api/film/detail/:id
+- Thông tin chi tiết của bộ phim và thông tin đánh giá của bộ phim: get --> http://localhost:5000/api/film/detail/:id
 - Tìm bộ phim theo thể loại: get --> http://localhost:5000/api/film/find/category/:id
 - Tìm bộ phim theo đạo diễn: get --> http://localhost:5000/api/film/find/director/:id
 
@@ -104,9 +108,8 @@
 
 - Xem danh sách yêu thích của người dùng: get --> http://localhost:5000/api/favourite/getList
 - Thêm bộ phim vào danh sách yêu thích: post --> http://localhost:5000/api/favourite/add/:idFilm
-- Xóa bộ phim khỏi danh sách yêu thích: delete --> http://localhost:5000/api/favourite/delete/:id
+- Xóa bộ phim khỏi danh sách yêu thích: delete --> http://localhost:5000/api/favourite/delete/:idFilm
 
 \*Rating
 
-- Xem đánh giá của toàn bộ người dùng: get --> http://localhost:5000/api/rating/all
 - Đánh giá sao cho bộ phim: post --> http://localhost:5000/api/rating/add/:filmId

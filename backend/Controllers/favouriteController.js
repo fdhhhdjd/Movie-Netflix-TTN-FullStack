@@ -76,8 +76,8 @@ const favouriteCtrl = {
   //Xóa bộ phim khỏi danh sách yêu thích của người dùng
   async removeFilmFromListFavourite(req, res) {
     try {
-      const id = req.params.id;
-      await Favourites.findByIdAndDelete({ _id: id });
+      const idFilm = req.params.idFilm;
+      await Favourites.findByIdAndDelete({ film: idFilm });
       return res.status(200).json({
         status: 200,
         success: true,
