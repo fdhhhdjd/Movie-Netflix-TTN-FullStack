@@ -54,6 +54,7 @@ const seriesFilmCtrl = {
         { _id: id },
         {
           name: name,
+          updatedAt: Date.now,
         }
       );
 
