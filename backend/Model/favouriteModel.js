@@ -4,12 +4,12 @@ const favouriteSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      require: true,
+      required: true,
     },
     film: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Film',
-      require: true,
+      required: true,
     },
     createdAt: {
       type: Date,

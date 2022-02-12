@@ -363,6 +363,7 @@ const userCtrl = {
           phone_number,
           sex,
           date_of_birth,
+          updatedAt: Date.now,
         }
       );
       res.status(200).json({
@@ -439,7 +440,7 @@ const userCtrl = {
       const passwordHash = await bcrypt.hash(password, salt);
       const userPassword = await Users.findByIdAndUpdate(
         { _id: user.id },
-        { password: passwordHash },
+        { password: passwordHash, updatedAt: Date.now },
         { new: true }
       );
       return res.status(200).json({

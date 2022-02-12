@@ -64,6 +64,10 @@
 
 - Xem đánh giá của toàn bộ người dùng: get --> http://localhost:5000/api/rating/all
 
+\*Comment
+
+- Xem tất cả bình luận: get --> http://localhost:5000/api/comment/all
+
 2. API dành cho khách hàng
 
 \*Upload:
@@ -113,3 +117,10 @@
 \*Rating
 
 - Đánh giá sao cho bộ phim: post --> http://localhost:5000/api/rating/add/:filmId
+
+\*Comment
+
+- Xem bình luận của bộ phim: get --> http://localhost:5000/api/comment/get/:filmId
+- Bình luận bộ phim: post --> http://localhost:5000/api/comment/add/:filmId
+- Chỉnh sửa bình luận: patch --> http://localhost:5000/api/comment/update/:id
+- Xóa bình luận: delete --> http://localhost:5000/api/comment/delete/:id

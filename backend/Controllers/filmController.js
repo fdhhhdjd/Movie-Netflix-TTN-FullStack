@@ -193,6 +193,7 @@ const filmCtrl = {
           price,
           ageLimit,
           filmLength,
+          updatedAt: Date.now,
         }
       );
 

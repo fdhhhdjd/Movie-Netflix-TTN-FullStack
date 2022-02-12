@@ -79,6 +79,7 @@ const directorCtrl = {
           name: name,
           image: image,
           description: description,
+          updatedAt: Date.now,
         }
       );
 
