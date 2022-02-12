@@ -26,7 +26,7 @@ router.post(
 
 //Xóa bộ phim khỏi danh sách yêu thích
 router.delete(
-  '/delete/:id',
+  '/delete/:idFilm',
   auth,
   authCustomer,
   favouriteCtrl.removeFilmFromListFavourite

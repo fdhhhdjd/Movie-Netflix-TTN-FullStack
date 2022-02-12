@@ -11,4 +11,7 @@ router.get('/all', auth, authAdmin, ratingCtrl.getAllRating);
 //Đánh giá sao cho bộ phim
 router.post('/add/:filmId', auth, authCustomer, ratingCtrl.ratingFilm);
 
+//Xem điểm đánh giá trung bình và số lượt đánh giá của bộ phim
+// router.get('/:filmId', auth, ratingCtrl.getAvgScoreAndNumRating);
+
 module.exports = router;

@@ -1,5 +1,5 @@
 const Films = require('../Model/filmModel.js');
-const mongoose = require('mongoose');
+const Ratings = require('../Model/ratingModel.js');
 
 const filmCtrl = {
   //Xem thông tin của tất cả bộ phim
@@ -32,10 +32,21 @@ const filmCtrl = {
         .populate('director')
         .populate('category')
         .populate('seriesFilm');
+      const rating = await Ratings.find({ film: id });
+      var avg_score = 0;
+      for (var i = 0; i < rating.length; i++) {
+        avg_score += rating[i].score;
+      }
+      avg_score = (avg_score / rating.length).toFixed(1);
+      if (isNaN(avg_score)) {
+        avg_score = 0;
+      }
       return res.status(200).json({
         status: 200,
         success: true,
         data,
+        avg_score: avg_score,
+        numRatings: rating.length,
         msg: 'Get detail film successfully',
       });
     } catch (err) {
@@ -114,6 +125,9 @@ const filmCtrl = {
         director,
         category,
         seriesFilm,
+        ageLimit,
+        filmLength,
+        price,
       } = req.body;
 
       const newFilm = new Films({
@@ -125,6 +139,9 @@ const filmCtrl = {
         director,
         category,
         seriesFilm,
+        ageLimit,
+        filmLength,
+        price,
       });
 
       //save mongodb
@@ -158,6 +175,8 @@ const filmCtrl = {
         category,
         seriesFilm,
         price,
+        ageLimit,
+        filmLength,
       } = req.body;
 
       await Films.findByIdAndUpdate(
@@ -172,6 +191,8 @@ const filmCtrl = {
           category,
           seriesFilm,
           price,
+          ageLimit,
+          filmLength,
         }
       );
 
