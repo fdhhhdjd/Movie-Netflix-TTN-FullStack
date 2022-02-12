@@ -77,7 +77,7 @@ const favouriteCtrl = {
   async removeFilmFromListFavourite(req, res) {
     try {
       const idFilm = req.params.idFilm;
-      await Favourites.findByIdAndDelete({ film: idFilm });
+      await Favourites.deleteMany({ film: idFilm });
       return res.status(200).json({
         status: 200,
         success: true,
