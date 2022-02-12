@@ -24,6 +24,7 @@ const category = require('./Routes/categoryRoute.js');
 const seriesFilm = require('./Routes/seriesFilmRoute.js');
 const film = require('./Routes/filmRoute.js');
 const favourite = require('./Routes/favouriteRoute.js');
+const rating = require('./Routes/ratingRoute.js');
 const upload = require('./Routes/UploadCloud.js');
 
 //!Link router Main
@@ -48,6 +49,9 @@ app.use('/api/film', film);
 
 //Favourite
 app.use('/api/favourite', favourite);
+
+//Rating
+app.use('/api/rating', rating);
 
 //Upload
 app.use('/api', upload);

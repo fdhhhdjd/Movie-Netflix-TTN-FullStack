@@ -30,7 +30,7 @@
 - Xem thông tin chi tiết đạo diễn: get --> http://localhost:5000/api/director/:id
 - Thêm mới thông tin đạo diễn : post --> http://localhost:5000/api/director/add
 - Chỉnh sửa thông tin đạo diễn : patch --> http://localhost:5000/api/director/update/:id
-- Xóa thông tin đạo diễn : patch --> http://localhost:5000/api/director/delete/:id
+- Xóa thông tin đạo diễn : delete --> http://localhost:5000/api/director/delete/:id
 
 \*Category
 
@@ -105,3 +105,8 @@
 - Xem danh sách yêu thích của người dùng: get --> http://localhost:5000/api/favourite/getList
 - Thêm bộ phim vào danh sách yêu thích: post --> http://localhost:5000/api/favourite/add/:idFilm
 - Xóa bộ phim khỏi danh sách yêu thích: delete --> http://localhost:5000/api/favourite/delete/:id
+
+\*Rating
+
+- Xem đánh giá của toàn bộ người dùng: get --> http://localhost:5000/api/rating/all
+- Đánh giá sao cho bộ phim: post --> http://localhost:5000/api/rating/add/:filmId
