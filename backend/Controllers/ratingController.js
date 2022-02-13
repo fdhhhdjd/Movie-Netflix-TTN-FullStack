@@ -27,7 +27,7 @@ const ratingCtrl = {
       const filmId = req.params.filmId;
       const { score } = req.body;
 
-      const rated = await Ratings.findOne({ user: userId });
+      const rated = await Ratings.findOne({ user: userId, film: filmId });
       if (rated) {
         return res.json({
           status: 400,
