@@ -23,6 +23,8 @@
 - Xóa ảnh đạo diễn trên cloud : post --> http://localhost:5000/api/destroyImageDirector
 - Upload ảnh phim : post --> http://localhost:5000/api/uploadImageFilm
 - Xóa ảnh phim : post --> http://localhost:5000/api/destroyImageFilm
+- Upload ảnh hình thức thanh toán : post --> http://localhost:5000/api/uploadImagePayment
+- Xóa ảnh hình thức thanh toán : post --> http://localhost:5000/api/destroyImagePayment
 
 \*Director:
 
@@ -67,6 +69,14 @@
 \*Comment
 
 - Xem tất cả bình luận: get --> http://localhost:5000/api/comment/all
+
+\*Payment
+
+- Xem tất cả hình thức thanh toán: get --> http://localhost:5000/api/payment/all
+- Xem chi tiết hình thức thanh toán: get --> http://localhost:5000/api/payment/:id
+- Thêm hình thức thanh toán mới: post --> http://localhost:5000/api/payment/add
+- Chỉnh sửa hình thức thanh toán: patch --> http://localhost:5000/api/payment/update/:id
+- Xóa hình thức thanh toán: delete --> http://localhost:5000/api/payment/delete/:id
 
 2. API dành cho khách hàng
 
@@ -124,3 +134,8 @@
 - Bình luận bộ phim: post --> http://localhost:5000/api/comment/add/:filmId
 - Chỉnh sửa bình luận: patch --> http://localhost:5000/api/comment/update/:id
 - Xóa bình luận: delete --> http://localhost:5000/api/comment/delete/:id
+
+\*Payment
+
+- Xem tất cả hình thức thanh toán: get --> http://localhost:5000/api/payment/all
+- Xem chi tiết hình thức thanh toán: get --> http://localhost:5000/api/payment/:id

@@ -26,6 +26,7 @@ const film = require('./Routes/filmRoute.js');
 const favourite = require('./Routes/favouriteRoute.js');
 const rating = require('./Routes/ratingRoute.js');
 const comment = require('./Routes/commentRoute.js');
+const payment = require('./Routes/paymentRoute.js');
 const upload = require('./Routes/UploadCloud.js');
 
 //!Link router Main
@@ -56,6 +57,9 @@ app.use('/api/rating', rating);
 
 //Comment
 app.use('/api/comment', comment);
+
+//Mode of payment
+app.use('/api/payment', payment);
 
 //Upload
 app.use('/api', upload);

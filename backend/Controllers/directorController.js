@@ -35,7 +35,7 @@ const directorCtrl = {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to get all directors',
+        msg: 'Failed to get detail director',
       });
     }
   },
