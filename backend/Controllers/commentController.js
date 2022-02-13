@@ -4,7 +4,7 @@ const commentCtrl = {
   //Xem tất cả bình luận
   async getAllComment(req, res) {
     try {
-      const data = await Comments.find({});
+      const data = await Comments.find({}).populate('user').populate('film');
       return res.status(200).json({
         status: 200,
         success: true,
@@ -24,7 +24,7 @@ const commentCtrl = {
   async getCommentsOfFilm(req, res) {
     try {
       const filmId = req.params.filmId;
-      const data = await Comments.find({ film: filmId });
+      const data = await Comments.find({ film: filmId }).populate('user');
       return res.status(200).json({
         status: 200,
         success: true,
