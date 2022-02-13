@@ -37,10 +37,12 @@ const filmCtrl = {
       for (var i = 0; i < rating.length; i++) {
         avg_score += rating[i].score;
       }
-      avg_score = (avg_score / rating.length).toFixed(1);
-      if (isNaN(avg_score)) {
+      if (avg_score == 0 && rating.length == 0) {
         avg_score = 0;
+      } else {
+        avg_score = (avg_score / rating.length).toFixed(1);
       }
+
       return res.status(200).json({
         status: 200,
         success: true,
