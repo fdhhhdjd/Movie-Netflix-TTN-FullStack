@@ -50,6 +50,9 @@
 - Thông tin chi tiết của bộ phim và thông tin đánh giá của bộ phim: get --> http://localhost:5000/api/film/detail/:id
 - Tìm bộ phim theo thể loại: get --> http://localhost:5000/api/film/find/category/:id
 - Tìm bộ phim theo đạo diễn: get --> http://localhost:5000/api/film/find/director/:id
+- Thêm một tập phim: post --> http://localhost:5000/api/film/:id/addEpisode
+- Cập nhập tập phim: patch --> http://localhost:5000/api/film/update/:filmId/updateEpisode/:episodeId
+- Xóa 1 tập phim: delete --> http://localhost:5000/api/film/delete/:filmId/deleteEpisode/:episodeId
 
 \*Favourite
 
