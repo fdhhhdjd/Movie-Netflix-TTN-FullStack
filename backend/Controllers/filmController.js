@@ -159,6 +159,45 @@ const filmCtrl = {
     }
   },
 
+  //Thêm tập phim
+  async addEpisodeOfFilm(req, res) {
+    try {
+      const id = req.params.id;
+      const {
+        episode,
+        public_id_video,
+        url_video,
+        public_id_image,
+        url_image,
+      } = req.body;
+      const film = await Films.findById({ _id: id });
+      if (film) {
+        const newEpisode = {
+          episode,
+          public_id_video,
+          url_video,
+          public_id_image,
+          url_image,
+        };
+        film.seriesFilm.push(newEpisode);
+
+        await film.save();
+
+        return res.status(200).json({
+          status: 200,
+          success: true,
+          msg: `Added episode ${episode} successfully`,
+        });
+      }
+    } catch (err) {
+      return res.status(200).json({
+        status: 200,
+        success: true,
+        msg: `Failed to add episode`,
+      });
+    }
+  },
+
   //chỉnh sửa thông tin bộ phim
   async updateFilm(req, res) {
     try {
@@ -201,10 +240,51 @@ const filmCtrl = {
         msg: 'Updated film successfully',
       });
     } catch (err) {
+      return res.status(400).json({
+        status: 400,
+        success: false,
+        msg: 'Failed to update film',
+      });
+    }
+  },
+
+  //Chỉnh sửa tập phim
+  async updateEpisodeOfFilm(req, res) {
+    try {
+      const filmId = req.params.filmId;
+      const episodeId = req.params.episodeId;
+      const {
+        episode,
+        public_id_video,
+        url_video,
+        public_id_image,
+        url_image,
+      } = req.body;
+      const film = await Films.findById({ _id: filmId });
+      if (film) {
+        for (var i = 0; i < film.seriesFilm.length; i++) {
+          if (film.seriesFilm[i].id == episodeId) {
+            film.seriesFilm[i].episode = episode;
+            film.seriesFilm[i].public_id_video = public_id_video;
+            film.seriesFilm[i].url_video = url_video;
+            film.seriesFilm[i].public_id_video = public_id_image;
+            film.seriesFilm[i].url_video = url_image;
+          }
+        }
+      }
+
+      await film.save();
+
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Failed to update film',
+        msg: 'Updated episode of film successfully',
+      });
+    } catch (err) {
+      return res.status(400).json({
+        status: 400,
+        success: false,
+        msg: 'Failed to update episode of film',
       });
     }
   },
@@ -222,10 +302,40 @@ const filmCtrl = {
         msg: 'Deleted film successfully',
       });
     } catch (err) {
+      return res.status(400).json({
+        status: 400,
+        success: false,
+        msg: 'Failed to delete film',
+      });
+    }
+  },
+
+  //Xóa 1 tập của bộ phim
+  async deleteEpisodeOfFilm(req, res) {
+    try {
+      const filmId = req.params.filmId;
+      const episodeId = req.params.episodeId;
+      const film = await Films.findById({ _id: filmId });
+      if (film) {
+        for (var i = 0; i < film.seriesFilm.length; i++) {
+          if (film.seriesFilm[i].id == episodeId) {
+            film.seriesFilm.splice(i, 1);
+          }
+        }
+      }
+
+      await film.save();
+
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Failed to delete film',
+        msg: 'Deleted episode of film successfully',
+      });
+    } catch (err) {
+      return res.status(400).json({
+        status: 400,
+        success: false,
+        msg: 'Failed to deleted episode of film',
       });
     }
   },
