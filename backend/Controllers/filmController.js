@@ -1,5 +1,5 @@
 const Films = require('../Model/filmModel.js');
-const mongoose = require('mongoose');
+const Ratings = require('../Model/ratingModel.js');
 
 const filmCtrl = {
   //Xem thông tin của tất cả bộ phim
@@ -7,8 +7,7 @@ const filmCtrl = {
     try {
       const data = await Films.find({})
         .populate('director')
-        .populate('category')
-        .populate('seriesFilm');
+        .populate('category');
       return res.status(200).json({
         status: 200,
         success: true,
@@ -30,12 +29,24 @@ const filmCtrl = {
       const id = req.params.id;
       const data = await Films.find({ _id: id })
         .populate('director')
-        .populate('category')
-        .populate('seriesFilm');
+        .populate('category');
+      const rating = await Ratings.find({ film: id });
+      var avg_score = 0;
+      for (var i = 0; i < rating.length; i++) {
+        avg_score += rating[i].score;
+      }
+      if (avg_score == 0 && rating.length == 0) {
+        avg_score = 0;
+      } else {
+        avg_score = (avg_score / rating.length).toFixed(1);
+      }
+
       return res.status(200).json({
         status: 200,
         success: true,
         data,
+        avg_score: avg_score,
+        numRatings: rating.length,
         msg: 'Get detail film successfully',
       });
     } catch (err) {
@@ -57,8 +68,7 @@ const filmCtrl = {
         category: categoryId,
       })
         .populate('director')
-        .populate('category')
-        .populate('seriesFilm');
+        .populate('category');
 
       return res.status(200).json({
         status: 200,
@@ -84,8 +94,7 @@ const filmCtrl = {
         director: directorId,
       })
         .populate('director')
-        .populate('category')
-        .populate('seriesFilm');
+        .populate('category');
 
       return res.status(200).json({
         status: 200,
@@ -108,23 +117,29 @@ const filmCtrl = {
       const {
         title,
         description,
-        date_production,
+        year_production,
+        country_production,
         image_film,
-        video_film,
         director,
         category,
         seriesFilm,
+        ageLimit,
+        filmLength,
+        price,
       } = req.body;
 
       const newFilm = new Films({
         title,
         description,
-        date_production,
+        year_production,
+        country_production,
         image_film,
-        video_film,
         director,
         category,
         seriesFilm,
+        ageLimit,
+        filmLength,
+        price,
       });
 
       //save mongodb
@@ -151,13 +166,15 @@ const filmCtrl = {
       const {
         title,
         description,
-        date_production,
+        year_production,
+        country_production,
         image_film,
-        video_film,
         director,
         category,
         seriesFilm,
         price,
+        ageLimit,
+        filmLength,
       } = req.body;
 
       await Films.findByIdAndUpdate(
@@ -165,13 +182,16 @@ const filmCtrl = {
         {
           title,
           description,
-          date_production,
+          year_production,
+          country_production,
           image_film,
-          video_film,
           director,
           category,
           seriesFilm,
           price,
+          ageLimit,
+          filmLength,
+          updatedAt: Date.now,
         }
       );
 

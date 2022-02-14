@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
-const CategorySchema = new mongoose.Schema(
+
+const ModeOfPaymentSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
       trim: true,
+    },
+    image: {
+      public_id: { type: String, required: true, trim: true },
+      url: { type: String, required: true, trim: true },
     },
     createdAt: {
       type: Date,
@@ -18,4 +23,4 @@ const CategorySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Category', CategorySchema);
+module.exports = mongoose.model('ModeOfPayment', ModeOfPaymentSchema);

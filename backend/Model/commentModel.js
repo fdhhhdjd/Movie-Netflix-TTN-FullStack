@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const RatingSchema = new mongoose.Schema(
+const CommentSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -10,13 +10,12 @@ const RatingSchema = new mongoose.Schema(
     film: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Film',
-      require: true,
-    },
-    score: {
-      type: Number,
       required: true,
-      min: 0,
-      max: 5,
+    },
+    content: {
+      type: String,
+      required: true,
+      trim: true,
     },
     createdAt: {
       type: Date,
@@ -30,4 +29,4 @@ const RatingSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Rating', RatingSchema);
+module.exports = mongoose.model('Comment', CommentSchema);

@@ -21,10 +21,11 @@ const admin = require('./Routes/adminRoute.js');
 const customer = require('./Routes/customerRoute.js');
 const director = require('./Routes/directorRouter.js');
 const category = require('./Routes/categoryRoute.js');
-const seriesFilm = require('./Routes/seriesFilmRoute.js');
 const film = require('./Routes/filmRoute.js');
 const favourite = require('./Routes/favouriteRoute.js');
 const rating = require('./Routes/ratingRoute.js');
+const comment = require('./Routes/commentRoute.js');
+const payment = require('./Routes/paymentRoute.js');
 const upload = require('./Routes/UploadCloud.js');
 
 //!Link router Main
@@ -41,9 +42,6 @@ app.use('/api/director', director);
 //Category
 app.use('/api/category', category);
 
-//Series Film
-app.use('/api/seriesFilm', seriesFilm);
-
 //Film
 app.use('/api/film', film);
 
@@ -52,6 +50,12 @@ app.use('/api/favourite', favourite);
 
 //Rating
 app.use('/api/rating', rating);
+
+//Comment
+app.use('/api/comment', comment);
+
+//Mode of payment
+app.use('/api/payment', payment);
 
 //Upload
 app.use('/api', upload);

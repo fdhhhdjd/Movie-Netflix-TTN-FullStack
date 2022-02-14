@@ -54,6 +54,7 @@ const categoryCtrl = {
         { _id: id },
         {
           name: name,
+          updatedAt: Date.now,
         }
       );
 

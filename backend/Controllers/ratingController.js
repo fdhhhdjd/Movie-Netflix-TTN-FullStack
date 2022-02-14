@@ -27,6 +27,15 @@ const ratingCtrl = {
       const filmId = req.params.filmId;
       const { score } = req.body;
 
+      const rated = await Ratings.findOne({ user: userId, film: filmId });
+      if (rated) {
+        return res.json({
+          status: 400,
+          success: false,
+          msg: 'You have already rated',
+        });
+      }
+
       const newRating = new Ratings({
         user: userId,
         film: filmId,
@@ -46,6 +55,15 @@ const ratingCtrl = {
         success: false,
         msg: 'Failed to rate film',
       });
+    }
+  },
+
+  async deleteAllRating(req, res) {
+    try {
+      await Ratings.deleteMany({});
+      return res.json('success');
+    } catch (err) {
+      console.log(err);
     }
   },
 };
