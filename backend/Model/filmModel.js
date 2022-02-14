@@ -12,23 +12,17 @@ const FilmSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    date_production: {
-      type: Date,
+    year_production: {
+      type: String,
       required: true,
+      trim: true,
+    },
+    country_production: {
+      type: String,
+      required: true,
+      trim: true,
     },
     image_film: {
-      public_id: {
-        type: String,
-        required: true,
-        trim: true,
-      },
-      url: {
-        type: String,
-        required: true,
-        trim: true,
-      },
-    },
-    video_film: {
       public_id: {
         type: String,
         required: true,
@@ -54,11 +48,25 @@ const FilmSchema = new mongoose.Schema(
         required: true,
       },
     ],
-    seriesFilm: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'SeriesFilm',
-      required: true,
-    },
+    seriesFilm: [
+      {
+        episode: {
+          type: Number,
+          required: true,
+          trim: true,
+        },
+        public_id: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+        url: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+      },
+    ],
     price: {
       type: Number,
       default: 0,
