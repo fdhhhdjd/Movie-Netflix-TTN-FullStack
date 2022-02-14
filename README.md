@@ -41,13 +41,6 @@
 - Cập nhập thể loại phim: put --> http://localhost:5000/api/category/update/:id
 - Xóa thể loại phim: delete --> http://localhost:5000/api/category/delete/:id
 
-\*Series Film
-
-- Xem tất cả tập phim: get --> http://localhost:5000/api/seriesFilm/all
-- Tạo thêm 1 tập phim: post --> http://localhost:5000/api/seriesFilm/add
-- Cập nhập 1 tập phim: put --> http://localhost:5000/api/seriesFilm/update/:id
-- Xóa 1 tập phim: delete --> http://localhost:5000/api/seriesFilm/delete/:id
-
 \*Film
 
 - Xem thông tin tất cả bộ phim: get --> http://localhost:5000/api/film/all
@@ -106,10 +99,6 @@
 \*Category
 
 - Xem tất cả thể loại phim : get --> http://localhost:5000/api/category/all
-
-\*Series Film
-
-- Xem tất cả tập phim: get --> http://localhost:5000/api/seriesFilm/all
 
 \*Film
 

@@ -7,8 +7,7 @@ const filmCtrl = {
     try {
       const data = await Films.find({})
         .populate('director')
-        .populate('category')
-        .populate('seriesFilm');
+        .populate('category');
       return res.status(200).json({
         status: 200,
         success: true,
@@ -30,8 +29,7 @@ const filmCtrl = {
       const id = req.params.id;
       const data = await Films.find({ _id: id })
         .populate('director')
-        .populate('category')
-        .populate('seriesFilm');
+        .populate('category');
       const rating = await Ratings.find({ film: id });
       var avg_score = 0;
       for (var i = 0; i < rating.length; i++) {
@@ -70,8 +68,7 @@ const filmCtrl = {
         category: categoryId,
       })
         .populate('director')
-        .populate('category')
-        .populate('seriesFilm');
+        .populate('category');
 
       return res.status(200).json({
         status: 200,
@@ -97,8 +94,7 @@ const filmCtrl = {
         director: directorId,
       })
         .populate('director')
-        .populate('category')
-        .populate('seriesFilm');
+        .populate('category');
 
       return res.status(200).json({
         status: 200,
@@ -121,9 +117,9 @@ const filmCtrl = {
       const {
         title,
         description,
-        date_production,
+        year_production,
+        country_production,
         image_film,
-        video_film,
         director,
         category,
         seriesFilm,
@@ -135,9 +131,9 @@ const filmCtrl = {
       const newFilm = new Films({
         title,
         description,
-        date_production,
+        year_production,
+        country_production,
         image_film,
-        video_film,
         director,
         category,
         seriesFilm,
@@ -170,9 +166,9 @@ const filmCtrl = {
       const {
         title,
         description,
-        date_production,
+        year_production,
+        country_production,
         image_film,
-        video_film,
         director,
         category,
         seriesFilm,
@@ -186,9 +182,9 @@ const filmCtrl = {
         {
           title,
           description,
-          date_production,
+          year_production,
+          country_production,
           image_film,
-          video_film,
           director,
           category,
           seriesFilm,
