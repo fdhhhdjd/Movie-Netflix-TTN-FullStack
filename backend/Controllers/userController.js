@@ -7,6 +7,7 @@ const sendEmail = require('./SendEmail');
 const CLIENT_ID = process.env.GOOGLE_CLIENT_IDS;
 const client = new OAuth2Client(CLIENT_ID);
 const path = require('path');
+require('dotenv').config();
 
 const userCtrl = {
   //đăng ký tài khoản khách hàng
@@ -485,7 +486,8 @@ const userCtrl = {
     //const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
     try {
       await sendEmail({
-        email: user.email,
+        emailFrom: process.env.SMPT_MAIL,
+        emailTo: user.email,
         subject: `Forgot Password`,
         template: 'forgot-password',
         attachments: [
@@ -548,7 +550,8 @@ const userCtrl = {
     //const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
     try {
       await sendEmail({
-        email: user.email,
+        emailFrom: process.env.SMPT_MAIL,
+        emailTo: user.email,
         subject: `Forgot Password`,
         template: 'forgot-password',
         attachments: [
