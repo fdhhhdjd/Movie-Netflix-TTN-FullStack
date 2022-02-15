@@ -74,6 +74,11 @@
 - Chỉnh sửa hình thức thanh toán: patch --> http://localhost:5000/api/payment/update/:id
 - Xóa hình thức thanh toán: delete --> http://localhost:5000/api/payment/delete/:id
 
+\* Feedback
+
+- Xem tất cả feedback: get --> http://localhost:5000/api/feedback/all
+- Trả lời feedback của khách hàng: post --> http://localhost:5000/api/feedback/response/:id
+
 2. API dành cho khách hàng
 
 \*Upload:
@@ -131,3 +136,9 @@
 
 - Xem tất cả hình thức thanh toán: get --> http://localhost:5000/api/payment/all
 - Xem chi tiết hình thức thanh toán: get --> http://localhost:5000/api/payment/:id
+
+3. API không cần đăng nhập
+
+\* Feedback
+
+- Khách hàng gửi feedback : post --> http://localhost:5000/api/feedback/send
