@@ -24,9 +24,16 @@ import {
   Films,
   NewFilm,
   Rating,
-  Favourite
+  Favourite,
 } from "./imports/index";
-import { Home, Welcome, Login,LoginAdmin,Admin,ProfileAdmin,} from "./imports/LazyRouter";
+import {
+  Home,
+  Welcome,
+  Login,
+  LoginAdmin,
+  Admin,
+  ProfileAdmin,
+} from "./imports/LazyRouter";
 function App() {
   return (
     <>
@@ -114,130 +121,24 @@ function App() {
             }
           />
           <Route path="*" element={<NotFound />} />
-        
-        {/* ADMIN */}
-        <Route
-            path="/loginadmin"
-            element={
-              
-                <LoginAdmin />
-              
-            }
-          />
-        <Route
-            path="/admin"
-            element={
-              
-                <Admin />
-              
-            }
-          />
-        <Route
-            path="/forgetadmin"
-            element={
-              
-                <ForgetAdmin />
-              
-            }
-          />
-        <Route
-            path="/profileadmin"
-            element={
-              
-                <ProfileAdmin />
-              
-            }
-          />
-        <Route
-            path="/password/reset/:token"
-            element={
-              
-                <ResetAdmin />
-              
-            }
-          />
-        <Route
-            path="/changepassword/"
-            element={
-              
-                <ChangePasswordAdmin />
-              
-            }
-          />
-        <Route
-            path="/director"
-            element={
-              
-                <Director />
-              
-            }
-          />
-        <Route
-            path="/newUser/:tokens"
-            element={
-              
-                <NewUser />
-              
-            }
-          />
-        <Route
-            path="/newDirector"
-            element={
-              
-                <NewDirector />
-              
-            }
-          />
-        <Route
-            path="/category"
-            element={
-              
-                <Category />
-              
-            }
-          />
-        <Route
-            path="/film"
-            element={
-              
-                <Films />
-              
-            }
-          />
-        <Route
-            path="/newFilm"
-            element={
-              
-                <NewFilm />
-              
-            }
-          />
-        <Route
-            path="/newFilm:tokens"
-            element={
-              
-                <NewFilm />
-              
-            }
-          />
-        <Route
-            path="/rating"
-            element={
-              
-                <Rating />
-              
-            }
-          />
-        <Route
-            path="/favourite"
-            element={
-              
-                <Favourite />
-              
-            }
-          />
-        </Routes>
 
+          {/* ADMIN */}
+          <Route path="/loginadmin" element={<LoginAdmin />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/forgetadmin" element={<ForgetAdmin />} />
+          <Route path="/profileadmin" element={<ProfileAdmin />} />
+          <Route path="/password/reset/:token" element={<ResetAdmin />} />
+          <Route path="/changepassword/" element={<ChangePasswordAdmin />} />
+          <Route path="/director" element={<Director />} />
+          <Route path="/newUser/:tokens" element={<NewUser />} />
+          <Route path="/newDirector" element={<NewDirector />} />
+          <Route path="/category" element={<Category />} />
+          <Route path="/film" element={<Films />} />
+          <Route path="/newFilm" element={<NewFilm />} />
+          <Route path="/newFilm:tokens" element={<NewFilm />} />
+          <Route path="/rating" element={<Rating />} />
+          <Route path="/favourite" element={<Favourite />} />
+        </Routes>
       </Suspense>
     </>
   );

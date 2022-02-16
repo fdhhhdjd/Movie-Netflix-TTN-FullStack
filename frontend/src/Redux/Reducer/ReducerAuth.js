@@ -16,7 +16,7 @@ const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.LOGIN_API_START:
     case types.REGISTER_API_START:
-    case types.REFRESH_TOKEN_ADMIN_START:
+    case types.REFRESH_TOKEN_START:
     case types.LOGOUT_API_START:
     case types.GET_PROFILE_START:
     case types.CHANGE_PASSWORD_START:
@@ -44,7 +44,7 @@ const AuthReducer = (state = initialState, action) => {
         loading: false,
         auth: action.payload,
       };
-    case types.REFRESH_TOKEN_ADMIN_SUCCESS:
+    case types.REFRESH_TOKEN_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -92,8 +92,7 @@ const AuthReducer = (state = initialState, action) => {
       };
     case types.LOGIN_API_FAIL:
     case types.LOGIN_GOOGLE_FAIL:
-    case types.REFRESH_TOKEN_ADMIN_FAIL:
-    case types.REFRESH_TOKEN_ADMIN_FAIL:
+    case types.REFRESH_TOKEN_FAIL:
     case types.LOGOUT_API_FAIL:
     case types.GET_PROFILE_FAIL:
     case types.CHANGE_PASSWORD_FAIL:

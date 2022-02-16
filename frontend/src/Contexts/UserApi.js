@@ -7,7 +7,7 @@ import swal from "sweetalert";
 const UserApi = (token) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    if (token.length > 0) {
+    if (token && token.length > 0) {
       dispatch(ProfileInitiate(token));
     }
   }, [token]);

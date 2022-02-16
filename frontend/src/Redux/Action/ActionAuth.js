@@ -75,14 +75,14 @@ export const ResetPassFail = (error) => ({
 
 //? refresh_token
 export const RefreshTokenStart = () => ({
-  type: types.REFRESH_TOKEN_ADMIN_START,
+  type: types.REFRESH_TOKEN_START,
 });
 export const RefreshTokenSuccess = (token) => ({
-  type: types.REFRESH_TOKEN_ADMIN_SUCCESS,
+  type: types.REFRESH_TOKEN_SUCCESS,
   payload: token,
 });
 export const RefreshTokenFail = (error) => ({
-  type: types.REFRESH_TOKEN_ADMIN_FAIL,
+  type: types.REFRESH_TOKEN_FAIL,
   payload: error,
 });
 
@@ -251,7 +251,7 @@ export const ChangeAdminInitiate =
         `/api/auth/customer/changePassword`,
         { ...state },
         {
-          headers: { Authorization: ` ${token}`  },
+          headers: { Authorization: ` ${token}` },
         }
       );
       dispatch(ChangePasswordAdminSuccess(data));

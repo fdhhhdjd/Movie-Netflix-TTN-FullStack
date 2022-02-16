@@ -7,7 +7,7 @@ const Watch = () => {
       <WatchStyle />
       <div className="watch">
         <div className="back">
-          <i class="fas fa-arrow-left" />
+          <i className="fas fa-arrow-left" />
           Home
         </div>
         {/* <video className="video" autoPlay progress controls> */}

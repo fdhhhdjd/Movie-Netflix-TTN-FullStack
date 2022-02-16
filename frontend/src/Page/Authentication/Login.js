@@ -48,7 +48,7 @@ const Login = () => {
       dispatch(clearErrors());
     }
   }, [Auth]);
-  console.log(isLock, "lock");
+
   return (
     <>
       <AuthenticationStyle />

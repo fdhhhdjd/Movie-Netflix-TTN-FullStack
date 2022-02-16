@@ -6,19 +6,19 @@ import store from "./Redux/Store";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router } from "react-router-dom";
-// import { DataProvider } from "./Contexts/GlobalState";
-import {DataAdminProvider} from './ContextsAdmin/GlobalStateAdmin'
+import { DataProvider } from "./Contexts/GlobalState";
+import { DataAdminProvider } from "./ContextsAdmin/GlobalStateAdmin";
 import "react-toastify/dist/ReactToastify.css";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-    <DataAdminProvider> 
-      {/* <DataProvider> */}
-        <Router>
-          <App />
-        </Router>
-      {/* </DataProvider> */}
-    </DataAdminProvider>
+      <DataAdminProvider>
+        <DataProvider>
+          <Router>
+            <App />
+          </Router>
+        </DataProvider>
+      </DataAdminProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

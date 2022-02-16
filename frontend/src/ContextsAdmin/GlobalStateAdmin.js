@@ -9,6 +9,7 @@ export const GlobalStateAdmin = createContext();
 export const DataAdminProvider = ({ children }) => {
   const [callback, setCallback] = useState(false);
   const { Admin, token } = useSelector((state) => state.admin);
+  const tokens = token.accessToken;
   const dispatch = useDispatch();
   useEffect(() => {
     const firstLogin = localStorage.getItem("firstLogin");
@@ -22,12 +23,16 @@ export const DataAdminProvider = ({ children }) => {
       refreshToken();
     }
   }, [callback]);
- 
+
   const data = {
-    callback: [callback, setCallback],  
-    UserApiAdmin: UserApiAdmin(token.accessToken),
-    AdminApi:AdminApi(token.accessToken),
-    FilmApi:FilmApi(token.accessToken),
+    callback: [callback, setCallback],
+    UserApiAdmin: UserApiAdmin(tokens),
+    AdminApi: AdminApi(tokens),
+    FilmApi: FilmApi(token.accessToken),
   };
-  return <GlobalStateAdmin.Provider value={data}>{children}</GlobalStateAdmin.Provider>;
+  return (
+    <GlobalStateAdmin.Provider value={data}>
+      {children}
+    </GlobalStateAdmin.Provider>
+  );
 };
