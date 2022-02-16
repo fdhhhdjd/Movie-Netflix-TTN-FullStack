@@ -55,12 +55,22 @@ const FilmSchema = new mongoose.Schema(
           required: true,
           trim: true,
         },
-        public_id: {
+        public_id_video: {
           type: String,
           required: true,
           trim: true,
         },
-        url: {
+        url_video: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+        public_id_image: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+        url_image: {
           type: String,
           required: true,
           trim: true,

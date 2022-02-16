@@ -7,6 +7,7 @@ const sendEmail = require('./SendEmail');
 const CLIENT_ID = process.env.GOOGLE_CLIENT_IDS;
 const client = new OAuth2Client(CLIENT_ID);
 const path = require('path');
+require('dotenv').config();
 
 const userCtrl = {
   //đăng ký tài khoản khách hàng
@@ -67,7 +68,7 @@ const userCtrl = {
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
       });
 
-      res.status(200).json({
+      res.json({
         status: 200,
         success: true,
         accesstoken,
@@ -92,7 +93,7 @@ const userCtrl = {
 
       //nếu email tồn tại
       if (user) {
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
           msg: 'The email already exists',
@@ -104,7 +105,7 @@ const userCtrl = {
         '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$'
       ).test(password);
       if (!reg) {
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
           message:
@@ -144,14 +145,14 @@ const userCtrl = {
         maxAge: 7 * 24 * 60 * 60 * 1000, //7d
       });
 
-      return res.status(200).json({
+      return res.json({
         status: 200,
         success: true,
         accesstoken,
         msg: 'Register Successfully 😍!!',
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         success: false,
         msg: err.message,
@@ -178,7 +179,7 @@ const userCtrl = {
         });
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         success: false,
         msg: err.message,
@@ -217,7 +218,7 @@ const userCtrl = {
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
       });
 
-      res.status(200).json({
+      res.json({
         status: 200,
         success: true,
         accessToken,
@@ -240,7 +241,7 @@ const userCtrl = {
       //kiểm tra người dùng có phải là admin
       const user = await Users.findOne({ email, role: 1 });
       if (!user) {
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
           msg: 'User does not exist',
@@ -250,7 +251,7 @@ const userCtrl = {
       //nếu đúng email thì kiểm tra mật khẩu
       const match = await bcrypt.compare(password, user.password);
       if (!match) {
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
           msg: 'Incorrect password',
@@ -268,14 +269,14 @@ const userCtrl = {
         maxAge: 7 * 24 * 60 * 60 * 1000, //7d
       });
 
-      return res.status(200).json({
+      return res.json({
         status: 200,
         success: true,
         accesstoken,
         msg: 'Login Successfully 😍 !',
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         success: false,
         msg: er.message,
@@ -289,7 +290,7 @@ const userCtrl = {
       res.clearCookie('refreshtoken', {
         path: '/api/auth/customer/refresh_token',
       });
-      return res.status(200).json({
+      return res.json({
         status: 200,
         success: true,
         msg: 'Logged out success',
@@ -308,7 +309,7 @@ const userCtrl = {
       res.clearCookie('refreshtoken', {
         path: '/api/auth/admin/refresh_token',
       });
-      return res.status(200).json({
+      return res.json({
         status: 200,
         success: true,
         msg: 'Logged out success',
@@ -331,7 +332,7 @@ const userCtrl = {
           success: false,
           msg: 'User does not exist.',
         });
-      res.status(200).json({
+      res.json({
         status: 200,
         success: true,
         user,
@@ -366,7 +367,7 @@ const userCtrl = {
           updatedAt: Date.now,
         }
       );
-      res.status(200).json({
+      res.json({
         status: 200,
         success: true,
         msg: 'Updated Profile Successfully !',
@@ -443,7 +444,7 @@ const userCtrl = {
         { password: passwordHash, updatedAt: Date.now },
         { new: true }
       );
-      return res.status(200).json({
+      return res.json({
         status: 200,
         success: true,
         msg: 'Change Password Successfully 😂!',
@@ -485,7 +486,8 @@ const userCtrl = {
     //const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
     try {
       await sendEmail({
-        email: user.email,
+        emailFrom: process.env.SMPT_MAIL,
+        emailTo: user.email,
         subject: `Forgot Password`,
         template: 'forgot-password',
         attachments: [
@@ -505,7 +507,7 @@ const userCtrl = {
         },
       });
 
-      return res.status(200).json({
+      return res.json({
         status: 200,
         success: true,
         msg: `Email sent to ${user.email} successfully`,
@@ -524,14 +526,14 @@ const userCtrl = {
     const user = await Users.findOne({ email: req.body.email, role: 1 });
     const { email } = req.body;
     if (!email) {
-      res.status(400).json({
+      res.json({
         status: 400,
         success: false,
         msg: 'Email are not empty. ',
       });
     }
     if (!user) {
-      res.status(400).json({
+      res.json({
         status: 400,
         success: false,
         msg: 'Account Not Exit',
@@ -541,14 +543,15 @@ const userCtrl = {
 
     await user.save({ validateBeforeSave: false });
 
-    const resetPasswordUrl = `${req.protocol}://${req.get(
-      'host'
-    )}/admin/password/reset/${resetToken}`;
-    // const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
-    //const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
+    // const resetPasswordUrl = `${req.protocol}://${req.get(
+    //   'host'
+    // )}/admin/password/reset/${resetToken}`;
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+    const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
     try {
       await sendEmail({
-        email: user.email,
+        emailFrom: process.env.SMPT_MAIL,
+        emailTo: user.email,
         subject: `Forgot Password`,
         template: 'forgot-password',
         attachments: [
@@ -568,7 +571,7 @@ const userCtrl = {
         },
       });
 
-      return res.status(200).json({
+      return res.json({
         status: 200,
         success: true,
         msg: `Email sent to ${user.email} successfully`,
@@ -654,7 +657,7 @@ const userCtrl = {
       { password: passwordHash },
       { new: true }
     );
-    res.status(200).json({
+    res.json({
       status: 200,
       success: true,
       msg: 'Reset successfully',
@@ -675,7 +678,7 @@ const userCtrl = {
         if (email_verified) {
           Users.findOne({ email, role: 0 }).exec((error, user) => {
             if (error) {
-              return res.status(400).json({
+              return res.json({
                 status: 400,
                 success: false,
                 msg: 'Invalid Authentication',
@@ -697,7 +700,7 @@ const userCtrl = {
                   maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
                 });
                 const { _id, fullname, email, image } = user;
-                res.status(200).json({
+                res.json({
                   status: 200,
                   success: true,
                   msg: 'Login successfully',
@@ -717,7 +720,7 @@ const userCtrl = {
                 });
                 newUser.save((err, data) => {
                   if (err) {
-                    return res.status(400).json({
+                    return res.json({
                       status: 400,
                       success: false,
                       msg: 'Invalid Authentication',
@@ -768,7 +771,7 @@ const userCtrl = {
         if (email_verified) {
           Users.findOne({ email, role: 1 }).exec((error, user) => {
             if (error) {
-              return res.status(400).json({
+              return res.json({
                 status: 400,
                 success: false,
                 msg: 'Invalid Authentication',
@@ -790,7 +793,7 @@ const userCtrl = {
                   maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
                 });
                 const { _id, fullname, email, image } = user;
-                res.status(200).json({
+                res.json({
                   status: 200,
                   success: true,
                   msg: 'Login successfully',
@@ -811,7 +814,7 @@ const userCtrl = {
                 });
                 newUser.save((err, data) => {
                   if (err) {
-                    return res.status(400).json({
+                    return res.json({
                       status: 400,
                       success: false,
                       msg: 'Invalid Authentication',

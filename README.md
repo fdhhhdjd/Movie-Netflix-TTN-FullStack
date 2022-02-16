@@ -50,6 +50,9 @@
 - Thông tin chi tiết của bộ phim và thông tin đánh giá của bộ phim: get --> http://localhost:5000/api/film/detail/:id
 - Tìm bộ phim theo thể loại: get --> http://localhost:5000/api/film/find/category/:id
 - Tìm bộ phim theo đạo diễn: get --> http://localhost:5000/api/film/find/director/:id
+- Thêm một tập phim: post --> http://localhost:5000/api/film/:id/addEpisode
+- Cập nhập tập phim: patch --> http://localhost:5000/api/film/update/:filmId/updateEpisode/:episodeId
+- Xóa 1 tập phim: delete --> http://localhost:5000/api/film/delete/:filmId/deleteEpisode/:episodeId
 
 \*Favourite
 
@@ -70,6 +73,11 @@
 - Thêm hình thức thanh toán mới: post --> http://localhost:5000/api/payment/add
 - Chỉnh sửa hình thức thanh toán: patch --> http://localhost:5000/api/payment/update/:id
 - Xóa hình thức thanh toán: delete --> http://localhost:5000/api/payment/delete/:id
+
+\* Feedback
+
+- Xem tất cả feedback: get --> http://localhost:5000/api/feedback/all
+- Trả lời feedback của khách hàng: post --> http://localhost:5000/api/feedback/response/:id
 
 2. API dành cho khách hàng
 
@@ -128,3 +136,9 @@
 
 - Xem tất cả hình thức thanh toán: get --> http://localhost:5000/api/payment/all
 - Xem chi tiết hình thức thanh toán: get --> http://localhost:5000/api/payment/:id
+
+3. API không cần đăng nhập
+
+\* Feedback
+
+- Khách hàng gửi feedback : post --> http://localhost:5000/api/feedback/send

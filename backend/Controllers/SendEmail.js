@@ -34,12 +34,13 @@ const sendEmail = async (options) => {
   transporter.use('compile', hbs(handlebarOptions));
 
   const mailOptions = {
-    from: process.env.SMPT_MAIL,
-    to: options.email,
+    from: options.emailFrom,
+    to: options.emailTo,
     subject: options.subject,
     attachments: options.attachments,
     template: options.template,
     context: options.context,
+    html: options.html,
   };
   await transporter.sendMail(mailOptions);
 };

@@ -14,8 +14,19 @@ export const Login = lazy(() => {
     setTimeout(() => resolve(import("../Page/Authentication/Login")), 1000);
   });
 });
-export const Movie = lazy(() => {
+export const LoginAdmin = lazy(() => {
   return new Promise((resolve) => {
-    setTimeout(() => resolve(import("../Page/Movie/Movie")), 1000);
+    setTimeout(() => resolve(import("../Page/Admins/LoginAdmin")), 1000);
   });
 });
+export const Admin = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("../Page/Admins/Admin")), 1000);
+  });
+});
+export const ProfileAdmin = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("../Page/Admins/ProfileAdmin")), 1000);
+  });
+});
+
