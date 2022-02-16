@@ -7,7 +7,8 @@ const filmCtrl = {
     try {
       const data = await Films.find({})
         .populate('director')
-        .populate('category');
+        .populate('category')
+      .populate('seriesFilm');
       return res.status(200).json({
         status: 200,
         success: true,
@@ -29,7 +30,8 @@ const filmCtrl = {
       const id = req.params.id;
       const data = await Films.find({ _id: id })
         .populate('director')
-        .populate('category');
+        .populate('category')
+        .populate('seriesFilm');
       const rating = await Ratings.find({ film: id });
       var avg_score = 0;
       for (var i = 0; i < rating.length; i++) {
@@ -68,7 +70,8 @@ const filmCtrl = {
         category: categoryId,
       })
         .populate('director')
-        .populate('category');
+        .populate('category')
+        .populate('seriesFilm');
 
       return res.status(200).json({
         status: 200,
@@ -94,7 +97,8 @@ const filmCtrl = {
         director: directorId,
       })
         .populate('director')
-        .populate('category');
+        .populate('category')
+        .populate('seriesFilm');
 
       return res.status(200).json({
         status: 200,
@@ -120,6 +124,7 @@ const filmCtrl = {
         year_production,
         country_production,
         image_film,
+        video_film,
         director,
         category,
         seriesFilm,
@@ -134,6 +139,7 @@ const filmCtrl = {
         year_production,
         country_production,
         image_film,
+        video_film,
         director,
         category,
         seriesFilm,
@@ -155,6 +161,7 @@ const filmCtrl = {
         status: 400,
         success: false,
         msg: 'Failed to add film',
+        err
       });
     }
   },
@@ -208,6 +215,7 @@ const filmCtrl = {
         year_production,
         country_production,
         image_film,
+        video_film,
         director,
         category,
         seriesFilm,
@@ -224,6 +232,7 @@ const filmCtrl = {
           year_production,
           country_production,
           image_film,
+          video_film,
           director,
           category,
           seriesFilm,

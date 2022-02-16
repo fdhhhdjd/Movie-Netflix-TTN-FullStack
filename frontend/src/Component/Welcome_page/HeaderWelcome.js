@@ -16,6 +16,7 @@ const HeaderWelcome = () => {
           <Link to="/login" className="btn btn-rounded">
             Sign In
           </Link>
+
         </div>
         <div className="showcase-content">
           <h1>Movie,TV show and more</h1>
@@ -26,6 +27,9 @@ const HeaderWelcome = () => {
           </Link>
         </div>
       </header>
+      <div>
+
+      </div>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as types from "../ActionTypes";
 //?Register
+//?Register
 export const RegisterStart = () => ({
   type: types.REGISTER_API_START,
 });
@@ -216,7 +217,8 @@ export const RefreshTokenInitiate = (token) => async (dispatch) => {
     dispatch(RefreshTokenStart());
 
     const { data } = await axios.get(`/api/auth/customer/refresh_token`, {
-      headers: { Authorization: token },
+      headers: { Authorization: ` ${token}` },
+      //tat dau buôi
     });
 
     dispatch(RefreshTokenSuccess(data));
@@ -230,7 +232,7 @@ export const ProfileInitiate = (token) => async (dispatch) => {
     dispatch(GetProfileStart());
 
     const { data } = await axios.get(`/api/auth/customer/profile`, {
-      headers: { Authorization: token },
+      headers: { Authorization: ` ${token}` },
     });
 
     dispatch(GetProfileSuccess(data.user));
@@ -249,7 +251,7 @@ export const ChangeAdminInitiate =
         `/api/auth/customer/changePassword`,
         { ...state },
         {
-          headers: { Authorization: token },
+          headers: { Authorization: ` ${token}`  },
         }
       );
       dispatch(ChangePasswordAdminSuccess(data));
