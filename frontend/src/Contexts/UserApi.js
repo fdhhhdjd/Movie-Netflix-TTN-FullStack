@@ -11,7 +11,7 @@ const UserApi = (token) => {
       dispatch(ProfileInitiate(token));
     }
   }, [token]);
-console.log(token)
+console.log(token,"token")
   return {};
 };
 export default UserApi;
