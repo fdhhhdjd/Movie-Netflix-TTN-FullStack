@@ -26,8 +26,8 @@ const Header = () => {
       setActiveTab("Home");
     } else if (location.pathname === "/feedback") {
       setActiveTab("Feedback");
-    } else if (location.pathname === "/movie") {
-      setActiveTab("Movie");
+    } else if (location.pathname === "/write") {
+      setActiveTab("Write");
     } else if (location.pathname === "/products") {
       setActiveTab("Products");
     }
@@ -52,13 +52,7 @@ const Header = () => {
               <span className="navbarmainLinks">Series</span>
             </span>
             <span to="/movies" className="link">
-              <span
-                className="navbarmainLinks"
-                onClick={() => navigate("/movie")}
-                className={` ${activeTab === "Movie" ? "active" : ""}`}
-              >
-                Movies
-              </span>
+              <span className="navbarmainLinks">Movies</span>
             </span>
             <span>New and Popular</span>
             <span
