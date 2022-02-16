@@ -1,5 +1,6 @@
 const Feedbacks = require('../Model/feedBackModel.js');
 const sendEmail = require('./SendEmail.js');
+const path = require('path');
 
 const feedbackCtrl = {
   //Xem tất cả phản hồi gửi tới
@@ -25,7 +26,7 @@ const feedbackCtrl = {
   async responseFeedback(req, res) {
     try {
       const id = req.params.id;
-      const { content } = req.body;
+      const { response_content } = req.body;
       const feedback = await Feedbacks.findById({ _id: id });
       if (!feedback) {
         return res.status(400).json({
@@ -39,8 +40,19 @@ const feedbackCtrl = {
         emailFrom: process.env.SMPT_MAIL,
         emailTo: feedback.email,
         subject: feedback.subject,
-        html: `<h1>Dear ${feedback.fullname},</h1><p>Your last feedback content is: ${feedback.content}</p><br><p>Thanks again for your sending feedback. So the answer of us is:</p>
-        <p>${content}</p>`,
+        template: 'response_feedback',
+        attachments: [
+          {
+            filename: 'netflix.jpg',
+            path: path.resolve('./views', 'images', 'netflix.jpg'),
+            cid: 'netflix_logo',
+          },
+        ],
+        context: {
+          fullname: feedback.fullname,
+          feedback_content: feedback.content,
+          response_content,
+        },
       });
 
       return res.status(200).json({
@@ -72,7 +84,18 @@ const feedbackCtrl = {
         emailFrom: process.env.SMPT_MAIL,
         emailTo: email,
         subject,
-        html: `<h1>Dear ${fullname},</h1><p>We've already received your feedback. The content is: ${content}</p><br><p>Thanks for your sending feedback to us. We will response as soon as posible</p>`,
+        template: 'feedback',
+        attachments: [
+          {
+            filename: 'netflix.jpg',
+            path: path.resolve('./views', 'images', 'netflix.jpg'),
+            cid: 'netflix_logo',
+          },
+        ],
+        context: {
+          fullname,
+          content,
+        },
       });
 
       const newFeedback = new Feedbacks({
@@ -91,11 +114,12 @@ const feedbackCtrl = {
         msg: 'Sent feedback successfully',
       });
     } catch (err) {
-      return res.status(400).json({
-        status: 400,
-        success: false,
-        msg: 'Failed to send feedback',
-      });
+      return res.json(err.message);
+      // return res.status(400).json({
+      //   status: 400,
+      //   success: false,
+      //   msg: 'Failed to send feedback',
+      // });
     }
   },
 };
