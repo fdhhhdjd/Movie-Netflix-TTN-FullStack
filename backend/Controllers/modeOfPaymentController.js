@@ -1,6 +1,6 @@
-const ModeOfPayments = require('../Model/paymentModel.js');
+const ModeOfPayments = require("../Model/modeOfPaymentModel.js");
 
-const paymentCtrl = {
+const modeOfPaymentCtrl = {
   //Xem tất cả hình thức thanh toán
   async getAllModeOfPayment(req, res) {
     try {
@@ -8,14 +8,14 @@ const paymentCtrl = {
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Get all mode of payments successfully',
+        msg: "Get all mode of payments successfully",
         data,
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to get all mode of payments',
+        msg: "Failed to get all mode of payments",
       });
     }
   },
@@ -28,14 +28,14 @@ const paymentCtrl = {
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Get detail mode of payment successfully',
+        msg: "Get detail mode of payment successfully",
         data: director,
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to get detail mode of payment',
+        msg: "Failed to get detail mode of payment",
       });
     }
   },
@@ -48,7 +48,7 @@ const paymentCtrl = {
         return res.status(400).json({
           status: 400,
           success: false,
-          msg: 'No Image Selected',
+          msg: "No Image Selected",
         });
       }
 
@@ -63,13 +63,13 @@ const paymentCtrl = {
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Created new mode of payment successfully',
+        msg: "Created new mode of payment successfully",
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed create new mode of payment',
+        msg: "Failed create new mode of payment",
       });
     }
   },
@@ -91,13 +91,13 @@ const paymentCtrl = {
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Updated mode of payment successfully',
+        msg: "Updated mode of payment successfully",
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to update mode of payment',
+        msg: "Failed to update mode of payment",
       });
     }
   },
@@ -110,16 +110,16 @@ const paymentCtrl = {
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Deleted mode of payment successfully',
+        msg: "Deleted mode of payment successfully",
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to delete mode of payment',
+        msg: "Failed to delete mode of payment",
       });
     }
   },
 };
 
-module.exports = paymentCtrl;
+module.exports = modeOfPaymentCtrl;

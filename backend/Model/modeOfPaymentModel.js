@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const ModeOfPaymentSchema = new mongoose.Schema(
   {
@@ -23,4 +23,4 @@ const ModeOfPaymentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('ModeOfPayment', ModeOfPaymentSchema);
+module.exports = mongoose.model("ModeOfPayment", ModeOfPaymentSchema);

@@ -68,16 +68,20 @@
 
 \*Payment
 
-- Xem tất cả hình thức thanh toán: get --> http://localhost:5000/api/payment/all
-- Xem chi tiết hình thức thanh toán: get --> http://localhost:5000/api/payment/:id
-- Thêm hình thức thanh toán mới: post --> http://localhost:5000/api/payment/add
-- Chỉnh sửa hình thức thanh toán: patch --> http://localhost:5000/api/payment/update/:id
-- Xóa hình thức thanh toán: delete --> http://localhost:5000/api/payment/delete/:id
+- Xem tất cả hình thức thanh toán: get --> http://localhost:5000/api/modeOfPayment/all
+- Xem chi tiết hình thức thanh toán: get --> http://localhost:5000/api/modeOfPayment/:id
+- Thêm hình thức thanh toán mới: post --> http://localhost:5000/api/modeOfPayment/add
+- Chỉnh sửa hình thức thanh toán: patch --> http://localhost:5000/api/modeOfPayment/update/:id
+- Xóa hình thức thanh toán: delete --> http://localhost:5000/api/modeOfPayment/delete/:id
 
 \* Feedback
 
 - Xem tất cả feedback: get --> http://localhost:5000/api/feedback/all
 - Trả lời feedback của khách hàng: post --> http://localhost:5000/api/feedback/response/:id
+
+\* Bill
+
+- Lấy ra toàn bộ hóa đơn: get -> http://localhost:5000/api/bill/all
 
 2. API dành cho khách hàng
 
@@ -134,8 +138,14 @@
 
 \*Payment
 
-- Xem tất cả hình thức thanh toán: get --> http://localhost:5000/api/payment/all
-- Xem chi tiết hình thức thanh toán: get --> http://localhost:5000/api/payment/:id
+- Xem tất cả hình thức thanh toán: get --> http://localhost:5000/api/modeOfPayment/all
+- Xem chi tiết hình thức thanh toán: get --> http://localhost:5000/api/modeOfPayment/:id
+
+\*Bill
+
+- Xem lịch sử hóa đơn của khách hàng: get --> http://localhost:5000/api/bill/history
+- Mua 1 bộ phim: post --> http://localhost:5000/api/bill/create/:filmId
+- Kiểm tra phim có xem được không: --> http://localhost:5000/api/bill/checkWatchFilm/:filmId
 
 3. API không cần đăng nhập
 
