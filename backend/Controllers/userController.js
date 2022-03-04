@@ -1,13 +1,13 @@
-const Users = require('../Model/userModel');
-const bcrypt = require('bcrypt');
-const crypto = require('crypto');
-const jwt = require('jsonwebtoken');
-const { OAuth2Client } = require('google-auth-library');
-const sendEmail = require('./SendEmail');
+const Users = require("../Model/userModel");
+const bcrypt = require("bcrypt");
+const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
+const { OAuth2Client } = require("google-auth-library");
+const sendEmail = require("./SendEmail");
 const CLIENT_ID = process.env.GOOGLE_CLIENT_IDS;
 const client = new OAuth2Client(CLIENT_ID);
-const path = require('path');
-require('dotenv').config();
+const path = require("path");
+require("dotenv").config();
 
 const userCtrl = {
   //đăng ký tài khoản khách hàng
@@ -21,26 +21,26 @@ const userCtrl = {
         return res.json({
           status: 400,
           success: false,
-          msg: 'The email already exists.',
+          msg: "The email already exists.",
         });
 
       if (password.length < 6)
         return res.json({
           status: 400,
           success: false,
-          msg: 'Password is at least 6 characters long.',
+          msg: "Password is at least 6 characters long.",
         });
 
       //kiểm tra format password
       let reg = new RegExp(
-        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$'
+        "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$"
       ).test(password);
       if (!reg) {
         return res.json({
           status: 400,
           success: false,
           message:
-            'Password must contain at least one number and one uppercase and lowercase and special letter, and at least 6 or more characters ',
+            "Password must contain at least one number and one uppercase and lowercase and special letter, and at least 6 or more characters ",
         });
       }
 
@@ -62,9 +62,9 @@ const userCtrl = {
       const accesstoken = createAccessToken({ id: newUser._id, role: 0 });
       const refreshtoken = createRefreshToken({ id: newUser._id, role: 0 });
 
-      res.cookie('refreshtoken', refreshtoken, {
+      res.cookie("refreshtoken", refreshtoken, {
         httpOnly: true,
-        path: '/api/auth/customer/refresh_token',
+        path: "/api/auth/customer/refresh_token",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
       });
 
@@ -72,7 +72,7 @@ const userCtrl = {
         status: 200,
         success: true,
         accesstoken,
-        msg: 'Register Successfully 😍!!',
+        msg: "Register Successfully 😍!!",
       });
     } catch (err) {
       return res.json({
@@ -96,20 +96,20 @@ const userCtrl = {
         return res.json({
           status: 400,
           success: false,
-          msg: 'The email already exists',
+          msg: "The email already exists",
         });
       }
 
       //kiểm tra format pasword
       let reg = new RegExp(
-        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$'
+        "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$"
       ).test(password);
       if (!reg) {
         return res.json({
           status: 400,
           success: false,
           message:
-            'Password must contain at least one number and one uppercase and lowercase and special letter, and at least 6 or more characters',
+            "Password must contain at least one number and one uppercase and lowercase and special letter, and at least 6 or more characters",
         });
       }
 
@@ -139,9 +139,9 @@ const userCtrl = {
       });
 
       //lưu refresh token vào cookie
-      res.cookie('refreshtoken', refreshtoken, {
+      res.cookie("refreshtoken", refreshtoken, {
         httpOnly: true,
-        path: '/api/auth/admin/refresh_token',
+        path: "/api/auth/admin/refresh_token",
         maxAge: 7 * 24 * 60 * 60 * 1000, //7d
       });
 
@@ -149,7 +149,7 @@ const userCtrl = {
         status: 200,
         success: true,
         accesstoken,
-        msg: 'Register Successfully 😍!!',
+        msg: "Register Successfully 😍!!",
       });
     } catch (err) {
       return res.json({
@@ -164,17 +164,17 @@ const userCtrl = {
   refreshToken: (req, res) => {
     try {
       const rf_token = req.cookies.refreshtoken;
-      if (!rf_token) return res.json({ msg: 'Please Login or Register' });
+      if (!rf_token) return res.json({ msg: "Please Login or Register" });
 
       jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-        if (err) return res.json({ msg: 'Please Login or Register' });
+        if (err) return res.json({ msg: "Please Login or Register" });
 
         const accesstoken = createAccessToken({ id: user.id, role: user.role });
 
         res.json({
           status: 200,
           success: true,
-          msg: 'Login Successfully 😉',
+          msg: "Login Successfully 😉",
           accessToken: accesstoken,
         });
       });
@@ -197,7 +197,7 @@ const userCtrl = {
         return res.json({
           status: 400,
           success: false,
-          msg: 'User does not exist.',
+          msg: "User does not exist.",
         });
 
       const isMatch = await bcrypt.compare(password, user.password);
@@ -205,16 +205,16 @@ const userCtrl = {
         return res.json({
           status: 400,
           success: false,
-          msg: 'Incorrect password.',
+          msg: "Incorrect password.",
         });
 
       // If login success , create access token and refresh token
       const accessToken = createAccessToken({ id: user._id, role: 0 });
       const refreshtoken = createRefreshToken({ id: user._id, role: 0 });
 
-      res.cookie('refreshtoken', refreshtoken, {
+      res.cookie("refreshtoken", refreshtoken, {
         httpOnly: true,
-        path: '/api/auth/customer/refresh_token',
+        path: "/api/auth/customer/refresh_token",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
       });
 
@@ -222,7 +222,7 @@ const userCtrl = {
         status: 200,
         success: true,
         accessToken,
-        msg: 'Login Successfully 😍 !',
+        msg: "Login Successfully 😍 !",
       });
     } catch (err) {
       return res.json({
@@ -244,7 +244,7 @@ const userCtrl = {
         return res.json({
           status: 400,
           success: false,
-          msg: 'User does not exist',
+          msg: "User does not exist",
         });
       }
 
@@ -254,7 +254,7 @@ const userCtrl = {
         return res.json({
           status: 400,
           success: false,
-          msg: 'Incorrect password',
+          msg: "Incorrect password",
         });
       }
 
@@ -263,9 +263,9 @@ const userCtrl = {
       const refreshtoken = createRefreshToken({ id: user.id, role: user.role });
 
       //lưu vào cookie
-      res.cookie('refreshtoken', refreshtoken, {
+      res.cookie("refreshtoken", refreshtoken, {
         httpOnly: true,
-        path: '/api/auth/admin/refresh_token',
+        path: "/api/auth/admin/refresh_token",
         maxAge: 7 * 24 * 60 * 60 * 1000, //7d
       });
 
@@ -273,7 +273,7 @@ const userCtrl = {
         status: 200,
         success: true,
         accesstoken,
-        msg: 'Login Successfully 😍 !',
+        msg: "Login Successfully 😍 !",
       });
     } catch (err) {
       return res.json({
@@ -287,13 +287,13 @@ const userCtrl = {
   //đăng xuất tài khoản khách hàng
   logoutCustomer: async (req, res) => {
     try {
-      res.clearCookie('refreshtoken', {
-        path: '/api/auth/customer/refresh_token',
+      res.clearCookie("refreshtoken", {
+        path: "/api/auth/customer/refresh_token",
       });
       return res.json({
         status: 200,
         success: true,
-        msg: 'Logged out success',
+        msg: "Logged out success",
       });
     } catch (err) {
       return res.json({
@@ -306,13 +306,13 @@ const userCtrl = {
   //đăng xuất tài khoản admin
   logoutAdmin: async (req, res) => {
     try {
-      res.clearCookie('refreshtoken', {
-        path: '/api/auth/admin/refresh_token',
+      res.clearCookie("refreshtoken", {
+        path: "/api/auth/admin/refresh_token",
       });
       return res.json({
         status: 200,
         success: true,
-        msg: 'Logged out success',
+        msg: "Logged out success",
       });
     } catch (err) {
       return res.json({
@@ -325,12 +325,12 @@ const userCtrl = {
   //xem profile
   profile: async (req, res) => {
     try {
-      const user = await Users.findById(req.user.id).select('-password');
+      const user = await Users.findById(req.user.id).select("-password");
       if (!user)
         return res.json({
           status: 400,
           success: false,
-          msg: 'User does not exist.',
+          msg: "User does not exist.",
         });
       res.json({
         status: 200,
@@ -353,7 +353,7 @@ const userCtrl = {
         return res.json({
           status: 400,
           success: false,
-          msg: 'No image upload',
+          msg: "No image upload",
         });
 
       await Users.findOneAndUpdate(
@@ -370,7 +370,7 @@ const userCtrl = {
       res.json({
         status: 200,
         success: true,
-        msg: 'Updated Profile Successfully !',
+        msg: "Updated Profile Successfully !",
       });
     } catch (err) {
       return res.json({
@@ -383,51 +383,51 @@ const userCtrl = {
   //chỉnh sửa mật khẩu
   ChangePassword: async (req, res) => {
     try {
-      const user = await Users.findById(req.user.id).select('+password');
+      const user = await Users.findById(req.user.id).select("+password");
       const { password, oldPassword, confirmPassword } = req.body;
       if (!password)
         return res.json({
           status: 400,
           success: false,
-          msg: 'Password are not empty.',
+          msg: "Password are not empty.",
         });
 
       if (!confirmPassword)
         return res.json({
           status: 400,
           success: false,
-          msg: ' Confirm are not empty.',
+          msg: " Confirm are not empty.",
         });
 
       if (!oldPassword)
         return res.json({
           status: 400,
           success: false,
-          msg: 'Old Password are not empty.',
+          msg: "Old Password are not empty.",
         });
 
       if (password.length < 6)
         return res.json({
           status: 400,
           success: false,
-          msg: 'Password is at least 6 characters long.',
+          msg: "Password is at least 6 characters long.",
         });
 
       let reg = new RegExp(
-        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$'
+        "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$"
       ).test(password);
       if (!reg) {
         return res.json({
           status: 400,
           success: false,
-          msg: 'Includes 6 characters, uppercase, lowercase and some and special characters.',
+          msg: "Includes 6 characters, uppercase, lowercase and some and special characters.",
         });
       }
       if (confirmPassword !== password) {
         return res.json({
           status: 400,
           success: false,
-          msg: 'Password and confirm password does not match!',
+          msg: "Password and confirm password does not match!",
         });
       }
       const isMatch = await bcrypt.compare(oldPassword, user.password);
@@ -435,7 +435,7 @@ const userCtrl = {
         return res.json({
           status: 400,
           success: false,
-          msg: ' Old Password Incorrect',
+          msg: " Old Password Incorrect",
         });
       const salt = await bcrypt.genSalt(10);
       const passwordHash = await bcrypt.hash(password, salt);
@@ -447,7 +447,7 @@ const userCtrl = {
       return res.json({
         status: 200,
         success: true,
-        msg: 'Change Password Successfully 😂!',
+        msg: "Change Password Successfully 😂!",
       });
     } catch (err) {
       return res.json({
@@ -465,14 +465,14 @@ const userCtrl = {
       res.json({
         status: 400,
         success: false,
-        msg: 'Email are not empty. ',
+        msg: "Email are not empty. ",
       });
     }
     if (!user) {
       res.json({
         status: 400,
         success: false,
-        msg: 'Account Not Exit',
+        msg: "Account Not Exit",
       });
     }
     const resetToken = user.getResetPasswordToken();
@@ -480,7 +480,7 @@ const userCtrl = {
     await user.save({ validateBeforeSave: false });
 
     const resetPasswordUrl = `${req.protocol}://${req.get(
-      'host'
+      "host"
     )}/customer/password/reset/${resetToken}`;
     // const resetPasswordUrl = `${process.env.FRONTEND_URL}/customer/password/reset/${resetToken}`;
     //const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
@@ -489,17 +489,17 @@ const userCtrl = {
         emailFrom: process.env.SMPT_MAIL,
         emailTo: user.email,
         subject: `Forgot Password`,
-        template: 'forgot-password',
+        template: "forgot-password",
         attachments: [
           {
-            filename: 'netflix.jpg',
-            path: path.resolve('./views', 'images', 'netflix.jpg'),
-            cid: 'netflix_logo',
+            filename: "netflix.jpg",
+            path: path.resolve("./views", "images", "netflix.jpg"),
+            cid: "netflix_logo",
           },
           {
-            filename: 'question.png',
-            path: path.resolve('./views', 'images', 'question.png'),
-            cid: 'question_img',
+            filename: "question.png",
+            path: path.resolve("./views", "images", "question.png"),
+            cid: "question_img",
           },
         ],
         context: {
@@ -529,14 +529,14 @@ const userCtrl = {
       res.json({
         status: 400,
         success: false,
-        msg: 'Email are not empty. ',
+        msg: "Email are not empty. ",
       });
     }
     if (!user) {
       res.json({
         status: 400,
         success: false,
-        msg: 'Account Not Exit',
+        msg: "Account Not Exit",
       });
     }
     const resetToken = user.getResetPasswordToken();
@@ -553,17 +553,17 @@ const userCtrl = {
         emailFrom: process.env.SMPT_MAIL,
         emailTo: user.email,
         subject: `Forgot Password`,
-        template: 'forgot-password',
+        template: "forgot-password",
         attachments: [
           {
-            filename: 'netflix.jpg',
-            path: path.resolve('./views', 'images', 'netflix.jpg'),
-            cid: 'netflix_logo',
+            filename: "netflix.jpg",
+            path: path.resolve("./views", "images", "netflix.jpg"),
+            cid: "netflix_logo",
           },
           {
-            filename: 'question.png',
-            path: path.resolve('./views', 'images', 'question.png'),
-            cid: 'question_img',
+            filename: "question.png",
+            path: path.resolve("./views", "images", "question.png"),
+            cid: "question_img",
           },
         ],
         context: {
@@ -590,9 +590,9 @@ const userCtrl = {
     const { password, confirmPassword } = req.body;
 
     const resetPasswordToken = crypto
-      .createHash('sha256')
+      .createHash("sha256")
       .update(req.params.token)
-      .digest('hex');
+      .digest("hex");
 
     const user = await Users.findOne({
       resetPasswordToken,
@@ -603,7 +603,7 @@ const userCtrl = {
       return res.json({
         status: 400,
         success: false,
-        msg: 'Reset Password Token is invalid or has been expired',
+        msg: "Reset Password Token is invalid or has been expired",
       });
     }
 
@@ -611,31 +611,31 @@ const userCtrl = {
       return res.json({
         status: 400,
         success: false,
-        msg: 'Password are not empty.',
+        msg: "Password are not empty.",
       });
 
     if (!confirmPassword)
       return res.json({
         status: 400,
         success: false,
-        msg: ' Confirm are not empty.',
+        msg: " Confirm are not empty.",
       });
 
     if (password.length < 6)
       return res.json({
         status: 400,
         success: false,
-        msg: 'Password is at least 6 characters long.',
+        msg: "Password is at least 6 characters long.",
       });
 
     let reg = new RegExp(
-      '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$'
+      "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$"
     ).test(password);
     if (!reg) {
       return res.json({
         status: 400,
         success: false,
-        msg: 'Includes 6 characters, uppercase, lowercase and some and special characters.',
+        msg: "Includes 6 characters, uppercase, lowercase and some and special characters.",
       });
     }
 
@@ -643,7 +643,7 @@ const userCtrl = {
       return res.json({
         status: 400,
         success: false,
-        msg: 'Password and confirm password does not match!',
+        msg: "Password and confirm password does not match!",
       });
     }
 
@@ -660,7 +660,7 @@ const userCtrl = {
     res.json({
       status: 200,
       success: true,
-      msg: 'Reset successfully',
+      msg: "Reset successfully",
     });
   },
 
@@ -681,7 +681,7 @@ const userCtrl = {
               return res.json({
                 status: 400,
                 success: false,
-                msg: 'Invalid Authentication',
+                msg: "Invalid Authentication",
               });
             } else {
               if (user) {
@@ -694,16 +694,16 @@ const userCtrl = {
                   role: user.role,
                 });
 
-                res.cookie('refreshtoken', refreshtoken, {
+                res.cookie("refreshtoken", refreshtoken, {
                   httpOnly: true,
-                  path: '/api/auth/customer/refresh_token',
+                  path: "/api/auth/customer/refresh_token",
                   maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
                 });
                 const { _id, fullname, email, image } = user;
                 res.json({
                   status: 200,
                   success: true,
-                  msg: 'Login successfully',
+                  msg: "Login successfully",
                   accesstoken,
                   user: { _id, fullname, email, image },
                 });
@@ -723,7 +723,7 @@ const userCtrl = {
                     return res.json({
                       status: 400,
                       success: false,
-                      msg: 'Invalid Authentication',
+                      msg: "Invalid Authentication",
                     });
                   }
                   const accesstoken = createAccessToken({
@@ -735,16 +735,16 @@ const userCtrl = {
                     role: data.role,
                   });
 
-                  res.cookie('refreshtoken', refreshtoken, {
+                  res.cookie("refreshtoken", refreshtoken, {
                     httpOnly: true,
-                    path: '/api/auth/customer/refresh_token',
+                    path: "/api/auth/customer/refresh_token",
                     maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
                   });
                   const { _id, fullname, email, image } = newUser;
                   res.json({
                     status: 200,
                     success: true,
-                    msg: 'Register successfully',
+                    msg: "Register successfully",
                     accesstoken,
                     user: { _id, fullname, email, image },
                   });
@@ -774,7 +774,7 @@ const userCtrl = {
               return res.json({
                 status: 400,
                 success: false,
-                msg: 'Invalid Authentication',
+                msg: "Invalid Authentication",
               });
             } else {
               if (user) {
@@ -787,16 +787,16 @@ const userCtrl = {
                   role: user.role,
                 });
 
-                res.cookie('refreshtoken', refreshtoken, {
+                res.cookie("refreshtoken", refreshtoken, {
                   httpOnly: true,
-                  path: '/api/auth/admin/refresh_token',
+                  path: "/api/auth/admin/refresh_token",
                   maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
                 });
                 const { _id, fullname, email, image } = user;
                 res.json({
                   status: 200,
                   success: true,
-                  msg: 'Login successfully',
+                  msg: "Login successfully",
                   accesstoken,
                   user: { _id, fullname, email, image },
                 });
@@ -817,7 +817,7 @@ const userCtrl = {
                     return res.json({
                       status: 400,
                       success: false,
-                      msg: 'Invalid Authentication',
+                      msg: "Invalid Authentication",
                     });
                   }
                   const accesstoken = createAccessToken({
@@ -829,16 +829,16 @@ const userCtrl = {
                     role: data.role,
                   });
 
-                  res.cookie('refreshtoken', refreshtoken, {
+                  res.cookie("refreshtoken", refreshtoken, {
                     httpOnly: true,
-                    path: '/api/auth/admin/refresh_token',
+                    path: "/api/auth/admin/refresh_token",
                     maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
                   });
                   const { _id, fullname, email, image } = newUser;
                   res.json({
                     status: 200,
                     success: true,
-                    msg: 'Register successfully',
+                    msg: "Register successfully",
                     accesstoken,
                     user: { _id, fullname, email, image },
                   });
@@ -850,12 +850,83 @@ const userCtrl = {
         }
       });
   },
+
+  //Lấy ra danh sách tài khoản admin
+  async getAllAdminAccount(req, res) {
+    try {
+      const data = await Users.find({ role: 1 });
+
+      return res.status(200).json({
+        status: 200,
+        success: true,
+        msg: "Get all admin account successfully",
+        data,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        success: false,
+        msg: "Failed to get all admin account",
+      });
+    }
+  },
+
+  //Lấy ra danh sách tài khoản khách hàng
+  async getAllCustomerAccount(req, res) {
+    try {
+      const data = await Users.find({ role: 0 });
+
+      return res.status(200).json({
+        status: 200,
+        success: true,
+        msg: "Get all customer account successfully",
+        data,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        success: false,
+        msg: "Failed to get all customer account",
+      });
+    }
+  },
+
+  //Chỉnh sửa thông tin tài khoản khách hàng
+  async updateInfoCustomerAccount(req, res) {
+    try {
+      const { fullname, image, phone_number, date_of_birth, sex } = req.body;
+      const userId = req.params.id;
+
+      await Users.findByIdAndUpdate(
+        { _id: userId, role: 0 },
+        {
+          fullname,
+          image,
+          phone_number,
+          date_of_birth,
+          sex,
+        }
+      );
+
+      return res.status(200).json({
+        status: 200,
+        success: true,
+        msg: "Updated info customer account successfully",
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        success: false,
+        msg: "Failed to update info customer account ",
+      });
+    }
+  },
 };
 
 const createAccessToken = (user) => {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '2h' });
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "2h" });
 };
 const createRefreshToken = (user) => {
-  return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' });
+  return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "7d" });
 };
 module.exports = userCtrl;

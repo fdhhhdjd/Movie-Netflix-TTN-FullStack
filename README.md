@@ -12,6 +12,9 @@
 - Quên mật khẩu tài khoản admin: post --> http://localhost:5000/api/auth/admin/forget
 - Link reset mật khẩu khi quên: put --> http://localhost:5000/api/auth/admin/password/reset/:token
 - Đăng nhập google tài khoản admin: post --> http://localhost:5000/api/auth/admin/loginGoogle
+- Danh sách tài khoản admin: get --> http://localhost:5000/api/auth/admin/getAllAdmin
+- Danh sách tài khoản khách hàng: get --> http://localhost:5000/api/auth/admin/getAllCustomer
+- Chỉnh sửa thông tin tài khoản khách hàng: patch --> http://localhost:5000/api/auth/admin/customerAccount/:id/update/info
 
 \*Upload:
 
@@ -65,6 +68,9 @@
 \*Comment
 
 - Xem tất cả bình luận: get --> http://localhost:5000/api/comment/all
+- Lấy thùng rác chứa những bình luận đã bị xóa: get --> http//localhost:5000/api/comment/bin
+- Khôi phục lại comment đã bị xóa: patch --> http://localhost:5000/api/comment/:id/restore
+- Xóa hẳn comment nếu ở trong thùng rác quá 7 ngày: delete --> http://localhost:5000/api/comment/bin/delete
 
 \*Payment
 
@@ -134,7 +140,7 @@
 - Xem bình luận của bộ phim: get --> http://localhost:5000/api/comment/get/:filmId
 - Bình luận bộ phim: post --> http://localhost:5000/api/comment/add/:filmId
 - Chỉnh sửa bình luận: patch --> http://localhost:5000/api/comment/update/:id
-- Xóa bình luận: delete --> http://localhost:5000/api/comment/delete/:id
+- Xóa mềm bình luận: patch --> http://localhost:5000/api/comment/softDelete/:id
 
 \*Payment
 

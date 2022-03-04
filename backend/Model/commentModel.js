@@ -1,15 +1,15 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const CommentSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
     film: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Film',
+      ref: "Film",
       required: true,
     },
     content: {
@@ -25,8 +25,12 @@ const CommentSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    deleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Comment', CommentSchema);
+module.exports = mongoose.model("Comment", CommentSchema);
