@@ -279,7 +279,7 @@ const userCtrl = {
       return res.json({
         status: 400,
         success: false,
-        msg: er.message,
+        msg: err.message,
       });
     }
   },
