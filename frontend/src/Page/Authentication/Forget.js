@@ -15,9 +15,12 @@ const initialState = {
 };
 const Forget = () => {
   const [state, setState] = useState(initialState);
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { forgetPassword, loading } = useSelector((state) => state.auth);
+
   const emailEL = useRef();
   const { email } = state;
   const handleForget = (e) => {
@@ -45,6 +48,10 @@ const Forget = () => {
       dispatch(clearErrors());
     }
   }, [forgetPassword]);
+  const handleLogin = () => {
+
+    navigate("/login")
+  }
   return (
     <>
       <ForgetStyle />
@@ -77,7 +84,7 @@ const Forget = () => {
             <span>
               New to Netflix?{" "}
               <b
-                onClick={() => navigate("/login")}
+                onClick={handleLogin}
                 style={{ cursor: "pointer" }}
               >
                 Login Now.

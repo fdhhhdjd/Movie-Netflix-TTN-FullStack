@@ -52,7 +52,7 @@ const Login = () => {
   return (
     <>
       <AuthenticationStyle />
-      <MetaData title="Login-Movie" />
+      <MetaData title="Login-Movie" description ='Login with your account'/>
       <div className="login">
         <div className="top">
           <div className="wrapper">
@@ -70,7 +70,7 @@ const Login = () => {
           <form onSubmit={handleSubmit(handleSubmitForm)}>
             <h1>Sign In</h1>
             <input
-              type="email"
+              
               placeholder="Email or phone number"
               {...register("email", {
                 required: true,

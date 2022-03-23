@@ -147,7 +147,7 @@ export const AdminResgiterInitiate = (
     
       })
       .then((user) => {
-        dispatch(AdminRegisterSuccess(user));
+        dispatch(AdminRegisterSuccess(user.data));
       })
       .catch((error) => {
         dispatch(AdminRegisterFail(toast.error(error.data)));
@@ -211,7 +211,7 @@ export const AdminLogoutInitiate = () => async (dispatch) => {
         email,
       });
   
-      dispatch(AdminForgetSuccess(data));
+      dispatch(AdminForgetSuccess(data.data));
     } catch (error) {
       dispatch(AdminForgetFail(error));
     }

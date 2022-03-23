@@ -16,7 +16,7 @@ import {
   ForgetAdmin,
   ResetAdmin,
   ChangePasswordAdmin,
-  Director,
+  
   NewUser,
   NewDirector,
   Category,
@@ -33,6 +33,7 @@ import {
   LoginAdmin,
   Admin,
   ProfileAdmin,
+  Director,
 } from "./imports/LazyRouter";
 function App() {
   return (

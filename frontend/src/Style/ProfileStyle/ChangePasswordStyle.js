@@ -32,6 +32,8 @@ export const ChangePasswordStyle = createGlobalStyle`
     font-size:36px;
     font-weight:500;
     color: red;
+    margin-bottom: 20px;
+    
 }
 .contact .content p{
     font-size:20px;

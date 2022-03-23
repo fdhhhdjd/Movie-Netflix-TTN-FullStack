@@ -15,16 +15,15 @@ const LoginAdmin = () => {
   const { AdminRegister } = useSelector((state) => state.admin);
   console.log(AdminRegister, "AdminRegister");
   useEffect(() => {
-    if (AdminRegister.success === true) {
-      window.location.href = "/admin";
-      localStorage.setItem("firstLogin", true);
-      dispatch(clearErrors());
+    if (AdminRegister.status === 200) {
+      setFlag(false);
+      toast.success("Register Success Please Login 😉!");
     }
-    if (AdminRegister.success === false) {
+    if (AdminRegister.status === 400) {
       toast.error(`${AdminRegister.msg}`);
-      dispatch(clearErrors());
     }
   }, [AdminRegister]);
+  console.log(flag,'flag')
   return (
     <>
       <AuthenticationAdStyle>

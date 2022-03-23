@@ -1,8 +1,8 @@
 
 import React from "react";
-// import Lottie from "react-lottie";
+import Lottie from "lottie-react";
 import  Button from "./Button";
-// import { defaultOptions, defaultOptions1 } from "../../imports/Lotite";
+import { defaultOptions, defaultOptions1 } from "../../imports/Lotite";
 const ContentAdmin = ({handleFlag,flag}) => {
   return (
     <>
@@ -11,8 +11,7 @@ const ContentAdmin = ({handleFlag,flag}) => {
         <div className="content">
           <h3>Note New Here?</h3>
           <p>
-            Hello everyone,i am tai,you is have account yet ? Can I help you?
-            I am ready to help you now !
+          Sign in now and manage your apps
           </p>
           <Button
             className="btn transparent"
@@ -21,16 +20,15 @@ const ContentAdmin = ({handleFlag,flag}) => {
             title="Sign Up"
           />
         </div>
-        {/* <div className="image">
+        <div className="image">
           <Lottie options={defaultOptions} />
-        </div> */}
+        </div>
       </div>
       <div className="panel right-panel">
         <div className="content">
           <h3>Are you ready to go home website?</h3>
           <p>
-            Thank you was a visit company TaiHeo Dev Web, I wish you a good
-            day,I love you so much
+          Hãy đăng kí ngay để trải nghiệm dịch vụ quản lí của chúng tôi
           </p>
           <Button
             className="btn transparent"
@@ -39,9 +37,9 @@ const ContentAdmin = ({handleFlag,flag}) => {
             title="Sign in"
           />
         </div>
-        {/* <div className="image">
+        <div className="image">
           <Lottie options={defaultOptions1} />
-        </div> */}
+        </div>
       </div>
     </div>
   </>

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {  AdminResgiterInitiate } from "../../Redux/Action/ActionAdminAuth";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+import swal from "sweetalert";
 const RegisterAdmin = () => {
     const {
         register,
@@ -37,6 +38,7 @@ const RegisterAdmin = () => {
                 fullname, email, password, sex, date_of_birth, phone_number
           )
         );
+
       };
       const handleIsLock = () => {
         setIsLock(!isLock);
@@ -50,11 +52,12 @@ const RegisterAdmin = () => {
           setIsLocks(false);
           setIsLock(false);
         }
+
       }, [AdminRegister]);
     
   return (
     <>
-        <form
+      <form
         className="sign-up-form form-main"
         onSubmit={handleSubmit(handleSubmitForm)}
       >

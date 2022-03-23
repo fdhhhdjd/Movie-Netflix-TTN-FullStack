@@ -17,8 +17,20 @@ const Register = () => {
     getValues,
     reset,
   } = useForm();
+  const [eyes,setEyes] = useState(false);
+  const handleClicked = () =>{
+    setEyes(!eyes);
+  }
+  const [eyeCf,setEyeCf] = useState(false);
+  const handleClickCf = () =>{
+    setEyeCf(!eyeCf);
+  }
+ 
   const passwords = useRef({});
+  const passwordConfirm = useRef({});
   passwords.current = watch("password");
+  passwordConfirm.current = watch("passwordConfirm");
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { authRegister, loading } = useSelector((state) => state.auth);
@@ -64,6 +76,7 @@ const Register = () => {
                 "Tên của bạn không được quá 20 kí tự"}
             </span>
             <input
+              
               {...register("email", {
                 required: true,
                 pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
@@ -82,17 +95,26 @@ const Register = () => {
             <input
               className="registerInput"
               {...register("password", {
+             
                 required: true,
                 minLength: {
                   value: 6,
                 },
                 pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&^_-]{8,}$/,
               })}
-              type="password"
+              type={eyes ? "type" : "password"}
               placeholder="Password"
+           
               name="password"
               id="password"
             />
+            {
+              eyes ? (<i className ="fa fa-solid fa-eye-slash" onClick={handleClicked}></i>):(<i className=" fa fa-solid fa-eye" onClick={handleClicked}></i>)
+            }
+            
+       
+            
+
 
             <span style={{ color: "red" }}>
               {errors.password?.type === "required" &&
@@ -109,11 +131,16 @@ const Register = () => {
                   value === getValues("password") ||
                   "The passwords do not match",
               })}
-              type="password"
+              type={eyeCf ? "type" : "password"}
               placeholder="Confirm Password"
               name="passwordConfirm"
               id="passwordConfirm"
             />
+         
+                        {
+              eyeCf ? (<i className =" fas fa-solid fa-eye-slash" onClick={handleClickCf}></i>):(<i className="fas fa-solid fa-eye" onClick={handleClickCf}></i>)
+            }
+      
 
             <span style={{ color: "red" }}>
               {errors.passwordConfirm?.type === "required" &&

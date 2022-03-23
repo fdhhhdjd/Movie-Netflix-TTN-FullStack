@@ -29,4 +29,9 @@ export const ProfileAdmin = lazy(() => {
     setTimeout(() => resolve(import("../Page/Admins/ProfileAdmin")), 1000);
   });
 });
+export const Director = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("../Page/Admins/Director")), 2000);
+  });
+});
 

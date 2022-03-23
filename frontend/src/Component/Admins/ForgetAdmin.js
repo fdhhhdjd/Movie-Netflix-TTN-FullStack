@@ -2,13 +2,14 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import { ForgetStyle } from "../../Style/Admin/ForgetStyle";
 import { Link } from "react-router-dom";
 
-import { Metadata } from "../../Page/MetaData/MetaData";
+import  MetaData  from "../../Page/MetaData/MetaData"
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { ForgetAdminsInitiate } from "../../Redux/Action/ActionAdminAuth";
 import swal from "sweetalert";
 const ForgetAdmin = () => {
   const { forget } = useSelector((state) => state.admin);
+  console.log(forget,'forget')
   const {
     register,
     formState: { errors },
@@ -18,6 +19,7 @@ const ForgetAdmin = () => {
   const dispatch = useDispatch();
   const handleSubmitForm = async (data) => {
     const { email } = data;
+    console.log(email,'email');
     dispatch(ForgetAdminsInitiate(email));
   };
   useEffect(() => {
@@ -34,7 +36,7 @@ const ForgetAdmin = () => {
   }, [forget]);
   return (
     <>
-      {/* <Metadata title="Forget-Admin" /> */}
+      <MetaData title="Forget-Admin" />
       <ForgetStyle>
         <div className="container1">
           <div className="forms-container">

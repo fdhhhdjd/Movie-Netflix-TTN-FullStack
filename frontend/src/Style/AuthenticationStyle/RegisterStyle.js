@@ -40,6 +40,7 @@ export const RegisterStyle = createGlobalStyle`
       color: white;
   
       form {
+        position:relative;
         width: 350px;
         height: 500px;
         padding: 30px;
@@ -69,6 +70,11 @@ export const RegisterStyle = createGlobalStyle`
           margin-left: 20rem;
           margin-bottom:1.4rem
         }
+        .fas{
+          position:absolute;
+          margin-left: 20rem;
+          margin-bottom:-8rem
+        }
         button {
           height: 40px;
           border-radius: 5px;
@@ -88,6 +94,20 @@ export const RegisterStyle = createGlobalStyle`
         }
       }
     }
+  }
+  .password-toogle-icon{
+    position: absolute;
+    top: 260px;
+    right: 40px;
+    z-index: 1000;
+    cursor: pointer;
+  }
+  .passwordConfirm-toogle-icon{
+    position: absolute;
+    top: 340px;
+    right: 40px;
+    z-index: 1000;
+    cursor: pointer;
   }
 
 `;

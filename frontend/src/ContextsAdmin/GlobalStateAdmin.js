@@ -10,6 +10,7 @@ export const DataAdminProvider = ({ children }) => {
   const [callback, setCallback] = useState(false);
   const { Admin, token } = useSelector((state) => state.admin);
   const tokens = token.accessToken;
+
   const dispatch = useDispatch();
   useEffect(() => {
     const firstLogin = localStorage.getItem("firstLogin");

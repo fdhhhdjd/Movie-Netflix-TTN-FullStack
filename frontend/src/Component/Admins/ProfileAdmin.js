@@ -99,6 +99,7 @@ const ProfileAdmins = () => {
   const handleUpload = async (e) => {
     e.preventDefault();
     try {
+    
       const file = e.target.files[0];
       if (!file)
         return swal("File not Exists", {
@@ -199,17 +200,6 @@ const ProfileAdmins = () => {
             <span className="userUpdateTitle">Edit Admin</span>
             <form className="userUpdateForm" onSubmit={handleSubmit}>
               <div className="userUpdateLeft">
-                {/* <div className="userUpdateItem">
-                  <label>Username</label>
-                  <input
-                    type="text"
-                    placeholder=""
-                    name="username"
-                    value={user.fullname}
-                    className="userUpdateInput"
-                    onChange={handleChangeInput}
-                  />
-                </div> */}
                 <div className="userUpdateItem">
                   <label>Full Name</label>
                   <input
