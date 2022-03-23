@@ -1,8 +1,5 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
+const mongoose = require("mongoose");
+const crypto = require("crypto");
 const UserSchema = new mongoose.Schema(
   {
     fullname: {
@@ -26,8 +23,8 @@ const UserSchema = new mongoose.Schema(
     image: {
       type: Object,
       default: {
-        public_id: '121313112',
-        url: 'https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png',
+        public_id: "121313112",
+        url: "https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png",
       },
     },
     phone_number: {
@@ -45,6 +42,10 @@ const UserSchema = new mongoose.Schema(
       required: false,
       trim: true,
     },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
     createdAt: {
       type: Date,
       default: Date.now,
@@ -61,17 +62,17 @@ const UserSchema = new mongoose.Schema(
 );
 UserSchema.methods.getResetPasswordToken = function () {
   //! tạo mã thông báo
-  const resetToken = crypto.randomBytes(20).toString('hex');
+  const resetToken = crypto.randomBytes(20).toString("hex");
 
   //! Thêm resetPasswordToken vào userSchema
   this.resetPasswordToken = crypto
-    .createHash('sha256')
+    .createHash("sha256")
     .update(resetToken)
-    .digest('hex');
+    .digest("hex");
 
   this.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
 
   return resetToken;
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model("User", UserSchema);

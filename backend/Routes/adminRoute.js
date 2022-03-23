@@ -7,6 +7,9 @@ const router = express.Router();
 //đăng ký tài khoản admin
 router.post("/register", userCtrl.registerAdmin);
 
+//xác thực email đăng ký
+router.get("/verify/:userId/:uniqueString", userCtrl.verifyEmail);
+
 //đăng nhập tài khoản admin
 router.post("/login", userCtrl.loginAdmin);
 
