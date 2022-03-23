@@ -8,6 +8,7 @@ Web Online: https://movienetflixttn.herokuapp.com/
 \*Admin:
 
 - Đăng ký tài khoản admin: post --> http://localhost:5000/api/auth/admin/register
+- Xác thực email đăng ký: get --> http://localhost:5000/api/auth/admin/verify/:userId/:uniqueString
 - Đăng nhập tài khoản admin: post --> http://localhost:5000/api/auth/admin/login
 - Đăng xuất tài khoản: get --> http://localhost:5000/api/auth/admin/logout
 - Xem profile: get --> http://localhost:5000/api/auth/admin/profile
@@ -104,6 +105,7 @@ Web Online: https://movienetflixttn.herokuapp.com/
 \*Customer:
 
 - Đăng ký tài khoản khách hàng: post --> http://localhost:5000/api/auth/customer/register
+- Xác thực email đăng ký: get --> http://localhost:5000/api/auth/admin/verify/:userId/:uniqueString
 - Đăng nhập tài khoản khách hàng : post --> http://localhost:5000/api/auth/customer/login
 - Đăng xuất tài khoản: get --> http://localhost:5000/api/auth/customer/logout
 - Xem profile: get --> http://localhost:5000/api/auth/customer/profile
