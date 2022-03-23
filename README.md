@@ -1,3 +1,8 @@
+Tiến độ công việc Team:
+https://docs.google.com/spreadsheets/d/1BBv4CXNniNjqdIE7tjrG9UM4nprd3NSVy2FX9oaWq0Q/edit#gid=0
+
+Web Online: https://movienetflixttn.herokuapp.com/
+
 1. API dành cho admin
 
 \*Admin:
