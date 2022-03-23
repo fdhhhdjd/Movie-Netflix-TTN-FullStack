@@ -595,8 +595,8 @@ const userCtrl = {
         template: "forgot-password",
         attachments: [
           {
-            filename: "netflix.jpg",
-            path: path.resolve("./views", "images", "netflix.jpg"),
+            filename: "netflix.png",
+            path: path.resolve("./views", "images", "netflix.png"),
             cid: "netflix_logo",
           },
           {
@@ -659,8 +659,8 @@ const userCtrl = {
         template: "forgot-password",
         attachments: [
           {
-            filename: "netflix.jpg",
-            path: path.resolve("./views", "images", "netflix.jpg"),
+            filename: "netflix.png",
+            path: path.resolve("./views", "images", "netflix.png"),
             cid: "netflix_logo",
           },
           {

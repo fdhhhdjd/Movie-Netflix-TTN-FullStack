@@ -1,6 +1,6 @@
-const Feedbacks = require('../Model/feedBackModel.js');
-const sendEmail = require('./SendEmail.js');
-const path = require('path');
+const Feedbacks = require("../Model/feedBackModel.js");
+const sendEmail = require("./SendEmail.js");
+const path = require("path");
 
 const feedbackCtrl = {
   //Xem tất cả phản hồi gửi tới
@@ -10,14 +10,14 @@ const feedbackCtrl = {
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Get all feedbacks successfully',
+        msg: "Get all feedbacks successfully",
         data: list_feedback,
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to get all feedbacks',
+        msg: "Failed to get all feedbacks",
       });
     }
   },
@@ -32,7 +32,7 @@ const feedbackCtrl = {
         return res.status(400).json({
           status: 400,
           success: false,
-          msg: 'This feedback does not exist',
+          msg: "This feedback does not exist",
         });
       }
 
@@ -40,12 +40,12 @@ const feedbackCtrl = {
         emailFrom: process.env.SMPT_MAIL,
         emailTo: feedback.email,
         subject: feedback.subject,
-        template: 'response_feedback',
+        template: "response_feedback",
         attachments: [
           {
-            filename: 'netflix.jpg',
-            path: path.resolve('./views', 'images', 'netflix.jpg'),
-            cid: 'netflix_logo',
+            filename: "netflix.png",
+            path: path.resolve("./views", "images", "netflix.png"),
+            cid: "netflix_logo",
           },
         ],
         context: {
@@ -58,13 +58,13 @@ const feedbackCtrl = {
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Sent email response feedback successfully',
+        msg: "Sent email response feedback successfully",
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to send response feedback',
+        msg: "Failed to send response feedback",
       });
     }
   },
@@ -77,19 +77,19 @@ const feedbackCtrl = {
         return res.status(400).json({
           status: 400,
           success: false,
-          msg: 'Please fill in full infomation',
+          msg: "Please fill in full infomation",
         });
       }
       await sendEmail({
         emailFrom: process.env.SMPT_MAIL,
         emailTo: email,
         subject,
-        template: 'feedback',
+        template: "feedback",
         attachments: [
           {
-            filename: 'netflix.jpg',
-            path: path.resolve('./views', 'images', 'netflix.jpg'),
-            cid: 'netflix_logo',
+            filename: "netflix.png",
+            path: path.resolve("./views", "images", "netflix.png"),
+            cid: "netflix_logo",
           },
         ],
         context: {
@@ -111,7 +111,7 @@ const feedbackCtrl = {
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Sent feedback successfully',
+        msg: "Sent feedback successfully",
       });
     } catch (err) {
       return res.json(err.message);
