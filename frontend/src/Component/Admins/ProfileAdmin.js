@@ -37,8 +37,8 @@ const ProfileAdmins = () => {
   const [user, setUser] = useState(initialState);
   const { profile, token } = useSelector((state) => state.admin);
   const { loading, handleUpload, handleDestroy, images, setImages } =
-  useDesUpImage(token);
- 
+  useDesUpImage(token.accessToken);
+ console.log(token.accessToken,'token')
   const [callback, setCallback] = state.callback;
   useEffect(() => {
     if (profile.user) {
