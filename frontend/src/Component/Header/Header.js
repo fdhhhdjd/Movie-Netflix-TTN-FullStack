@@ -59,7 +59,7 @@ const Header = () => {
               onClick={() => navigate("/feedback")}
               className={` ${activeTab === "Feedback" ? "active" : ""}`}
             >
-              FeedBack
+              FeedBacks
             </span>
           </div>
           <div className="right">
