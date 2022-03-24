@@ -8,6 +8,7 @@ import { EditProfileStyle } from "../../Style/ProfileStyle/EditProfileStyle";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 import { toast } from "react-toastify";
+import {useDesUpImage} from '../../imports/index'
 const initialState = {
   fullname: "",
 
@@ -17,12 +18,14 @@ const initialState = {
 };
 const EditProfile = () => {
   const state = useContext(GlobalState);
-  const [images, setImages] = useState(false);
+
   const [onEdit, setOnEdit] = useState(false);
-  const [loading, setLoading] = useState(false);
+
   const [user, setUser] = useState(initialState);
   const { profile, refreshTokens } = useSelector((state) => state.auth);
   const [callback, setCallback] = state.callback;
+  const { loading, handleUpload, handleDestroy, images, setImages } =
+  useDesUpImage(refreshTokens);
   useEffect(() => {
     if (profile) {
       setUser({ ...profile });
@@ -62,59 +65,6 @@ const EditProfile = () => {
       navigate("/profile");
     } catch (error) {
       alert(error.response.data.msg);
-    }
-  };
-  const handleDestroy = async () => {
-    try {
-      setLoading(true);
-      await axios.post(
-        "/api/destroyImageUser",
-        { public_id: images.public_id },
-        {
-          headers: {
-            Authorization: ` ${refreshTokens}`,
-          },
-        }
-      );
-      setLoading(false);
-      setImages(false);
-    } catch (err) {
-      alert(err.response.data.msg);
-    }
-  };
-  const handleUpload = async (e) => {
-    e.preventDefault();
-    try {
-      const file = e.target.files[0];
-      if (!file)
-        return swal("File not Exists", {
-          icon: "error",
-        });
-      if (file.size > 1024 * 1024)
-        // 1mb
-        return swal("Size too large!", {
-          icon: "error",
-        });
-      if (file.type !== "image/jpeg" && file.type !== "image/png")
-        // 1mb
-        return swal("File format is incorrect.", {
-          icon: "error",
-        });
-      let formData = new FormData();
-
-      formData.append("file", file);
-      setLoading(true);
-      const res = await axios.post("/api/uploadImageUser", formData, {
-        headers: {
-          "content-type": "multipart/form-data",
-          Authorization: `${refreshTokens}`,
-        },
-      });
-
-      setLoading(false);
-      setImages(res.data);
-    } catch (error) {
-      toast.error(error.response.data.msg);
     }
   };
   const styleUpload = {
