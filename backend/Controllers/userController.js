@@ -76,18 +76,29 @@ const userCtrl = {
 
       await newVerification.save();
 
+      const confirmEmailUrl =
+        currentUrl +
+        "api/auth/customer/verify/" +
+        newUser.id +
+        "/" +
+        uniqueString;
+
       //send email verification
       await sendEmail({
         emailFrom: process.env.SMPT_MAIL,
         emailTo: email,
         subject: `Verify Your Email`,
-        html: `<p>Verify your email address to complete the signup and login into your account.</p><p>This link <b>expires in 6 hours</b>.</p><p>Press <a href= ${
-          currentUrl +
-          "api/auth/customer/verify/" +
-          newUser.id +
-          "/" +
-          uniqueString
-        }>here</a> to proceed.</p>`,
+        template: "confirm-email",
+        attachments: [
+          {
+            filename: "netflix.png",
+            path: path.resolve("./views", "images", "netflix.png"),
+            cid: "netflix_logo",
+          },
+        ],
+        context: {
+          confirmEmailUrl,
+        },
       });
 
       return res.json({
@@ -131,11 +142,8 @@ const userCtrl = {
           if (isMatch) {
             await Users.findOneAndUpdate({ _id: userId }, { verified: true });
             await UserVerifications.deleteOne({ userId });
-            return res.json({
-              status: 200,
-              success: true,
-              msg: "Register success",
-            });
+
+            return res.sendFile(path.resolve("./views", "verify-success.html"));
           } else {
             return res.json({
               status: 400,
@@ -959,7 +967,7 @@ const userCtrl = {
   //Lấy ra danh sách tài khoản admin
   async getAllAdminAccount(req, res) {
     try {
-      const data = await Users.find({ role: 1 });
+      const data = await Users.find({ role: 1, verified: true });
 
       return res.status(200).json({
         status: 200,
@@ -979,7 +987,7 @@ const userCtrl = {
   //Lấy ra danh sách tài khoản khách hàng
   async getAllCustomerAccount(req, res) {
     try {
-      const data = await Users.find({ role: 0 });
+      const data = await Users.find({ role: 0, verified: true });
 
       return res.status(200).json({
         status: 200,
@@ -996,6 +1004,34 @@ const userCtrl = {
     }
   },
 
+  //Xem chi tiết thông tin tài khoản khách hàng
+  async getDetailCustomerAccount(req, res) {
+    try {
+      const userId = req.params.id;
+      const user = await Users.findById({ _id: userId });
+      if (!user) {
+        return res.json({
+          status: 400,
+          success: false,
+          msg: "User not found",
+        });
+      }
+      return res.json({
+        status: 200,
+        success: true,
+        msg: "Get detail user successfully",
+        data: user,
+      });
+    } catch (error) {
+      return res.json({
+        status: 400,
+        success: false,
+        // msg: "Failed to get detail user",
+        msg: error.message,
+      });
+    }
+  },
+
   //Chỉnh sửa thông tin tài khoản khách hàng
   async updateInfoCustomerAccount(req, res) {
     try {
@@ -1003,7 +1039,7 @@ const userCtrl = {
       const userId = req.params.id;
 
       await Users.findByIdAndUpdate(
-        { _id: userId, role: 0 },
+        { _id: userId, role: 0, verified: true },
         {
           fullname,
           image,
