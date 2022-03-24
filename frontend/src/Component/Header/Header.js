@@ -45,7 +45,7 @@ const Header = () => {
                 onClick={() => navigate("/home")}
                 className={` ${activeTab === "Home" ? "active" : ""}`}
               >
-                Homepage
+                Homepagetaiheo
               </span>
             </span>
             <span to="/series" className="link">
