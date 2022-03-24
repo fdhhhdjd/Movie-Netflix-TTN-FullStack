@@ -8,7 +8,7 @@ const commentCtrl = require("../Controllers/commentController.js");
 router.get("/all", auth, authAdmin, commentCtrl.getAllComment);
 
 //Xem bình luận của 1 bộ phim
-router.get("/get/:filmId", auth, authCustomer, commentCtrl.getCommentsOfFilm);
+router.get("/get/:filmId", auth, commentCtrl.getCommentsOfFilm);
 
 //Bình luận bộ phim
 router.post("/add/:filmId", auth, authCustomer, commentCtrl.commentFilm);
