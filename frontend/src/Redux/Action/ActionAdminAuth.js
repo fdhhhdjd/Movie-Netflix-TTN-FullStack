@@ -147,7 +147,7 @@ export const AdminResgiterInitiate = (
     
       })
       .then((user) => {
-        dispatch(AdminRegisterSuccess(user));
+        dispatch(AdminRegisterSuccess(user.data));
       })
       .catch((error) => {
         dispatch(AdminRegisterFail(toast.error(error.data)));

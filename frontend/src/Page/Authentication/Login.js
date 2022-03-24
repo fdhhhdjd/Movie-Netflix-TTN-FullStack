@@ -76,7 +76,7 @@ const Login = () => {
                 required: true,
                 pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
               })}
-              type="email"
+              
               name="email"
               id="email"
             />
