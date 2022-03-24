@@ -20,6 +20,7 @@ Web Online: https://movienetflixttn.herokuapp.com/
 - Đăng nhập google tài khoản admin: post --> http://localhost:5000/api/auth/admin/loginGoogle
 - Danh sách tài khoản admin: get --> http://localhost:5000/api/auth/admin/getAllAdmin
 - Danh sách tài khoản khách hàng: get --> http://localhost:5000/api/auth/admin/getAllCustomer
+- Xem chi tiết tài khoản khách hàng: get --> http://localhost:5000/api/auth/admin/getDetailCustomer/:id
 - Chỉnh sửa thông tin tài khoản khách hàng: patch --> http://localhost:5000/api/auth/admin/customerAccount/:id/update/info
 
 \*Upload:

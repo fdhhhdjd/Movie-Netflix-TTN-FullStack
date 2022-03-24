@@ -43,6 +43,14 @@ router.get("/getAllAdmin", auth, authAdmin, userCtrl.getAllAdminAccount);
 //Lấy ra danh sách tài khoản khách hàng
 router.get("/getAllCustomer", auth, authAdmin, userCtrl.getAllCustomerAccount);
 
+//Xem chi tiết tài khoản khách hàng
+router.get(
+  "/getDetailCustomer/:id",
+  auth,
+  authAdmin,
+  userCtrl.getDetailCustomerAccount
+);
+
 //Chỉnh sửa thông tin tài khoản khách hàng
 router.patch(
   "/customerAccount/:id/update/info",

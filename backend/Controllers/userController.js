@@ -959,7 +959,7 @@ const userCtrl = {
   //Lấy ra danh sách tài khoản admin
   async getAllAdminAccount(req, res) {
     try {
-      const data = await Users.find({ role: 1 });
+      const data = await Users.find({ role: 1, verified: true });
 
       return res.status(200).json({
         status: 200,
@@ -979,7 +979,7 @@ const userCtrl = {
   //Lấy ra danh sách tài khoản khách hàng
   async getAllCustomerAccount(req, res) {
     try {
-      const data = await Users.find({ role: 0 });
+      const data = await Users.find({ role: 0, verified: true });
 
       return res.status(200).json({
         status: 200,
@@ -996,6 +996,34 @@ const userCtrl = {
     }
   },
 
+  //Xem chi tiết thông tin tài khoản khách hàng
+  async getDetailCustomerAccount(req, res) {
+    try {
+      const userId = req.params.id;
+      const user = await Users.findById({ _id: userId });
+      if (!user) {
+        return res.json({
+          status: 400,
+          success: false,
+          msg: "User not found",
+        });
+      }
+      return res.json({
+        status: 200,
+        success: true,
+        msg: "Get detail user successfully",
+        data: user,
+      });
+    } catch (error) {
+      return res.json({
+        status: 400,
+        success: false,
+        // msg: "Failed to get detail user",
+        msg: error.message,
+      });
+    }
+  },
+
   //Chỉnh sửa thông tin tài khoản khách hàng
   async updateInfoCustomerAccount(req, res) {
     try {
@@ -1003,7 +1031,7 @@ const userCtrl = {
       const userId = req.params.id;
 
       await Users.findByIdAndUpdate(
-        { _id: userId, role: 0 },
+        { _id: userId, role: 0, verified: true },
         {
           fullname,
           image,
