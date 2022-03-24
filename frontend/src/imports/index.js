@@ -40,3 +40,5 @@ export {default as NewFilm} from "../Component/Admins/NewFilm"
 export {default as Favourite} from "../Component/Admins/Favourite"
 export { Rating} from "../Component/Admins/Rating"
 
+//!Custom Hook
+export { default as useDesUpImage } from "../CustomHook/useDesUpImage";
