@@ -20,6 +20,7 @@ const SideBarAdmins = () => {
     const handleLogout = () => {
       dispatch(AdminLogoutInitiate());
     };
+    //chon pathname
     useEffect(() => {
       if (location.pathname === "/admin") {
         setActiveTab("Home");
