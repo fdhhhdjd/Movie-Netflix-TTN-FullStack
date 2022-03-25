@@ -43,6 +43,9 @@ router.get("/getAllAdmin", auth, authAdmin, userCtrl.getAllAdminAccount);
 //Lấy ra danh sách tài khoản khách hàng
 router.get("/getAllCustomer", auth, authAdmin, userCtrl.getAllCustomerAccount);
 
+//Lấy ra danh sách tài khoản khách hàng chưa check email
+router.get("/getAllCustomerUncheck", userCtrl.GetAllCustomerUncheck);
+
 //Xem chi tiết tài khoản khách hàng
 router.get(
   "/getDetailCustomer/:id",

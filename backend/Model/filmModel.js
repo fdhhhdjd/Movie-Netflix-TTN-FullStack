@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const FilmSchema = new mongoose.Schema(
   {
@@ -37,14 +37,14 @@ const FilmSchema = new mongoose.Schema(
     director: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Director',
+        ref: "Director",
         required: true,
       },
     ],
     category: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category',
+        ref: "Category",
         required: true,
       },
     ],
@@ -86,7 +86,7 @@ const FilmSchema = new mongoose.Schema(
       required: true,
     },
     ageLimit: {
-      type: String,
+      type: Number,
       required: true,
     },
     createdAt: {
@@ -101,4 +101,4 @@ const FilmSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Film', FilmSchema);
+module.exports = mongoose.model("Film", FilmSchema);
