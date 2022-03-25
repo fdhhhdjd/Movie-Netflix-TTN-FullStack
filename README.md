@@ -22,6 +22,7 @@ Web Online: https://movienetflixttn.herokuapp.com/
 - Danh sách tài khoản khách hàng: get --> http://localhost:5000/api/auth/admin/getAllCustomer
 - Xem chi tiết tài khoản khách hàng: get --> http://localhost:5000/api/auth/admin/getDetailCustomer/:id
 - Chỉnh sửa thông tin tài khoản khách hàng: patch --> http://localhost:5000/api/auth/admin/customerAccount/:id/update/info
+- Danh sách khách hàng chưa check email đăng ký: get --> http://localhost:5000/api/auth/admin/getAllCustomerUncheck
 
 \*Upload:
 
@@ -117,6 +118,7 @@ Web Online: https://movienetflixttn.herokuapp.com/
 - Quên mật khẩu tài khoản khách hàng: post --> http://localhost:5000/api/auth/customer/forget
 - Link reset mật khẩu khi quên: put --> http://localhost:5000/api/auth/customer/password/reset/:token
 - Đăng nhập google tài khoản khách hàng: post --> http://localhost:5000/api/auth/customer/loginGoogle
+- Lựa chọn phim cho trẻ em hoặc người lớn : get --> http://localhost:5000/api/film/selectForAdultOrChild
 
 \*Director:
 

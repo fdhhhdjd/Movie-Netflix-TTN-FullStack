@@ -1,25 +1,63 @@
-const Films = require('../Model/filmModel.js');
-const Ratings = require('../Model/ratingModel.js');
+const Films = require("../Model/filmModel.js");
+const Ratings = require("../Model/ratingModel.js");
+const Users = require("../Model/userModel");
 
 const filmCtrl = {
+  //lựa chọn bộ phim cho người lớn hay trẻ em
+  async selectFilmForChilOrAdult(req, res) {
+    try {
+      const { adult } = req.body;
+      const userId = req.user.id;
+      const user = await Users.findByIdAndUpdate(
+        { _id: userId },
+        { adult },
+        { new: true }
+      );
+
+      if (user.adult == true) {
+        const adultFilms = await Films.find({ ageLimit: { $gte: 16 } });
+        return res.json({
+          status: 200,
+          success: true,
+          msg: "Get films for adult successfully",
+          data: adultFilms,
+        });
+      } else {
+        const childrenFilms = await Films.find({ ageLimit: { $lt: 16 } });
+        return res.json({
+          status: 200,
+          success: true,
+          msg: "Get films for children successfully",
+          data: childrenFilms,
+        });
+      }
+    } catch (error) {
+      return res.json({
+        status: 400,
+        success: false,
+        msg: error.message,
+      });
+    }
+  },
+
   //Xem thông tin của tất cả bộ phim
   async getAllFilm(req, res) {
     try {
       const data = await Films.find({})
-        .populate('director')
-        .populate('category')
-      .populate('seriesFilm');
+        .populate("director")
+        .populate("category")
+        .populate("seriesFilm");
       return res.status(200).json({
         status: 200,
         success: true,
         data,
-        msg: 'Get all films successfully',
+        msg: "Get all films successfully",
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to get all films',
+        msg: "Failed to get all films",
       });
     }
   },
@@ -29,9 +67,9 @@ const filmCtrl = {
     try {
       const id = req.params.id;
       const data = await Films.find({ _id: id })
-        .populate('director')
-        .populate('category')
-        .populate('seriesFilm');
+        .populate("director")
+        .populate("category")
+        .populate("seriesFilm");
       const rating = await Ratings.find({ film: id });
       var avg_score = 0;
       for (var i = 0; i < rating.length; i++) {
@@ -49,13 +87,13 @@ const filmCtrl = {
         data,
         avg_score: avg_score,
         numRatings: rating.length,
-        msg: 'Get detail film successfully',
+        msg: "Get detail film successfully",
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to get detail film',
+        msg: "Failed to get detail film",
       });
     }
   },
@@ -69,21 +107,21 @@ const filmCtrl = {
         // category: mongoose.Types.ObjectId(categoryId),
         category: categoryId,
       })
-        .populate('director')
-        .populate('category')
-        .populate('seriesFilm');
+        .populate("director")
+        .populate("category")
+        .populate("seriesFilm");
 
       return res.status(200).json({
         status: 200,
         success: true,
         data,
-        msg: 'Get film by category successfully',
+        msg: "Get film by category successfully",
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to get film by category',
+        msg: "Failed to get film by category",
       });
     }
   },
@@ -96,21 +134,21 @@ const filmCtrl = {
       const data = await Films.find({
         director: directorId,
       })
-        .populate('director')
-        .populate('category')
-        .populate('seriesFilm');
+        .populate("director")
+        .populate("category")
+        .populate("seriesFilm");
 
       return res.status(200).json({
         status: 200,
         success: true,
         data,
-        msg: 'Get film by director successfully',
+        msg: "Get film by director successfully",
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to get film by director',
+        msg: "Failed to get film by director",
       });
     }
   },
@@ -154,14 +192,14 @@ const filmCtrl = {
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Added film successfully',
+        msg: "Added film successfully",
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to add film',
-        err
+        msg: "Failed to add film",
+        err,
       });
     }
   },
@@ -246,13 +284,13 @@ const filmCtrl = {
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Updated film successfully',
+        msg: "Updated film successfully",
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to update film',
+        msg: "Failed to update film",
       });
     }
   },
@@ -287,13 +325,13 @@ const filmCtrl = {
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Updated episode of film successfully',
+        msg: "Updated episode of film successfully",
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to update episode of film',
+        msg: "Failed to update episode of film",
       });
     }
   },
@@ -308,13 +346,13 @@ const filmCtrl = {
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Deleted film successfully',
+        msg: "Deleted film successfully",
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to delete film',
+        msg: "Failed to delete film",
       });
     }
   },
@@ -338,13 +376,13 @@ const filmCtrl = {
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Deleted episode of film successfully',
+        msg: "Deleted episode of film successfully",
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to deleted episode of film',
+        msg: "Failed to deleted episode of film",
       });
     }
   },
