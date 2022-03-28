@@ -29,9 +29,6 @@ export const FeedbackStyle = createGlobalStyle`
     font-size:36px;
     font-weight:500;
     color: red;
-    @media only screen and (max-width: 390px) {
-        margin-top:50px;
-    }
 }
 .contact .content p{
     font-size:20px;
@@ -47,29 +44,17 @@ export const FeedbackStyle = createGlobalStyle`
     justify-content: center;
     align-items: center;
     margin-top:30px;
-    @media only screen and (max-width: 390px) {
-        margin-top:50px;
-    }
     
 }
 .containers .contactInfo{
     width: 50%;
     display: flex;
     flex-direction: column;
-    @media only screen and (max-width: 390px) {
-        padding:0;
-        margin:0;
-        width:100%;
-    }
 
 }
 .contact .contactInfo .box{
     position: relative;
     padding: 20px 0;display: flex;
-    @media only screen and (max-width: 390px) {
-
-        width:100%;
-    }
     
 }
 .contact .contactInfo .box .icon{
@@ -102,10 +87,6 @@ export const FeedbackStyle = createGlobalStyle`
     color: #fff;
     flex-direction: column;
     font-weight:300;
-    @media only screen and (max-width: 390px) {
-        
-        word-wrap:break-word;
-    }
 }
 .contact .contactInfo .box .text:hover{
     color: rgba(255, 255, 255, 0.5)
@@ -115,19 +96,10 @@ export const FeedbackStyle = createGlobalStyle`
 #feedback{
     text-decoration: none;
     color: #fff;
-    @media only screen and (max-width: 390px) {
-        
-        word-wrap:break-word;
-    }
-
 }
 .contact .contactInfo .box .text h3{
     font-weight: 500;
     color: white;
- 
-}
-.contact .contactInfo .box .text p{
-    word-wrap:break-word;
  
 }
 .contactForm{
@@ -135,12 +107,6 @@ export const FeedbackStyle = createGlobalStyle`
     padding:40px;
     background: #fff;
     border-radius: 4px;
-    @media only screen and (max-width: 390px) {
-        padding:20px;
-        width:100%;
-        margin-left:100px;
-
-    }
 }
 .contactForm h2{
     font-size:30px;
@@ -199,34 +165,19 @@ margin-left:1000px;
 margin-bottom:260px;
 height:100px;
 width:100px;
-@media only screen and (max-width: 390px) {
-    padding:0;
-    margin:0;
-    display:none;
-}
 }
 @media(max-width:991px){
     .contact{
-       
-        margin:0;
-        padding-left:10px;
-        padding-top:50px;
-       
+        padding: 50px;
     }
     .containers{
-       
-        width:100%;
         flex-direction: column;
     }
     .containers .contactInfo{
         margin-bottom:40px;
-        width:100%;
     }
     .containers .contactInfo{
         width:100%;
     }
-    .logo-feedback{
-       display:none;
-    }   
 }
 `;

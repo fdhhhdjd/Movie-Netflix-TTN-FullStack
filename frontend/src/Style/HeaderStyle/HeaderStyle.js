@@ -31,7 +31,6 @@ export const HeaderStyle = createGlobalStyle`
       -ms-flex-pack: justify;
           justify-content: space-between;
   height: 70px;
-
 }
 
 .navbar .container .left {
@@ -41,9 +40,6 @@ export const HeaderStyle = createGlobalStyle`
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-          @media only screen and (max-width: 800px) {
-            display:none;
-           }
 }
 
 .navbar .container .left img {
@@ -63,9 +59,6 @@ export const HeaderStyle = createGlobalStyle`
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-          @media only screen and (max-width: 800px) {
-            display:none;
-           }
 }
 
 .navbar .container .right .icon {
@@ -109,75 +102,5 @@ export const HeaderStyle = createGlobalStyle`
 }
 .nav-links:hover{
   color: red;
-}
-// mobile
-.navbar_mobile{
-  width:28px;
-  height:28px;
-  color:red;
-  display:none;
-  
-  @media only screen and (max-width: 800px) {
-    display:block;
-}
-}
-.navbar-overplay{
-  position:fixed;
-  top:0;
-  right:0;
-  bottom:0;
-  left:0;
-  background-color:rgba(0,0,0,0.3);
-  display:none;
-  animation: faceIn linear 0.2s;
-  
-}
-.nav_mobile{
-  position:fixed;
-  top:0;
-  bottom:0;
-  left:0;
-  width:100px;
-  max-width:100%;
-  background-color:rgba(0,0,0,0.7);
-  transform:translateY(-100%);
-  transition:transform 0.9s ease-in-out;
-  
-}
-.nav_input{
-  display:none;
-}
-.nav_input:checked ~ .navbar-overplay{
-  display:block; 
-}
-.nav_input:checked ~ .nav_mobile{
-  transform:translateY(0%);
-}
-.nav_mobile_list{
-  margin-top:24px;
-
-}
-.nav_mobile_link{
-  text-decoration:none;
-  color:#333;
-  display:block;
-  padding:8px 0:
-  font-size:1.4rem;
-}
-.nav_mobile_close{
-  width:20px;
-  height:20px;
-  color:#666;
-  position:absolute;
-  top:0;
-  right:0;
-}
-@keyframes faceIn {
-  from{
-    opacity:0;
-  }
-  to{
-    opacity:1;
-  }
 }
 `;
