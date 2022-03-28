@@ -74,7 +74,7 @@ const feedbackCtrl = {
     try {
       const { fullname, email, subject, content } = req.body;
       if (!fullname || !email || !subject || !content) {
-        return res.status(400).json({
+        return res.json({
           status: 400,
           success: false,
           msg: "Please fill in full infomation",
@@ -108,7 +108,7 @@ const feedbackCtrl = {
       //save in mongodb
       await newFeedback.save();
 
-      return res.status(200).json({
+      return res.json({
         status: 200,
         success: true,
         msg: "Sent feedback successfully",
