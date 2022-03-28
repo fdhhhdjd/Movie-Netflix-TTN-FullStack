@@ -33,7 +33,7 @@ export default function ListItem({ index }) {
               </div>
               <div className="itemInfoTop">
                 <span>1 hour 14 mins</span>
-                <span className="limit">+16</span>
+                <span className="limit">16+</span>
                 <span>1999</span>
               </div>
               <div className="desc">

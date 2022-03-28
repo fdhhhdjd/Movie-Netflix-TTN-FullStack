@@ -4,11 +4,15 @@ export const ListStyle = createGlobalStyle`
 .list {
     width: 100%;
     margin-top: 10px;
+    position: relative;
+    top: -100px;
+    margin-left: 17px;
+    margin-bottom: 40px;
   
     .listTitle {
       color: white;
       font-size: 20px;
-      font-weight: 500;
+      font-weight: 700;
       margin-left: 50px;
     }
  

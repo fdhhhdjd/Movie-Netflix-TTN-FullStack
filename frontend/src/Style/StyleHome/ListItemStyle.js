@@ -9,6 +9,7 @@ export const ListItemStyle = createGlobalStyle`
   overflow: hidden;
   cursor: pointer;
   color: white;
+  border-radius: 5px;
 
   img {
     width: 100%;
@@ -23,6 +24,7 @@ export const ListItemStyle = createGlobalStyle`
     position: absolute;
     top: 0;
     left: 0;
+
   }
 
   &:hover {

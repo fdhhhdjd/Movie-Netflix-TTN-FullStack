@@ -13,10 +13,16 @@ const Header = () => {
   const [images, setImages] = useState();
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
-  window.onscroll = () => {
-    setIsScrolled(window.pageYOffset === 0 ? false : true);
-    return () => (window.onscroll = null);
-  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.pageYOffset !== 0);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   const handleLogout = () => {
     dispatch(LogoutInitiate());
     toast.success("Logout Success Thank You!");
@@ -45,21 +51,21 @@ const Header = () => {
                 onClick={() => navigate("/home")}
                 className={` ${activeTab === "Home" ? "active" : ""}`}
               >
-                Homepage
+                Home
               </span>
             </span>
             <span to="/series" className="link">
-              <span className="navbarmainLinks">Series</span>
+              <span className="navbarmainLinks">TV Shows</span>
             </span>
             <span to="/movies" className="link">
               <span className="navbarmainLinks">Movies</span>
             </span>
-            <span>New and Popular</span>
+            <span>New & Popular</span>
             <span
               onClick={() => navigate("/feedback")}
               className={` ${activeTab === "Feedback" ? "active" : ""}`}
             >
-              FeedBacks
+              My List
             </span>
           </div>
           <div className="right">
@@ -77,7 +83,7 @@ const Header = () => {
             )}
 
             <div className="profile">
-              <i className="icon fas fa-arrow-down" />
+              <i className="fas fa-caret-down"></i>
               <div className="options">
                 <span>Settings</span>
                 <span onClick={handleLogout}>Logout</span>

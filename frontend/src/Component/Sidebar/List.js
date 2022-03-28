@@ -26,7 +26,7 @@ const List = () => {
         <span className="listTitle">Continue to watch</span>
         <div className="wrapper">
           <i
-            className="sliderArrow left fas fa-chevron-right "
+            className="sliderArrow left fas fa-chevron-left "
             onClick={() => handleClick("left")}
             style={{ display: !isMoved && "none" }}
           />
@@ -40,7 +40,7 @@ const List = () => {
             <ListItem index={6} />
           </div>
           <i
-            className="fas fa-chevron-left sliderArrow right"
+            className="fas fa-chevron-right sliderArrow right"
             onClick={() => handleClick("right")}
           />
         </div>
