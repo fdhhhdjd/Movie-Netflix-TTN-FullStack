@@ -1,5 +1,12 @@
 import { useState } from "react";
 import video from "../../Image/Welcome/video.mp4";
+import {
+  PlayCircleOutline,
+  AddCircleOutline,
+  ThumbUpOutlined,
+  ThumbDownOutlined,
+  ArrowDropDownCircleOutlined,
+} from "@material-ui/icons";
 import { ListItemStyle } from "../../Style/StyleHome/ListItemStyle";
 export default function ListItem({ index }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -9,7 +16,9 @@ export default function ListItem({ index }) {
       <ListItemStyle />
       <div
         className="listItem"
-        style={{ left: isHovered && index * 225 - 50 + index * 2.5 }}
+        style={{
+          left: isHovered && (index === 0 ? 0 : index * 225 - 45 + index * 2.5),
+        }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -21,24 +30,24 @@ export default function ListItem({ index }) {
         {isHovered && (
           <>
             <video className="video" autoPlay progress controls>
-              {" "}
-              <source src={video} />
+              <source src={trailer} />
             </video>
-            <div className="itemInfo">
+            <div className="item-info">
               <div className="icons">
-                <i className="icon fas fa-play" />
-                <i className="fa fa-plus icon" />
-                <i className="fas fa-thumbs-up icon" />
-                <i className="fa fa-thumbs-down icon" />
+                <span className="icons-left">
+                  <PlayCircleOutline/>
+                  <AddCircleOutline />
+                  <ThumbUpOutlined />
+                </span>
+                <span className="icons-right">
+                  <ArrowDropDownCircleOutlined />
+                </span>
               </div>
-              <div className="itemInfoTop">
-                <span>1 hour 14 mins</span>
+              <div className="item-info-top">
+                <span className="match">94% Match</span>
                 <span className="limit">16+</span>
-                <span>1999</span>
-              </div>
-              <div className="desc">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Praesentium hic rem eveniet error possimus, neque ex doloribus.
+                <span>1 hour 14 mins</span>
+                <span>HD</span>
               </div>
               <div className="genre">Action</div>
             </div>

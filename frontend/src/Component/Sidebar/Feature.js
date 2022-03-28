@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FeatureStyle } from "../../Style/StyleHome/FeatureStyle";
+import title from "../../Image/title-test.png"
 const Feature = ({ type }) => {
   return (
     <>
@@ -31,7 +32,7 @@ const Feature = ({ type }) => {
         <div className="fadeOut"></div>
         <div className="info">
           <img
-            src="https://occ-0-1432-1433.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABUZdeG1DrMstq-YKHZ-dA-cx2uQN_YbCYx7RABDk0y7F8ZK6nzgCz4bp5qJVgMizPbVpIvXrd4xMBQAuNe0xmuW2WjoeGMDn1cFO.webp?r=df1"
+            src={title}
             alt=""
           />
           <span className="desc">

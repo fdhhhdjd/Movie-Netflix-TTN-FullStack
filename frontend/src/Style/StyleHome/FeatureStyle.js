@@ -66,8 +66,8 @@ export const FeatureStyle = createGlobalStyle`
   
       .desc {
         margin: 20px 0px;
-        color: black;
-      
+        color: #fff;
+        text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
       }
 
       .buttons {
