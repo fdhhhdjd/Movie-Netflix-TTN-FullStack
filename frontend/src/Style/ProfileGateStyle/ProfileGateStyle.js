@@ -66,7 +66,7 @@ export const ProfileGateStyle = createGlobalStyle`
                         left: 35%;
 
                         svg {
-                            font-size: 40px;
+                            font-size: 3vw;
                             color: #fff;
                         }
                     }

@@ -13,6 +13,7 @@ import {
 } from "../../Redux/Action/ActionAuth";
 import { toast } from "react-toastify";
 import LoadingSmall from "../Loading/LoadingSmall";
+import { Facebook } from "@material-ui/icons";
 const Login = () => {
   const {
     register,
@@ -76,7 +77,6 @@ const Login = () => {
                 required: true,
                 pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
               })}
-              
               name="email"
               id="email"
             />
@@ -86,30 +86,32 @@ const Login = () => {
               {errors?.email?.type === "pattern" &&
                 "Email của ban không hợp lệ!"}
             </span>
-            <input
-              type={isLock ? "type" : "password"}
-              {...register("password", { required: true })}
-              placeholder="Password"
-              name="password"
-              id="password"
-            />
-            {isLock ? (
-              <i
-                className="fa fa-eye-slash"
-                onClick={handleIsLock}
-                style={{ cursor: "pointer" }}
+            <div className="pwd-input">
+              <input
+                type={isLock ? "type" : "password"}
+                {...register("password", { required: true })}
+                placeholder="Password"
+                name="password"
+                id="password"
               />
-            ) : (
-              <i
-                className="fa fa-eye"
-                onClick={handleIsLock}
-                style={{ cursor: "pointer" }}
-              />
-            )}
+              {isLock ? (
+                <i
+                  className="fa fa-eye-slash"
+                  onClick={handleIsLock}
+                  style={{ cursor: "pointer" }}
+                />
+              ) : (
+                <i
+                  className="fa fa-eye"
+                  onClick={handleIsLock}
+                  style={{ cursor: "pointer" }}
+                />
+              )}
+            </div>
 
             <span style={{ color: "red" }}>
               {errors.password?.type === "required" &&
-                "Mời bạn nhập đầy đủ mật khẩu. "}
+                "Mời bạn nhập đầy đủ mật khẩu! "}
             </span>
             {loading ? (
               <span className="loginButton2">
@@ -118,26 +120,27 @@ const Login = () => {
             ) : (
               <button className="loginButton">Sign In</button>
             )}
-            <span>
-              New to Netflix ? &nbsp;
-              <b
-                onClick={() => navigate("/signup")}
-                style={{ cursor: "pointer" }}
-              >
-                Sign up now
-              </b>
-              &nbsp; Or &nbsp;
-              <b
-                onClick={() => navigate("/forget")}
-                style={{ cursor: "pointer" }}
-              >
-                Forget
-              </b>
-            </span>
-            <small>
-              This page is protected by Google reCAPTCHA to ensure you're not a
-              bot. <b>Learn more</b>.
-            </small>
+            <div className="help">
+              <div className="remember">
+                <input type="checkbox" />
+                <span>Remember me</span>
+              </div>
+              <a href="#">Need help?</a>
+            </div>
+            <footer>
+              <div className="login-facebook">
+                <Facebook className="fb-icon" />
+                <a href="#">Login with Facebook</a>
+              </div>
+              <span className="signup">
+                New to Netflix?<a href="#">Sign up now</a>
+              </span>
+              <span className="learn-more">
+                This page is protected by Google reCAPTCHA to ensure you're not
+                a bot.
+                <a href="#">Learn more</a>
+              </span>
+            </footer>
           </form>
         </div>
       </div>
