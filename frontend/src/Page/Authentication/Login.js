@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import GoogleLogin from "react-google-login";
+import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-toastify";
+import swal from "sweetalert";
+import { Link } from "react-router-dom";
 import { logo } from "../../imports/image";
 import { MetaData } from "../../imports/index";
 import {
@@ -13,7 +15,6 @@ import {
 } from "../../Redux/Action/ActionAuth";
 import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
 import LoadingSmall from "../Loading/LoadingSmall";
-import swal from "sweetalert";
 const Login = () => {
   const {
     register,
@@ -150,7 +151,10 @@ const Login = () => {
               />
               {error && <span className="text-danger">{error}</span>}
               <span className="signup">
-                New to Netflix?<a href="#">Sign up now</a>
+                New to Netflix?
+                <a href="#">
+                  <Link to="/signup">Sign up now</Link>
+                </a>
               </span>
               <span className="learn-more">
                 This page is protected by Google reCAPTCHA to ensure you're not
