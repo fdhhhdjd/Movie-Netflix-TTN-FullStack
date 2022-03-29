@@ -1,20 +1,22 @@
 import { useRef, useState } from "react";
 import { ListItem } from "../../imports/index";
+import {
+  ArrowBackIosOutlined,
+  ArrowForwardIosOutlined,
+} from "@material-ui/icons";
 import { ListStyle } from "../../Style/StyleHome/listStyle";
 const List = () => {
-  const [isMoved, setIsMoved] = useState(false);
   const [slideNumber, setSlideNumber] = useState(0);
 
   const listRef = useRef();
 
   const handleClick = (direction) => {
-    setIsMoved(true);
-    let distance = listRef.current.getBoundingClientRect().x - 70;
-    if (direction === "left" && slideNumber > -1) {
+    const distance = listRef.current.getBoundingClientRect().x - 50;
+    if (direction === "left" && slideNumber > 0) {
       setSlideNumber(slideNumber - 1);
       listRef.current.style.transform = `translateX(${230 + distance}px)`;
     }
-    if (direction === "right" && slideNumber < 5) {
+    if (direction === "right" && slideNumber < 4) {
       setSlideNumber(slideNumber + 1);
       listRef.current.style.transform = `translateX(${-230 + distance}px)`;
     }
@@ -22,15 +24,15 @@ const List = () => {
   return (
     <>
       <ListStyle />
-      <div className="list">
-        <span className="listTitle">Continue to watch</span>
+      <section className="list">
+        <span className="list-title">Continue to watch</span>
         <div className="wrapper">
-          <i
-            className="sliderArrow left fas fa-chevron-right "
+          <ArrowBackIosOutlined
+            className="slider-arrow left"
             onClick={() => handleClick("left")}
-            style={{ display: !isMoved && "none" }}
+            style={{ display: slideNumber === 0 && "none" }}
           />
-          <div className="container" ref={listRef}>
+          <div className="film-container" ref={listRef}>
             <ListItem index={0} />
             <ListItem index={1} />
             <ListItem index={2} />
@@ -38,13 +40,17 @@ const List = () => {
             <ListItem index={4} />
             <ListItem index={5} />
             <ListItem index={6} />
+            <ListItem index={7} />
+            <ListItem index={8} />
+            <ListItem index={9} />
           </div>
-          <i
-            className="fas fa-chevron-left sliderArrow right"
+          <ArrowForwardIosOutlined
+            className="slider-arrow right"
             onClick={() => handleClick("right")}
+            style={{ display: slideNumber === 4 && "none" }}
           />
         </div>
-      </div>
+      </section>
     </>
   );
 };

@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 export const FeatureStyle = createGlobalStyle`
 .featured {
-    height: 90vh;
+    height: 100vh;
     position: relative;
   
     .category {
@@ -24,6 +24,26 @@ export const FeatureStyle = createGlobalStyle`
         padding: 5px;
       }
     }
+
+    .fadeOut {
+      background-image: linear-gradient(
+        rgba(20, 20, 20, 0) 0,
+        rgba(20, 20, 20, 0.15) 15%,
+        rgba(20, 20, 20, 0.35) 29%,
+        rgba(20, 20, 20, 0.58) 44%,
+        #141414 68%,
+        #141414 100%
+      );
+      position: absolute;
+      background-size: 100% 100%;
+      background-position: 0 top;
+      background-repeat: repeat-x;
+      background-color: transparent;
+      width: 100%;
+      height: 5vw;
+      top: auto;
+      bottom: -22px;
+    }
   
     img {
       width: 100%;
@@ -34,8 +54,8 @@ export const FeatureStyle = createGlobalStyle`
     .info {
       width: 35%;
       position: absolute;
-      left: 50px;
-      bottom: 100px;
+      left: 68px;
+      bottom: 200px;
       color: white;
       display: flex;
       flex-direction: column;
@@ -46,15 +66,15 @@ export const FeatureStyle = createGlobalStyle`
   
       .desc {
         margin: 20px 0px;
-        color: black;
-      
+        color: #fff;
+        text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
       }
-  
+
       .buttons {
         display: flex;
   
         button {
-          padding: 10px 20px;
+          padding: 12px 27px;
           border: none;
           border-radius: 5px;
           display: flex;
@@ -64,16 +84,27 @@ export const FeatureStyle = createGlobalStyle`
           font-weight: 500;
           margin-right: 10px;
           cursor: pointer;
-          
-  
+
+          i {
+            font-size: 25px;
+          }
+
           &.play {
-            background-color:red;
-            color: white
+            background-color:#fff;
+            color: #000;
+
+            &:hover{
+              background-color: rgba(255,255,255,0.75);
+            }
           }
   
           &.more {
-            background-color:cadetblue;
+            background-color: rgba(109,109,110,0.7);
             color: white;
+
+            &:hover{
+              background-color: rgba(109,109,110,0.4);
+            }
           }
   
           span {

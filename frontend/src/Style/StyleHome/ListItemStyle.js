@@ -4,11 +4,12 @@ export const ListItemStyle = createGlobalStyle`
 .listItem {
   width: 225px;
   height: 120px;
-  background-color: #0b0b0b;
+  background: #0b0b0b;
   margin-right: 5px;
   overflow: hidden;
   cursor: pointer;
   color: white;
+  border-radius: 5px;
 
   img {
     width: 100%;
@@ -18,7 +19,7 @@ export const ListItemStyle = createGlobalStyle`
 
   video {
     width: 100%;
-    height: 140px;
+    height: 180px;
     object-fit: cover;
     position: absolute;
     top: 0;
@@ -26,61 +27,73 @@ export const ListItemStyle = createGlobalStyle`
   }
 
   &:hover {
-    width: 325px;
-    height: 300px;
+    width: auto;
+    height: auto;
     position: absolute;
     top: -150px;
-    -webkit-box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 0.07);
-    box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 0.07);
-    border-radius: 5px;
-
+    -webkit-box-shadow: 0px 2px 15px 0px rgba(255, 255, 255, 0.14);
+    box-shadow: 0px 2px 15px 0px rgba(255, 255, 255, 0.14);
     img {
       height: 140px;
     }
+  }
 
-    .itemInfo {
+  .item-info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    padding: 0 10px;
+
+    .icons {
+      margin: 8px 0px;
       display: flex;
-      flex-direction: column;
-      padding: 5px;
+      justify-content:space-between;
 
-      .icons {
-        display: flex;
-        margin-bottom: 10px;
+      &.play-btn {
+        background: #fff;
+        color: #000;
+      }
 
-        .icon {
-          border: 2px solid white;
-          padding: 5px;
-          border-radius: 50%;
-          margin-right: 10px;
-          font-size: 16px;
+      & > span > * {
+        margin-right: 10px;
+        font-size: 35px;
+
+        &:hover {
+          opacity: 0.7;
         }
-      }
-      .itemInfoTop {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        font-size: 14px;
-        font-weight: 600;
-        color: gray;
-
-        .limit {
-          border: 1px solid gray;
-          padding: 1px 3px;
-          margin: 0 10px;
-        }
-      }
-
-      .desc {
-        font-size: 13px;
-        margin-bottom: 10px;
-      }
-
-      .genre {
-        font-size: 14px;
-        color: lightgray;
       }
     }
+
+    &-top {
+      color: #808080;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 10px;
+      span {
+        margin-right: 10px;
+
+        &.match {
+          color: #46d369;
+          font-size: 18px;
+        }
+
+        &:nth-child(2), &:nth-child(4) {
+          padding: 1px 6px;
+          border: 1px solid #808080;
+        }
+      }
+    }
+    .desc {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .genre {
+      color: #ccc;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
   }
+}
   #myID{
     width: 100%;
     height: 140px;

@@ -4,45 +4,43 @@ export const ListStyle = createGlobalStyle`
 .list {
     width: 100%;
     margin-top: 10px;
+    position: relative;
+    top: -100px;
+    margin-bottom: 40px;
   
-    .listTitle {
-      color: white;
+    &-title {
+      color: #fff;
       font-size: 20px;
-      font-weight: 500;
+      font-weight: 700;
       margin-left: 50px;
     }
- 
     .wrapper {
+      display: flex;
       position: relative;
-   
-      .sliderArrow {
+      .slider-arrow {
         width: 50px;
-        height: 100%;
-        background-color: black;
-        color: white;
+        height: 120px;
+        margin-top: 10px;
+        color: #fff;
         position: absolute;
-        z-index: 99;
-        top: 0;
-        bottom: 0;
-        margin: auto;
+        z-index: 999;
         cursor: pointer;
-  
+        
         &.left {
           left: 0;
         }
-  
         &.right {
           right: 0;
         }
       }
-      .container {
+      .film-container {
         margin-left: 50px;
-        display: flex;
         margin-top: 10px;
-        width: max-content;
-        transform: translateX(0px);
-        transition: all 1s ease;
+        display: flex;
+        transform: translateX(0);
+        transition: all 1s ease-in-out;
       }
     }
   }
 `;
+

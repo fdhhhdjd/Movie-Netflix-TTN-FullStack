@@ -9,13 +9,13 @@ const Home = () => {
       <MetaData title={`Home-Page-Movie`} />
       <div className="home">
         <Header />
-        <Feature type="movie" />
+        <Feature />
         <List />
         <List />
         <List />
       </div>
-      <Watch />
-      <Footer />
+      {/* <Watch /> */}
+      {/* <Footer /> */}
     </>
   );
 };
