@@ -17,9 +17,18 @@ const Feedback = () => {
     content: "",
   });
   const { fullname, email, subject, content } = state;
+  console.log(fullname, email, subject, content);
   const { profile } = useSelector((state) => state.auth);
   const {sendFeedBack} = useSelector((state) => state.feedback);
+  const user = profile;
+  console.log(user,'user')
+  console.log(state,'state')
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (user) {
+      user && setState(user);
+    }
+  }, [user]);
   const handleSubmit = (e) => {
     e.preventDefault();
     // if (!name || !email || !subject || !message) {
@@ -29,7 +38,7 @@ const Feedback = () => {
       // toast.success("Cảm ơn bạn đã phản hồi cho tôi!");
     // }
   };
-  const handleInputChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
@@ -41,6 +50,7 @@ const Feedback = () => {
       setTimeout(() => {
         dispatch(clearErrors());
       }, 2000);
+      setState({  content: "", subject: "" });
       
     }else if (sendFeedBack.status === 400){
       swal(`${sendFeedBack.msg}`, {
@@ -126,41 +136,46 @@ const Feedback = () => {
               <h2>Send Message</h2>
               <div className="inputBox">
                 <input
-                  type="text"
-                  name="fullname"
-                  required="required"
-                  onChange={handleInputChange}
+                  className="form-control"
+                  type="type"
+                  required
                   value={fullname}
+                  name="fullname"
+                  onChange={handleChange}
                 />
                 <span>Full Name</span>
               </div>
               <div className="inputBox">
                 <input
-                  type="email"
                   className="form-control"
+                  type="type"
+                  value={state.email|| email}
                   name="email"
-                  required="required"
-                  onChange={handleInputChange}
-                  value={email}
+                  onChange={handleChange}
+                  disabled={true}
                 />
-                <span>Email</span>
+                {/* <span>Email</span> */}
               </div>
               <div className="inputBox">
                 <input
-                  type="text"
-                  name="subject"
-                  required="required"
-                  onChange={handleInputChange}
+                  className="form-control"
+                  type="type"
                   value={subject}
+                  name="subject"
+                  onChange={handleChange}
+                  required
                 />
                 <span>Subject</span>
               </div>
               <div className="inputBox">
                 <textarea
-                  name="content"
-                  onChange={handleInputChange}
+                  className="form-control"
+                  cols="10"
+                  rows="5"
                   value={content}
-                  required="required"
+                  name="content"
+                  onChange={handleChange}
+                  required
                 ></textarea>
                 <span>Type Your Message...</span>
               </div>
