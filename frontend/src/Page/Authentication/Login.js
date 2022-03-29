@@ -1,19 +1,19 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
-import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
 import GoogleLogin from "react-google-login";
-import { MetaData } from "../../imports/index";
-import { logo } from "../../imports/image";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import ReCAPTCHA from "react-google-recaptcha";
+import { toast } from "react-toastify";
+import { logo } from "../../imports/image";
+import { MetaData } from "../../imports/index";
 import {
   clearErrors,
   loginGoogleInitiate,
   loginInitiate,
 } from "../../Redux/Action/ActionAuth";
-import { toast } from "react-toastify";
+import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
 import LoadingSmall from "../Loading/LoadingSmall";
-import { Facebook } from "@material-ui/icons";
+import swal from "sweetalert";
 const Login = () => {
   const {
     register,
@@ -22,16 +22,24 @@ const Login = () => {
     watch,
   } = useForm();
   const passwords = useRef({});
+  const reCaptcha = useRef();
   passwords.current = watch("password");
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isLock, setIsLock] = useState(false);
+  const [token, setToken] = useState("");
+  const [error, setError] = useState("");
   const { auth, loading } = useSelector((state) => state.auth);
   const Auth = auth;
   const HandleGoogle = (response) => {
     dispatch(loginGoogleInitiate(response));
   };
   const handleSubmitForm = (data) => {
+    if (!token) {
+      swal("Mời bạn xác thực đầy đủ 😍", {
+        icon: "error",
+      });
+      return;
+    }
     const { email, password } = data;
     dispatch(loginInitiate(email, password));
   };
@@ -40,7 +48,7 @@ const Login = () => {
   };
   useEffect(() => {
     if (auth.success === true) {
-      window.location.href = "/home";
+      window.location.href = "/browse";
       localStorage.setItem("firstLogin", true);
       dispatch(clearErrors());
     }
@@ -61,13 +69,6 @@ const Login = () => {
           </div>
         </div>
         <div className="container">
-          <GoogleLogin
-            clientId="1083950083676-fr9m6jsgig4aalf6mj81t8rlgl9v45bd.apps.googleusercontent.com"
-            buttonText="Login Google +"
-            onSuccess={HandleGoogle}
-            onFailure={HandleGoogle}
-            cookiePolicy={"single_host_origin"}
-          />
           <form onSubmit={handleSubmit(handleSubmitForm)}>
             <h1>Sign In</h1>
             <input
@@ -128,10 +129,26 @@ const Login = () => {
               <a href="#">Need help?</a>
             </div>
             <footer>
-              <div className="login-facebook">
-                <Facebook className="fb-icon" />
-                <a href="#">Login with Facebook</a>
-              </div>
+              <GoogleLogin
+                clientId="1083950083676-fr9m6jsgig4aalf6mj81t8rlgl9v45bd.apps.googleusercontent.com"
+                buttonText="Login Google +"
+                onSuccess={HandleGoogle}
+                onFailure={HandleGoogle}
+                cookiePolicy={"single_host_origin"}
+                render={(renderProps) => (
+                  <div className="login-facebook" onClick={renderProps.onClick}>
+                    <i className="fa-brands fa-google fb-icon"></i>
+                    <a>Login with Google</a>
+                  </div>
+                )}
+              />
+              <ReCAPTCHA
+                ref={reCaptcha}
+                sitekey="6LfVSXwcAAAAAF84Eh53ZDlQX-hyJeh_jrEEY3S5"
+                onChange={(token) => setToken(token)}
+                onExpired={(e) => setToken("")}
+              />
+              {error && <span className="text-danger">{error}</span>}
               <span className="signup">
                 New to Netflix?<a href="#">Sign up now</a>
               </span>

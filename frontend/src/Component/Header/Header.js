@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { LogoutInitiate } from "../../Redux/Action/ActionAuth";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { HeaderStyle } from "../../Style/HeaderStyle/HeaderStyle";
 import { logo } from "../../imports/image";
+import { LogoutInitiate } from "../../Redux/Action/ActionAuth";
+import { HeaderStyle } from "../../Style/HeaderStyle/HeaderStyle";
 const Header = () => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.auth);
   const [activeTab, setActiveTab] = useState("Home");
   const location = useLocation();
-  const [images, setImages] = useState();
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
 
@@ -91,43 +90,23 @@ const Header = () => {
             </div>
           </div>
 
-          <label for='nav-mobile-input' className="navbar_mobile">
-          <i className="fa-solid fa-bars-progress"></i>
-
+          <label htmlFor="nav-mobile-input" className="navbar_mobile">
+            <i className="fa-solid fa-bars-progress"></i>
           </label>
-          <input type='checkbox' hidden   name="" className="nav_input" id="nav-mobile-input"/>
-          <label for="nav-mobile-input" className="navbar-overplay">
-          </label>
+          <input
+            type="checkbox"
+            hidden
+            name=""
+            className="nav_input"
+            id="nav-mobile-input"
+          />
+          <label htmlFor="nav-mobile-input" className="navbar-overplay"></label>
           <nav className="nav_mobile">
-            <label for="nav-mobile-input" className="nav_mobile_close">
-            <i className="fa-solid fa-circle-xmark"></i>
+            <label htmlFor="nav-mobile-input" className="nav_mobile_close">
+              <i className="fa-solid fa-circle-xmark"></i>
             </label>
-            {/* <ul className="nav_mobile_list">
-              <li>
-                <Link to="" className="nav_mobile_link">Homepage</Link>
-              </li>
-              <li>
-                <Link to="" className="nav_mobile_link">Series</Link>
-              </li>
-              <li>
-                <Link to="" className="nav_mobile_link">Movies</Link>
-              </li>  
-              <li>
-              <Link to="" className="nav_mobile_link">New and Popular</Link>
-              </li>  
-               <li>
-                 
-               <i className="fa-solid fa-comments"></i>
-                </li>
-                <li>
-                <Link to="" className="nav_mobile_link">New and Popular</Link>
-
-                </li>
-              
-            </ul> */}
           </nav>
         </div>
-
       </div>
     </>
   );
