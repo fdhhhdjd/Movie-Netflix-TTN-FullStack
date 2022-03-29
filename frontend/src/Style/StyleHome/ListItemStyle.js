@@ -10,6 +10,7 @@ export const ListItemStyle = createGlobalStyle`
   cursor: pointer;
   color: white;
   border-radius: 5px;
+  transition: .4s ease-in-out;
 
   img {
     width: 100%;

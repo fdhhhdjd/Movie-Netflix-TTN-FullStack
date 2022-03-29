@@ -9,7 +9,7 @@ export const HeaderStyle = createGlobalStyle`
   top: 0;
   z-index: 999;
   background: linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 0.3) 50%);
-  transition: all 0.8s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .active{
   color:#fff !important;

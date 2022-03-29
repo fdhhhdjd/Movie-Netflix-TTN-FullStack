@@ -25,6 +25,8 @@ import {
   NewFilm,
   Rating,
   Favourite,
+  ProfileGate,
+  ManageProfile,
 } from "./imports/index";
 import {
   Home,
@@ -120,9 +122,16 @@ function App() {
               </UserRoute>
             }
           />
+          <Route
+            path="/browse"
+            element={
+              <UserRoute>
+                <ProfileGate />
+              </UserRoute>
+            }
+          />
           <Route path="*" element={<NotFound />} />
-
-          {/* ADMIN */}
+          ADMIN
           <Route path="/loginadmin" element={<LoginAdmin />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/forgetadmin" element={<ForgetAdmin />} />
