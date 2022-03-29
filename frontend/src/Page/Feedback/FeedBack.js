@@ -139,17 +139,18 @@ const Feedback = () => {
                   className="form-control"
                   type="type"
                   required
-                  value={fullname}
+                  value={fullname||''}
                   name="fullname"
                   onChange={handleChange}
+                  disabled={true}
                 />
-                <span>Full Name</span>
+                {/* <span>Full Name</span> */}
               </div>
               <div className="inputBox">
                 <input
                   className="form-control"
                   type="type"
-                  value={state.email|| email}
+                  value={state.email|| ''  }
                   name="email"
                   onChange={handleChange}
                   disabled={true}
@@ -160,7 +161,7 @@ const Feedback = () => {
                 <input
                   className="form-control"
                   type="type"
-                  value={subject}
+                  value={subject || ''}
                   name="subject"
                   onChange={handleChange}
                   required
