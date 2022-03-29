@@ -25,6 +25,8 @@ import {
   NewFilm,
   Rating,
   Favourite,
+  ProfileGate,
+  ManageProfile
 } from "./imports/index";
 import {
   Home,
@@ -37,7 +39,7 @@ import {
 function App() {
   return (
     <>
-      <Suspense fallback={<Loading />}>
+      {/* <Suspense fallback={<Loading />}>
         <ToastContainer position="top-center" />
         <Routes>
           <Route
@@ -120,9 +122,9 @@ function App() {
               </UserRoute>
             }
           />
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} /> */}
 
-          {/* ADMIN */}
+          {/* ADMIN
           <Route path="/loginadmin" element={<LoginAdmin />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/forgetadmin" element={<ForgetAdmin />} />
@@ -139,7 +141,8 @@ function App() {
           <Route path="/rating" element={<Rating />} />
           <Route path="/favourite" element={<Favourite />} />
         </Routes>
-      </Suspense>
+      </Suspense> */}
+      <ManageProfile/>
     </>
   );
 }
