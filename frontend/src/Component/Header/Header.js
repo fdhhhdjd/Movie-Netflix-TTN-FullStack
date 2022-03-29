@@ -90,7 +90,44 @@ const Header = () => {
               </div>
             </div>
           </div>
+
+          <label for='nav-mobile-input' className="navbar_mobile">
+          <i className="fa-solid fa-bars-progress"></i>
+
+          </label>
+          <input type='checkbox' hidden   name="" className="nav_input" id="nav-mobile-input"/>
+          <label for="nav-mobile-input" className="navbar-overplay">
+          </label>
+          <nav className="nav_mobile">
+            <label for="nav-mobile-input" className="nav_mobile_close">
+            <i className="fa-solid fa-circle-xmark"></i>
+            </label>
+            {/* <ul className="nav_mobile_list">
+              <li>
+                <Link to="" className="nav_mobile_link">Homepage</Link>
+              </li>
+              <li>
+                <Link to="" className="nav_mobile_link">Series</Link>
+              </li>
+              <li>
+                <Link to="" className="nav_mobile_link">Movies</Link>
+              </li>  
+              <li>
+              <Link to="" className="nav_mobile_link">New and Popular</Link>
+              </li>  
+               <li>
+                 
+               <i className="fa-solid fa-comments"></i>
+                </li>
+                <li>
+                <Link to="" className="nav_mobile_link">New and Popular</Link>
+
+                </li>
+              
+            </ul> */}
+          </nav>
         </div>
+
       </div>
     </>
   );
