@@ -91,15 +91,15 @@ const Header = () => {
             </div>
           </div>
 
-          <label for='nav-mobile-input' className="navbar_mobile">
+          <label htmlFor='nav-mobile-input' className="navbar_mobile">
           <i className="fa-solid fa-bars-progress"></i>
 
           </label>
           <input type='checkbox' hidden   name="" className="nav_input" id="nav-mobile-input"/>
-          <label for="nav-mobile-input" className="navbar-overplay">
+          <label htmlFor="nav-mobile-input" className="navbar-overplay">
           </label>
           <nav className="nav_mobile">
-            <label for="nav-mobile-input" className="nav_mobile_close">
+            <label htmlFor="nav-mobile-input" className="nav_mobile_close">
             <i className="fa-solid fa-circle-xmark"></i>
             </label>
             {/* <ul className="nav_mobile_list">
