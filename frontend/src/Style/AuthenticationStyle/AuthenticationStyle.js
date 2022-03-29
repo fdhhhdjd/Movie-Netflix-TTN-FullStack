@@ -94,17 +94,18 @@ export const AuthenticationStyle = createGlobalStyle`
         }
         
         .pwd-input {
+          position: relative;
           display: flex;
-          align-items: center;
-          width: 108%;
+          margin-bottom: 14px;
 
           input {
             width: 100%;
           }
 
           i{
-            transform: translateY(-50%);
-            margin-left: 10px;
+            position: absolute;
+            right: 10px;
+            transform: translateY(100%)
           }
         }
 

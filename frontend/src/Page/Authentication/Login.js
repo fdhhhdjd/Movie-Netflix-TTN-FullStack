@@ -1,19 +1,19 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
-import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
-import { useNavigate } from "react-router-dom";
+import { Facebook } from "@material-ui/icons";
+import React, { useEffect, useRef, useState } from "react";
 import GoogleLogin from "react-google-login";
-import { MetaData } from "../../imports/index";
-import { logo } from "../../imports/image";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { logo } from "../../imports/image";
+import { MetaData } from "../../imports/index";
 import {
   clearErrors,
   loginGoogleInitiate,
-  loginInitiate,
+  loginInitiate
 } from "../../Redux/Action/ActionAuth";
-import { toast } from "react-toastify";
+import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
 import LoadingSmall from "../Loading/LoadingSmall";
-import { Facebook } from "@material-ui/icons";
 const Login = () => {
   const {
     register,
