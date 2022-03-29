@@ -18,27 +18,30 @@ export { default as Sidebar } from "../Component/Sidebar/Sidebar";
 export { default as Feature } from "../Component/Sidebar/Feature";
 export { default as List } from "../Component/Sidebar/List";
 export { default as ListItem } from "../Component/Sidebar/ListItem";
+export { default as Modal } from "../Component/Modal/Modal";
+export { default as ProfileGate } from "../Page/ProfileGate/ProfileGate";
 export { default as Watch } from "../Component/Watch/Watch";
 export { default as Footer } from "../Component/Sidebar/Footer";
 export { default as FeedBack } from "../Page/Feedback/FeedBack";
 export { default as Profile } from "../Component/Profile/Profile";
 export { default as EditProfile } from "../Component/Profile/EditProfile";
 export { default as ChangePassword } from "../Component/Profile/ChangePassword";
+export { default as ManageProfile } from "../Page/ProfileGate/ManageProfile";
 //Admin
-export {default as LoginAdmin} from "../Page/Admins/LoginAdmin";
-export {default as ForgetAdmin} from "../Component/Admins/ForgetAdmin";
-export {default as ResetAdmin} from "../Component/Admins/ResetAdmin";
-export {default as ChangePasswordAdmin} from "../Page/Admins/ChangePasswordAdmin"
-export {default as Director} from "../Page/Admins/Director"
-export {default as NewUser} from "../Component/Admins/NewUser"
-export {default as LoadingImage} from "../Component/Admins/Loading/LoadingImage"
-export {default as NewDirector} from "../Component/Admins/NewDirector"
-export {default as Category} from "../Component/Admins/Category"
-export {default as SeriesFilm} from "../Component/Admins/SeriesFilm"
-export {default as Films} from "../Page/Admins/Films"
-export {default as NewFilm} from "../Component/Admins/NewFilm"
-export {default as Favourite} from "../Component/Admins/Favourite"
-export { Rating} from "../Component/Admins/Rating"
+export { default as LoginAdmin } from "../Page/Admins/LoginAdmin";
+export { default as ForgetAdmin } from "../Component/Admins/ForgetAdmin";
+export { default as ResetAdmin } from "../Component/Admins/ResetAdmin";
+export { default as ChangePasswordAdmin } from "../Page/Admins/ChangePasswordAdmin";
+export { default as Director } from "../Page/Admins/Director";
+export { default as NewUser } from "../Component/Admins/NewUser";
+export { default as LoadingImage } from "../Component/Admins/Loading/LoadingImage";
+export { default as NewDirector } from "../Component/Admins/NewDirector";
+export { default as Category } from "../Component/Admins/Category";
+export { default as SeriesFilm } from "../Component/Admins/SeriesFilm";
+export { default as Films } from "../Page/Admins/Films";
+export { default as NewFilm } from "../Component/Admins/NewFilm";
+export { default as Favourite } from "../Component/Admins/Favourite";
+export { Rating } from "../Component/Admins/Rating";
 
 //!Custom Hook
 export { default as useDesUpImage } from "../CustomHook/useDesUpImage";

@@ -1,11 +1,10 @@
 import { useState } from "react";
 import video from "../../Image/Welcome/video.mp4";
 import {
-  PlayCircleOutline,
   AddCircleOutline,
   ThumbUpOutlined,
-  ThumbDownOutlined,
   ArrowDropDownCircleOutlined,
+  PlayCircleFilledWhiteRounded 
 } from "@material-ui/icons";
 import { ListItemStyle } from "../../Style/StyleHome/ListItemStyle";
 export default function ListItem({ index }) {
@@ -35,7 +34,7 @@ export default function ListItem({ index }) {
             <div className="item-info">
               <div className="icons">
                 <span className="icons-left">
-                  <PlayCircleOutline/>
+                  <PlayCircleFilledWhiteRounded/>
                   <AddCircleOutline />
                   <ThumbUpOutlined />
                 </span>
