@@ -1,33 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
-import { logo } from "../../imports/image";
-import { FeedbackStyle } from "../../Style/FeedBackStyle.js/FeedbackStyle";
+import { Link } from "react-router-dom";
+import swal from "sweetalert";
 import Header from "../../Component/Header/Header";
+import { logo } from "../../imports/image";
 import { MetaData } from "../../imports/index";
-import { useSelector } from "react-redux";
+import { clearErrors, SendFeedBackInitiate } from '../../Redux/Action/ActionFeedBack';
+import { FeedbackStyle } from "../../Style/FeedBackStyle/FeedbackStyle";
 const Feedback = () => {
   const [state, setState] = useState({
-    name: "",
+    fullname: "",
     email: "",
     subject: "",
-    message: "",
+    content: "",
   });
-  const { name, email, subject, message } = state;
+  const { fullname, email, subject, content } = state;
   const { profile } = useSelector((state) => state.auth);
+  const {sendFeedBack} = useSelector((state) => state.feedback);
+  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || !email || !subject || !message) {
-      toast.error("Mời bạn nhập đầy đủ vào Form !!");
-    } else {
-      setState({ name: "", email: "", subject: "", message: "" });
-      toast.success("Cảm ơn bạn đã phản hồi cho tôi!");
-    }
+    // if (!name || !email || !subject || !message) {
+    //   toast.error("Mời bạn nhập đầy đủ vào Form !!");
+    // } else {
+      dispatch(SendFeedBackInitiate({...state}))
+      // toast.success("Cảm ơn bạn đã phản hồi cho tôi!");
+    // }
   };
   const handleInputChange = (e) => {
-    let { name, value } = e.target;
+    const { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
+  useEffect(()=>{
+    if(sendFeedBack.status === 200){
+      swal(`${sendFeedBack.msg}`, {
+        icon: "success",
+      });
+      setTimeout(() => {
+        dispatch(clearErrors());
+      }, 2000);
+      
+    }else if (sendFeedBack.status === 400){
+      swal(`${sendFeedBack.msg}`, {
+        icon: "error",
+      });
+      setTimeout(() => {
+        dispatch(clearErrors());
+      }, 2000);
+    }
+  },[sendFeedBack])
+
   return (
     <>
       <Header />
@@ -52,15 +76,15 @@ const Feedback = () => {
             </div>
             <div className="box">
               <div className="icon">
-                <i class="far fa-envelope" style={{ color: "red" }}></i>
+                <i className="far fa-envelope" style={{ color: "red" }}></i>
               </div>
               <div className="text">
                 <h3>Email</h3>
                 <br />
                 <p>
-                  <a href="mailto:info@yoursite.com" id="feedback">
+                  <Link to="mailto:info@yoursite.com" id="feedback">
                     nguyentientai10@gmail.com
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>
@@ -80,19 +104,19 @@ const Feedback = () => {
             </div>
             <div className="box">
               <div className="icon">
-                <i class="fa fa-globe" aria-hidden="true"></i>
+                <i className="fa fa-globe" aria-hidden="true"></i>
               </div>
               <div className="text">
                 <h3>Facebook</h3>
                 <br />
                 <p>
-                  <a
-                    href="https://www.facebook.com/profile.php?id=100006139249437"
+                  <Link
+                    to="https://www.facebook.com/profile.php?id=100006139249437"
                     id="feedback"
                     target="_blank"
                   >
                     https://www.facebook.com/profile.php?id=100006139249437
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>
@@ -103,10 +127,10 @@ const Feedback = () => {
               <div className="inputBox">
                 <input
                   type="text"
-                  name="name"
+                  name="fullname"
                   required="required"
                   onChange={handleInputChange}
-                  value={name}
+                  value={fullname}
                 />
                 <span>Full Name</span>
               </div>
@@ -133,9 +157,9 @@ const Feedback = () => {
               </div>
               <div className="inputBox">
                 <textarea
-                  name="message"
+                  name="content"
                   onChange={handleInputChange}
-                  value={message}
+                  value={content}
                   required="required"
                 ></textarea>
                 <span>Type Your Message...</span>
