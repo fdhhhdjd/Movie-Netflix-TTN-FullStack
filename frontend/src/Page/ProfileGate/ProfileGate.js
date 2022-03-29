@@ -31,6 +31,10 @@ const ProfileGate = () => {
     e.preventDefault();
     setIsEdit(!isEdit);
   };
+
+  const handleGoToHome = () => {
+    window.location.href = "/home";
+  }
   return (
     <>
       <ProfileGateStyle />
@@ -42,7 +46,7 @@ const ProfileGate = () => {
           </span>
           <ul className="user-container">
             {users.map((user, index) => (
-              <li className="user" key={index}>
+              <li className="user" key={index} onClick={handleGoToHome}>
                 <img
                   className={isEdit ? "edit" : ""}
                   src={user.avatar}
