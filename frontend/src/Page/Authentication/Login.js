@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import swal from "sweetalert";
 import { logo } from "../../imports/image";
-import { MetaData } from "../../imports/index";
+import { InputField, MetaData, useRequireInput } from "../../imports/index";
 import {
   clearErrors,
   loginGoogleInitiate,
@@ -30,6 +30,7 @@ const Login = () => {
   const [token, setToken] = useState("");
   const { auth, loading } = useSelector((state) => state.auth);
   const Auth = auth;
+  const { emailRequire, passwordRequire } = useRequireInput();
   const HandleGoogle = (response) => {
     dispatch(loginGoogleInitiate(response));
   };
@@ -75,12 +76,14 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="Email or phone number"
-                {...register("email", {
-                  required: true,
-                  pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
-                })}
+                {...register("email", emailRequire)}
                 name="email"
-                id="email"
+              />
+              <InputField
+                inputType="email"
+                inputName="email"
+                useForm={register}
+                inputRequire={emailRequire}
               />
             </div>
             <span style={{ color: "red" }}>
@@ -92,10 +95,9 @@ const Login = () => {
             <div className="pwd-input">
               <input
                 type={isLock ? "type" : "password"}
-                {...register("password", { required: true })}
+                {...register("password", passwordRequire)}
                 placeholder="Password"
                 name="password"
-                id="password"
               />
               {isLock ? (
                 <i
