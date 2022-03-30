@@ -139,13 +139,13 @@ export const AuthenticationStyle = createGlobalStyle`
         footer {
           display: flex;
           flex-direction: column;
+          cursor: pointer;
           .login-facebook {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
             .fb-icon {
-              color: #0071eb;
-              background-color: #fff;
+              color: #EA4335;
             }
             a {
               font-size: 14px;

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 import swal from "sweetalert";
-import Header from "../../Component/Header/Header";
 import { logo } from "../../imports/image";
-import { MetaData } from "../../imports/index";
-import { clearErrors, SendFeedBackInitiate } from '../../Redux/Action/ActionFeedBack';
+import { MetaData, Header } from "../../imports/index";
+import {
+  clearErrors,
+  SendFeedBackInitiate,
+} from "../../Redux/Action/ActionFeedBack";
 import { FeedbackStyle } from "../../Style/FeedBackStyle/FeedbackStyle";
 const Feedback = () => {
   const [state, setState] = useState({
@@ -16,13 +17,10 @@ const Feedback = () => {
     subject: "",
     content: "",
   });
-  const { fullname, email, subject, content } = state;
-  console.log(fullname, email, subject, content);
+  const { fullname, subject, content } = state;
   const { profile } = useSelector((state) => state.auth);
-  const {sendFeedBack} = useSelector((state) => state.feedback);
+  const { sendFeedBack } = useSelector((state) => state.feedback);
   const user = profile;
-  console.log(user,'user')
-  console.log(state,'state')
   const dispatch = useDispatch();
   useEffect(() => {
     if (user) {
@@ -31,28 +29,22 @@ const Feedback = () => {
   }, [user]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (!name || !email || !subject || !message) {
-    //   toast.error("Mời bạn nhập đầy đủ vào Form !!");
-    // } else {
-      dispatch(SendFeedBackInitiate({...state}))
-      // toast.success("Cảm ơn bạn đã phản hồi cho tôi!");
-    // }
+    dispatch(SendFeedBackInitiate({ ...state }));
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
-  useEffect(()=>{
-    if(sendFeedBack.status === 200){
+  useEffect(() => {
+    if (sendFeedBack.status === 200) {
       swal(`${sendFeedBack.msg}`, {
         icon: "success",
       });
       setTimeout(() => {
         dispatch(clearErrors());
       }, 2000);
-      setState({  content: "", subject: "" });
-      
-    }else if (sendFeedBack.status === 400){
+      setState({ content: "", subject: "" });
+    } else if (sendFeedBack.status === 400) {
       swal(`${sendFeedBack.msg}`, {
         icon: "error",
       });
@@ -60,7 +52,7 @@ const Feedback = () => {
         dispatch(clearErrors());
       }, 2000);
     }
-  },[sendFeedBack])
+  }, [sendFeedBack, dispatch]);
 
   return (
     <>
@@ -139,29 +131,27 @@ const Feedback = () => {
                   className="form-control"
                   type="type"
                   required
-                  value={fullname||""}
+                  value={fullname || ""}
                   name="fullname"
                   onChange={handleChange}
                   disabled={true}
                 />
-                {/* <span>Full Name</span> */}
               </div>
               <div className="inputBox">
                 <input
                   className="form-control"
                   type="type"
-                  value={state.email|| ""}
+                  value={state.email || ""}
                   name="email"
                   onChange={handleChange}
                   disabled={true}
                 />
-                {/* <span>Email</span> */}
               </div>
               <div className="inputBox">
                 <input
                   className="form-control"
                   type="type"
-                  value={subject||""}
+                  value={subject || ""}
                   name="subject"
                   onChange={handleChange}
                   required
@@ -173,7 +163,7 @@ const Feedback = () => {
                   className="form-control"
                   cols="10"
                   rows="5"
-                  value={content||""}
+                  value={content || ""}
                   name="content"
                   onChange={handleChange}
                   required

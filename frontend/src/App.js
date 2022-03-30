@@ -1,40 +1,38 @@
 import React, { Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import {
-  Loading,
-  NotFound,
-  Register,
-  Forget,
-  Reset,
-  UserRoutes,
-  UserRoute,
-  FeedBack,
-  Profile,
-  EditProfile,
+  Category,
   ChangePassword,
-  ForgetAdmin,
-  ResetAdmin,
   ChangePasswordAdmin,
   Director,
-  NewUser,
-  NewDirector,
-  Category,
-  SeriesFilm,
-  Films,
-  NewFilm,
-  Rating,
+  EditProfile,
   Favourite,
+  FeedBack,
+  Films,
+  Forget,
+  ForgetAdmin,
+  Loading,
+  NewDirector,
+  NewFilm,
+  NewUser,
+  NotFound,
+  Profile,
   ProfileGate,
-  ManageProfile,
+  Rating,
+  Register,
+  Reset,
+  ResetAdmin,
+  UserRoute,
+  UserRoutes,
 } from "./imports/index";
 import {
+  Admin,
   Home,
-  Welcome,
   Login,
   LoginAdmin,
-  Admin,
   ProfileAdmin,
+  Welcome,
 } from "./imports/LazyRouter";
 function App() {
   return (
@@ -42,6 +40,7 @@ function App() {
       <Suspense fallback={<Loading />}>
         <ToastContainer position="top-center" />
         <Routes>
+          {/* User */}
           <Route
             path="/login"
             element={
@@ -130,8 +129,7 @@ function App() {
               </UserRoute>
             }
           />
-          <Route path="*" element={<NotFound />} />
-          ADMIN
+          {/* ADMIN */}
           <Route path="/loginadmin" element={<LoginAdmin />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/forgetadmin" element={<ForgetAdmin />} />
@@ -147,6 +145,8 @@ function App() {
           <Route path="/newFilm:tokens" element={<NewFilm />} />
           <Route path="/rating" element={<Rating />} />
           <Route path="/favourite" element={<Favourite />} />
+          {/* Shared */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </>
