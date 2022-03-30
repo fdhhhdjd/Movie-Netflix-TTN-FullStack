@@ -14,7 +14,7 @@ const filmCtrl = {
         { new: true }
       );
 
-      if (user.adult == true) {
+      if (user.adult == "adult") {
         const adultFilms = await Films.find({ ageLimit: { $gte: 16 } });
         return res.json({
           status: 200,
@@ -22,7 +22,7 @@ const filmCtrl = {
           msg: "Get films for adult successfully",
           data: adultFilms,
         });
-      } else {
+      } else if (user.adult == "kid") {
         const childrenFilms = await Films.find({ ageLimit: { $lt: 16 } });
         return res.json({
           status: 200,
