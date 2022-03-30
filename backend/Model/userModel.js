@@ -47,7 +47,8 @@ const UserSchema = new mongoose.Schema(
       default: false,
     },
     adult: {
-      type: Boolean,
+      type: String,
+      required: false,
     },
     createdAt: {
       type: Date,
