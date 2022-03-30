@@ -80,12 +80,12 @@ const Login = () => {
                 {...register("email", emailRequire)}
                 name="email"
               />
-              <InputField
+              {/* <InputField
                 inputType="email"
                 inputName="email"
                 useForm={register}
                 inputRequire={emailRequire}
-              />
+              /> */}
             </div>
             <span style={{ color: "red" }}>
               {errors.email?.type === "required" &&
