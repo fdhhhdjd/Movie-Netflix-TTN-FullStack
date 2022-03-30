@@ -45,3 +45,5 @@ export { Rating } from "../Component/Admins/Rating";
 
 //!Custom Hook
 export { default as useDesUpImage } from "../CustomHook/useDesUpImage";
+export { default as InputField } from "../CustomHook/useInputField";
+export { default as useRequireInput } from "../CustomHook/useRequireInput";

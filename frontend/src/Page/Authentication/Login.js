@@ -7,11 +7,11 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import swal from "sweetalert";
 import { logo } from "../../imports/image";
-import { MetaData } from "../../imports/index";
+import { InputField, MetaData, useRequireInput } from "../../imports/index";
 import {
   clearErrors,
   loginGoogleInitiate,
-  loginInitiate
+  loginInitiate,
 } from "../../Redux/Action/ActionAuth";
 import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
 import LoadingSmall from "../Loading/LoadingSmall";
@@ -28,9 +28,9 @@ const Login = () => {
   const dispatch = useDispatch();
   const [isLock, setIsLock] = useState(false);
   const [token, setToken] = useState("");
-  const [error, setError] = useState("");
   const { auth, loading } = useSelector((state) => state.auth);
   const Auth = auth;
+  const { emailRequire, passwordRequire } = useRequireInput();
   const HandleGoogle = (response) => {
     dispatch(loginGoogleInitiate(response));
   };
@@ -57,7 +57,7 @@ const Login = () => {
       toast.error(`${auth.msg}`);
       dispatch(clearErrors());
     }
-  }, [Auth]);
+  }, [Auth?.success, dispatch]);
 
   return (
     <>
@@ -76,13 +76,15 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="Email or phone number"
-                {...register("email", {
-                  required: true,
-                  pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
-                })}
+                {...register("email", emailRequire)}
                 name="email"
-                id="email"
               />
+              {/* <InputField
+                inputType="email"
+                inputName="email"
+                useForm={register}
+                inputRequire={emailRequire}
+              /> */}
             </div>
             <span style={{ color: "red" }}>
               {errors.email?.type === "required" &&
@@ -93,10 +95,9 @@ const Login = () => {
             <div className="pwd-input">
               <input
                 type={isLock ? "type" : "password"}
-                {...register("password", { required: true })}
+                {...register("password", passwordRequire)}
                 placeholder="Password"
                 name="password"
-                id="password"
               />
               {isLock ? (
                 <i
@@ -140,8 +141,8 @@ const Login = () => {
                 cookiePolicy={"single_host_origin"}
                 render={(renderProps) => (
                   <div className="login-google" onClick={renderProps.onClick}>
-                    <i class="fab fa-google gg-icon"></i>
-                    <a>Login with Google</a>
+                    <i className="fab fa-google gg-icon"></i>
+                    <a href="#">Login with Google</a>
                   </div>
                 )}
               />
@@ -151,7 +152,6 @@ const Login = () => {
                 onChange={(token) => setToken(token)}
                 onExpired={(e) => setToken("")}
               />
-              {error && <span className="text-danger">{error}</span>}
               <span className="signup">
                 New to Netflix?
                 <a href="#">
