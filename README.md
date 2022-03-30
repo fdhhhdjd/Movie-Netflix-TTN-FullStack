@@ -118,7 +118,7 @@ Web Online: https://movienetflixttn.herokuapp.com/
 - Quên mật khẩu tài khoản khách hàng: post --> http://localhost:5000/api/auth/customer/forget
 - Link reset mật khẩu khi quên: put --> http://localhost:5000/api/auth/customer/password/reset/:token
 - Đăng nhập google tài khoản khách hàng: post --> http://localhost:5000/api/auth/customer/loginGoogle
-- Lựa chọn phim cho trẻ em hoặc người lớn : get --> http://localhost:5000/api/film/selectForAdultOrChild
+- Lựa chọn phim cho trẻ em hoặc người lớn : post --> http://localhost:5000/api/film/selectForAdultOrChild
 
 \*Director:
 

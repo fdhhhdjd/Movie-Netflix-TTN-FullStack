@@ -11,7 +11,6 @@ const initialState = {
   changePassword: [],
   forgetPassword: [],
   resetPassword: [],
-  filmAge:[],
 };
 const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -23,7 +22,6 @@ const AuthReducer = (state = initialState, action) => {
     case types.CHANGE_PASSWORD_START:
     case types.FORGET_PASS_START:
     case types.RESET_PASSWORD_START:
-    case types.GET_FILMFORUSER_START:
       return {
         ...state,
         loading: true,
@@ -92,12 +90,6 @@ const AuthReducer = (state = initialState, action) => {
         changePassword: [],
         forgetPassword: [],
       };
-    case types.GET_FILMFORUSER_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        filmAge: action.payload,
-      };
     case types.LOGIN_API_FAIL:
     case types.LOGIN_GOOGLE_FAIL:
     case types.REFRESH_TOKEN_FAIL:
@@ -106,7 +98,6 @@ const AuthReducer = (state = initialState, action) => {
     case types.CHANGE_PASSWORD_FAIL:
     case types.FORGET_PASS_FAIL:
     case types.RESET_PASSWORD_FAIL:
-    case types.GET_FILMFORUSER_FAIL:
       return {
         ...state,
         loading: false,

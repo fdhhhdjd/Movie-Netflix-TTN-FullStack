@@ -3,6 +3,7 @@ const initialState = {
   loading: false,
   error: null,
   categories: [],
+
   film:[],
   rating:[],
   favourite:[],

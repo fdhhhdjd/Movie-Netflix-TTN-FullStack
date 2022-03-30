@@ -55,7 +55,7 @@ export const AuthenticationStyle = createGlobalStyle`
   }
       form {
         width: 30%;
-        max-height: 85vh;
+        max-height: 87vh;
         padding: 50px 60px;
         display: flex;
         flex-direction: column;
@@ -147,7 +147,7 @@ export const AuthenticationStyle = createGlobalStyle`
             cursor: pointer;
 
             &:hover a{
-              font-size: 1.5vw;
+              font-size: 1vw;
               color: #fff;
             }
 
