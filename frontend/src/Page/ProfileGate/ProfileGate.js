@@ -1,40 +1,37 @@
-import { ProfileGateStyle } from "../../Style/ProfileGateStyle/ProfileGateStyle";
-import { logo } from "../../imports/image";
-import { useState } from "react";
 import { EditOutlined } from "@material-ui/icons";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logo } from "../../imports/image";
+import { GetAllAdultInitiate } from "../../Redux/Action/ActionFilmadult";
+import { ProfileGateStyle } from "../../Style/ProfileGateStyle/ProfileGateStyle";
 
 const ProfileGate = () => {
   const users = [
     {
-      name: "Gia Bao",
+      name: "Kids",
       avatar:
         "https://occ-0-395-58.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABdm_-DEYu1y2T38LnXWSy-u7u24MbY361Zg2WziU3fOqSJy3w2j3-7E9f6FQVC_Rv3zj3xGZ1SQM7F6G8WjR4XFnHwDL.png?r=fcd",
       adult: false,
     },
     {
-      name: "Tien Tai",
+      name: "Adults",
       avatar:
         "https://occ-0-395-58.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABeUqbfriC_pGWtwTa1KOx-ZSiQYa7ltLkOuduGxY_GRRc41ugYJNGYHe4LNcmshST4qkRSENvcs2xFomPc0rtX8wq2NG.png?r=b97",
       adult: true,
     },
-    {
-      name: "Thanh Tat",
-      avatar:
-        "https://occ-0-395-58.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABTYctxxbe-UkKEdlMxXm4FVGD6DqTHkQ0TQ5CQJ9jbOMnG0CYxYcSICcTUQz8DrB7CpKUGpqJVMtEqksLlvSJx2ac3Ak.png?r=a41",
-      adult: false,
-    },
   ];
 
   const [isEdit, setIsEdit] = useState(false);
-
+  const { refreshTokens } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const handleClick = (e) => {
     e.preventDefault();
     setIsEdit(!isEdit);
   };
 
-  const handleGoToHome = () => {
-    window.location.href = "/home";
-  }
+  const handleGoToHome = (adult) => {
+    dispatch(GetAllAdultInitiate(adult, refreshTokens));
+  };
   return (
     <>
       <ProfileGateStyle />
@@ -46,7 +43,11 @@ const ProfileGate = () => {
           </span>
           <ul className="user-container">
             {users.map((user, index) => (
-              <li className="user" key={index} onClick={handleGoToHome}>
+              <li
+                className="user"
+                key={index}
+                onClick={() => handleGoToHome(user.adult)}
+              >
                 <img
                   className={isEdit ? "edit" : ""}
                   src={user.avatar}
