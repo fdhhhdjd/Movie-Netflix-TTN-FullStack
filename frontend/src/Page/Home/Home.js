@@ -1,5 +1,5 @@
 import React from "react";
-import { Footer, Header, Watch } from "../../imports";
+import { Header } from "../../imports";
 import { Feature, List, MetaData } from "../../imports/index";
 import { HomeStyle } from "../../Style/StyleHome/HomeStyle";
 const Home = () => {
