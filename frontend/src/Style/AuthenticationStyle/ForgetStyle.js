@@ -40,14 +40,15 @@ export const ForgetStyle = createGlobalStyle`
       color: white;
   
       form {
-        width: 350px;
+        width: 400px;
         height: 300px;
-        padding: 30px;
-        border-radius: 5px;
-        background-color: #0b0b0b;
+        padding: 40px 60px;
+        justify-content: space-around;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 4px;
+        position: relative;
         .loginButton1{
           text-align: center;
         }
@@ -57,6 +58,8 @@ export const ForgetStyle = createGlobalStyle`
           background-color: gray;
           color: white;
           padding-left: 10px;
+          outline:none;
+          border: none;
   
           &::placeholder {
             color: lightgray;

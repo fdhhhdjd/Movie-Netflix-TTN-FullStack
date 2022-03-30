@@ -1,3 +1,5 @@
+import { useForm } from "react-hook-form";
+
 const InputField = (props) => {
   const {
     inputType,
@@ -8,10 +10,14 @@ const InputField = (props) => {
     data,
     setData,
     label,
-    useForm,
-    inputRequire
+    inputRequire,
   } = props;
-  console.log(useForm);
+  const {
+    register,
+    formState: { errors },
+  } = useForm();
+  console.log(errors);
+
   return (
     <>
       <input
@@ -21,13 +27,19 @@ const InputField = (props) => {
         value={inputValue}
         ref={inputRef}
         required="required"
-        {...useForm({inputName}, inputRequire)}
-        onChange={(e) => {
-          const { name, value } = e.target;
-          setData({ ...data, [name]: value });
-        }}
+        {...register(inputName, inputRequire)}
+        // onChange={(e) => {
+        //   const { name, value } = e.target;
+        //   setData({ ...data, [name]: value });
+        // }}
       />
       <span>{label}</span>
+      <span style={{ color: "red" }}>
+        {errors.email?.type === "required" &&
+          `Mời bạn nhập ${inputName} đầy đủ! `}
+        {errors?.email?.type === "pattern" &&
+          `${inputName} của bạn không hợp lệ!`}
+      </span>
     </>
   );
 };

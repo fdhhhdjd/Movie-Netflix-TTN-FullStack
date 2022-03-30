@@ -1,13 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
-import { RegisterStyle } from "../../Style/AuthenticationStyle/RegisterStyle";
-import { useNavigate } from "react-router-dom";
-import { MetaData } from "../../imports/index";
-import { logo } from "../../imports/image";
+import React, { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { logo } from "../../imports/image";
+import { MetaData, useRequireInput } from "../../imports/index";
 import { clearErrors, RegisterInitiate } from "../../Redux/Action/ActionAuth";
+import { RegisterStyle } from "../../Style/AuthenticationStyle/RegisterStyle";
 import LoadingSmall from "../Loading/LoadingSmall";
+
 const Register = () => {
   const {
     register,
@@ -22,6 +23,13 @@ const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { authRegister, loading } = useSelector((state) => state.auth);
+  const {
+    emailRequire,
+    passwordLoginRequire,
+    passwordRegisterRequire,
+    usernameRequire,
+  } = useRequireInput();
+
   const handleSubmitForm = (data) => {
     const { email, fullname, password } = data;
     dispatch(RegisterInitiate(fullname, email, password));
@@ -51,9 +59,9 @@ const Register = () => {
           <form onSubmit={handleSubmit(handleSubmitForm)}>
             <h1>Register</h1>
             <input
-              {...register("fullname", { required: true, maxLength: 20 })}
+              {...register("fullname", usernameRequire)}
               type="text"
-              placeholder="UserName"
+              placeholder="Username"
               name="fullname"
               id="fullname"
             />
@@ -64,10 +72,7 @@ const Register = () => {
                 "Tên của bạn không được quá 20 kí tự"}
             </span>
             <input
-              {...register("email", {
-                required: true,
-                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
-              })}
+              {...register("email", emailRequire)}
               type="email"
               placeholder="Email Address"
               name="email"
@@ -81,13 +86,7 @@ const Register = () => {
             </span>
             <input
               className="registerInput"
-              {...register("password", {
-                required: true,
-                minLength: {
-                  value: 6,
-                },
-                pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&^_-]{8,}$/,
-              })}
+              {...register("password", passwordRegisterRequire)}
               type="password"
               placeholder="Password"
               name="password"
@@ -126,22 +125,24 @@ const Register = () => {
                 <LoadingSmall />
               </span>
             ) : (
-              <button className="loginButton">Sign In</button>
+              <button className="loginButton">Sign Up</button>
             )}
 
-            <span>
-              New to Netflix ?{" "}
-              <b
-                onClick={() => navigate("/login")}
-                style={{ cursor: "pointer" }}
-              >
-                Login now.
-              </b>
-            </span>
-            <small>
-              This page is protected by Google reCAPTCHA to ensure you're not a
-              bot. <b>Learn more</b>.
-            </small>
+            <footer>
+              <span>
+                Had a netflix account yet ?{" "}
+                <b
+                  onClick={() => navigate("/login")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Login now.
+                </b>
+              </span>
+              <small>
+                This page is protected by Google reCAPTCHA to ensure you're not
+                a bot. <b style={{ cursor: "pointer" }}>Learn more</b>.
+              </small>
+            </footer>
           </form>
         </div>
       </div>

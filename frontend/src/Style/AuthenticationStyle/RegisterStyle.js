@@ -40,14 +40,15 @@ export const RegisterStyle = createGlobalStyle`
       color: white;
   
       form {
-        width: 350px;
-        height: 500px;
-        padding: 30px;
-        border-radius: 5px;
-        background-color: #0b0b0b;
+        width: 450px;
+        height: 550px;
+        padding: 40px 60px;
+        justify-content: space-around;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 4px;
+        position: relative;
         .loginButton1{
           text-align: center;
         }
@@ -58,6 +59,8 @@ export const RegisterStyle = createGlobalStyle`
           color: white;
           padding-left: 10px;
           position:relative;
+          border: none;
+          outline: none;
   
           &::placeholder {
             color: lightgray;
@@ -80,10 +83,12 @@ export const RegisterStyle = createGlobalStyle`
           cursor: pointer;
         }
   
-        span {
-          color: lightgray;
-          b {
-            color: white;
+        footer {
+          margin-top: 10px;
+          display: flex;
+          flex-direction: column;
+          & > * {
+            margin-top: 10px;
           }
         }
       }
