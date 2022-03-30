@@ -147,12 +147,12 @@ export const AuthenticationStyle = createGlobalStyle`
             cursor: pointer;
 
             &:hover a{
-              font-size: 2vw;
+              font-size: 1vw;
               color: #fff;
             }
 
             &:hover .gg-icon {
-              font-size: 3.5vw;
+              font-size: 2vw;
             }
 
             .gg-icon {
