@@ -18,7 +18,7 @@ export const ListStyle = createGlobalStyle`
       display: flex;
       position: relative;
       .slider-arrow {
-        width: 50px;
+        width: 30px;
         height: 120px;
         margin-top: 10px;
         color: #fff;
