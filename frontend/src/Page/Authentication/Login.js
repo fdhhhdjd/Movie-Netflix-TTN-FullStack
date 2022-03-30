@@ -3,15 +3,15 @@ import GoogleLogin from "react-google-login";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import swal from "sweetalert";
-import { Link } from "react-router-dom";
 import { logo } from "../../imports/image";
 import { MetaData } from "../../imports/index";
 import {
   clearErrors,
   loginGoogleInitiate,
-  loginInitiate,
+  loginInitiate
 } from "../../Redux/Action/ActionAuth";
 import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
 import LoadingSmall from "../Loading/LoadingSmall";
@@ -72,16 +72,18 @@ const Login = () => {
         <div className="container">
           <form onSubmit={handleSubmit(handleSubmitForm)}>
             <h1>Sign In</h1>
-            <input
-              type="email"
-              placeholder="Email or phone number"
-              {...register("email", {
-                required: true,
-                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
-              })}
-              name="email"
-              id="email"
-            />
+            <div className="email-input">
+              <input
+                type="email"
+                placeholder="Email or phone number"
+                {...register("email", {
+                  required: true,
+                  pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
+                })}
+                name="email"
+                id="email"
+              />
+            </div>
             <span style={{ color: "red" }}>
               {errors.email?.type === "required" &&
                 "Mời bạn nhập Email đầy đủ! "}
@@ -137,8 +139,8 @@ const Login = () => {
                 onFailure={HandleGoogle}
                 cookiePolicy={"single_host_origin"}
                 render={(renderProps) => (
-                  <div className="login-facebook" onClick={renderProps.onClick}>
-                    <i className="fa-brands fa-google fb-icon"></i>
+                  <div className="login-google" onClick={renderProps.onClick}>
+                    <i class="fab fa-google gg-icon"></i>
                     <a>Login with Google</a>
                   </div>
                 )}

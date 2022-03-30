@@ -29,6 +29,7 @@ const Feature = ({ type }) => {
           </div>
         )}
         <img src="https://a-static.besthdwallpaper.com/spider-man-homecoming-phim-spiderman-va-ironman-trong-hanh-dong-hinh-nen-2560x1440-15603_51.jpg" />
+        <span className="age-tag">18+</span>
         <div className="fadeOut"></div>
         <div className="info">
           <img
