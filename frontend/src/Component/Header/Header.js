@@ -84,7 +84,7 @@ const Header = () => {
             <div className="profile">
               <i className="fas fa-caret-down"></i>
               <div className="options">
-                <span>Setting</span>
+                <span>Settings</span>
                 <span onClick={handleLogout}>Logout</span>
               </div>
             </div>
