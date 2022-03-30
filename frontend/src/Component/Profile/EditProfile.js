@@ -11,19 +11,17 @@ import { toast } from "react-toastify";
 import {useDesUpImage} from '../../imports/index'
 const initialState = {
   fullname: "",
-
   phone_number: "",
   sex: "",
   date_of_birth: "",
 };
 const EditProfile = () => {
   const state = useContext(GlobalState);
-
   const [onEdit, setOnEdit] = useState(false);
-
   const [user, setUser] = useState(initialState);
   const { profile, refreshTokens } = useSelector((state) => state.auth);
   const [callback, setCallback] = state.callback;
+  console.log(profile.fullname,'name')
   const { loading, handleUpload, handleDestroy, images, setImages } =
   useDesUpImage(refreshTokens);
   useEffect(() => {

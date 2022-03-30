@@ -110,7 +110,18 @@ export const GetProfileFail = (error) => ({
   type: types.GET_PROFILE_FAIL,
   payload: error,
 });
-
+  //GET CHOOSE USER 
+  export const GetFilmForUserStart =()=>({
+    type:types.GET_FILMFORUSER_START,
+  })
+  export const GetFilmForUserSuccess =(token)=>({
+    type:types.GET_FILMFORUSER_SUCCESS,
+    payload:token,
+  })
+  export const GetFilmForUserFail =(error)=>({
+    type:types.GET_FILMFORUSER_FAIL,
+    payload: error,
+  })
 //!Register
 export const RegisterInitiate =
   (fullname, email, password) => async (dispatch) => {
@@ -259,6 +270,21 @@ export const ChangeAdminInitiate =
       dispatch(ChangePasswordAdminFail(error));
     }
   };
+  //Get film for user
+  export const GetFilmForUserInitiate = (token)=>{
+    return async function (dispatch) {
+      try{
+        dispatch(GetFilmForUserStart())
+        const {data} = await axios.post(`/api/film/selectForAdultOrChild`,{
+          headers: { Authorization: ` ${token}` },
+        });
+        dispatch(GetFilmForUserSuccess(data.data))
+
+      }catch(error){
+        dispatch(GetFilmForUserFail(error));
+      }
+    }
+  }
 //!CLEAR_ERRORS
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: types.CLEAR_ERRORS_SUCCESS });

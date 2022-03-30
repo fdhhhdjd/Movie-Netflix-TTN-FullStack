@@ -1,8 +1,10 @@
 import { ProfileGateStyle } from "../../Style/ProfileGateStyle/ProfileGateStyle";
 import { logo } from "../../imports/image";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { EditOutlined } from "@material-ui/icons";
-
+import {useSelector} from 'react-redux'
+import swal from "sweetalert";
+import axios from "axios";
 const ProfileGate = () => {
   const users = [
     {
@@ -17,23 +19,33 @@ const ProfileGate = () => {
         "https://occ-0-395-58.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABeUqbfriC_pGWtwTa1KOx-ZSiQYa7ltLkOuduGxY_GRRc41ugYJNGYHe4LNcmshST4qkRSENvcs2xFomPc0rtX8wq2NG.png?r=b97",
       adult: true,
     },
-    {
-      name: "Thanh Tat",
-      avatar:
-        "https://occ-0-395-58.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABTYctxxbe-UkKEdlMxXm4FVGD6DqTHkQ0TQ5CQJ9jbOMnG0CYxYcSICcTUQz8DrB7CpKUGpqJVMtEqksLlvSJx2ac3Ak.png?r=a41",
-      adult: false,
-    },
+
   ];
-
   const [isEdit, setIsEdit] = useState(false);
-
   const handleClick = (e) => {
     e.preventDefault();
     setIsEdit(!isEdit);
   };
+  const {profile,refreshTokens} = useSelector((state) => state.auth)
+  const [adultUser,setAdultUser] = useState(false)
 
-  const handleGoToHome = () => {
-    window.location.href = "/home";
+  const [user, setUser] = useState('')
+  const handleGoToHome = async (adult) => {
+      setAdultUser(adult);
+      // await axios.post(
+      //   `/api/film/selectForAdultOrChild`,
+      //   {adult: adultUser },
+      //   {
+      //     headers: {
+      //       Authorization: `${refreshTokens}`,
+      //     },
+      //   }
+      // );
+      window.location.href = "/home";
+      // swal("Truy cập Thanh Cong 😍", {
+      //   icon: "success",
+      // });
+    
   }
   return (
     <>
@@ -46,7 +58,7 @@ const ProfileGate = () => {
           </span>
           <ul className="user-container">
             {users.map((user, index) => (
-              <li className="user" key={index} onClick={handleGoToHome}>
+              <li className="user" key={index} onClick={()=>handleGoToHome(user.adult)}>
                 <img
                   className={isEdit ? "edit" : ""}
                   src={user.avatar}

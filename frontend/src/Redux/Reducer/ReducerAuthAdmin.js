@@ -181,7 +181,6 @@ const initialState = {
             loading: false,
             changePassword: []
         }
-
         default:
               return state
       }

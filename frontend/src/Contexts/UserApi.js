@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { ProfileInitiate, TokenInitiate } from "../Redux/Action/ActionAuth";
+import { ProfileInitiate, TokenInitiate ,GetFilmForUserInitiate} from "../Redux/Action/ActionAuth";
 import { toast } from "react-toastify";
 import swal from "sweetalert";
 const UserApi = (token) => {
@@ -9,6 +9,7 @@ const UserApi = (token) => {
   useEffect(() => {
     if (token && token.length > 0) {
       dispatch(ProfileInitiate(token));
+      dispatch(GetFilmForUserInitiate(token));
     }
   }, [token]);
 
