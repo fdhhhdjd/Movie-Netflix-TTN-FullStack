@@ -6,7 +6,7 @@ const authCustomer = require("../middleware/authCustomer");
 const router = express.Router();
 
 //Lựa chọn bộ phim dành cho trẻ em hay người lớn
-router.get(
+router.post(
   "/selectForAdultOrChild",
   auth,
   authCustomer,

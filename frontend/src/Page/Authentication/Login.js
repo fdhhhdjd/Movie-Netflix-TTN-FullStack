@@ -28,7 +28,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const [isLock, setIsLock] = useState(false);
   const [token, setToken] = useState("");
-  const [error, setError] = useState("");
   const { auth, loading } = useSelector((state) => state.auth);
   const Auth = auth;
   const { emailRequire, passwordRequire } = useRequireInput();
@@ -58,7 +57,7 @@ const Login = () => {
       toast.error(`${auth.msg}`);
       dispatch(clearErrors());
     }
-  }, [Auth]);
+  }, [Auth?.success, dispatch]);
 
   return (
     <>
@@ -142,8 +141,8 @@ const Login = () => {
                 cookiePolicy={"single_host_origin"}
                 render={(renderProps) => (
                   <div className="login-google" onClick={renderProps.onClick}>
-                    <i class="fab fa-google gg-icon"></i>
-                    <a>Login with Google</a>
+                    <i className="fab fa-google gg-icon"></i>
+                    <a href="#">Login with Google</a>
                   </div>
                 )}
               />
@@ -153,7 +152,6 @@ const Login = () => {
                 onChange={(token) => setToken(token)}
                 onExpired={(e) => setToken("")}
               />
-              {error && <span className="text-danger">{error}</span>}
               <span className="signup">
                 New to Netflix?
                 <a href="#">
