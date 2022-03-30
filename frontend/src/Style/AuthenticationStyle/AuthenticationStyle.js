@@ -41,7 +41,7 @@ export const AuthenticationStyle = createGlobalStyle`
   .loginButton{
     height: 45px;
     font-size: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
     background: #e50914;
     color: #fff;
     border: none;
@@ -55,6 +55,7 @@ export const AuthenticationStyle = createGlobalStyle`
   }
       form {
         width: 30%;
+        max-height: 85vh;
         padding: 50px 60px;
         display: flex;
         flex-direction: column;
@@ -93,18 +94,18 @@ export const AuthenticationStyle = createGlobalStyle`
           }
         }
         
-        .pwd-input {
+        .pwd-input, .email-input {
+          position: relative;
           display: flex;
-          align-items: center;
-          width: 108%;
 
           input {
             width: 100%;
           }
 
           i{
-            transform: translateY(-50%);
-            margin-left: 10px;
+            position: absolute;
+            right: 10px;
+            transform: translateY(100%)
           }
         }
 
@@ -139,18 +140,30 @@ export const AuthenticationStyle = createGlobalStyle`
         footer {
           display: flex;
           flex-direction: column;
-          cursor: pointer;
-          .login-facebook {
+          .login-google {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
-            .fb-icon {
-              color: #EA4335;
+            cursor: pointer;
+
+            &:hover a{
+              font-size: 1.5vw;
+              color: #fff;
+            }
+
+            &:hover .gg-icon {
+              font-size: 1.5vw;
+            }
+
+            .gg-icon {
+              color: #ea4335;
+              transition: .2s ease;
             }
             a {
               font-size: 14px;
               margin-left: 8px;
               color: #8c8c8c;
+              transition: .2s ease;
             }
           }
           .signup {

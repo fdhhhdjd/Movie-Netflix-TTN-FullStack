@@ -25,7 +25,7 @@ export const FeatureStyle = createGlobalStyle`
       }
     }
 
-    .fadeOut {
+      .fadeOut {
       background-image: linear-gradient(
         rgba(20, 20, 20, 0) 0,
         rgba(20, 20, 20, 0.15) 15%,
@@ -49,6 +49,17 @@ export const FeatureStyle = createGlobalStyle`
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    .age-tag {
+      position: absolute;
+      right: 0;
+      color: #fff;
+      top: 70%;
+      font-size: 1.2vw;
+      border-left: 3px solid #fff;
+      padding: 8px 60px 8px 10px;
+      background: rgba(255, 255, 255, 0.2);
     }
   
     .info {
