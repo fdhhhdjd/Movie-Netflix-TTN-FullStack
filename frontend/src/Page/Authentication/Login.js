@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import swal from "sweetalert";
 import { logo } from "../../imports/image";
-import { InputField, MetaData, useRequireInput } from "../../imports/index";
+import { MetaData, useRequireInput } from "../../imports/index";
 import {
   clearErrors,
   loginGoogleInitiate,
@@ -31,7 +31,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const { auth, loading } = useSelector((state) => state.auth);
   const Auth = auth;
-  const { emailRequire, passwordRequire } = useRequireInput();
+  const { emailRequire, passwordLoginRequire } = useRequireInput();
   const HandleGoogle = (response) => {
     dispatch(loginGoogleInitiate(response));
   };
@@ -60,13 +60,15 @@ const Login = () => {
     }
   }, [Auth]);
 
+  console.log(errors);
+
   return (
     <>
       <AuthenticationStyle />
       <MetaData title="Login-Movie" />
       <div className="login">
         <div className="top">
-          <div className="wrapper">
+          <div className="wr<a>pper">
             <img className="logo" src={logo} alt="" />
           </div>
         </div>
@@ -90,7 +92,7 @@ const Login = () => {
             <div className="pwd-input">
               <input
                 type={isLock ? "type" : "password"}
-                {...register("password", passwordRequire)}
+                {...register("password", passwordLoginRequire)}
                 placeholder="Password"
                 name="password"
               />
@@ -125,7 +127,7 @@ const Login = () => {
                 <input type="checkbox" />
                 <span>Remember me</span>
               </div>
-              <a href="#">Need help?</a>
+              <a href="/forget">Forgot password?</a>
             </div>
             <footer>
               <GoogleLogin
@@ -150,9 +152,7 @@ const Login = () => {
               {error && <span className="text-danger">{error}</span>}
               <span className="signup">
                 New to Netflix?
-                <a href="#">
-                  <Link to="/signup">Sign up now</Link>
-                </a>
+                <Link to="/signup">Sign up now</Link>
               </span>
               <span className="learn-more">
                 This page is protected by Google reCAPTCHA to ensure you're not

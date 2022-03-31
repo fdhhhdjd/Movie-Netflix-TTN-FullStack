@@ -61,6 +61,7 @@ export const RegisterStyle = createGlobalStyle`
           position:relative;
           border: none;
           outline: none;
+          background: #333;
   
           &::placeholder {
             color: lightgray;
