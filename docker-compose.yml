@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  netflix-movie-backend:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: netflix-movie-backend-ct
+    env_file:
+          - .env
+    ports:
+      - '5001:5000'
