@@ -10,3 +10,15 @@ services:
           - .env
     ports:
       - '5001:5000'
+
+  # netflix-movie-frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: ./frontend/dockerfile
+  #   container_name: netflix-movie-frontend-ct
+  #   ports:
+  #     - '3001:3000'
+  #   volumes:
+  #     - ./frontend/src:/app/src   
+  #   depends_on:
+  #     - netflix-movie-backend
