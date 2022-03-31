@@ -11,7 +11,6 @@ import { toast } from "react-toastify";
 import {useDesUpImage} from '../../imports/index'
 const initialState = {
   fullname: "",
-
   phone_number: "",
   sex: "",
   date_of_birth: "",
@@ -26,6 +25,7 @@ const EditProfile = () => {
   const [callback, setCallback] = state.callback;
   const { loading, handleUpload, handleDestroy, images, setImages } =
   useDesUpImage(refreshTokens);
+  console.log(state.callback);
   useEffect(() => {
     if (profile) {
       setUser({ ...profile });
@@ -79,7 +79,7 @@ const EditProfile = () => {
             title={`Edit-Profile-${profile.fullname || profile.name}`}
           />
           <EditProfileStyle />
-          <div className="container1">
+          <div className="edit-profile-container">
             <div className="upload">
               <input
                 type="file"
@@ -108,7 +108,7 @@ const EditProfile = () => {
               <h1 className="newUserTitle">Edit Profile</h1>
               <form onSubmit={handleSubmit}>
                 <div className="newUserItem">
-                  <label htmlFor="username">Username</label>
+                  <label htmlFor="username">Username:</label>
                   <input
                     type="text"
                     placeholder="john"
@@ -119,7 +119,7 @@ const EditProfile = () => {
                 </div>
 
                 <div className="newUserItem">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">Email:</label>
                   <input
                     type="email"
                     placeholder="john@gmail.com"
@@ -128,11 +128,11 @@ const EditProfile = () => {
                     value={user.email}
                     onChange={handleChangeInput}
                     disabled
-                    style={{ color: "black" }}
+                    style={{ color: "#000" }}
                   />
                 </div>
                 <div className="newUserItem">
-                  <label htmlFor="dienthoai">Phone</label>
+                  <label htmlFor="dienthoai">Phone:</label>
                   <input
                     type="text"
                     placeholder="+1 123 456 78"
@@ -143,7 +143,7 @@ const EditProfile = () => {
                   />
                 </div>
                 <div className="newUserItem">
-                  <label htmlFor="ngaysinh">date</label>
+                  <label htmlFor="ngaysinh">Date:</label>
                   <input
                     type="date"
                     data-date=""
