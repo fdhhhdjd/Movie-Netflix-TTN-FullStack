@@ -10,8 +10,14 @@ router.post(
   "/selectForAdultOrChild",
   auth,
   authCustomer,
-  filmCtrl.selectFilmForChilOrAdult
+  filmCtrl.selectFilmForKidOrAdult
 );
+
+//Danh sách phim dành cho người lớn
+router.get("/adult", auth, authCustomer, filmCtrl.getFilmForAdult);
+
+//Danh sách phim dành cho trẻ em
+router.get("/kid", auth, authCustomer, filmCtrl.getFilmForKid);
 
 //Xem thông tin tất cả bộ phim
 router.get("/all", auth, filmCtrl.getAllFilm);

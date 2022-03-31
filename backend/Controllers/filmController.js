@@ -4,33 +4,55 @@ const Users = require("../Model/userModel");
 
 const filmCtrl = {
   //lựa chọn bộ phim cho người lớn hay trẻ em
-  async selectFilmForChilOrAdult(req, res) {
+  async selectFilmForKidOrAdult(req, res) {
     try {
       const { adult } = req.body;
       const userId = req.user.id;
-      const user = await Users.findByIdAndUpdate(
-        { _id: userId },
-        { adult },
-        { new: true }
-      );
+      await Users.findByIdAndUpdate({ _id: userId }, { adult }, { new: true });
 
-      if (user.adult == "adult") {
-        const adultFilms = await Films.find({ ageLimit: { $gte: 16 } });
-        return res.json({
-          status: 200,
-          success: true,
-          msg: "Get films for adult successfully",
-          data: adultFilms,
-        });
-      } else if (user.adult == "kid") {
-        const childrenFilms = await Films.find({ ageLimit: { $lt: 16 } });
-        return res.json({
-          status: 200,
-          success: true,
-          msg: "Get films for children successfully",
-          data: childrenFilms,
-        });
-      }
+      return res.json({
+        status: 200,
+        success: true,
+        msg: `Selected: ${adult}`,
+      });
+    } catch (error) {
+      return res.json({
+        status: 400,
+        success: false,
+        msg: error.message,
+      });
+    }
+  },
+
+  //Lấy ra danh sách phim dành cho người lớn
+  async getFilmForAdult(req, res) {
+    try {
+      const adultFilms = await Films.find({ ageLimit: { $gte: 16 } });
+      return res.json({
+        status: 200,
+        success: true,
+        msg: "Get films for adult successfully",
+        data: adultFilms,
+      });
+    } catch (error) {
+      return res.json({
+        status: 400,
+        success: false,
+        msg: error.message,
+      });
+    }
+  },
+
+  //Lấy ra danh sách phim dành cho trẻ em
+  async getFilmForKid(req, res) {
+    try {
+      const kidFilms = await Films.find({ ageLimit: { $lt: 16 } });
+      return res.json({
+        status: 200,
+        success: true,
+        msg: "Get films for kid successfully",
+        data: kidFilms,
+      });
     } catch (error) {
       return res.json({
         status: 400,
