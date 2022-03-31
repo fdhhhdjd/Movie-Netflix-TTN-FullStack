@@ -2,7 +2,8 @@ import { createGlobalStyle } from "styled-components";
 
 export const EditProfileStyle = createGlobalStyle`
 
-.container1{
+.edit-profile-container{
+  height: 100vh;
   display: flex;
   padding-top: 7rem;
   justify-content:center;
@@ -26,20 +27,35 @@ export const EditProfileStyle = createGlobalStyle`
   flex-direction: column;
   margin-top: 10px;
   margin-right: 20px;
+  
+  #email {
+    background: rgba(255, 255, 255, 0.8);
+  }
 }
 
 .newUserItem > label {
   margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: white;
 }
 
 .newUserItem > input {
-  height: 20px;
-  padding: 10px;
-  border: 1px solid gray;
-  border-radius: 5px;
+  height: 35px;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  padding: 0 10px;
+  margin-bottom: 15px;
+  background: rgba(255, 255, 255, 0.2);
+
+  &::placeholder {
+    color: lightgray;
+  }
+
+  
 }
 
 .newUserGender > input {
@@ -58,20 +74,25 @@ export const EditProfileStyle = createGlobalStyle`
 }
 
 .newUserButton{
-    width: 200px;
     border: none;
-    background-color: red;
-    color: white;
-    padding: 5px 10px;
+    background-color: #e50914;
+    color: #fff;
+    padding: 2vh 2vw;
     font-weight: 600;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-top: 30px;
     cursor: pointer;
+    transition: .4s ease-in-out;
+
+    &:hover {
+      transform: scale(1.2)
+    }
 }
 
 .upload{
-  max-width: 350px;
-  height: 400px;
+  width: 10vw;
+  max-width: 25vw;
+  height: 48vh;
   width: 100%;
   border: 1px solid #ddd;
   padding: 30px;
@@ -112,6 +133,7 @@ export const EditProfileStyle = createGlobalStyle`
   height: 100%;
   display: block;
   object-fit: cover;
+  object-position: center;
 }
 #file_img span{
   position: absolute;
