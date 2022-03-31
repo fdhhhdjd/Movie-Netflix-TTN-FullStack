@@ -9,6 +9,8 @@ import { HeaderStyle } from "../../Style/HeaderStyle/HeaderStyle";
 const Header = () => {
   const dispatch = useDispatch();
   const { profile, refreshTokens } = useSelector((state) => state.auth);
+  const { allFilmAdult ,updateAdult} = useSelector((state) => state.adult);
+  console.log(allFilmAdult.data,'phim');
   const [activeTab, setActiveTab] = useState("Home");
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -48,7 +50,10 @@ const Header = () => {
     setIsAdult("kid");
   }
 
-  console.log(profile.adult);
+  console.log(updateAdult.msg,'home');
+  console.log(profile,'profile');
+  
+  
 
   return (
     <>

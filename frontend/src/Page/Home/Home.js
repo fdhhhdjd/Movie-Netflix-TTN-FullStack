@@ -5,7 +5,6 @@ import { HomeStyle } from "../../Style/StyleHome/HomeStyle";
 import { GlobalState } from "../../Contexts/GlobalState";
 import {useSelector} from 'react-redux'
 const Home = () => {
-  const {state} = useContext(GlobalState);
   return (
     <>
       <HomeStyle />
