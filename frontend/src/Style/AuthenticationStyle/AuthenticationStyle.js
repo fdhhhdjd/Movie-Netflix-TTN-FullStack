@@ -54,8 +54,8 @@ export const AuthenticationStyle = createGlobalStyle`
     text-align: center;
   }
       form {
-        width: 30%;
-        max-height: 87vh;
+        width: 430px;
+        max-height: 700px;
         padding: 50px 60px;
         display: flex;
         flex-direction: column;
@@ -152,7 +152,7 @@ export const AuthenticationStyle = createGlobalStyle`
             }
 
             &:hover .gg-icon {
-              font-size: 1.5vw;
+              font-size: 2vw;
             }
 
             .gg-icon {

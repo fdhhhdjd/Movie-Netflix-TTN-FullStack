@@ -28,6 +28,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const [isLock, setIsLock] = useState(false);
   const [token, setToken] = useState("");
+  const [error, setError] = useState("");
   const { auth, loading } = useSelector((state) => state.auth);
   const Auth = auth;
   const { emailRequire, passwordRequire } = useRequireInput();
@@ -57,7 +58,7 @@ const Login = () => {
       toast.error(`${auth.msg}`);
       dispatch(clearErrors());
     }
-  }, [Auth?.success, dispatch]);
+  }, [Auth]);
 
   return (
     <>
@@ -79,12 +80,6 @@ const Login = () => {
                 {...register("email", emailRequire)}
                 name="email"
               />
-              {/* <InputField
-                inputType="email"
-                inputName="email"
-                useForm={register}
-                inputRequire={emailRequire}
-              /> */}
             </div>
             <span style={{ color: "red" }}>
               {errors.email?.type === "required" &&
@@ -142,7 +137,7 @@ const Login = () => {
                 render={(renderProps) => (
                   <div className="login-google" onClick={renderProps.onClick}>
                     <i className="fab fa-google gg-icon"></i>
-                    <a href="#">Login with Google</a>
+                    <a>Login with Google</a>
                   </div>
                 )}
               />
@@ -152,6 +147,7 @@ const Login = () => {
                 onChange={(token) => setToken(token)}
                 onExpired={(e) => setToken("")}
               />
+              {error && <span className="text-danger">{error}</span>}
               <span className="signup">
                 New to Netflix?
                 <a href="#">

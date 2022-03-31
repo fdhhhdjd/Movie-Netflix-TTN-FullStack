@@ -75,7 +75,7 @@ const Forget = () => {
             )}
 
             <span>
-              New to Netflix?{" "}
+              Want to login?{" "}
               <b
                 onClick={() => navigate("/login")}
                 style={{ cursor: "pointer" }}
