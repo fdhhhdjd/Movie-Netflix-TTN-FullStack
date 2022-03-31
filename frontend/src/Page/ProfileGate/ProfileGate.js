@@ -1,37 +1,33 @@
 import { EditOutlined } from "@material-ui/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { logo } from "../../imports/image";
-import { GetAllAdultInitiate } from "../../Redux/Action/ActionFilmadult";
+import { users } from "../../imports/import";
+import { UpdateAdultInitiate } from "../../Redux/Action/ActionFilmadult";
 import { ProfileGateStyle } from "../../Style/ProfileGateStyle/ProfileGateStyle";
-
 const ProfileGate = () => {
-  const users = [
-    {
-      name: "Kids",
-      avatar:
-        "https://occ-0-395-58.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABdm_-DEYu1y2T38LnXWSy-u7u24MbY361Zg2WziU3fOqSJy3w2j3-7E9f6FQVC_Rv3zj3xGZ1SQM7F6G8WjR4XFnHwDL.png?r=fcd",
-      adult: "kid",
-    },
-    {
-      name: "Adults",
-      avatar:
-        "https://occ-0-395-58.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABeUqbfriC_pGWtwTa1KOx-ZSiQYa7ltLkOuduGxY_GRRc41ugYJNGYHe4LNcmshST4qkRSENvcs2xFomPc0rtX8wq2NG.png?r=b97",
-      adult: "adult",
-    },
-  ];
-
   const [isEdit, setIsEdit] = useState(false);
-  const { refreshTokens } = useSelector((state) => state.auth);
+  const { refreshTokens, profile } = useSelector((state) => state.auth);
+  const { updateAdult } = useSelector((state) => state.adult);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleClick = (e) => {
     e.preventDefault();
     setIsEdit(!isEdit);
   };
-
   const handleGoToHome = (adult) => {
-    dispatch(GetAllAdultInitiate(adult, refreshTokens));
+    dispatch(UpdateAdultInitiate(adult, refreshTokens));
   };
+  useEffect(() => {
+    if (updateAdult.msg == "kid") {
+      navigate("/home");
+    } else if (updateAdult.msg == "adult") {
+      navigate("/home");
+    } else if (updateAdult.msg == "") {
+      navigate("/browse");
+    }
+  }, [updateAdult]);
   return (
     <>
       <ProfileGateStyle />

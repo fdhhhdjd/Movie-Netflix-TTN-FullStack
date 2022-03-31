@@ -1,13 +1,12 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RefreshTokenInitiate } from "../Redux/Action/ActionAuth";
-import UserApi from "./UserApi";
-
+import { AdultApi, UserApi } from "../imports/index";
 
 export const GlobalState = createContext();
 export const DataProvider = ({ children }) => {
   const [callback, setCallback] = useState(false);
-  const { auth, refreshTokens } = useSelector((state) => state.auth);
+  const { auth, refreshTokens, profile } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
     const firstLogin = localStorage.getItem("firstLogin");
@@ -24,7 +23,7 @@ export const DataProvider = ({ children }) => {
   const data = {
     callback: [callback, setCallback],
     UserApi: UserApi(refreshTokens),
-
+    AdultApi: AdultApi(refreshTokens),
   };
   return <GlobalState.Provider value={data}>{children}</GlobalState.Provider>;
 };

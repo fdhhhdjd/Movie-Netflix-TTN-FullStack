@@ -27,7 +27,7 @@ export { default as Profile } from "../Component/Profile/Profile";
 export { default as EditProfile } from "../Component/Profile/EditProfile";
 export { default as ChangePassword } from "../Component/Profile/ChangePassword";
 export { default as ManageProfile } from "../Page/ProfileGate/ManageProfile";
-//Admin
+//!Admin
 export { default as LoginAdmin } from "../Page/Admins/LoginAdmin";
 export { default as ForgetAdmin } from "../Component/Admins/ForgetAdmin";
 export { default as ResetAdmin } from "../Component/Admins/ResetAdmin";
@@ -42,7 +42,9 @@ export { default as Films } from "../Page/Admins/Films";
 export { default as NewFilm } from "../Component/Admins/NewFilm";
 export { default as Favourite } from "../Component/Admins/Favourite";
 export { Rating } from "../Component/Admins/Rating";
-
+//!file Small Context
+export { default as UserApi } from "../Contexts/UserApi";
+export { default as AdultApi } from "../Contexts/AdultApi";
 //!Custom Hook
 export { default as useDesUpImage } from "../CustomHook/useDesUpImage";
 export { default as InputField } from "../CustomHook/useInputField";

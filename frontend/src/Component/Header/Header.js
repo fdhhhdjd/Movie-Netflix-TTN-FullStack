@@ -4,10 +4,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { logo } from "../../imports/image";
 import { LogoutInitiate } from "../../Redux/Action/ActionAuth";
+import { UpdateAdultInitiate } from "../../Redux/Action/ActionFilmadult";
 import { HeaderStyle } from "../../Style/HeaderStyle/HeaderStyle";
 const Header = () => {
   const dispatch = useDispatch();
-  const { profile } = useSelector((state) => state.auth);
+  const { profile, refreshTokens } = useSelector((state) => state.auth);
   const [activeTab, setActiveTab] = useState("Home");
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,7 +23,8 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  const handleLogout = () => {
+  const handleLogout = (adult) => {
+    dispatch(UpdateAdultInitiate((adult = ""), refreshTokens));
     dispatch(LogoutInitiate());
     toast.success("Logout Success Thank You!");
   };

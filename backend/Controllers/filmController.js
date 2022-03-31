@@ -13,7 +13,7 @@ const filmCtrl = {
       return res.json({
         status: 200,
         success: true,
-        msg: `Selected: ${adult}`,
+        msg: adult,
       });
     } catch (error) {
       return res.json({
