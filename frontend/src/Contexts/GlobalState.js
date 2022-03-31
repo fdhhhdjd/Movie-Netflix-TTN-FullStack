@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RefreshTokenInitiate } from "../Redux/Action/ActionAuth";
 import UserApi from "./UserApi";
-
+import AdultFilmApi from './AdultFilmApi'
 
 export const GlobalState = createContext();
 export const DataProvider = ({ children }) => {
@@ -24,7 +24,7 @@ export const DataProvider = ({ children }) => {
   const data = {
     callback: [callback, setCallback],
     UserApi: UserApi(refreshTokens),
-
+    AdultFilmApi:AdultFilmApi(refreshTokens),
   };
   return <GlobalState.Provider value={data}>{children}</GlobalState.Provider>;
 };

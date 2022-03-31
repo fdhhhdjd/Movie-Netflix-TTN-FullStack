@@ -1,8 +1,11 @@
-import React from "react";
+import React,{useContext} from "react";
 import { Header } from "../../imports";
 import { Feature, List, MetaData } from "../../imports/index";
 import { HomeStyle } from "../../Style/StyleHome/HomeStyle";
+import { GlobalState } from "../../Contexts/GlobalState";
+import {useSelector} from 'react-redux'
 const Home = () => {
+  const {state} = useContext(GlobalState);
   return (
     <>
       <HomeStyle />

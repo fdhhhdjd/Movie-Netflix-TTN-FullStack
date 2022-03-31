@@ -1,10 +1,11 @@
 import { EditOutlined } from "@material-ui/icons";
-import { useState } from "react";
+import { useState,useContext,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logo } from "../../imports/image";
-import { GetAllAdultInitiate } from "../../Redux/Action/ActionFilmadult";
+import { SelectAgetInitiate} from "../../Redux/Action/ActionFilmadult";
 import { ProfileGateStyle } from "../../Style/ProfileGateStyle/ProfileGateStyle";
-
+import {GlobalState} from '../../Contexts/GlobalState'
+import{useNavigate} from 'react-router-dom'
 const ProfileGate = () => {
   const users = [
     {
@@ -23,6 +24,9 @@ const ProfileGate = () => {
 
   const [isEdit, setIsEdit] = useState(false);
   const { refreshTokens } = useSelector((state) => state.auth);
+  const { SelectFilm } = useSelector((state) => state.adult);
+  console.log(SelectFilm,'selectfilm')
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleClick = (e) => {
     e.preventDefault();
@@ -30,8 +34,18 @@ const ProfileGate = () => {
   };
 
   const handleGoToHome = (adult) => {
-    dispatch(GetAllAdultInitiate(adult, refreshTokens));
+    dispatch(SelectAgetInitiate(adult, refreshTokens));
+
   };
+  useEffect(() => {
+    if (SelectFilm.msg == "Selected: kid") {
+      navigate("/home");
+    } else if (SelectFilm.msg == "Selected: adult") {
+      navigate("/home");
+    } else if (SelectFilm.msg == "") {
+      navigate("/browse");
+    }
+  }, [SelectFilm]);
   return (
     <>
       <ProfileGateStyle />
