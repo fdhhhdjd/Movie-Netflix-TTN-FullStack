@@ -1,5 +1,5 @@
-import React,{useContext} from "react";
-import { Header } from "../../imports";
+import React from "react";
+import { Footer, Header } from "../../imports";
 import { Feature, List, MetaData } from "../../imports/index";
 import { HomeStyle } from "../../Style/StyleHome/HomeStyle";
 import { GlobalState } from "../../Contexts/GlobalState";
@@ -16,8 +16,7 @@ const Home = () => {
         <List />
         <List />
       </div>
-      {/* <Watch /> */}
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };
