@@ -123,6 +123,23 @@ export const HeaderStyle = createGlobalStyle`
           flex-direction: column;
   position: fixed;
 }
+
+.navbar .container .right .exit {
+  padding: 8px 30px;
+  font-size: 1vw;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  font-weight: 600;
+  color: #fff;
+  background: #e50914;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
 .nav-links{
   text-decoration: none;
   color: #fff
