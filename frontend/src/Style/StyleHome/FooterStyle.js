@@ -1,96 +1,67 @@
 import { createGlobalStyle } from "styled-components";
-import { background } from "../../imports/image";
 export const FooterStyle = createGlobalStyle`
-.register {
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 1) 100%
-      ),
-      url(${background});
-    background-size: cover;
-    position: relative;
-  
-    .top {
-      .wrapper {
-        padding: 20px 50px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-  
-        .logo {
-          height: 10rem;
-        }
-  
-        .loginButton {
-          background-color: red;
-          border: none;
-          color: white;
-          border-radius: 5px;
-          padding: 5px 15px;
-          font-size: 16px;
-          font-weight: 500;
-          cursor: pointer;
+  .footer-container {
+    padding: 1.5vw 15vw;
+    background: #141414;
+    color: #808080;
+    display: flex;
+    flex-direction: column;
+    margin-top: -3vw;
+
+    .icons {
+      font-size: 24px;
+      margin-left: 5px;
+      margin-bottom: 10px;
+      a {
+        color: #fff;
+        &:hover {
+          opacity: .8;
         }
       }
+      
+      i {
+        margin-right: 2.2vw;
+      }
     }
-  
-    .container {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
+
+    .content {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: white;
-  
-      h1 {
-        font-size: 50px;
-      }
-  
-      h2 {
-        margin: 20px;
-      }
-  
-      p {
-        font-size: 20px;
-      }
-  
-      .input {
-        width: 50%;
-        background-color: white;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-top: 20px;
-        height: 50px;
-        border-radius: 5px;
-  
-        input{
-            flex: 9;
-            height: 100%;
-            border: none;
-            padding: 0 10px;
-        }
-  
-        .registerButton{
-            flex: 3;
-            height: 100%;
-            background-color: red;
-            border: none;
-            color: white;
-            font-size: 22px;
-            cursor: pointer;
+      flex-wrap: wrap; 
+      flex-direction: row;
+      align-items: flex-start;
+
+      a {
+        flex-basis: 25%;
+        color: #808080;
+        text-decoration: none;
+        font-size: 13px;
+        margin: 8px 0;
+
+        &:hover {
+          text-decoration: underline;
         }
       }
     }
-    .marquee{
-      position:fixed;
+
+    .service-code {
+      margin-top: 30px;
+      font-size: 14px;
+      cursor: pointer;
+
+      a {
+        border: 1px solid #808080;
+        padding: 6px;
+
+        &:hover {
+          color: #fff;
+          border: 1px solid #fff;
+        }
+      }
+    }
+
+    .copyright {
+      font-size: 12px;
+      margin-top: 20px;
     }
   }
 `;

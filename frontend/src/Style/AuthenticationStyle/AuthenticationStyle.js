@@ -54,7 +54,7 @@ export const AuthenticationStyle = createGlobalStyle`
     text-align: center;
   }
       form {
-        width: 430px;
+        width: 400px;
         max-height: 700px;
         padding: 50px 60px;
         display: flex;

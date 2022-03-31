@@ -60,6 +60,7 @@ export const ForgetStyle = createGlobalStyle`
           padding-left: 10px;
           outline:none;
           border: none;
+          background: #333;
   
           &::placeholder {
             color: lightgray;
