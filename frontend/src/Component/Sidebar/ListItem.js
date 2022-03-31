@@ -28,7 +28,7 @@ export default function ListItem({ index }) {
 
         {isHovered && (
           <>
-            <video className="video" autoPlay progress controls>
+            <video className="video" autoPlay progress="true" controls>
               <source src={trailer} />
             </video>
             <div className="item-info">

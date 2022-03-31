@@ -1,15 +1,15 @@
 import axios from "axios";
 import * as types from "../ActionTypes";
-//?Select Adult
-export const SelectAgeStart = () => ({
-  type: types.SELECT_AGE_START,
+//?Update Adult
+export const UpdateAdultStart = () => ({
+  type: types.UPLOAD_ADULT_START,
 });
-export const SelectAgeSuccess = (token) => ({
-  type: types.SELECT_AGE_SUCCESS,
+export const UpdateAdultSuccess = (token) => ({
+  type: types.UPLOAD_ADULT_SUCCESS,
   payload: token,
 });
-export const SelectAgeFail = (error) => ({
-  type: types.SELECT_AGE_FAIL,
+export const UpdateAdultFail = (error) => ({
+  type: types.UPLOAD_ADULT_FAIL,
   payload: error,
 });
 //?Get all Adult
@@ -24,24 +24,23 @@ export const GetAllAdultFail = (error) => ({
   type: types.GET_ALL_ADULT_FAIL,
   payload: error,
 });
-//?Get all Adult
-export const GetAllChildrenStart = () => ({
-  type: types.GET_ALL_CHILDREN_START,
+//?Get all Kid
+export const GetAllKidStart = () => ({
+  type: types.GET_ALL_ADULT_START,
 });
-export const GetAllChildrenSuccess = (token) => ({
-  type: types.GET_ALL_CHILDREN_SUCCESS,
+export const GetAllKidSuccess = (token) => ({
+  type: types.GET_ALL_ADULT_SUCCESS,
   payload: token,
 });
-export const GetAllChildrenFail = (error) => ({
-  type: types.GET_ALL_CHILDREN_FAIL,
+export const GetAllKidFail = (error) => ({
+  type: types.GET_ALL_ADULT_FAIL,
   payload: error,
 });
-//! Get all Adult
-export const SelectAgetInitiate = (adult, refreshTokens) => {
+//!Update Adult
+export const UpdateAdultInitiate = (adult, refreshTokens) => {
   return async function (dispatch) {
     try {
-      dispatch(SelectAgeStart());
-
+      dispatch(UpdateAdultStart());
       const { data } = await axios.post(
         `/api/film/selectForAdultOrChild`,
         {
@@ -52,24 +51,20 @@ export const SelectAgetInitiate = (adult, refreshTokens) => {
         }
       );
 
-      dispatch(SelectAgeSuccess(data));
+      dispatch(UpdateAdultSuccess(data));
     } catch (error) {
-      dispatch(SelectAgeFail(error));
+      dispatch(UpdateAdultFail(error));
     }
   };
 };
 //! Get all Adult
-export const GetAllAdultInitiate = (token) => {
+export const GetAllAdultInitiate = (refreshTokens) => {
   return async function (dispatch) {
     try {
       dispatch(GetAllAdultStart());
-
-      const { data } = await axios.get(
-        `/api/film/adult`,
-        {
-          headers: { Authorization: token},
-        }
-      );
+      const { data } = await axios.get(`/api/film/adult`, {
+        headers: { Authorization: refreshTokens },
+      });
 
       dispatch(GetAllAdultSuccess(data));
     } catch (error) {
@@ -77,22 +72,18 @@ export const GetAllAdultInitiate = (token) => {
     }
   };
 };
-//! Get all Adult
-export const GetAllChildrenInitiate = (token) => {
+//! Get all Kid
+export const GetAllKidInitiate = (refreshTokens) => {
   return async function (dispatch) {
     try {
-      dispatch(GetAllChildrenStart());
+      dispatch(GetAllKidStart());
+      const { data } = await axios.get(`/api/film/kid`, {
+        headers: { Authorization: refreshTokens },
+      });
 
-      const { data } = await axios.get(
-        `/api/film/kid`,
-        {
-          headers: { Authorization: token },
-        }
-      );
-
-      dispatch(GetAllChildrenSuccess(data));
+      dispatch(GetAllKidSuccess(data));
     } catch (error) {
-      dispatch(GetAllChildrenFail(error));
+      dispatch(GetAllKidFail(error));
     }
   };
 };
