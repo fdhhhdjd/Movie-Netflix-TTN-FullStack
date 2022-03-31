@@ -41,7 +41,7 @@ const userCtrl = {
         return res.json({
           status: 400,
           success: false,
-          message:
+          msg:
             "Password must contain at least one number and one uppercase and lowercase and special letter, and at least 6 or more characters ",
         });
       }

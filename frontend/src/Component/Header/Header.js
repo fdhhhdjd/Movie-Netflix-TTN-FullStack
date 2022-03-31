@@ -12,6 +12,7 @@ const Header = () => {
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
+  const [isAdult, setIsAdult] = useState("adult");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +38,15 @@ const Header = () => {
       setActiveTab("Products");
     }
   }, [location]);
+
+  const handleExitKid = () => {
+    window.location.href = "/browse"
+  }
+  const handleKidMode = () => {
+    setIsAdult("kid");
+  }
+
+  console.log(profile.adult);
 
   return (
     <>
@@ -64,30 +74,48 @@ const Header = () => {
               onClick={() => navigate("/feedback")}
               className={` ${activeTab === "Feedback" ? "active" : ""}`}
             >
-              My List
+              Feedback
             </span>
           </div>
           <div className="right">
             <i className="icon fas fa-search" />
 
-            <span>{profile.fullname || profile.name}</span>
+            {isAdult === "adult" ? (
+              <>
+                <span>{profile.fullname || profile.name}</span>
 
-            <i className=" icon fas fa-bell" />
-            {profile.image && (
-              <img
-                src={profile.image.url}
-                alt=""
-                onClick={() => navigate("/profile")}
-              />
+                <i className=" icon fas fa-bell" />
+                {profile.image && (
+                  <img
+                    src={profile.image.url}
+                    alt=""
+                    onClick={() => navigate("/profile")}
+                  />
+                )}
+
+                <div className="profile">
+                  <i className="fas fa-caret-down"></i>
+                  <div className="options">
+                    <span>Setting</span>
+                    <span onClick={handleLogout}>Logout</span>
+                    <span onClick={handleKidMode}>Kid Mode</span>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                {profile.image && (
+                  <img
+                    src={profile.image.url}
+                    alt=""
+                    onClick={() => navigate("/profile")}
+                  />
+                )}
+                <button onClick={handleExitKid} className="exit">
+                  Exit Kid
+                </button>
+              </>
             )}
-
-            <div className="profile">
-              <i className="fas fa-caret-down"></i>
-              <div className="options">
-                <span>Setting</span>
-                <span onClick={handleLogout}>Logout</span>
-              </div>
-            </div>
           </div>
 
           <label htmlFor="nav-mobile-input" className="navbar_mobile">
