@@ -20,11 +20,11 @@ const ProfileGate = () => {
     dispatch(UpdateAdultInitiate(adult, refreshTokens));
   };
   useEffect(() => {
-    if (updateAdult.msg == "kid") {
+    if (updateAdult.msg === "kid") {
       navigate("/home");
-    } else if (updateAdult.msg == "adult") {
+    } else if (updateAdult.msg === "adult") {
       navigate("/home");
-    } else if (updateAdult.msg == "") {
+    } else if (updateAdult.msg === "") {
       navigate("/browse");
     }
   }, [updateAdult]);
