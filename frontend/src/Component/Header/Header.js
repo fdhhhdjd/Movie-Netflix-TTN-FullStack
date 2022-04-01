@@ -48,7 +48,7 @@ const Header = () => {
   const handleKidMode = (adult) => {
     setIsAdult("kid");
     dispatch(UpdateAdultInitiate((adult = "kid"), refreshTokens)); 
-    toast.success("Change Kid Success");
+    // toast.success("Change Kid Success");
     
     
   } 

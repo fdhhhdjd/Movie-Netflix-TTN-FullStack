@@ -1,11 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import title from "../../Image/title-test.png";
 import { FeatureStyle } from "../../Style/StyleHome/FeatureStyle";
-import title from "../../Image/title-test.png"
-import { useSelector } from "react-redux";
 const Feature = ({ type }) => {
-  // const { allFilmAdult ,updateAdult} = useSelector((state) => state.adult);
-  // console.log(allFilmAdult.data,'film');
   return (
     <>
       <FeatureStyle />
