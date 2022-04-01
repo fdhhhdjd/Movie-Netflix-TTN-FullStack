@@ -1,8 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import title from "../../Image/title-test.png";
 import { FeatureStyle } from "../../Style/StyleHome/FeatureStyle";
 const Feature = ({ type }) => {
+  const { profile } = useSelector((state) => state.auth);
   return (
     <>
       <FeatureStyle />
@@ -29,13 +31,12 @@ const Feature = ({ type }) => {
           </div>
         )}
         <img src="https://a-static.besthdwallpaper.com/spider-man-homecoming-phim-spiderman-va-ironman-trong-hanh-dong-hinh-nen-2560x1440-15603_51.jpg" />
-        <span className="age-tag">18+</span>
+        {profile.adult === "adult" && <span className="age-tag">18+</span>}
+        {profile.adult === "kid" && <span className="age-tag">16+</span>}
+
         <div className="fadeOut"></div>
         <div className="info">
-          <img
-            src={title}
-            alt=""
-          />
+          <img src={title} alt="" />
           <span className="desc">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
             adipisci repellendus eum quasi illo, velit numquam, maxime tempora

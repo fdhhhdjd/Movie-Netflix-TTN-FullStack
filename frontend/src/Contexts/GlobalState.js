@@ -7,6 +7,7 @@ export const GlobalState = createContext();
 export const DataProvider = ({ children }) => {
   const [callback, setCallback] = useState(false);
   const { auth, refreshTokens, profile } = useSelector((state) => state.auth);
+  const { updateAdult } = useSelector((state) => state.adult);
   const dispatch = useDispatch();
   useEffect(() => {
     const firstLogin = localStorage.getItem("firstLogin");
@@ -22,7 +23,7 @@ export const DataProvider = ({ children }) => {
   }, [callback]);
   const data = {
     callback: [callback, setCallback],
-    UserApi: UserApi(refreshTokens),
+    UserApi: UserApi(refreshTokens, updateAdult),
     AdultApi: AdultApi(refreshTokens, profile),
   };
   return <GlobalState.Provider value={data}>{children}</GlobalState.Provider>;

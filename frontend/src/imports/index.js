@@ -49,3 +49,13 @@ export { default as AdultApi } from "../Contexts/AdultApi";
 export { default as useDesUpImage } from "../CustomHook/useDesUpImage";
 export { default as InputField } from "../CustomHook/useInputField";
 export { default as useRequireInput } from "../CustomHook/useRequireInput";
+//!Private Route Admin
+export { default as LoadingToRedirectAdmin } from "../Page/PrivateRouterAdmin/LoadingToRedirectAdmin";
+export { default as LoadingToRedirectAuth } from "../Page/PrivateRouterAdmin/LoadingToRedirectAuth";
+export { default as PrivateRouterAdmin } from "../Page/PrivateRouterAdmin/PrivateRouterAdmin";
+export { default as PrivateRouterAuthAdmin } from "../Page/PrivateRouterAdmin/PrivateRouterAuthAdmin";
+//!Private Route User
+export { default as LoadingToRedirect } from "../Page/PrivateRouterUser/LoadingToRedirect";
+export { default as LoadingToRedirects } from "../Page/PrivateRouterUser/LoadingToRedirects";
+export { default as PrivateRouter } from "../Page/PrivateRouterUser/PrivateRouter";
+export { default as PrivateRouterAuth } from "../Page/PrivateRouterUser/PrivateRouterAuth";

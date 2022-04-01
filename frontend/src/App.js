@@ -23,8 +23,8 @@ import {
   Register,
   Reset,
   ResetAdmin,
-  UserRoute,
-  UserRoutes,
+  PrivateRouterAuth,
+  PrivateRouter,
 } from "./imports/index";
 import {
   Admin,
@@ -41,94 +41,43 @@ function App() {
         <ToastContainer position="top-center" />
         <Routes>
           {/* User */}
-          <Route
-            path="/login"
-            element={
-              <UserRoutes>
-                <Login />
-              </UserRoutes>
-            }
-          />
-          <Route
-            path="/customer/password/reset/:token"
-            element={
-              <UserRoutes>
-                <Reset />
-              </UserRoutes>
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <UserRoutes>
-                <Register />
-              </UserRoutes>
-            }
-          />
-          <Route
-            path="/forget"
-            element={
-              <UserRoutes>
-                <Forget />
-              </UserRoutes>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <UserRoutes>
-                <Welcome />
-              </UserRoutes>
-            }
-          />
-          <Route
-            path="/home"
-            element={
-              <UserRoute>
-                <Home />
-              </UserRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <UserRoute>
-                <Profile />
-              </UserRoute>
-            }
-          />
-          <Route
-            path="/profile/edit"
-            element={
-              <UserRoute>
-                <EditProfile />
-              </UserRoute>
-            }
-          />
-          <Route
-            path="/profile/ChangePassword"
-            element={
-              <UserRoute>
-                <ChangePassword />
-              </UserRoute>
-            }
-          />
-          <Route
-            path="/feedback"
-            element={
-              <UserRoute>
-                <FeedBack />
-              </UserRoute>
-            }
-          />
-          <Route
-            path="/browse"
-            element={
-              <UserRoute>
-                <ProfileGate />
-              </UserRoute>
-            }
-          />
+          <Route element={<PrivateRouterAuth />}>
+            <Route path="/login" element={<Login />} />
+          </Route>
+          <Route element={<PrivateRouterAuth />}>
+            <Route path="/customer/password/reset/:token" element={<Reset />} />
+          </Route>
+          <Route element={<PrivateRouterAuth />}>
+            <Route path="/signup" element={<Register />} />
+          </Route>
+          <Route element={<PrivateRouterAuth />}>
+            <Route path="/forget" element={<Forget />} />
+          </Route>
+          <Route element={<PrivateRouter />}>
+            <Route path="/" element={<Welcome />} />
+          </Route>
+          <Route element={<PrivateRouter />}>
+            <Route path="/browse" element={<ProfileGate />} />
+          </Route>
+          <Route element={<PrivateRouter />}>
+            <Route path="/home" element={<Home />} />
+          </Route>
+          <Route element={<PrivateRouter />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+          <Route element={<PrivateRouter />}>
+            <Route path="/profile/edit" element={<EditProfile />} />
+          </Route>
+          <Route element={<PrivateRouter />}>
+            <Route
+              path="/profile/ChangePassword"
+              element={<ChangePassword />}
+            />
+          </Route>
+          <Route element={<PrivateRouter />}>
+            <Route path="/feedback" element={<FeedBack />} />
+          </Route>
+
           {/* ADMIN */}
           <Route path="/loginadmin" element={<LoginAdmin />} />
           <Route path="/admin" element={<Admin />} />

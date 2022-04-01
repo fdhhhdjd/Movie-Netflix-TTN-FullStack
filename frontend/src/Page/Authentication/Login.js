@@ -3,7 +3,7 @@ import GoogleLogin from "react-google-login";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import swal from "sweetalert";
 import { logo } from "../../imports/image";
@@ -28,9 +28,11 @@ const Login = () => {
   const dispatch = useDispatch();
   const [isLock, setIsLock] = useState(false);
   const [token, setToken] = useState("");
-  const [error, setError] = useState("");
   const { auth, loading } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const location = useLocation();
   const Auth = auth;
+  const grecaptchaObject = window.grecaptcha;
   const { emailRequire, passwordLoginRequire } = useRequireInput();
   const HandleGoogle = (response) => {
     dispatch(loginGoogleInitiate(response));
@@ -49,19 +51,20 @@ const Login = () => {
     setIsLock(!isLock);
   };
   useEffect(() => {
-    if (auth.success === true) {
-      window.location.href = "/browse";
+    if (auth.status === 200) {
+      if (location.state?.from) {
+        navigate(location.state.from);
+        window.location.reload();
+      } else {
+        window.location.href = "/";
+      }
       localStorage.setItem("firstLogin", true);
-      dispatch(clearErrors());
     }
     if (auth.success === false) {
       toast.error(`${auth.msg}`);
       dispatch(clearErrors());
     }
   }, [Auth]);
-
-  console.log(errors);
-
   return (
     <>
       <AuthenticationStyle />
@@ -148,8 +151,11 @@ const Login = () => {
                 sitekey="6LfVSXwcAAAAAF84Eh53ZDlQX-hyJeh_jrEEY3S5"
                 onChange={(token) => setToken(token)}
                 onExpired={(e) => setToken("")}
+                theme="dark"
+                grecaptcha={grecaptchaObject}
+                size="normal"
               />
-              {error && <span className="text-danger">{error}</span>}
+              <br />
               <span className="signup">
                 New to Netflix?
                 <Link to="/signup">Sign up now</Link>
@@ -157,7 +163,9 @@ const Login = () => {
               <span className="learn-more">
                 This page is protected by Google reCAPTCHA to ensure you're not
                 a bot.
-                <a href="#">Learn more</a>
+                <a href="https://profile-forme.surge.sh/" target="_blank">
+                  Learn more
+                </a>
               </span>
             </footer>
           </form>
