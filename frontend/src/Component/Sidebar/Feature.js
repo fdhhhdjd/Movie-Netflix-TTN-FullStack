@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import title from "../../Image/title-test.png";
 import { FeatureStyle } from "../../Style/StyleHome/FeatureStyle";
-import title from "../../Image/title-test.png"
 const Feature = ({ type }) => {
   return (
     <>

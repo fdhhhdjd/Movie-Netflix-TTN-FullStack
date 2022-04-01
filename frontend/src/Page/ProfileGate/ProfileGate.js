@@ -28,6 +28,7 @@ const ProfileGate = () => {
       navigate("/browse");
     }
   }, [updateAdult]);
+  console.log(profile.adult,'browse');
   return (
     <>
       <ProfileGateStyle />
