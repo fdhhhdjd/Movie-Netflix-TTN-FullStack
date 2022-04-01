@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { logo } from "../../imports/image";
 import { LogoutInitiate } from "../../Redux/Action/ActionAuth";
 import { UpdateAdultInitiate } from "../../Redux/Action/ActionFilmadult";
+import { GetAllKidInitiate } from "../../Redux/Action/ActionFilmadult";
 import { HeaderStyle } from "../../Style/HeaderStyle/HeaderStyle";
 const Header = () => {
   const dispatch = useDispatch();
@@ -48,9 +49,7 @@ const Header = () => {
   const handleKidMode = (adult) => {
     setIsAdult("kid");
     dispatch(UpdateAdultInitiate((adult = "kid"), refreshTokens)); 
-    // toast.success("Change Kid Success");
-    
-    
+    toast.success("Change Kid Success");
   } 
   console.log(allFilmAdult.data,'film at home')
   console.log(isAdult,'isAdult');

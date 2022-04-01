@@ -7,7 +7,7 @@ import {
   PlayCircleFilledWhiteRounded 
 } from "@material-ui/icons";
 import { ListItemStyle } from "../../Style/StyleHome/ListItemStyle";
-export default function ListItem({ index,image }) {
+export default function ListItem({ index }) {
   const [isHovered, setIsHovered] = useState(false);
   const trailer = video;
   return (
@@ -22,7 +22,7 @@ export default function ListItem({ index,image }) {
         onMouseLeave={() => setIsHovered(false)}
       >
         <img
-          src={image}
+          src="https://static2.vieon.vn/vieplay-image/carousel_web_v4_ntc/2021/01/20/0kenhuxj_1920x1080-carousel-hauduemattroi5da40f4828611e6f2dfb3d3722723cc1_1920_1080.webp"
           alt=""
         />
 

@@ -1,9 +1,10 @@
+import { useRef, useState } from "react";
+import { ListItem } from "../../imports/index";
 import {
   ArrowBackIosOutlined,
-  ArrowForwardIosOutlined
+  ArrowForwardIosOutlined,
 } from "@material-ui/icons";
-import { useRef, useState } from "react";
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux'
 import { ListStyle } from "../../Style/StyleHome/listStyle";
 const List = () => {
   const [slideNumber, setSlideNumber] = useState(0);

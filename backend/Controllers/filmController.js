@@ -27,10 +27,7 @@ const filmCtrl = {
   //Lấy ra danh sách phim dành cho người lớn
   async getFilmForAdult(req, res) {
     try {
-      const adultFilms = await Films.find({ ageLimit: { $gte: 16 } })
-      .populate("director")
-      .populate("category")
-      .populate("seriesFilm");
+      const adultFilms = await Films.find({ ageLimit: { $gte: 16 } });
       return res.json({
         status: 200,
         success: true,
@@ -49,10 +46,7 @@ const filmCtrl = {
   //Lấy ra danh sách phim dành cho trẻ em
   async getFilmForKid(req, res) {
     try {
-      const kidFilms = await Films.find({ ageLimit: { $lt: 16 } })
-      .populate("director")
-      .populate("category")
-      .populate("seriesFilm");
+      const kidFilms = await Films.find({ ageLimit: { $lt: 16 } });
       return res.json({
         status: 200,
         success: true,
