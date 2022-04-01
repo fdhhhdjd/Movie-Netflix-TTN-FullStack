@@ -2,18 +2,23 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetAllAdultInitiate,
-  GetAllKidInitiate,
+  GetAllKidInitiate
 } from "../Redux/Action/ActionFilmadult";
 const AdultApi = (refreshTokens) => {
   const dispatch = useDispatch();
   const { updateAdult } = useSelector((state) => state.adult);
+  const { profile } = useSelector((state) => state.auth);
   useEffect(() => {
-    if (updateAdult.msg == "kid") {
+    if (updateAdult.msg == "kid"  ) {
       dispatch(GetAllKidInitiate(refreshTokens));
     } else if (updateAdult.msg == "adult") {
       dispatch(GetAllAdultInitiate(refreshTokens));
+    } else if (updateAdult.msg == "" || profile.adult=="kid"){
+      dispatch(GetAllKidInitiate(refreshTokens));
+    } else if (updateAdult.msg == ""|| profile.adult=="adult" ){
+      dispatch(GetAllAdultInitiate(refreshTokens));
     }
-  }, [updateAdult]);
+  }, [updateAdult,profile]);
 
   return {};
 };

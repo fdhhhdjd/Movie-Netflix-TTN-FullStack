@@ -4,10 +4,12 @@ import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
 } from "@material-ui/icons";
+import {useSelector} from 'react-redux'
 import { ListStyle } from "../../Style/StyleHome/listStyle";
 const List = () => {
   const [slideNumber, setSlideNumber] = useState(0);
-
+  const { allFilmAdult ,updateAdult} = useSelector((state) => state.adult);
+  const {profile} = useSelector((state) => state.auth)
   const listRef = useRef();
 
   const handleClick = (direction) => {
@@ -33,8 +35,13 @@ const List = () => {
             style={{ display: slideNumber === 0 && "none" }}
           />
           <div className="film-container" ref={listRef}>
-            <ListItem index={0} />
-            <ListItem index={1} />
+            {/* {allFilmAdult.data.map((film)=>{
+              return(
+                <ListItem index={0} image={film.image_film.url} ageLimit={film.ageLimit} />
+              )
+            })} */}
+           
+            {/* <ListItem index={1} />
             <ListItem index={2} />
             <ListItem index={3} />
             <ListItem index={4} />
@@ -42,7 +49,7 @@ const List = () => {
             <ListItem index={6} />
             <ListItem index={7} />
             <ListItem index={8} />
-            <ListItem index={9} />
+            <ListItem index={9} /> */}
           </div>
           <ArrowForwardIosOutlined
             className="slider-arrow right"

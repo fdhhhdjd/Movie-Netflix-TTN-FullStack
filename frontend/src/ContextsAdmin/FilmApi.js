@@ -13,12 +13,11 @@ const FilmApi = (tokens,callback) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (tokens) {
-      dispatch(GetAllCategoryInitiate(tokens));
-      dispatch(GetAllSeriesFilmInitiate(tokens));
-      dispatch(GetAllFilmInitiate(tokens));
-      dispatch(GetAllRateInitiate(tokens));
-      dispatch(GetAllFavouriteInitiate(tokens));
-      
+      // dispatch(GetAllCategoryInitiate(tokens));
+      // dispatch(GetAllSeriesFilmInitiate(tokens));
+      // dispatch(GetAllFilmInitiate(tokens));
+      // dispatch(GetAllRateInitiate(tokens));
+      // dispatch(GetAllFavouriteInitiate(tokens));
     }
   }, [tokens, callback]);
   return {
