@@ -13,6 +13,7 @@ import {
   Forget,
   ForgetAdmin,
   Loading,
+  Modal,
   NewDirector,
   NewFilm,
   NewUser,
@@ -149,6 +150,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
+      {/* <Modal/> */}
     </>
   );
 }
