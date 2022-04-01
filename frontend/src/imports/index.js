@@ -12,8 +12,6 @@ export { default as HeaderWelcome } from "../Component/Welcome_page/HeaderWelcom
 export { default as TabComponent } from "../Component/Welcome_page/TabComponent";
 export { default as Tab } from "../Component/Welcome_page/Tab";
 export { default as Header } from "../Component/Header/Header";
-export { default as UserRoute } from "../Page/UserRoute/UserRoute";
-export { default as UserRoutes } from "../Page/UserRoute/UserRoutes";
 export { default as Sidebar } from "../Component/Sidebar/Sidebar";
 export { default as Feature } from "../Component/Sidebar/Feature";
 export { default as List } from "../Component/Sidebar/List";

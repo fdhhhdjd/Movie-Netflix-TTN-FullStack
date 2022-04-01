@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logo } from "../../imports/image";
 import { users } from "../../imports/import";
+import { MetaData } from "../../imports/index";
 import { UpdateAdultInitiate } from "../../Redux/Action/ActionFilmadult";
 import { ProfileGateStyle } from "../../Style/ProfileGateStyle/ProfileGateStyle";
 const ProfileGate = () => {
@@ -31,6 +32,7 @@ const ProfileGate = () => {
   return (
     <>
       <ProfileGateStyle />
+      <MetaData title="Choose Adult" />
       <div className="container">
         <img src={logo} className="logo" alt="" />
         <div className="info">
