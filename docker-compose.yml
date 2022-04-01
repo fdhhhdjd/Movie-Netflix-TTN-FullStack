@@ -4,7 +4,7 @@ services:
   netflix-movie-backend:
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     container_name: netflix-movie-backend-ct
     env_file:
           - .env
@@ -14,7 +14,7 @@ services:
   # netflix-movie-frontend:
   #   build:
   #     context: ./frontend
-  #     dockerfile: ./frontend/dockerfile
+  #     dockerfile: ./frontend/Dockerfile
   #   container_name: netflix-movie-frontend-ct
   #   ports:
   #     - '3001:3000'
