@@ -171,5 +171,3 @@ Web Online: https://movienetflixttn.herokuapp.com/
 \* Feedback
 
 - Khách hàng gửi feedback : post --> http://localhost:5000/api/feedback/send
-
-50k
