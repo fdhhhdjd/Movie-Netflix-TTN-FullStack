@@ -2,21 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import title from "../../Image/title-test.png";
 import { FeatureStyle } from "../../Style/StyleHome/FeatureStyle";
-import { Modal } from "../../imports/index";
-import { useState } from "react";
-
 const Feature = ({ type }) => {
-  const [isOpenModal, setOpenModal] = useState(false);
-
-  const handleMoreInfo = () => {
-    setOpenModal(true);
-  };
-
   return (
     <>
       <FeatureStyle />
       <div className="featured">
-        {isOpenModal && <Modal />}
         {type && (
           <div className="category">
             <span>{type === "movie" ? "Movies" : "Series"}</span>
@@ -42,7 +32,10 @@ const Feature = ({ type }) => {
         <span className="age-tag">18+</span>
         <div className="fadeOut"></div>
         <div className="info">
-          <img src={title} alt="" />
+          <img
+            src={title}
+            alt=""
+          />
           <span className="desc">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
             adipisci repellendus eum quasi illo, velit numquam, maxime tempora
@@ -57,13 +50,13 @@ const Feature = ({ type }) => {
                 <span>Play</span>
               </button>
             </Link>
-            <div className="xin">
-              <button className="more" onClick={handleMoreInfo}>
+            <Link to="/url" className="xin">
+              <button className="more">
                 <i className="fas fa-info-circle" />
                 &nbsp;
                 <span>More Info</span>
               </button>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

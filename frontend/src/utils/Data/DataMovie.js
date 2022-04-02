@@ -1,17 +1,4 @@
-export const mainMovie = {
-  backgroundImg:
-    "https://a-static.besthdwallpaper.com/spider-man-homecoming-phim-spiderman-va-ironman-trong-hanh-dong-hinh-nen-2560x1440-15603_51.jpg",
-  title: "Spiderman",
-  rate: 9.7,
-  year_production: 2020,
-  type: "movie",
-  runtime: 800,
-  desc: "A budding superhero struggles to get the world — and his fellow high schoolers — to take him seriously as he goes up against the nefarious Vulture.",
-  casts: ["Tome Holland", "Michael Keaton", "Rober Downey Jr."],
-  genres: ["Sci-fi Movies", "US Movies", "Action & Adventure"]
-};
-
-export const recMovies = [
+export const moviesModal = [
   {
     img: "https://a-static.besthdwallpaper.com/spider-man-homecoming-phim-spiderman-va-ironman-trong-hanh-dong-hinh-nen-2560x1440-15603_51.jpg",
     ageLimit: 18,
