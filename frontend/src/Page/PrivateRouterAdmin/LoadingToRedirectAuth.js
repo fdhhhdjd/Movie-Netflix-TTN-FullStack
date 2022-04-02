@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Loading } from "../../imports/index";
-const LoadingToRedirect = (children) => {
+const LoadingToRedirect = () => {
   const [count, setCount] = useState(2);
-  console.log(children, "children");
   const navigate = useNavigate();
-
+  const location = useLocation();
   useEffect(() => {
     const interval = setInterval(() => {
       setCount((currentCount) => --currentCount);
     }, 1000);
-
-    count === 0 && navigate("/home");
-    count === 0 && toast.info("Please Logout when you return to the site 🤔");
+    count === 0 &&
+      navigate("/homeAdmin", { replace: true, state: { from: location } });
+    count === 0 && toast.info("Please Logout Account Manager Admin 🤔");
     return () => clearInterval(interval);
   }, [count, navigate]);
 
