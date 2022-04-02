@@ -92,6 +92,8 @@ export const ListItemStyle = createGlobalStyle`
       color: #ccc;
       font-weight: 600;
       margin-bottom: 15px;
+      display: flex;
+     
     }
   }
 }

@@ -77,7 +77,6 @@ function App() {
           <Route element={<PrivateRouter />}>
             <Route path="/feedback" element={<FeedBack />} />
           </Route>
-
           {/* ADMIN */}
           <Route path="/loginadmin" element={<LoginAdmin />} />
           <Route path="/admin" element={<Admin />} />

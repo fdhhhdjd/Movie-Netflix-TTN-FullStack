@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logo } from "../../imports/image";
-import { users } from "../../imports/import";
+import { users } from "../../utils/Data/DataGate";
 import { MetaData } from "../../imports/index";
 import { UpdateAdultInitiate } from "../../Redux/Action/ActionFilmadult";
 import { ProfileGateStyle } from "../../Style/ProfileGateStyle/ProfileGateStyle";
@@ -67,7 +67,7 @@ const ProfileGate = () => {
               Done
             </a>
           ) : (
-            <a href="/" onClick={handleClick}>
+            <a href="" onClick={handleClick}>
               Manage Profile
             </a>
           )}
