@@ -90,6 +90,14 @@ function App() {
             }
           />
           <Route
+            path="/home/:id"
+            element={
+              <UserRoute>
+                <Home />
+              </UserRoute>
+            }
+          />
+          <Route
             path="/profile"
             element={
               <UserRoute>
