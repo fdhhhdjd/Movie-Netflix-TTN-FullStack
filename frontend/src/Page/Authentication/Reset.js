@@ -74,6 +74,7 @@ const Reset = () => {
               />
 
               <button className="loginButton">Reset</button>
+              <br />
               <footer>
                 <span className="signup">
                   Wanna login ? &nbsp;

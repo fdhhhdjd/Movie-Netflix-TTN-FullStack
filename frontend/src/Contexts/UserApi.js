@@ -1,16 +1,13 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { ProfileInitiate, TokenInitiate } from "../Redux/Action/ActionAuth";
-import { toast } from "react-toastify";
-import swal from "sweetalert";
-const UserApi = (token) => {
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { ProfileInitiate } from "../Redux/Action/ActionAuth";
+const UserApi = (token, updateAdult) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (token && token.length > 0) {
       dispatch(ProfileInitiate(token));
     }
-  }, [token]);
+  }, [token, updateAdult]);
 
   return {};
 };

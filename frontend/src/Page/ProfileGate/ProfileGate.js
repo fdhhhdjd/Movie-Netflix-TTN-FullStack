@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logo } from "../../imports/image";
 import { users } from "../../imports/import";
+import { MetaData } from "../../imports/index";
 import { UpdateAdultInitiate } from "../../Redux/Action/ActionFilmadult";
 import { ProfileGateStyle } from "../../Style/ProfileGateStyle/ProfileGateStyle";
 const ProfileGate = () => {
@@ -20,18 +21,18 @@ const ProfileGate = () => {
     dispatch(UpdateAdultInitiate(adult, refreshTokens));
   };
   useEffect(() => {
-    if (updateAdult.msg == "kid") {
+    if (updateAdult.msg === "kid") {
       navigate("/home");
-    } else if (updateAdult.msg == "adult") {
+    } else if (updateAdult.msg === "adult") {
       navigate("/home");
-    } else if (updateAdult.msg == "") {
+    } else if (updateAdult.msg === "") {
       navigate("/browse");
     }
   }, [updateAdult]);
-  console.log(profile.adult,'browse');
   return (
     <>
       <ProfileGateStyle />
+      <MetaData title="Choose Adult" />
       <div className="container">
         <img src={logo} className="logo" alt="" />
         <div className="info">

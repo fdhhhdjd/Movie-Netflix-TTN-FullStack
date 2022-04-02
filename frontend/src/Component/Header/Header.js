@@ -5,12 +5,11 @@ import { toast } from "react-toastify";
 import { logo } from "../../imports/image";
 import { LogoutInitiate } from "../../Redux/Action/ActionAuth";
 import { UpdateAdultInitiate } from "../../Redux/Action/ActionFilmadult";
-import { GetAllKidInitiate } from "../../Redux/Action/ActionFilmadult";
 import { HeaderStyle } from "../../Style/HeaderStyle/HeaderStyle";
 const Header = () => {
   const dispatch = useDispatch();
   const { profile, refreshTokens } = useSelector((state) => state.auth);
-  const { allFilmAdult ,updateAdult} = useSelector((state) => state.adult);
+
   const [activeTab, setActiveTab] = useState("Home");
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -44,19 +43,14 @@ const Header = () => {
   }, [location]);
 
   const handleExitKid = () => {
-    window.location.href = "/browse"
-  }
+    window.location.href = "/browse";
+  };
   const handleKidMode = (adult) => {
     setIsAdult("kid");
-    dispatch(UpdateAdultInitiate((adult = "kid"), refreshTokens)); 
+    dispatch(UpdateAdultInitiate((adult = "kid"), refreshTokens));
     toast.success("Change Kid Success");
-  } 
-  console.log(allFilmAdult.data,'film at home')
-  console.log(isAdult,'isAdult');
-  console.log(updateAdult.msg,'home');
-  console.log(profile.adult,'profile');
-  
-  
+  };
+
 
   return (
     <>
