@@ -9,7 +9,7 @@ import { HeaderStyle } from "../../Style/HeaderStyle/HeaderStyle";
 const Header = () => {
   const dispatch = useDispatch();
   const { profile, refreshTokens } = useSelector((state) => state.auth);
-  const { updateAdult } = useSelector((state) => state.adult);
+
   const [activeTab, setActiveTab] = useState("Home");
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -50,6 +50,7 @@ const Header = () => {
     dispatch(UpdateAdultInitiate((adult = "kid"), refreshTokens));
     toast.success("Change Kid Success");
   };
+
 
   return (
     <>

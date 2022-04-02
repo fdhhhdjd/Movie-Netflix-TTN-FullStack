@@ -3,12 +3,16 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import title from "../../Image/title-test.png";
 import { FeatureStyle } from "../../Style/StyleHome/FeatureStyle";
+import { Modal } from "../../imports/index";
+import { useState } from "react";
+
 const Feature = ({ type }) => {
-  const { profile } = useSelector((state) => state.auth);
+
   return (
     <>
       <FeatureStyle />
       <div className="featured">
+        {isOpenModal && <Modal />}
         {type && (
           <div className="category">
             <span>{type === "movie" ? "Movies" : "Series"}</span>
@@ -51,13 +55,13 @@ const Feature = ({ type }) => {
                 <span>Play</span>
               </button>
             </Link>
-            <Link to="/url" className="xin">
-              <button className="more">
+            <div className="xin">
+              <button className="more" onClick={handleMoreInfo}>
                 <i className="fas fa-info-circle" />
                 &nbsp;
                 <span>More Info</span>
               </button>
-            </Link>
+            </div>
           </div>
         </div>
       </div>
