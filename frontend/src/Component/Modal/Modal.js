@@ -17,24 +17,27 @@ import {
   PlayArrowRounded,
 } from "@material-ui/icons";
 
-const Modal = () => {
-  console.log(mainMovie);
-  function countSeason(n) {
+const Modal = ({ setIsOpenModal }) => {
+  const countSeason = (n) => {
     if (n > 1) {
       return `${n} seasons`;
     } else {
       return "1 season";
     }
-  }
+  };
 
-  function countRuntime(n) {
+  const countRuntime = (n) => {
     return `${Math.floor(n / 60)}h ${n % 60}m`;
-  }
+  };
+
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+  };
   return (
     <>
       <ModalStyle />
       <div className="modal-container">
-        <div className="cancel-btn">
+        <div className="cancel-btn" onClick={handleCloseModal}>
           <Close sx={{ fontSize: "40px" }} />
         </div>
 

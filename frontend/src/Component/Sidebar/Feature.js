@@ -6,18 +6,17 @@ import { FeatureStyle } from "../../Style/StyleHome/FeatureStyle";
 import { Modal } from "../../imports/index";
 import { useState } from "react";
 
-const Feature = ({ type }) => {
-  const [isOpenModal, setOpenModal] = useState(false);
+const Feature = ({ type, setIsOpenModal }) => {
   const { refreshTokens, profile } = useSelector((state) => state.auth);
 
   const handleMoreInfo = () => {
-    setOpenModal(true);
-  }; 
+    setIsOpenModal(true);
+  };
+
   return (
     <>
       <FeatureStyle />
       <div className="featured">
-        {isOpenModal && <Modal />}
         {type && (
           <div className="category">
             <span>{type === "movie" ? "Movies" : "Series"}</span>

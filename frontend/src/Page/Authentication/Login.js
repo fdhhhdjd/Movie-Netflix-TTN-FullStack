@@ -7,7 +7,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import swal from "sweetalert";
 import { logo } from "../../imports/image";
-import { MetaData, useRequireInput } from "../../imports/index";
+import {
+  MetaData,
+  useRequireInput,
+  useTogglePassword,
+} from "../../imports/index";
 import {
   clearErrors,
   loginGoogleInitiate,
@@ -26,7 +30,6 @@ const Login = () => {
   const reCaptcha = useRef();
   passwords.current = watch("password");
   const dispatch = useDispatch();
-  const [isLock, setIsLock] = useState(false);
   const [token, setToken] = useState("");
   const { auth, loading } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -34,6 +37,7 @@ const Login = () => {
   const Auth = auth;
   const grecaptchaObject = window.grecaptcha;
   const { emailRequire, passwordLoginRequire } = useRequireInput();
+  const { handleIsLock, isLock } = useTogglePassword();
   const HandleGoogle = (response) => {
     dispatch(loginGoogleInitiate(response));
   };
@@ -47,9 +51,7 @@ const Login = () => {
     const { email, password } = data;
     dispatch(loginInitiate(email, password));
   };
-  const handleIsLock = () => {
-    setIsLock(!isLock);
-  };
+
   useEffect(() => {
     if (auth.status === 200) {
       if (location.state?.from) {

@@ -140,6 +140,8 @@ export const AuthenticationStyle = createGlobalStyle`
         footer {
           display: flex;
           flex-direction: column;
+          margin-top: 1vh;
+          line-height: 1.5;
           .login-google {
             display: flex;
             align-items: center;
