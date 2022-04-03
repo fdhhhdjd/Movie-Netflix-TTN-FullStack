@@ -8,7 +8,11 @@ import { toast } from "react-toastify";
 import swal from "sweetalert";
 import { GlobalState } from "../../Contexts/GlobalState";
 import { logo } from "../../imports/image";
-import { MetaData, useRequireInput } from "../../imports/index";
+import {
+  MetaData,
+  useRequireInput,
+  useTogglePassword,
+} from "../../imports/index";
 import {
   clearErrors,
   loginGoogleInitiate,
@@ -36,7 +40,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const state = useContext(GlobalState);
   const [rememberer, setRememberMe] = state.remember;
-  const [isLock, setIsLock] = useState(false);
   const [token, setToken] = useState("");
   const { auth, loading } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -44,6 +47,7 @@ const Login = () => {
   const Auth = auth;
   const grecaptchaObject = window.grecaptcha;
   const { emailRequire, passwordLoginRequire } = useRequireInput();
+  const { handleIsLock, isLock } = useTogglePassword();
   const HandleGoogle = (response) => {
     dispatch(loginGoogleInitiate(response));
   };
@@ -62,9 +66,9 @@ const Login = () => {
     setRememberMe(!rememberer);
   };
 
-  const handleIsLock = () => {
-    setIsLock(!isLock);
-  };
+  // const handleIsLock = () => {
+  //   setIsLock(!isLock);
+  // };
 
   useEffect(() => {
     if (auth.status === 200) {

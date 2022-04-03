@@ -1,11 +1,11 @@
-import { useRef, useState } from "react";
-import { ListItem } from "../../imports/index";
+import { useState, useRef, Fragment } from "react";
 import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
 } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import { ListStyle } from "../../Style/StyleHome/listStyle";
+import { ListItem } from "../../imports/index";
 const List = () => {
   const [slideNumber, setSlideNumber] = useState(0);
   const { allFilmAdult, updateAdult } = useSelector((state) => state.adult);
@@ -35,11 +35,20 @@ const List = () => {
             style={{ display: slideNumber === 0 && "none" }}
           />
           <div className="film-container" ref={listRef}>
-            {/* {allFilmAdult.data.map((film)=>{
-              return(
-                <ListItem index={0} image={film.image_film.url} ageLimit={film.ageLimit} />
-              )
-            })} */}
+            {allFilmAdult.data.map((film, index) => {
+              return (
+                <Fragment key={film._id}>
+                  <ListItem
+                    image={film.image_film.url}
+                    ageLimit={film.ageLimit}
+                    filmLength={film.filmLength}
+                    category={film.category}
+                    series={film.seriesFilm}
+                    id={film._id}
+                  />
+                </Fragment>
+              );
+            })}
 
             <ListItem index={1} />
             <ListItem index={2} />

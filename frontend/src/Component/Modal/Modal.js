@@ -1,74 +1,179 @@
-import { Add, PlayArrow, ThumbUpOutlined, Close } from "@material-ui/icons";
-import title from "../../Image/title-test.png";
+// import {
+//   Add,
+//   PlayArrow,
+//   ThumbUpOutlined,
+//   Close,
+//   ListAlt,
+//   AddCircleOutline,
+// } from "@material-ui/icons";
 import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
+import { mainMovie, recMovies } from "../../imports/import";
+import { Recommend } from "../../imports/index";
+import {
+  Close,
+  ThumbDownAltOutlined,
+  Add,
+  ThumbUpOutlined,
+  PlayArrowRounded,
+} from "@material-ui/icons";
 
-const Modal = () => {
+const Modal = ({ setIsOpenModal }) => {
+  const countSeason = (n) => {
+    if (n > 1) {
+      return `${n} seasons`;
+    } else {
+      return "1 season";
+    }
+  };
+
+  const countRuntime = (n) => {
+    return `${Math.floor(n / 60)}h ${n % 60}m`;
+  };
+
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+  };
   return (
     <>
       <ModalStyle />
       <div className="modal-container">
-        <div className="close-btn">
-          <Close></Close>
+        <div className="cancel-btn" onClick={handleCloseModal}>
+          <Close sx={{ fontSize: "40px" }} />
         </div>
-        <div className="banner">
-          <img
-            className="banner-img"
-            src="https://a-static.besthdwallpaper.com/spider-man-homecoming-phim-spiderman-va-ironman-trong-hanh-dong-hinh-nen-2560x1440-15603_51.jpg"
-          />
-          {/* <div className="fadeout"></div> */}
-          <div className="info">
-            <img src={title} alt="" className="banner-title" />
-            <div className="icons">
-              <button>
-                <PlayArrow />
-                <span> Play</span>
+
+        <div
+          className="modal-backdrop"
+          style={{
+            backgroundImage: `url(
+                        ${mainMovie.backgroundImg}
+                    )`,
+          }}
+        >
+          <div className="modal-name-icons">
+            <h1>{mainMovie.title}</h1>
+            <div className="modal-btn-icons">
+              <button className="modal-playbtn">
+                <PlayArrowRounded
+                  sx={{ marginRight: "10px", fontSize: "1.8em" }}
+                />
+                <span>Play</span>
               </button>
-              <Add />
-              <ThumbUpOutlined />
+
+              <Add sx={{ fontSize: "2.5vw" }} className="modal-icon" />
+              <ThumbUpOutlined
+                sx={{ fontSize: "2.5vw" }}
+                className="modal-icon"
+              />
+              <ThumbDownAltOutlined
+                sx={{ fontSize: "2.5vw" }}
+                className="modal-icon"
+              />
             </div>
-          </div>
-        </div>
-        <div className="info-top">
-          <div className="info-top-left">
-            <span className="rate">8.7 Rate</span>
-            <span>2020</span>
-            <span>1 hour 14 mins</span>
-            <span>HD</span>4
-            <span className="desc">
-              Peter Parker is unmasked and no longer able to separate his normal
-              life from the high-stakes of being a super-hero. When he asks for
-              help from Doctor Strange the stakes become even more dangerous,
-              forcing him to discover what it truly means to be Spider-Man.
-            </span>
-          </div>
-          <div className="info-top-right">
-            <span className="genres">Genres: Action</span>
           </div>
         </div>
 
-        {/* <div className="titleGroup">
-            <div className="titleGroup--header">
-              <ListAlt />
-              Spiderman Collection
+        <div className="modal-info">
+          <div className="modal-info-fst">
+            <div className="info-left">
+              {/* release year, description,... */}
+              <span className="info-vote">{mainMovie.rate}% rate</span>
+              <span className="info-year">{mainMovie.year_production}</span>
+              <span className="info-season">
+                {mainMovie.type === "tvShows"
+                  ? countSeason(mainMovie.seasons)
+                  : countRuntime(mainMovie.runtime)}
+              </span>
+              <span className="info-HD">HD</span>
+              <div className="info-des">{mainMovie.desc}</div>
             </div>
-            <div className="titleGroup--content">
-              {moviesModal.map((movie, index) => (
-                <div className="titleGroup--film" key={index}>
-                  <img src={movie.img} />
-                  <div className="titleGroup--film__infoTop">
-                    <span className="infoTop--ageLimit">{movie.ageLimit}+</span>
-                    <span className="infoTop--year">
-                      {movie.year_production}+
+
+            <div className="info-right" style={{ fontSize: "1vw" }}>
+              {/* cast, genres */}
+              <div className="info-casts" style={{ marginBottom: "10px" }}>
+                <span className="preview-cast" style={{ color: "grey" }}>
+                  Cast:{" "}
+                </span>
+                {mainMovie.casts &&
+                  mainMovie.casts.map((cast, index) => (
+                    <span key={index} className="cast">
+                      <a>{(index ? ", " : "") + `${cast}`}</a>
                     </span>
-                    <span className="addIcon">
-                      <AddCircleOutline />
+                  ))}
+                <span className="cast" style={{ fontStyle: "italic" }}>
+                  <a>, more</a>
+                </span>
+              </div>
+              <div className="info-genres">
+                <span className="preview-genre" style={{ color: "grey" }}>
+                  Genres:{" "}
+                </span>
+                {mainMovie.genres &&
+                  mainMovie.genres.map((genre, index) => (
+                    <span key={genre.id} className="genre">
+                      <a>{(index ? ", " : "") + `${genre}`}</a>
                     </span>
-                  </div>
-                  <div className="titleGroup--film__desc">{movie.desc}</div>
-                </div>
-              ))}
+                  ))}
+              </div>
             </div>
-          </div> */}
+          </div>
+
+          {/* div Episodes if tv show */}
+          {/* {bannerMId.type === "tvShows" && (
+            <TvEpisodes
+              movies={movies}
+              tvId={bannerMId.bannerMovie}
+              apiKey={API_KEY}
+            />
+          )} */}
+
+          {/* div More Like this */}
+          <Recommend recommend={recMovies} />
+
+          {/* div about this movie */}
+          <div className="modal-info-last">
+            {/* header */}
+            <div className="about-header">
+              <h2 className="about-label" style={{ fontWeight: "400" }}>
+                About <strong>Spiderman</strong>
+              </h2>
+            </div>
+            {/* container */}
+            <div className="about-container">
+              <div className="about-creator about">
+                <span style={{ color: "grey" }}>Creators: </span>
+                {("movies" === "movies" || "movies" === undefined) && (
+                  <span className="cast">Gia Bao</span>
+                )}
+                {/* {bannerMId.type === "tvShows" &&
+                  movies.creatorTv.map((cre, index) => (
+                    <span key={index} className="cast">
+                      <a>{(index ? ", " : "") + `${cre.name}`}</a>
+                    </span>
+                  ))} */}
+              </div>
+              <div className="about-cast about">
+                <span style={{ color: "grey" }}>Cast: </span>
+                {/* {movies.allCast &&
+                  movies.allCast.map((cast, index) => (
+                    <span key={index} className="cast">
+                      <a>{(index ? ", " : "") + `${cast.name}`}</a>
+                    </span>
+                  ))} */}
+              </div>
+              <div className="about-genre about">
+                {/* <span style={{ color: "grey" }}>Genres: </span>
+                {movies.details.genres &&
+                  movies.details.genres.map((genre, index) => (
+                    <span key={genre.id} className="genre">
+                      <a>{(index ? ", " : "") + `${genre.name}`}</a>
+                    </span>
+                  ))} */}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="modal-bot-cover"></div>
       </div>
     </>
   );

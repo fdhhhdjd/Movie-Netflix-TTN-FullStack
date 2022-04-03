@@ -25,6 +25,7 @@ export { default as Profile } from "../Component/Profile/Profile";
 export { default as EditProfile } from "../Component/Profile/EditProfile";
 export { default as ChangePassword } from "../Component/Profile/ChangePassword";
 export { default as ManageProfile } from "../Page/ProfileGate/ManageProfile";
+export { default as Recommend } from "../Component/Modal/Recommend";
 //!Admin
 export { default as LoginAdmin } from "../Page/Admins/LoginAdmin";
 export { default as ForgetAdmin } from "../Component/Admins/ForgetAdmin";
@@ -47,6 +48,7 @@ export { default as AdultApi } from "../Contexts/AdultApi";
 export { default as useDesUpImage } from "../CustomHook/useDesUpImage";
 export { default as InputField } from "../CustomHook/useInputField";
 export { default as useRequireInput } from "../CustomHook/useRequireInput";
+export { default as useTogglePassword } from "../CustomHook/useTogglePassword";
 //!Private Route Admin
 export { default as LoadingToRedirectAdmin } from "../Page/PrivateRouterAdmin/LoadingToRedirectAdmin";
 export { default as LoadingToRedirectAuth } from "../Page/PrivateRouterAdmin/LoadingToRedirectAuth";

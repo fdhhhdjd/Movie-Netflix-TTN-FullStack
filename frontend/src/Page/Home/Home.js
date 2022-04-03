@@ -1,20 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Footer, Header } from "../../imports";
-import { Feature, List, MetaData } from "../../imports/index";
+import { Feature, Modal, List, MetaData } from "../../imports/index";
 import { HomeStyle } from "../../Style/StyleHome/HomeStyle";
 const Home = () => {
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  console.log(isOpenModal);
   return (
     <>
       <HomeStyle />
       <MetaData title={`Home-Page-Movie`} />
-      <div className="home">
+      <div className={`home ${isOpenModal && "openModal"}`}>
         <Header />
-        <Feature />
+        {isOpenModal && (
+          <div>
+            <Modal setIsOpenModal={setIsOpenModal} />
+          </div>
+        )}
+        <Feature setIsOpenModal={setIsOpenModal} />
         <List />
         <List />
         <List />
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 };

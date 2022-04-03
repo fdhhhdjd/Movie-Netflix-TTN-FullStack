@@ -4,51 +4,65 @@ import {
   AddCircleOutline,
   ThumbUpOutlined,
   ArrowDropDownCircleOutlined,
-  PlayCircleFilledWhiteRounded 
+  PlayCircleFilledWhiteRounded,
 } from "@material-ui/icons";
+import { useNavigate } from "react-router-dom";
 import { ListItemStyle } from "../../Style/StyleHome/ListItemStyle";
-export default function ListItem({ index }) {
+export default function ListItem({
+  image,
+  ageLimit,
+  filmLength,
+  category,
+  series,
+  id,
+}) {
   const [isHovered, setIsHovered] = useState(false);
-  const trailer = video;
+
+  const navigate = useNavigate();
   return (
     <>
       <ListItemStyle />
       <div
         className="listItem"
-        style={{
-          left: isHovered && (index === 0 ? 0 : index * 225 - 45 + index * 2.5),
-        }}
+        style={
+          {
+            // left: isHovered && (index === 0 ? 0 : index * 225 - 45 + index * 2.5),
+          }
+        }
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <img
-          src="https://static2.vieon.vn/vieplay-image/carousel_web_v4_ntc/2021/01/20/0kenhuxj_1920x1080-carousel-hauduemattroi5da40f4828611e6f2dfb3d3722723cc1_1920_1080.webp"
-          alt=""
-        />
+        <img src={image} alt="" />
 
         {isHovered && (
           <>
             <video className="video" autoPlay progress="true" controls>
-              <source src={trailer} />
+              <source src={series[0].url_video} />
             </video>
             <div className="item-info">
               <div className="icons">
                 <span className="icons-left">
-                  <PlayCircleFilledWhiteRounded/>
+                  <PlayCircleFilledWhiteRounded />
                   <AddCircleOutline />
                   <ThumbUpOutlined />
                 </span>
                 <span className="icons-right">
-                  <ArrowDropDownCircleOutlined />
+                  <ArrowDropDownCircleOutlined
+                    onClick={() => navigate(`/home/${id}`)}
+                  />
                 </span>
               </div>
               <div className="item-info-top">
                 <span className="match">94% Match</span>
-                <span className="limit">16+</span>
-                <span>1 hour 14 mins</span>
+                <span className="limit">{ageLimit}+</span>
+                <span>{filmLength}</span>
                 <span>HD</span>
               </div>
-              <div className="genre">Action</div>
+              <div className="genre">
+                {category.map((cat) => {
+                  return <li key={cat._id}>{cat.name}&nbsp;</li>;
+                })}
+              </div>
             </div>
           </>
         )}
