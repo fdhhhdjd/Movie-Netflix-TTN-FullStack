@@ -3,8 +3,10 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import title from "../../Image/title-test.png";
 import { FeatureStyle } from "../../Style/StyleHome/FeatureStyle";
+import Cookies from "js-cookie";
 const Feature = ({ type }) => {
   const { profile } = useSelector((state) => state.auth);
+  const a = Cookies.get("refreshtoken");
   return (
     <>
       <FeatureStyle />

@@ -6,6 +6,7 @@ import { AdultApi, UserApi } from "../imports/index";
 export const GlobalState = createContext();
 export const DataProvider = ({ children }) => {
   const [callback, setCallback] = useState(false);
+  const [rememberer, setRememberMe] = useState(false);
   const { auth, refreshTokens, profile } = useSelector((state) => state.auth);
   const { updateAdult } = useSelector((state) => state.adult);
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export const DataProvider = ({ children }) => {
   }, [callback]);
   const data = {
     callback: [callback, setCallback],
+    remember: [rememberer, setRememberMe],
     UserApi: UserApi(refreshTokens, updateAdult),
     AdultApi: AdultApi(refreshTokens, profile),
   };
