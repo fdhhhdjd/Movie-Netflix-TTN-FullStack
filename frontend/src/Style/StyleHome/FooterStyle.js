@@ -2,7 +2,6 @@ import { createGlobalStyle } from "styled-components";
 export const FooterStyle = createGlobalStyle`
   .footer-container {
     padding: 1.5vw 15vw;
-    background: #141414;
     color: #808080;
     display: flex;
     flex-direction: column;

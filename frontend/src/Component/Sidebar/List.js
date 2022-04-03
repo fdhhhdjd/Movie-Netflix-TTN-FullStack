@@ -13,15 +13,15 @@ const List = () => {
   const listRef = useRef();
 
   const handleClick = (direction) => {
-    // const distance = listRef.current.getBoundingClientRect().x - 50;
-    // if (direction === "left" && slideNumber > 0) {
-    //   setSlideNumber(slideNumber - 1);
-    //   listRef.current.style.transform = `translateX(${230 + distance}px)`;
-    // }
-    // if (direction === "right" && slideNumber < 4) {
-    //   setSlideNumber(slideNumber + 1);
-    //   listRef.current.style.transform = `translateX(${-230 + distance}px)`;
-    // }
+    const distance = listRef.current.getBoundingClientRect().x - 50;
+    if (direction === "left" && slideNumber > 0) {
+      setSlideNumber(slideNumber - 1);
+      listRef.current.style.transform = `translateX(${230 + distance}px)`;
+    }
+    if (direction === "right" && slideNumber < 4) {
+      setSlideNumber(slideNumber + 1);
+      listRef.current.style.transform = `translateX(${-230 + distance}px)`;
+    }
   };
   return (
     <>
@@ -35,7 +35,7 @@ const List = () => {
             style={{ display: slideNumber === 0 && "none" }}
           />
           <div className="film-container" ref={listRef}>
-            {allFilmAdult.data.map((film)=>{
+            {allFilmAdult.data.map((film, index)=>{
               return(
                 <Fragment key={film._id}>
                   <ListItem image={film.image_film.url} ageLimit={film.ageLimit} filmLength={film.filmLength}
