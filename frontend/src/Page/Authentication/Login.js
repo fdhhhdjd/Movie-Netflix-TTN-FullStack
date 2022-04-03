@@ -16,7 +16,6 @@ import {
 import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
 import LoadingSmall from "../Loading/LoadingSmall";
 const Login = () => {
-  const [checked, setChecked] = useState(true);
   const {
     register,
     formState: { errors },
@@ -24,14 +23,8 @@ const Login = () => {
     watch,
   } = useForm();
   const passwords = useRef({});
-  const emails = useRef({});
   const reCaptcha = useRef();
   passwords.current = watch("password");
-  emails.current = watch("email");
-  const info = useRef();
-  info.current = JSON.parse(localStorage.getItem("info"));
-  register("email", { value: info.current?.email });
-  register("password", { value: info.current?.password });
   const dispatch = useDispatch();
   const [isLock, setIsLock] = useState(false);
   const [token, setToken] = useState("");
@@ -53,7 +46,6 @@ const Login = () => {
     }
     const { email, password } = data;
     dispatch(loginInitiate(email, password));
-    console.log(email, password, "haha");
   };
   const handleIsLock = () => {
     setIsLock(!isLock);
@@ -64,7 +56,7 @@ const Login = () => {
         navigate(location.state.from);
         window.location.reload();
       } else {
-        window.location.href = "/browse";
+        window.location.href = "/";
       }
       localStorage.setItem("firstLogin", true);
     }
@@ -73,15 +65,6 @@ const Login = () => {
       dispatch(clearErrors());
     }
   }, [Auth]);
-  const handleChecked = () => {
-    setChecked(!checked);
-    if (checked === true) {
-      const infoUser = { password: passwords.current, email: emails.current };
-      localStorage.setItem("info", JSON.stringify(infoUser));
-    } else if (checked === false) {
-      localStorage.clear();
-    }
-  };
   return (
     <>
       <AuthenticationStyle />
@@ -130,6 +113,7 @@ const Login = () => {
                 />
               )}
             </div>
+
             <span style={{ color: "red" }}>
               {errors.password?.type === "required" &&
                 "Mời bạn nhập đầy đủ mật khẩu! "}
@@ -143,11 +127,7 @@ const Login = () => {
             )}
             <div className="help">
               <div className="remember">
-                <input
-                  type="checkbox"
-                  value={checked}
-                  onChange={() => handleChecked()}
-                />
+                <input type="checkbox" />
                 <span>Remember me</span>
               </div>
               <a href="/forget">Forgot password?</a>

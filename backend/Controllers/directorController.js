@@ -63,7 +63,7 @@ const directorCtrl = {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: err.message,
+        msg: 'Failed to add director',
       });
     }
   },

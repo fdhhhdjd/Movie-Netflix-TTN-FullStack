@@ -1,36 +1,32 @@
+import { useState } from "react";
+import video from "../../Image/Welcome/video.mp4";
 import {
   AddCircleOutline,
-  ArrowDropDownCircleOutlined,
-  PlayCircleFilledWhiteRounded,
   ThumbUpOutlined,
+  ArrowDropDownCircleOutlined,
+  PlayCircleFilledWhiteRounded 
 } from "@material-ui/icons";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from 'react-router-dom'
 import { ListItemStyle } from "../../Style/StyleHome/ListItemStyle";
-export default function ListItem({
-  image,
-  ageLimit,
-  filmLength,
-  category,
-  series,
-  id,
-  index,
-}) {
+export default function ListItem({image,ageLimit,filmLength,category,series,id}) {
   const [isHovered, setIsHovered] = useState(false);
 
   const navigate = useNavigate();
   return (
     <>
       <ListItemStyle />
-      <div
+      <div 
         className="listItem"
         style={{
-          left: isHovered && (index === 0 ? 0 : index * 225 - 45 + index * 2.5),
+          // left: isHovered && (index === 0 ? 0 : index * 225 - 45 + index * 2.5),
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <img src={image} alt="" />
+        <img
+          src={image}
+          alt=""
+        />
 
         {isHovered && (
           <>
@@ -40,14 +36,12 @@ export default function ListItem({
             <div className="item-info">
               <div className="icons">
                 <span className="icons-left">
-                  <PlayCircleFilledWhiteRounded />
+                  <PlayCircleFilledWhiteRounded/>
                   <AddCircleOutline />
                   <ThumbUpOutlined />
                 </span>
                 <span className="icons-right">
-                  <ArrowDropDownCircleOutlined
-                    onClick={() => navigate(`/home/${id}`)}
-                  />
+                  <ArrowDropDownCircleOutlined  onClick={()=>navigate(`/home/${id}`)}/>
                 </span>
               </div>
               <div className="item-info-top">
@@ -57,10 +51,15 @@ export default function ListItem({
                 <span>HD</span>
               </div>
               <div className="genre">
-                {category.map((cat) => {
-                  return <li key={cat._id}>{cat.name}&nbsp;</li>;
-                })}
+              {category.map((cat)=>{
+                return(
+                  <li  key={cat._id} >{cat.name}&nbsp;</li>
+                )
+              })}
+
               </div>
+
+              
             </div>
           </>
         )}
