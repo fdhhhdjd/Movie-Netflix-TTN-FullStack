@@ -8,6 +8,7 @@ import { useState } from "react";
 
 const Feature = ({ type }) => {
   const [isOpenModal, setOpenModal] = useState(false);
+  const { refreshTokens, profile } = useSelector((state) => state.auth);
 
   const handleMoreInfo = () => {
     setOpenModal(true);
@@ -31,7 +32,8 @@ const Feature = ({ type }) => {
               <option value="horror">Horror</option>
               <option value="romance">Romance</option>
               <option value="sci-fi">Sci-fi</option>
-              <option value="thriller">Thriller</option>
+              <option value="thriller">Thriller</option> 
+              <option value="thriller">Thriller</option> 
               <option value="western">Western</option>
               <option value="animation">Animation</option>
               <option value="drama">Drama</option>

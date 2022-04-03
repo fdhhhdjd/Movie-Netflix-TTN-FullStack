@@ -1,11 +1,11 @@
-import { useRef, useState } from "react";
-import { ListItem } from "../../imports/index";
 import {
   ArrowBackIosOutlined,
-  ArrowForwardIosOutlined,
+  ArrowForwardIosOutlined
 } from "@material-ui/icons";
-import {useSelector} from 'react-redux'
+import { Fragment, useRef, useState } from "react";
+import { useSelector } from 'react-redux';
 import { ListStyle } from "../../Style/StyleHome/listStyle";
+import {ListItem} from '../../imports/index' 
 const List = () => {
   const [slideNumber, setSlideNumber] = useState(0);
   const { allFilmAdult ,updateAdult} = useSelector((state) => state.adult);
@@ -13,15 +13,15 @@ const List = () => {
   const listRef = useRef();
 
   const handleClick = (direction) => {
-    const distance = listRef.current.getBoundingClientRect().x - 50;
-    if (direction === "left" && slideNumber > 0) {
-      setSlideNumber(slideNumber - 1);
-      listRef.current.style.transform = `translateX(${230 + distance}px)`;
-    }
-    if (direction === "right" && slideNumber < 4) {
-      setSlideNumber(slideNumber + 1);
-      listRef.current.style.transform = `translateX(${-230 + distance}px)`;
-    }
+    // const distance = listRef.current.getBoundingClientRect().x - 50;
+    // if (direction === "left" && slideNumber > 0) {
+    //   setSlideNumber(slideNumber - 1);
+    //   listRef.current.style.transform = `translateX(${230 + distance}px)`;
+    // }
+    // if (direction === "right" && slideNumber < 4) {
+    //   setSlideNumber(slideNumber + 1);
+    //   listRef.current.style.transform = `translateX(${-230 + distance}px)`;
+    // }
   };
   return (
     <>
@@ -35,21 +35,16 @@ const List = () => {
             style={{ display: slideNumber === 0 && "none" }}
           />
           <div className="film-container" ref={listRef}>
-            {/* {allFilmAdult.data.map((film)=>{
+            {allFilmAdult.data.map((film)=>{
               return(
-                <ListItem index={0} image={film.image_film.url} ageLimit={film.ageLimit} />
+                <Fragment key={film._id}>
+                  <ListItem image={film.image_film.url} ageLimit={film.ageLimit} filmLength={film.filmLength}
+                    category={film.category} series={film.seriesFilm} id={film._id}
+                  />
+                
+                </Fragment>
               )
-            })} */}
-           
-            {/* <ListItem index={1} />
-            <ListItem index={2} />
-            <ListItem index={3} />
-            <ListItem index={4} />
-            <ListItem index={5} />
-            <ListItem index={6} />
-            <ListItem index={7} />
-            <ListItem index={8} />
-            <ListItem index={9} /> */}
+            })}
           </div>
           <ArrowForwardIosOutlined
             className="slider-arrow right"

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import swal from "sweetalert";
-import { DestroyImg, UploadImg } from "../imports/import";
+import { DestroyImg, UploadImg } from "../utils/Api"
 const useUpDesImage = (token) => {
   const [loading, setLoading] = useState(false);
   const [images, setImages] = useState(false);
