@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
-import { MetaData } from "../../imports/index";
+import { MetaData, useTogglePassword } from "../../imports/index";
 import { logo } from "../../imports/image";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +22,8 @@ const Reset = () => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
+  const { handleIsLock, isLock, isLockConfirm, handleIsLockConfirm } =
+    useTogglePassword();
   const handleReset = (e) => {
     e.preventDefault();
     dispatch(ResetPassInitiate(token, password, confirmPassword));
@@ -57,21 +59,52 @@ const Reset = () => {
           ) : (
             <form onSubmit={handleReset}>
               <h1>Reset</h1>
-              <input
-                type="password"
-                placeholder="New Password"
-                name="password"
-                value={password}
-                onChange={handleChangeInput}
-              />
 
-              <input
-                type="password"
-                placeholder="confirmPassword"
-                name="confirmPassword"
-                value={confirmPassword}
-                onChange={handleChangeInput}
-              />
+              <div className="pwd-input">
+                <input
+                  placeholder="New Password"
+                  name="password"
+                  value={password}
+                  onChange={handleChangeInput}
+                  type={isLock ? "type" : "password"}
+                />
+                {isLock ? (
+                  <i
+                    className="fa fa-eye-slash"
+                    onClick={handleIsLock}
+                    style={{ cursor: "pointer" }}
+                  />
+                ) : (
+                  <i
+                    className="fa fa-eye"
+                    onClick={handleIsLock}
+                    style={{ cursor: "pointer" }}
+                  />
+                )}
+              </div>
+
+              <div className="pwd-input">
+                <input
+                  type={isLockConfirm ? "type" : "password"}
+                  placeholder="Confirm password"
+                  name="confirmPassword"
+                  value={confirmPassword}
+                  onChange={handleChangeInput}
+                />
+                {isLockConfirm ? (
+                  <i
+                    className="fa fa-eye-slash"
+                    onClick={handleIsLockConfirm}
+                    style={{ cursor: "pointer" }}
+                  />
+                ) : (
+                  <i
+                    className="fa fa-eye"
+                    onClick={handleIsLockConfirm}
+                    style={{ cursor: "pointer" }}
+                  />
+                )}
+              </div>
 
               <button className="loginButton">Reset</button>
               <br />

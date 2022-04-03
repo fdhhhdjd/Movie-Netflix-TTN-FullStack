@@ -7,7 +7,7 @@ export const HeaderStyle = createGlobalStyle`
   font-size: 14px;
   position: fixed;
   top: 0;
-  z-index: 999;
+  z-index: 99;
   background: linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 0.3) 50%);
   transition: all 0.3s ease-in-out;
 }

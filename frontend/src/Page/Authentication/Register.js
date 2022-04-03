@@ -4,9 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { logo } from "../../imports/image";
-import { MetaData, useRequireInput } from "../../imports/index";
+import {
+  MetaData,
+  useRequireInput,
+  useTogglePassword,
+} from "../../imports/index";
 import { clearErrors, RegisterInitiate } from "../../Redux/Action/ActionAuth";
-import { RegisterStyle } from "../../Style/AuthenticationStyle/RegisterStyle";
+import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
 import LoadingSmall from "../Loading/LoadingSmall";
 
 const Register = () => {
@@ -22,13 +26,11 @@ const Register = () => {
   passwords.current = watch("password");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { handleIsLock, isLock, isLockConfirm, handleIsLockConfirm } =
+    useTogglePassword();
   const { authRegister, loading } = useSelector((state) => state.auth);
-  const {
-    emailRequire,
-    passwordLoginRequire,
-    passwordRegisterRequire,
-    usernameRequire,
-  } = useRequireInput();
+  const { emailRequire, passwordRegisterRequire, usernameRequire } =
+    useRequireInput();
 
   const handleSubmitForm = (data) => {
     const { email, fullname, password } = data;
@@ -47,7 +49,7 @@ const Register = () => {
   }, [authRegister]);
   return (
     <>
-      <RegisterStyle />
+      <AuthenticationStyle />
       <MetaData title="Register-Movie" />
       <div className="login">
         <div className="top">
@@ -84,14 +86,29 @@ const Register = () => {
               {errors?.email?.type === "pattern" &&
                 "Email của ban không hợp lệ!"}
             </span>
-            <input
-              className="registerInput"
-              {...register("password", passwordRegisterRequire)}
-              type="password"
-              placeholder="Password"
-              name="password"
-              id="password"
-            />
+            <div className="pwd-input">
+              <input
+                className="registerInput"
+                {...register("password", passwordRegisterRequire)}
+                type={isLock ? "type" : "password"}
+                placeholder="Password"
+                name="password"
+                id="password"
+              />
+              {isLock ? (
+                <i
+                  className="fa fa-eye-slash"
+                  onClick={handleIsLock}
+                  style={{ cursor: "pointer" }}
+                />
+              ) : (
+                <i
+                  className="fa fa-eye"
+                  onClick={handleIsLock}
+                  style={{ cursor: "pointer" }}
+                />
+              )}
+            </div>
 
             <span style={{ color: "red" }}>
               {errors.password?.type === "required" &&
@@ -101,19 +118,34 @@ const Register = () => {
               {errors?.password?.type === "pattern" &&
                 "Mật khẩu có kí tự in hoa,số và kí tự đặt biệt !"}
             </span>
-            <input
-              {...register("passwordConfirm", {
-                required: true,
-                validate: (value) =>
-                  value === getValues("password") ||
-                  "The passwords do not match",
-              })}
-              type="password"
-              placeholder="Confirm Password"
-              name="passwordConfirm"
-              id="passwordConfirm"
-            />
 
+            <div className="pwd-input">
+              <input
+                {...register("passwordConfirm", {
+                  required: true,
+                  validate: (value) =>
+                    value === getValues("password") ||
+                    "The passwords do not match",
+                })}
+                type={isLockConfirm ? "type" : "password"}
+                placeholder="Confirm Password"
+                name="passwordConfirm"
+                id="passwordConfirm"
+              />
+              {isLockConfirm ? (
+                <i
+                  className="fa fa-eye-slash"
+                  onClick={handleIsLockConfirm}
+                  style={{ cursor: "pointer" }}
+                />
+              ) : (
+                <i
+                  className="fa fa-eye"
+                  onClick={handleIsLockConfirm}
+                  style={{ cursor: "pointer" }}
+                />
+              )}
+            </div>
             <span style={{ color: "red" }}>
               {errors.passwordConfirm?.type === "required" &&
                 "Mời bạn nhập lại mật khẩu."}

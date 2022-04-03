@@ -129,20 +129,29 @@ export const RegisterInitiate =
     }
   };
 //!Login
-export const loginInitiate = (email, password) => async (dispatch) => {
-  try {
-    dispatch(LoginStart());
+export const loginInitiate =
+  (email, password, rememberer) => async (dispatch) => {
+    try {
+      dispatch(LoginStart());
 
-    const { data } = await axios.post(`/api/auth/customer/login`, {
-      email,
-      password,
-    });
-
-    dispatch(LoginSuccess(data));
-  } catch (error) {
-    dispatch(LoginFail(error));
-  }
-};
+      const { data } = await axios.post(`/api/auth/customer/login`, {
+        email,
+        password,
+      });
+      if (rememberer === true) {
+        localStorage.setItem(
+          "remember",
+          JSON.stringify({
+            email: email,
+            password: password,
+          })
+        );
+      }
+      dispatch(LoginSuccess(data));
+    } catch (error) {
+      dispatch(LoginFail(error));
+    }
+  };
 //!Login Google
 export const loginGoogleInitiate = (response) => {
   return async function (dispatch) {

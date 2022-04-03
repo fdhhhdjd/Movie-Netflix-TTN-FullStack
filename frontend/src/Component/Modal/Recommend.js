@@ -1,8 +1,5 @@
 import { Grid } from "@mui/material";
-import {
-  Add,
-  PlayArrowRounded,
-} from "@material-ui/icons";
+import { Add, PlayArrowRounded } from "@material-ui/icons";
 import { useState } from "react";
 
 const Recommend = ({ recommend }) => {
@@ -51,9 +48,11 @@ const Recommend = ({ recommend }) => {
             >
               <div
                 className="recommend-thumbnail"
-                style={{
-                //   backgroundImage: `url(${baseUrl}${rec.backdrop_path})`,
-                }}
+                style={
+                  {
+                    //   backgroundImage: `url(${baseUrl}${rec.backdrop_path})`,
+                  }
+                }
               >
                 {isHover.isHovered[index] && (
                   <span className="rec-playbtn">
@@ -74,10 +73,7 @@ const Recommend = ({ recommend }) => {
                       {rec.release_date || rec.first_air_date}
                     </div>
                   </div>
-                  <Add
-                    sx={{ fontSize: "2.5vw" }}
-                    className="modal-icon-add"
-                  />
+                  <Add sx={{ fontSize: "2.5vw" }} className="modal-icon-add" />
                 </div>
                 <div className="rec-info-description">
                   {truncate(rec.overview, 120)}

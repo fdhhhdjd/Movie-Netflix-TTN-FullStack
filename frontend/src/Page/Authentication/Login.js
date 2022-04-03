@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import GoogleLogin from "react-google-login";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
@@ -6,8 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import swal from "sweetalert";
+import { GlobalState } from "../../Contexts/GlobalState";
 import { logo } from "../../imports/image";
-import { MetaData, useRequireInput } from "../../imports/index";
+import {
+  MetaData,
+  useRequireInput,
+  useTogglePassword,
+} from "../../imports/index";
 import {
   clearErrors,
   loginGoogleInitiate,
@@ -16,17 +21,25 @@ import {
 import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
 import LoadingSmall from "../Loading/LoadingSmall";
 const Login = () => {
+  const DataRemember = localStorage.getItem("remember");
+  const foundUser = JSON.parse(DataRemember);
   const {
     register,
     formState: { errors },
     handleSubmit,
     watch,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      email: (foundUser && foundUser.email) || "",
+      password: (foundUser && foundUser.password) || "",
+    },
+  });
   const passwords = useRef({});
   const reCaptcha = useRef();
   passwords.current = watch("password");
   const dispatch = useDispatch();
-  const [isLock, setIsLock] = useState(false);
+  const state = useContext(GlobalState);
+  const [rememberer, setRememberMe] = state.remember;
   const [token, setToken] = useState("");
   const { auth, loading } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -34,9 +47,11 @@ const Login = () => {
   const Auth = auth;
   const grecaptchaObject = window.grecaptcha;
   const { emailRequire, passwordLoginRequire } = useRequireInput();
+  const { handleIsLock, isLock } = useTogglePassword();
   const HandleGoogle = (response) => {
     dispatch(loginGoogleInitiate(response));
   };
+
   const handleSubmitForm = (data) => {
     if (!token) {
       swal("Mời bạn xác thực đầy đủ 😍", {
@@ -45,18 +60,23 @@ const Login = () => {
       return;
     }
     const { email, password } = data;
-    dispatch(loginInitiate(email, password));
+    dispatch(loginInitiate(email, password, rememberer));
   };
-  const handleIsLock = () => {
-    setIsLock(!isLock);
+  const HandleRemember = () => {
+    setRememberMe(!rememberer);
   };
+
+  // const handleIsLock = () => {
+  //   setIsLock(!isLock);
+  // };
+
   useEffect(() => {
     if (auth.status === 200) {
       if (location.state?.from) {
         navigate(location.state.from);
         window.location.reload();
       } else {
-        window.location.href = "/";
+        window.location.href = "/browse";
       }
       localStorage.setItem("firstLogin", true);
     }
@@ -71,7 +91,7 @@ const Login = () => {
       <MetaData title="Login-Movie" />
       <div className="login">
         <div className="top">
-          <div className="wr<a>pper">
+          <div className="wrapper">
             <img className="logo" src={logo} alt="" />
           </div>
         </div>
@@ -127,7 +147,7 @@ const Login = () => {
             )}
             <div className="help">
               <div className="remember">
-                <input type="checkbox" />
+                <input type="checkbox" onChange={HandleRemember} />
                 <span>Remember me</span>
               </div>
               <a href="/forget">Forgot password?</a>

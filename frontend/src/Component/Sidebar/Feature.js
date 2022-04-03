@@ -3,21 +3,17 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import title from "../../Image/title-test.png";
 import { FeatureStyle } from "../../Style/StyleHome/FeatureStyle";
-import { Modal } from "../../imports/index";
-import { useState } from "react";
-
-const Feature = ({ type }) => {
-  const [isOpenModal, setOpenModal] = useState(false);
-  const { refreshTokens, profile } = useSelector((state) => state.auth);
-
+import Cookies from "js-cookie";
+const Feature = ({ type, setIsOpenModal }) => {
+  const { profile } = useSelector((state) => state.auth);
+  const a = Cookies.get("refreshtoken");
   const handleMoreInfo = () => {
-    setOpenModal(true);
-  }; 
+    setIsOpenModal(true);
+  };
   return (
     <>
       <FeatureStyle />
       <div className="featured">
-        {isOpenModal && <Modal />}
         {type && (
           <div className="category">
             <span>{type === "movie" ? "Movies" : "Series"}</span>
@@ -31,8 +27,8 @@ const Feature = ({ type }) => {
               <option value="horror">Horror</option>
               <option value="romance">Romance</option>
               <option value="sci-fi">Sci-fi</option>
-              <option value="thriller">Thriller</option> 
-              <option value="thriller">Thriller</option> 
+              <option value="thriller">Thriller</option>
+              <option value="thriller">Thriller</option>
               <option value="western">Western</option>
               <option value="animation">Animation</option>
               <option value="drama">Drama</option>
