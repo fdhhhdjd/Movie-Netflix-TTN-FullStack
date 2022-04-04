@@ -12,6 +12,8 @@ const List = () => {
   const { profile } = useSelector((state) => state.auth);
   const listRef = useRef();
 
+  console.log(allFilmAdult, "allFilm");
+
   const handleClick = (direction) => {
     const distance = listRef.current.getBoundingClientRect().x - 50;
     if (direction === "left" && slideNumber > 0) {
@@ -35,7 +37,7 @@ const List = () => {
             style={{ display: slideNumber === 0 && "none" }}
           />
           <div className="film-container" ref={listRef}>
-            {allFilmAdult.data.map((film, index) => {
+            {allFilmAdult ? allFilmAdult.data.map((film, index) => {
               return (
                 <Fragment key={film._id}>
                   <ListItem
@@ -45,20 +47,11 @@ const List = () => {
                     category={film.category}
                     series={film.seriesFilm}
                     id={film._id}
+                    index= {index}
                   />
                 </Fragment>
               );
-            })}
-
-            <ListItem index={1} />
-            <ListItem index={2} />
-            <ListItem index={3} />
-            <ListItem index={4} />
-            <ListItem index={5} />
-            <ListItem index={6} />
-            <ListItem index={7} />
-            <ListItem index={8} />
-            <ListItem index={9} />
+            }) : window.location.href("/browse")}
           </div>
           <ArrowForwardIosOutlined
             className="slider-arrow right"
