@@ -11,7 +11,9 @@ const List = () => {
   const { allFilmAdult, updateAdult } = useSelector((state) => state.adult);
   const { profile } = useSelector((state) => state.auth);
   const listRef = useRef();
-  console.log(allFilmAdult, "film");
+
+  console.log(allFilmAdult, "allFilm");
+
   const handleClick = (direction) => {
     const distance = listRef.current.getBoundingClientRect().x - 50;
     if (direction === "left" && slideNumber > 0) {
@@ -35,22 +37,23 @@ const List = () => {
             style={{ display: slideNumber === 0 && "none" }}
           />
           <div className="film-container" ref={listRef}>
-            {allFilmAdult.data &&
-              allFilmAdult.data.map((film, index) => {
-                return (
-                  <Fragment key={film._id}>
-                    <ListItem
-                      image={film.image_film.url}
-                      ageLimit={film.ageLimit}
-                      filmLength={film.filmLength}
-                      category={film.category}
-                      series={film.seriesFilm}
-                      id={film._id}
-                      index={index}
-                    />
-                  </Fragment>
-                );
-              })}
+            {allFilmAdult
+              ? allFilmAdult.data.map((film, index) => {
+                  return (
+                    <Fragment key={film._id}>
+                      <ListItem
+                        image={film.image_film.url}
+                        ageLimit={film.ageLimit}
+                        filmLength={film.filmLength}
+                        category={film.category}
+                        series={film.seriesFilm}
+                        id={film._id}
+                        index={index}
+                      />
+                    </Fragment>
+                  );
+                })
+              : window.location.href("/browse")}
           </div>
           <ArrowForwardIosOutlined
             className="slider-arrow right"

@@ -35,7 +35,7 @@ export default function ListItem({
         {isHovered && (
           <>
             <video className="video" autoPlay progress="true" controls>
-              <source src={series[0].url_video} />
+              <source src={series && series[0].url_video} />
             </video>
             <div className="item-info">
               <div className="icons">
