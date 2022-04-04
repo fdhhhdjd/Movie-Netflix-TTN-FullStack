@@ -1,8 +1,8 @@
-import { useState, useRef, Fragment } from "react";
 import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
 } from "@material-ui/icons";
+import { Fragment, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { ListStyle } from "../../Style/StyleHome/listStyle";
 import { ListItem } from "../../imports/index";
@@ -37,21 +37,23 @@ const List = () => {
             style={{ display: slideNumber === 0 && "none" }}
           />
           <div className="film-container" ref={listRef}>
-            {allFilmAdult ? allFilmAdult.data.map((film, index) => {
-              return (
-                <Fragment key={film._id}>
-                  <ListItem
-                    image={film.image_film.url}
-                    ageLimit={film.ageLimit}
-                    filmLength={film.filmLength}
-                    category={film.category}
-                    series={film.seriesFilm}
-                    id={film._id}
-                    index= {index}
-                  />
-                </Fragment>
-              );
-            }) : window.location.href("/browse")}
+            {allFilmAdult
+              ? allFilmAdult.data.map((film, index) => {
+                  return (
+                    <Fragment key={film._id}>
+                      <ListItem
+                        image={film.image_film.url}
+                        ageLimit={film.ageLimit}
+                        filmLength={film.filmLength}
+                        category={film.category}
+                        series={film.seriesFilm}
+                        id={film._id}
+                        index={index}
+                      />
+                    </Fragment>
+                  );
+                })
+              : window.location.href("/browse")}
           </div>
           <ArrowForwardIosOutlined
             className="slider-arrow right"

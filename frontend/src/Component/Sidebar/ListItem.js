@@ -1,11 +1,10 @@
-import { useState } from "react";
-import video from "../../Image/Welcome/video.mp4";
 import {
   AddCircleOutline,
-  ThumbUpOutlined,
   ArrowDropDownCircleOutlined,
   PlayCircleFilledWhiteRounded,
+  ThumbUpOutlined,
 } from "@material-ui/icons";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ListItemStyle } from "../../Style/StyleHome/ListItemStyle";
 export default function ListItem({
@@ -15,7 +14,7 @@ export default function ListItem({
   category,
   series,
   id,
-  index
+  index,
 }) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -25,11 +24,9 @@ export default function ListItem({
       <ListItemStyle />
       <div
         className="listItem"
-        style={
-          {
-            left: isHovered && (index === 0 ? 0 : index * 225 - 45 + index * 2.5),
-          }
-        }
+        style={{
+          left: isHovered && (index === 0 ? 0 : index * 225 - 45 + index * 2.5),
+        }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
