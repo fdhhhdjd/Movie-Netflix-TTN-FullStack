@@ -1,6 +1,7 @@
 const Films = require("../Model/filmModel.js");
 const Ratings = require("../Model/ratingModel.js");
 const Users = require("../Model/userModel");
+const bcrypt = require("bcrypt");
 
 const filmCtrl = {
   //lựa chọn bộ phim cho người lớn hay trẻ em
@@ -28,9 +29,9 @@ const filmCtrl = {
   async getFilmForAdult(req, res) {
     try {
       const adultFilms = await Films.find({ ageLimit: { $gte: 16 } })
-      .populate("director")
-      .populate("category")
-      .populate("seriesFilm");
+        .populate("director")
+        .populate("category")
+        .populate("seriesFilm");
       return res.json({
         status: 200,
         success: true,
@@ -50,15 +51,44 @@ const filmCtrl = {
   async getFilmForKid(req, res) {
     try {
       const kidFilms = await Films.find({ ageLimit: { $lt: 16 } })
-      .populate("director")
-      .populate("category")
-      .populate("seriesFilm");
+        .populate("director")
+        .populate("category")
+        .populate("seriesFilm");
       return res.json({
         status: 200,
         success: true,
         msg: "Get films for kid successfully",
         data: kidFilms,
       });
+    } catch (error) {
+      return res.json({
+        status: 400,
+        success: false,
+        msg: error.message,
+      });
+    }
+  },
+
+  //thoát chế độ xem phim dành cho trẻ em
+  async exitKidMode(req, res) {
+    try {
+      const userId = req.user.id;
+      const { i_password } = req.body;
+      const user = await Users.findById(userId).select("password");
+      const isMatch = await bcrypt.compare(i_password, user.password);
+      if (isMatch) {
+        return res.json({
+          status: 200,
+          success: true,
+          msg: "Exited kid mode successfully",
+        });
+      } else {
+        return res.json({
+          status: 400,
+          success: false,
+          msg: "Incorrect password",
+        });
+      }
     } catch (error) {
       return res.json({
         status: 400,

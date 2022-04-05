@@ -19,6 +19,9 @@ router.get("/adult", auth, authCustomer, filmCtrl.getFilmForAdult);
 //Danh sách phim dành cho trẻ em
 router.get("/kid", auth, authCustomer, filmCtrl.getFilmForKid);
 
+//Thoát khỏi chế độ cho trẻ em
+router.post("/kid/exit", auth, authCustomer, filmCtrl.exitKidMode);
+
 //Xem thông tin tất cả bộ phim
 router.get("/all", auth, filmCtrl.getAllFilm);
 
