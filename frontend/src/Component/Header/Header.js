@@ -4,18 +4,23 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { logo } from "../../imports/image";
 import { LogoutInitiate } from "../../Redux/Action/ActionAuth";
+import { LoginKidInitiate } from "../../Redux/Action/ActionFilmAdmin";
 import { UpdateAdultInitiate } from "../../Redux/Action/ActionFilmadult";
 import { HeaderStyle } from "../../Style/HeaderStyle/HeaderStyle";
 const Header = () => {
   const dispatch = useDispatch();
   const { profile, refreshTokens } = useSelector((state) => state.auth);
   const { allFilmAdult, updateAdult } = useSelector((state) => state.adult);
+  const { verifiedPassword } = useSelector((state) => state.film);
+  console.log(verifiedPassword, "aaaaaaaaaaaaaa");
   const [activeTab, setActiveTab] = useState("Home");
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const [isAdult, setIsAdult] = useState(updateAdult.msg || profile.adult);
-
+  const [verifyPassword, setVerifyPassword] = useState("");
+  const [modal, setModal] = useState(false);
+  console.log(profile, "auth");
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.pageYOffset !== 0);
@@ -41,20 +46,28 @@ const Header = () => {
       setActiveTab("Products");
     }
   }, [location]);
-
   const handleExitKid = () => {
     window.location.href = "/browse";
   };
-  const handleKidMode = (adult) => {
-    setIsAdult("kid");
-    dispatch(UpdateAdultInitiate((adult = "kid"), refreshTokens));
-    toast.success("Change Kid Success");
+  const handleKidMode = () => {
+    setModal(!modal);
+    toast.success("Please enter password !");
   };
-  console.log(allFilmAdult.data, "film at home");
-  console.log(isAdult, "isAdult");
-  console.log(updateAdult.msg, "home");
-  console.log(profile.adult, "profile");
-
+  const handleVerify = () => {
+    dispatch(LoginKidInitiate(verifyPassword, refreshTokens));
+  };
+  useEffect(
+    (adult) => {
+      if (verifiedPassword.status === 200) {
+        setIsAdult("kid");
+        dispatch(UpdateAdultInitiate((adult = "kid"), refreshTokens));
+        toast.success("Change Kid Success <3");
+      } else if (verifiedPassword.status === 400) {
+        toast.success("Wrong Password ");
+      }
+    },
+    [verifiedPassword]
+  );
   return (
     <>
       <HeaderStyle />
@@ -101,12 +114,32 @@ const Header = () => {
                 )}
 
                 <div className="profile">
-                  <i className="fas fa-caret-down"></i>
-                  <div className="options">
-                    <span>Setting</span>
-                    <span onClick={handleLogout}>Logout</span>
-                    <span onClick={handleKidMode}>Kid Mode</span>
-                  </div>
+                  {modal ? (
+                    <div className="modal">
+                      <span>Verify Password</span>
+                      <i
+                        className="fa-solid fa-circle-xmark"
+                        onClick={() => setModal(!modal)}
+                      ></i>
+                      <input
+                        value={verifyPassword}
+                        type="password"
+                        onChange={(e) => setVerifyPassword(e.target.value)}
+                      />
+                      <button className="Verify" onClick={handleVerify}>
+                        Verify
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                      <i className="fas fa-caret-down"></i>
+                      <div className="options">
+                        <span>Setting</span>
+                        <span onClick={handleLogout}>Logout</span>
+                        <span onClick={handleKidMode}>Kid Mode</span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </>
             ) : (
