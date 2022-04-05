@@ -4,7 +4,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { logo } from "../../imports/image";
 import { LogoutInitiate } from "../../Redux/Action/ActionAuth";
-import { LoginKidInitiate } from "../../Redux/Action/ActionFilmAdmin";
+import {
+  LoginKidInitiate,
+  clearErrors,
+} from "../../Redux/Action/ActionFilmAdmin";
 import { UpdateAdultInitiate } from "../../Redux/Action/ActionFilmadult";
 import { HeaderStyle } from "../../Style/HeaderStyle/HeaderStyle";
 const Header = () => {
@@ -59,15 +62,19 @@ const Header = () => {
   useEffect(
     (adult) => {
       if (verifiedPassword.status === 200) {
+        setModal(false);
         setIsAdult("kid");
         dispatch(UpdateAdultInitiate((adult = "kid"), refreshTokens));
         toast.success("Change Kid Success <3");
+        dispatch(clearErrors());
       } else if (verifiedPassword.status === 400) {
         toast.success("Wrong Password ");
+        dispatch(clearErrors());
       }
     },
     [verifiedPassword]
   );
+  console.log(modal, "modal");
   return (
     <>
       <HeaderStyle />
@@ -114,32 +121,12 @@ const Header = () => {
                 )}
 
                 <div className="profile">
-                  {modal ? (
-                    <div className="modal">
-                      <span>Verify Password</span>
-                      <i
-                        className="fa-solid fa-circle-xmark"
-                        onClick={() => setModal(!modal)}
-                      ></i>
-                      <input
-                        value={verifyPassword}
-                        type="password"
-                        onChange={(e) => setVerifyPassword(e.target.value)}
-                      />
-                      <button className="Verify" onClick={handleVerify}>
-                        Verify
-                      </button>
-                    </div>
-                  ) : (
-                    <>
-                      <i className="fas fa-caret-down"></i>
-                      <div className="options">
-                        <span>Setting</span>
-                        <span onClick={handleLogout}>Logout</span>
-                        <span onClick={handleKidMode}>Kid Mode</span>
-                      </div>
-                    </>
-                  )}
+                  <i className="fas fa-caret-down"></i>
+                  <div className="options">
+                    <span>Setting</span>
+                    <span onClick={handleLogout}>Logout</span>
+                    <span onClick={handleKidMode}>Kid Mode</span>
+                  </div>
                 </div>
               </>
             ) : (
@@ -176,6 +163,25 @@ const Header = () => {
           </nav>
         </div>
       </div>
+      {modal && (
+        <div className="modal" onDoubleClick={() => setModal(!modal)}>
+          <div className="modal-content">
+            <span>Verify Password</span>
+            <i
+              className="fa-solid fa-circle-xmark"
+              onClick={() => setModal(!modal)}
+            ></i>
+            <input
+              value={verifyPassword}
+              type="password"
+              onChange={(e) => setVerifyPassword(e.target.value)}
+            />
+            <button className="Verify" onClick={handleVerify}>
+              Verify
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 };

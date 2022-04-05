@@ -194,6 +194,88 @@ export const HeaderStyle = createGlobalStyle`
 .nav-links:hover{
   color: red;
 }
+ .modal {
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color:rgba(0, 0, 0, 0.3);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  transition: .4s ease-in-out;
+  padding:20px;
+  z-index:1;
+}
+.modal-content{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:500px;
+  height:400px;
+  max-width:100%;
+  background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGtpnO6isWOnv0xoeVsauA_Lq7_4k5hENz6Q&usqp=CAU');
+  background-size:100% 100%;
+  border:1px solid gray;
+  border-radius:10px;
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.modal-content span {
+  font-size:26px;
+  font-weight:800;
+  color:red;
+}
+.modal-content i {
+  position:absolute;
+  top:2%;
+  right:2%;
+  color:white;
+  &:hover {
+    color:red;
+  }
+}
+.modal-content input {
+
+  color: #333;
+  font-size: 1.2rem;
+	margin: 0 auto;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  background-color: rgb(240, 240, 240);
+  border: solid;
+  width: 90%;
+  display: block;
+  transition: all 0.3s;
+}
+
+  &::placeholder {
+    color: lightgray;
+  }
+}
+.modal-content .Verify{
+  width: 120px;
+  background-color: red;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-top:5px;
+  padding:15px;
+  font-size: 20px;
+  border-radius: 8px;
+  font-weight: 400;
+  -webkit-box-shadow: 0px 10px 20px -6px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 10px 20px -6px rgba(0, 0, 0, 0.12);
+  &:hover {
+    color:red;
+    background-color:rgb(210, 210, 210);
+  }
+}
 // mobile
 .navbar_mobile{
   width:28px;

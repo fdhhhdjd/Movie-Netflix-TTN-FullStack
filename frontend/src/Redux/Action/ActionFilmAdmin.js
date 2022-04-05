@@ -167,3 +167,7 @@ export const LoginKidInitiate = (i_password, refreshTokens) => {
     }
   };
 };
+//!CLEAR_ERRORS
+export const clearErrors = () => async (dispatch) => {
+  dispatch({ type: types.CLEAR_ERRORS_SUCCESS });
+};
