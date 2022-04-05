@@ -107,7 +107,54 @@ export const HeaderStyle = createGlobalStyle`
   border-radius: 5px;
   transition: .4s ease-in-out;
 }
+.navbar .container .right .profile .modal {
+  position:relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border:1px solid gray;
+  transition: .4s ease-in-out;
+  padding:20px;
+  margin-top:60px;
+}
+.navbar .container .right .profile .modal span {
+  font-size:18px;
+  font-weight:600;
+}
+.navbar .container .right .profile .modal i {
+  position:absolute;
+  top:10%;
+  right:5%;
+}
+.navbar .container .right .profile .modal input {
+  height: 25px;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  padding: 0 10px;
+  margin-bottom: 15px;
+  background: #333;
 
+  &::placeholder {
+    color: lightgray;
+  }
+}
+.navbar .container .right .profile .modal .Verify{
+  width: 80px;
+  background-color: red;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-top:5px;
+  padding:2px;
+  font-size: 18px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  -webkit-box-shadow: 0px 10px 20px -6px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 10px 20px -6px rgba(0, 0, 0, 0.12);
+}
 .navbar .container .right .profile span {
   padding: 10px;
   cursor: pointer;

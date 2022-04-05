@@ -128,3 +128,7 @@ export const GET_ALL_ADULT_FAIL = "GET_ALL_ADULT_FAIL";
 export const GET_ALL_KID_START = "GET_ALL_KID_START ";
 export const GET_ALL_KID_SUCCESS = "GET_ALL_KID_SUCCESS";
 export const GET_ALL_KID_FAIL = "GET_ALL_KID_FAIL";
+//*Get login KId
+export const LOGIN_KID_START = "LOGIN_KID_START ";
+export const LOGIN_KID_SUCCESS = "LOGIN_KID_SUCCESS";
+export const LOGIN_KID_FAIL = "LOGIN_KID_FAIL";
