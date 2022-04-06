@@ -3,7 +3,7 @@ const initialState = {
   loading: false,
   error: null,
   categories: [],
-  verifiedPassword: "",
+  verifiedPassword: [],
   film: [],
   rating: [],
   favourite: [],
@@ -106,6 +106,16 @@ const AdminFilmReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case types.CLEAR_ERRORS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        film: [],
+        rating: [],
+        favourite: [],
+        categories: [],
+        verifiedPassword: [],
       };
     default:
       return state;
