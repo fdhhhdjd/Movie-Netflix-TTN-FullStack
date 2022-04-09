@@ -1,13 +1,12 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { logo } from "../../imports/image";
+import swal from "sweetalert";
+import Swal from "sweetalert2";
+import { CheckPass, logo, True } from "../../imports/image";
 import { LogoutInitiate } from "../../Redux/Action/ActionAuth";
-import {
-  LoginKidInitiate,
-  clearErrors,
-} from "../../Redux/Action/ActionFilmAdmin";
 import { UpdateAdultInitiate } from "../../Redux/Action/ActionFilmadult";
 import { HeaderStyle } from "../../Style/HeaderStyle/HeaderStyle";
 const Header = () => {
@@ -15,15 +14,12 @@ const Header = () => {
   const { profile, refreshTokens } = useSelector((state) => state.auth);
   const { allFilmAdult, updateAdult } = useSelector((state) => state.adult);
   const { verifiedPassword } = useSelector((state) => state.film);
-  console.log(verifiedPassword, "aaaaaaaaaaaaaa");
   const [activeTab, setActiveTab] = useState("Home");
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const [isAdult, setIsAdult] = useState(updateAdult.msg || profile.adult);
-  const [verifyPassword, setVerifyPassword] = useState("");
-  const [modal, setModal] = useState(false);
-  console.log(profile, "auth");
+  console.log(profile.image.url, "auth");
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.pageYOffset !== 0);
@@ -49,32 +45,87 @@ const Header = () => {
       setActiveTab("Products");
     }
   }, [location]);
-  const handleExitKid = () => {
-    window.location.href = "/browse";
+  const handleKidMode = (adult) => {
+    dispatch(UpdateAdultInitiate((adult = "kid"), refreshTokens));
+    setIsAdult("kid");
   };
-  const handleKidMode = () => {
-    setModal(!modal);
-    toast.success("Please enter password !");
+  const handleExitKid = async () => {
+    try {
+      return await swal({
+        title: "Are you sure to get out of kids mode ?",
+        icon: "warning",
+        buttons: true,
+        warningMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          Swal.fire({
+            title: "Please Enter Password !!",
+            input: "password",
+            inputAttributes: {
+              autocapitalize: "off",
+            },
+            showCancelButton: true,
+            confirmButtonText: "Enter",
+            confirmButtonColor: "#1cb803",
+            showLoaderOnConfirm: true,
+            preConfirm: (checkPass) => {
+              return axios
+                .post(
+                  `/api/film/kid/exit`,
+                  {
+                    i_password: checkPass,
+                  },
+                  {
+                    headers: { Authorization: refreshTokens },
+                  }
+                )
+                .then((res) => {
+                  console.log(res.data, "res");
+
+                  if (res.data.status === 400) {
+                    return Swal.showValidationMessage(
+                      `Request fail: ${res.data.msg}`
+                    );
+                  } else if (res.data.status === 200) {
+                    // dispatch(DeleteOrderNewUserInitial({ id }));
+                    // setCallback(!callback);
+                  }
+                })
+                .catch((error) => {
+                  return Swal.showValidationMessage(`Request failed: ${error}`);
+                });
+            },
+            allowOutsideClick: () => !Swal.isLoading(),
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: "Admin Thank You 😊!!",
+                imageUrl: `${profile && profile.image.url}`,
+                width: 600,
+                padding: "3em",
+                color: "#716add",
+                background: `#fff url(${True}) `,
+                backdrop: `
+                    rgba(0,0,0,0.4)
+                    url(${CheckPass})
+                    left top
+                    no-repeat
+                  `,
+              }).then(() => {
+                window.location.href = "/browse";
+              });
+            }
+
+            console.log(result, "result");
+          });
+        } else {
+          swal("Thank you for 😆'!");
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
-  const handleVerify = () => {
-    dispatch(LoginKidInitiate(verifyPassword, refreshTokens));
-  };
-  useEffect(
-    (adult) => {
-      if (verifiedPassword.status === 200) {
-        setModal(false);
-        setIsAdult("kid");
-        dispatch(UpdateAdultInitiate((adult = "kid"), refreshTokens));
-        toast.success("Change Kid Success <3");
-        dispatch(clearErrors());
-      } else if (verifiedPassword.status === 400) {
-        toast.success("Wrong Password ");
-        dispatch(clearErrors());
-      }
-    },
-    [verifiedPassword]
-  );
-  console.log(modal, "modal");
   return (
     <>
       <HeaderStyle />
@@ -163,25 +214,6 @@ const Header = () => {
           </nav>
         </div>
       </div>
-      {modal && (
-        <div className="modal" onDoubleClick={() => setModal(!modal)}>
-          <div className="modal-content">
-            <span>Verify Password</span>
-            <i
-              className="fa-solid fa-circle-xmark"
-              onClick={() => setModal(!modal)}
-            ></i>
-            <input
-              value={verifyPassword}
-              type="password"
-              onChange={(e) => setVerifyPassword(e.target.value)}
-            />
-            <button className="Verify" onClick={handleVerify}>
-              Verify
-            </button>
-          </div>
-        </div>
-      )}
     </>
   );
 };
