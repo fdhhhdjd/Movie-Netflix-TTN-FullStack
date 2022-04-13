@@ -49,7 +49,11 @@ const Login = () => {
   const { emailRequire, passwordLoginRequire } = useRequireInput();
   const { handleIsLock, isLock } = useTogglePassword();
   const HandleGoogle = (response) => {
-    dispatch(loginGoogleInitiate(response));
+    if (response.error) {
+      return toast.error(response.error);
+    } else {
+      dispatch(loginGoogleInitiate(response));
+    }
   };
 
   const handleSubmitForm = (data) => {
