@@ -158,7 +158,7 @@ const Login = () => {
             </div>
             <footer>
               <GoogleLogin
-                clientId="1083950083676-fr9m6jsgig4aalf6mj81t8rlgl9v45bd.apps.googleusercontent.com"
+                clientId={process.env.REACT_APP_GOOGLE_LOGIN_KEY}
                 buttonText="Login Google +"
                 onSuccess={HandleGoogle}
                 onFailure={HandleGoogle}
@@ -172,7 +172,7 @@ const Login = () => {
               />
               <ReCAPTCHA
                 ref={reCaptcha}
-                sitekey="6LfVSXwcAAAAAF84Eh53ZDlQX-hyJeh_jrEEY3S5"
+                sitekey={process.env.REACT_APP_RECAPTCHA_KEY}
                 onChange={(token) => setToken(token)}
                 onExpired={(e) => setToken("")}
                 theme="dark"
