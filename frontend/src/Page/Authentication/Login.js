@@ -150,7 +150,7 @@ const Login = () => {
                 <input type="checkbox" onChange={HandleRemember} />
                 <span>Remember me</span>
               </div>
-              <a href="/forget">Forgot password?</a>
+              <Link to="/forget">Forgot password?</Link>
             </div>
             <footer>
               <GoogleLogin
