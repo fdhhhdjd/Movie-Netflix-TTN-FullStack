@@ -70,21 +70,21 @@ const Login = () => {
   //   setIsLock(!isLock);
   // };
 
-  useEffect(() => {
-    if (auth.status === 200) {
-      if (location.state?.from) {
-        navigate(location.state.from);
-        window.location.reload();
-      } else {
-        window.location.href = "/browse";
-      }
-      localStorage.setItem("firstLogin", true);
-    }
-    if (auth.success === false) {
-      toast.error(`${auth.msg}`);
-      dispatch(clearErrors());
-    }
-  }, [Auth]);
+  // useEffect(() => {
+  //   if (auth.status === 200) {
+  //     if (location.state?.from) {
+  //       navigate(location.state.from);
+  //       window.location.reload();
+  //     } else {
+  //       window.location.href = "/browse";
+  //     }
+  //     localStorage.setItem("firstLogin", true);
+  //   }
+  //   if (auth.success === false) {
+  //     toast.error(`${auth.msg}`);
+  //     dispatch(clearErrors());
+  //   }
+  // }, [Auth]);
   return (
     <>
       <AuthenticationStyle />
