@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -54,6 +55,9 @@ const Login = () => {
     } else {
       dispatch(loginGoogleInitiate(response));
     }
+  };
+  const responseFacebook = (response) => {
+    console.log(response);
   };
 
   const handleSubmitForm = (data) => {
@@ -169,6 +173,15 @@ const Login = () => {
                     <a>Login with Google</a>
                   </div>
                 )}
+              />
+              <FacebookLogin
+                // appId={process.env.REACT_APP_KEY_FACEBOOK}
+                appId={process.env.REACT_APP_KEY_FACEBOOK_TEST}
+                autoLoad={false}
+                callback={responseFacebook}
+                icon="fa-facebook"
+                cssClass="btnFacebook"
+                textButton="&nbsp;&nbsp;Sign In with Facebook"
               />
               <ReCAPTCHA
                 ref={reCaptcha}

@@ -36,4 +36,7 @@ router.put("/password/reset/:token", userCtrl.resetPassword);
 //đăng nhập gg tài khoản khách hàng
 router.post("/loginGoogle", userCtrl.LoginGoogleCustomer);
 
+//đăng nhập fb tài khoản khách hàng
+router.post("/loginFacebook", userCtrl.LoginFacebook);
+
 module.exports = router;

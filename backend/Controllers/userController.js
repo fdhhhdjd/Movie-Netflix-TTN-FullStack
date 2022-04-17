@@ -8,6 +8,7 @@ const sendEmail = require("./SendEmail");
 const CLIENT_ID = process.env.GOOGLE_CLIENT_IDS;
 const client = new OAuth2Client(CLIENT_ID);
 const path = require("path");
+const CONSTANTS = require("../configs/contants");
 const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
 
@@ -60,7 +61,7 @@ const userCtrl = {
       await newUser.save();
 
       //url to be used in the email
-      const currentUrl = "http://localhost:5000/";
+      const currentUrl = `${req.protocol}://${req.get("host")}/`;
       const uniqueString = uuidv4() + newUser.id;
 
       //hash unique string
@@ -213,7 +214,7 @@ const userCtrl = {
       await newUser.save();
 
       //url to be used in the email
-      const currentUrl = "http://localhost:5000/";
+      const currentUrl = `${req.protocol}://${req.get("host")}/`;
       const uniqueString = uuidv4() + newUser.id;
 
       //hash unique string
@@ -859,6 +860,101 @@ const userCtrl = {
             }
           });
         }
+      });
+  },
+  //đăng nhập khách hàng fb
+  LoginFacebook: async (req, res) => {
+    const { userID, accessToken } = req.body;
+    let urlGraphFacebook = STORAGE.getURIFromTemplate(
+      CONSTANTS.STORAGE_GRAPH_FACEBOOK,
+      {
+        userID,
+        accessToken,
+      }
+    );
+    fetch(urlGraphFacebook, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        const { email, name, picture } = response;
+        Users.findOne({ email, role: 0 }).exec((error, user) => {
+          if (error) {
+            return res.json({
+              status: 400,
+              success: false,
+              msg: "Invalid Authentication",
+            });
+          } else {
+            if (user) {
+              const accesstoken = STORAGE.createAccessToken({
+                id: user._id,
+                role: user.role,
+              });
+              const refreshtoken = STORAGE.createRefreshToken({
+                id: user._id,
+                role: user.role,
+              });
+
+              res.cookie("refreshtoken", refreshtoken, {
+                httpOnly: true,
+                path: "/api/auth/customer/refresh_token",
+                maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
+              });
+              const { _id, name, email, image } = user;
+              res.json({
+                status: 200,
+                success: true,
+                msg: "Login successfully",
+                accesstoken,
+                user: { _id, name, email, image },
+              });
+            } else {
+              let password = email + process.env.ACCESS_TOKEN_SECRET;
+              let newUser = new Users({
+                name: name,
+                email,
+                password,
+                image: {
+                  public_id: password,
+                  url: picture.data.url,
+                },
+                verified: true,
+              });
+              newUser.save((err, data) => {
+                if (err) {
+                  return res.json({
+                    status: 400,
+                    success: false,
+                    msg: "Invalid Authentication",
+                  });
+                }
+                const accesstoken = STORAGE.createAccessToken({
+                  id: data._id,
+                  role: data.role,
+                });
+                const refreshtoken = STORAGE.createRefreshToken({
+                  id: data._id,
+                  role: data.role,
+                });
+
+                res.cookie("refreshtoken", refreshtoken, {
+                  httpOnly: true,
+                  path: "/api/auth/customer/refresh_token",
+                  maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
+                });
+                const { _id, name, email, image } = newUser;
+                res.json({
+                  status: 200,
+                  success: true,
+                  msg: "Register successfully",
+                  accesstoken,
+                  user: { _id, name, email, image },
+                });
+              });
+            }
+          }
+        });
       });
   },
 
