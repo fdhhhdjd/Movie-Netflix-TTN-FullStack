@@ -176,6 +176,15 @@ const Feedback = () => {
             </form>
           </div>
         </div>
+        <div className="alo-now">
+          <a href="tel:0339253073">
+            <span className="alo-phone">
+              <span className="animated infinite zoomIn alo-ph-circle"></span>
+              <span className="animated infinite pulse alo-ph-circle-fill"></span>
+              <span className="animated infinite tada alo-ph-img-circle"></span>
+            </span>
+          </a>
+        </div>
       </section>
       <div style={{ background: "black", color: "white" }}>
         <marquee
@@ -185,9 +194,9 @@ const Feedback = () => {
         >
           Chào mừng bạn đến với Web Movie NTripleT,đây là phần phản hồi khách
           hàng đến với Team,ở đây bạn có thể phản hồi bất kì khi cảm thầy mình
-          chưa hài lòng để mình có thể sữa chưa cũng như khắc phục webside,mình
+          chưa hài lòng để mình có thể sữa chưa cũng như khắc phục website,mình
           sẽ trả lời những phản hồi của bạn sớm nhất,cảm ơn mọi người đã ghé
-          thăm,chúc các bạn xem phim vui vẻ ,
+          thăm, chúc các bạn xem phim vui vẻ...
         </marquee>
       </div>
     </>

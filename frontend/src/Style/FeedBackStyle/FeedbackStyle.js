@@ -6,6 +6,113 @@ export const FeedbackStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
 }
+
+.alo-now .alo-phone {
+    position: fixed;
+    background-color: transparent;
+    bottom: 20px;
+    height: 110px;
+    left: 0;
+    visibility: visible;
+    width: 110px;
+    z-index: 200000!important;
+}
+
+.alo-now .alo-phone .alo-ph-circle {
+    display: block;
+    background-color: transparent;
+    border: 2px solid #e50914;
+    border-radius: 100%;
+    height: 90px;
+    left: 12px;
+    opacity: .5;
+    position: absolute;
+    top: 12px;
+    width: 90px;
+}
+
+.alo-now .alo-phone .alo-ph-img-circle {
+    display: block;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABNmlDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjarY6xSsNQFEDPi6LiUCsEcXB4kygotupgxqQtRRCs1SHJ1qShSmkSXl7VfoSjWwcXd7/AyVFwUPwC/0Bx6uAQIYODCJ7p3MPlcsGo2HWnYZRhEGvVbjrS9Xw5+8QMUwDQCbPUbrUOAOIkjvjB5ysC4HnTrjsN/sZ8mCoNTIDtbpSFICpA/0KnGsQYMIN+qkHcAaY6addAPAClXu4vQCnI/Q0oKdfzQXwAZs/1fDDmADPIfQUwdXSpAWpJOlJnvVMtq5ZlSbubBJE8HmU6GmRyPw4TlSaqo6MukP8HwGK+2G46cq1qWXvr/DOu58vc3o8QgFh6LFpBOFTn3yqMnd/n4sZ4GQ5vYXpStN0ruNmAheuirVahvAX34y/Axk/96FpPYgAAACBjSFJNAAB6JQAAgIMAAPn/AACA6AAAUggAARVYAAA6lwAAF2/XWh+QAAAB/ElEQVR42uya7W3CMBCG31QM4A1aNggTlG6QbpBMkHYC1AloJ4BOABuEDcgGtBOETnD9c1ERCH/lwxeaV8oPFGP86Hy+DxMREW5Bd7gRjSDSNGn4/RiAOvm8C0ZCRD5PSkQVXSr1nK/xE3mcWimA1ZV3JYBZCIO4giQANoYxMwYS6+xKY4lT5dJPreWZY+uspqSCKPYN27GJVBDXheVSQe494ksiEWTuMXcu1dld9SARxDX1OAJ4lgjy4zDnFsC076A4adEiRwAZg4hOUSpNoCsBPDGM+HqkNGynYBCuILuWj+dgWysGsNe8nwL4GsrW0m2fxZBq9rW0rNcX5MOQ9eZD8JFahcG5g/iKT671alGAYQggpYWvpEPYWrU/HDTOfeRIX0q2SL3QN4tGhZJukVobQyXYWw7WtLDKDIuM+ZSzscyCE9PCy5IttCvnZNaeiGLNHKuz8ZVh/MXTVu/1xQKmIqLEAuJ0fNo3iG5B51oSkeKnsBi/4bG9gYB/lCytU5G9DryFW+3Gm+JLwU7ehbJrwTjq4DJU8bHcVbEV9dXXqqP6uqO5e2/QZRYJpqu2IUAA4B3tXvx8hgKp05QZW6dJqrLTNkB6vrRURLRwPHqtYgkC3cLWQAcDQGGKH13FER/NATzi786+BPDNjm1dMkfjn2pGkBHkf4D8DgBJDuDHx9BN+gAAAABJRU5ErkJggg==) center center/70% auto no-repeat #e50914;
+    border: 2px solid transparent;
+    border-radius: 100%;
+    height: 30px;
+    left: 43px;
+    opacity: .7;
+    position: absolute;
+    top: 43px;
+    transform-origin: 50% 50% 0;
+    transition: all .2s ease-in-out 0s;
+    width: 30px;
+}
+
+.alo-now .alo-phone .alo-ph-circle-fill {
+    display: block;
+    background-color: #e50914;
+    border: 2px solid transparent;
+    border-radius: 100%;
+    height: 60px;
+    left: 28px;
+    opacity: .75!important;
+    position: absolute;
+    top: 28px;
+    transition: all .5s ease 0s;
+    width: 60px;
+}
+
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+.animated.infinite {
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+.zoomIn {
+    animation-name: zoomIn;
+}
+
+.pulse {
+    animation-name: pulse;
+    animation-timing-function: ease-in-out;
+}
+
+.tada {
+    animation-name: tada;
+}
+
+@keyframes zoomIn {
+    0% {opacity: 0;
+    transform: scale3d(.3, .3, .3);}
+    50% {opacity: 1;}
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale3d(1, 1, 1);
+    }
+    50% {
+        transform: scale3d(1.05, 1.05, 1.05)
+    }
+}
+
+@keyframes tada {
+    0%, 100% {
+        transform: scale3d(1,1,1);
+    }
+    10%, 20% {
+        transform: scale3d(.9,.9,.9) rotate3d(0,0,1,-3deg);
+    }
+    30%, 50%, 70%, 90% {
+        transform: scale3d(1.1,1.1,1.1) rotate3d(0,0,1,3deg);
+    }
+    40%, 60%, 80% {
+        transform: scale3d(1.1,1.1,1.1) rotate3d(0,0,1,-3deg);
+    }
+}
+
 .contact{
     position: relative;
     min-height: 100vh;
@@ -199,6 +306,10 @@ margin-left:1000px;
 margin-bottom:260px;
 height:100px;
 width:100px;
+
+
+
+
 @media only screen and (max-width: 390px) {
     padding:0;
     margin:0;
