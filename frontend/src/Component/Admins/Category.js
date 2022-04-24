@@ -6,10 +6,9 @@ const Category = () => {
     <>
     <GlobalStyleAmin/>
     <TopBar/>
-    <div className="container">
+    <div className="admin__container">
         <SideBarAdmins/>
         <Categorys/>
-        
     </div>
 </>
   )

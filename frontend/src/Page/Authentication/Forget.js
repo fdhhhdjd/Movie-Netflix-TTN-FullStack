@@ -55,7 +55,7 @@ const Forget = () => {
             <img className="logo" src={logo} alt="" />
           </div>
         </div>
-        <div className="container">
+        <div className="forget__container">
           <form onSubmit={handleForget}>
             <h1>Forget</h1>
             <input

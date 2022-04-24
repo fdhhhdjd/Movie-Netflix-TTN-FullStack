@@ -130,7 +130,7 @@ const Header = () => {
     <>
       <HeaderStyle />
       <div className={isScrolled ? "navbar scrolled" : "navbar"}>
-        <div className="container">
+        <div className="header__container">
           <div className="left">
             <img src={logo} alt="" />
             <span to="/" className="link ">

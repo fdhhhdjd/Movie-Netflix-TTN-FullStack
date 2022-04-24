@@ -6,10 +6,9 @@ const SeriesFilm = () => {
     <>
     <GlobalStyleAmin/>
     <TopBar/>
-    <div className="container">
+    <div className="admin__container">
         <SideBarAdmins/>
         <SeriesFilms/>
-        
     </div>
 </>
   )

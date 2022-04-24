@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import swal2 from "sweetalert2";
 import {
   Category,
   ChangePassword,
@@ -16,7 +17,6 @@ import {
   NewDirector,
   NewFilm,
   NewUser,
-  NotFound,
   PrivateRouter,
   PrivateRouterAuth,
   Profile,
@@ -33,6 +33,7 @@ import {
   LoginAdmin,
   ProfileAdmin,
   Welcome,
+  NotFound,
 } from "./imports/LazyRouter";
 function App() {
   return (

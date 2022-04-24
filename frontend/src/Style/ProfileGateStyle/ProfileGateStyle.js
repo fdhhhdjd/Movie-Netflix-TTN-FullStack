@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 export const ProfileGateStyle = createGlobalStyle`
-    .container {
+    .gate__container {
         height: 100vh;
         background: #141414;
 
