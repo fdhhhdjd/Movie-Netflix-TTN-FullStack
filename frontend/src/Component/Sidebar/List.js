@@ -37,7 +37,7 @@ const List = () => {
             style={{ display: slideNumber === 0 && "none" }}
           />
           <div className="film-container" ref={listRef}>
-            {allFilmAdult
+            {allFilmAdult.data
               ? allFilmAdult.data.map((film, index) => {
                   return (
                     <Fragment key={film._id}>
