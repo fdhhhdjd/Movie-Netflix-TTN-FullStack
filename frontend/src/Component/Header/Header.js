@@ -19,7 +19,6 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const [isAdult, setIsAdult] = useState(updateAdult.msg || profile.adult);
-  console.log(profile.image.url, "auth");
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.pageYOffset !== 0);
@@ -163,7 +162,7 @@ const Header = () => {
                 <span>{profile.fullname || profile.name}</span>
 
                 <i className=" icon fas fa-bell" />
-                {profile.image && (
+                {profile.image.url && (
                   <img
                     src={profile.image.url}
                     alt=""
