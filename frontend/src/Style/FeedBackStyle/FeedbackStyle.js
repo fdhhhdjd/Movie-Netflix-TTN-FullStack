@@ -238,6 +238,7 @@ export const FeedbackStyle = createGlobalStyle`
  
 }
 .contactForm{
+    position:relative;
     width: 40%;
     padding:40px;
     background: #fff;
@@ -302,8 +303,8 @@ box-shadow: 0px 10px 20px -6px rgba(0, 0, 0, 0.12);
 }
 .logo-feedback{
 position:absolute;
-margin-left:1000px;
-margin-bottom:260px;
+top:10px;
+right:20px;
 height:100px;
 width:100px;
 
@@ -316,16 +317,11 @@ width:100px;
     display:none;
 }
 }
-@media(max-width:991px){
+@media(max-width:992px){
     .contact{
-       
-        margin:0;
-        padding-left:10px;
-        padding-top:50px;
-       
+
     }
     .containers{
-       
         width:100%;
         flex-direction: column;
     }
@@ -339,5 +335,17 @@ width:100px;
     .logo-feedback{
        display:none;
     }   
+    .contactInfo{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .box{
+            min-width:380px;
+        }
+    }
+    .contactForm{
+        max-width:380px;
+    }
 }
 `;
