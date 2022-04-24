@@ -19,7 +19,7 @@ export const HeaderStyle = createGlobalStyle`
   background-color: #0b0b0b;
 }
 
-.navbar .container {
+.navbar .header__container {
   padding: 0px 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -34,7 +34,7 @@ export const HeaderStyle = createGlobalStyle`
 
 }
 
-.navbar .container .left {
+.navbar .header__container .left {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -46,23 +46,23 @@ export const HeaderStyle = createGlobalStyle`
            }
 }
 
-.navbar .container .left img {
+.navbar .header__container .left img {
   height: 5rem;
   margin-top: 10px;
   margin-right: 30px;
 }
 
-.navbar .container .left > span {
+.navbar .header__container .left > span {
   margin-right: 20px;
   cursor: pointer;
   transition: .5s ease;
 }
 
-.navbar .container .left > span:hover {
+.navbar .header__container .left > span:hover {
   color: #b3b3b3;
 }
 
-.navbar .container .right {
+.navbar .header__container .right {
   color: #fff;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -76,13 +76,13 @@ export const HeaderStyle = createGlobalStyle`
            }
 }
 
-.navbar .container .right .icon {
+.navbar .header__container .right .icon {
   margin: 0px 15px;
   cursor: pointer;
   font-size: 22px;
 }
 
-.navbar .container .right img {
+.navbar .header__container .right img {
   width: 35px;
   height: 35px;
   border-radius: 5px;
@@ -92,22 +92,22 @@ export const HeaderStyle = createGlobalStyle`
   cursor: pointer;
 }
 
-.navbar .container .right .profile i {
+.navbar .header__container .right .profile i {
   cursor: pointer;
   transition: .3s ease-in-out;
 }
 
-.navbar .container .right .profile:hover i {
+.navbar .header__container .right .profile:hover i {
   transform: rotate(180deg);
 }
 
-.navbar .container .right .profile .options {
+.navbar .header__container .right .profile .options {
   display: none;
   background-color: #0b0b0b;
   border-radius: 5px;
   transition: .4s ease-in-out;
 }
-.navbar .container .right .profile .modal {
+.navbar .header__container .right .profile .modal {
   position:relative;
   display: flex;
   flex-direction: column;
@@ -117,16 +117,16 @@ export const HeaderStyle = createGlobalStyle`
   padding:20px;
   margin-top:60px;
 }
-.navbar .container .right .profile .modal span {
+.navbar .header__container .right .profile .modal span {
   font-size:18px;
   font-weight:600;
 }
-.navbar .container .right .profile .modal i {
+.navbar .header__container .right .profile .modal i {
   position:absolute;
   top:10%;
   right:5%;
 }
-.navbar .container .right .profile .modal input {
+.navbar .header__container .right .profile .modal input {
   height: 25px;
   color: #fff;
   border: none;
@@ -140,7 +140,7 @@ export const HeaderStyle = createGlobalStyle`
     color: lightgray;
   }
 }
-.navbar .container .right .profile .modal .Verify{
+.navbar .header__container .right .profile .modal .Verify{
   width: 80px;
   background-color: red;
   color: #fff;
@@ -155,12 +155,12 @@ export const HeaderStyle = createGlobalStyle`
   -webkit-box-shadow: 0px 10px 20px -6px rgba(0, 0, 0, 0.12);
   box-shadow: 0px 10px 20px -6px rgba(0, 0, 0, 0.12);
 }
-.navbar .container .right .profile span {
+.navbar .header__container .right .profile span {
   padding: 10px;
   cursor: pointer;
 }
 
-.navbar .container .right .profile:hover .options {
+.navbar .header__container .right .profile:hover .options {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -171,7 +171,7 @@ export const HeaderStyle = createGlobalStyle`
   position: fixed;
 }
 
-.navbar .container .right .exit {
+.navbar .header__container .right .exit {
   padding: 8px 30px;
   font-size: 1vw;
   border-radius: 3px;

@@ -5,7 +5,7 @@ export const GlobalStyleAmin = createGlobalStyle`
     font-family: 'Kanit', sans-serif;
     margin: 0;
 }
-.container{
+.admin__container{
     display: flex;
     margin-top: 10px;
 }

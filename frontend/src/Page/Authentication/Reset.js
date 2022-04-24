@@ -51,7 +51,7 @@ const Reset = () => {
             <img className="logo" src={logo} alt="" />
           </div>
         </div>
-        <div className="container">
+        <div className="auth__container">
           {resetPassword && resetPassword.success === true ? (
             <button className="loginButton1" onClick={() => navigate("/login")}>
               Thank Please Login Account 🥰

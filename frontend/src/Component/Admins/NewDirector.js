@@ -6,11 +6,9 @@ const NewDirector = () => {
     <>
     <GlobalStyleAmin/>
     <TopBar/>
-    <div className="container">
+    <div className="admin__container">
         <SideBarAdmins/>
         <NewDirectors/>
- 
-        
     </div>
 </>
   )

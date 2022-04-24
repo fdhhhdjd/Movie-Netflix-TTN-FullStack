@@ -33,7 +33,7 @@ const ProfileGate = () => {
     <>
       <ProfileGateStyle />
       <MetaData title="Choose Adult" />
-      <div className="container">
+      <div className="gate__container">
         <img src={logo} className="logo" alt="" />
         <div className="info">
           <span className="title">

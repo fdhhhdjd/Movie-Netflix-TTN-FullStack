@@ -41,7 +41,7 @@ export const TabStyle = createGlobalStyle`
     border-right: none;
   }
 
-  .tabs .container {
+  .tabs .tab__container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
@@ -56,12 +56,12 @@ export const TabStyle = createGlobalStyle`
     color: #fff;
   }
 
-  .tabs .container > div {
+  .tabs .tab__container > div {
     padding: 1.5rem 0;
     color: gray;
   }
 
-  .tabs .container > div:hover {
+  .tabs .tab__container > div:hover {
     color: #fff;
     cursor: pointer;
   }
@@ -147,7 +147,7 @@ export const TabStyle = createGlobalStyle`
     background: #222;
   }
 
-  .container {
+  .tab__container {
     max-width: 70%;
     margin: auto;
     overflow: hidden;
