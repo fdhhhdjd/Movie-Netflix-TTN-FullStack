@@ -103,7 +103,7 @@ const Login = () => {
             <img className="logo" src={logo} alt="" />
           </div>
         </div>
-        <div className="container">
+        <div className="auth__container">
           <form onSubmit={handleSubmit(handleSubmitForm)}>
             <h1>Sign In</h1>
             <div className="email-input">

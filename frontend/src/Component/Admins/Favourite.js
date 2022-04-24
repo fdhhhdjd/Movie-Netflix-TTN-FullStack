@@ -6,11 +6,9 @@ const Favourite = () => {
     <>
     <GlobalStyleAmin/>
     <TopBar/>
-    <div className="container">
+    <div className="admin__container">
         <SideBarAdmins/>
         <Favourites/>
-
-        
     </div>
 </>
   )

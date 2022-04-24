@@ -6,7 +6,7 @@ const Admin = () => {
     <div>
       <GlobalStyleAmin />
       <TopBar />
-      <div className="container">
+      <div className="admin__container">
         <SideBarAdmins />
       </div>
     </div>
