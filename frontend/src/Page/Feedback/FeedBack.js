@@ -60,7 +60,6 @@ const Feedback = () => {
       <FeedbackStyle />
       <MetaData title={`Feedback-${profile.fullname || profile.name}`} />
       <section className="contact">
-        <img src={logo} className="logo-feedback" alt="" />
         <div className="content">
           <h2>Customer FeedBack </h2>
         </div>
@@ -125,6 +124,7 @@ const Feedback = () => {
           </div>
           <div className="contactForm">
             <form onSubmit={handleSubmit}>
+              <img src={logo} className="logo-feedback" alt="" />
               <h2>Send Message</h2>
               <div className="inputBox">
                 <input

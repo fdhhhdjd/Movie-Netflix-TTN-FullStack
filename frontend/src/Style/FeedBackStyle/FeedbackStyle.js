@@ -238,6 +238,7 @@ export const FeedbackStyle = createGlobalStyle`
  
 }
 .contactForm{
+    position:relative;
     width: 40%;
     padding:40px;
     background: #fff;
@@ -302,8 +303,8 @@ box-shadow: 0px 10px 20px -6px rgba(0, 0, 0, 0.12);
 }
 .logo-feedback{
 position:absolute;
-margin-left:1000px;
-margin-bottom:260px;
+top:10px;
+right:20px;
 height:100px;
 width:100px;
 
@@ -313,19 +314,15 @@ width:100px;
 @media only screen and (max-width: 390px) {
     padding:0;
     margin:0;
-    display:none;
+
 }
 }
-@media(max-width:991px){
+@media only screen and (max-width: 992px) {
     .contact{
-       
-        margin:0;
-        padding-left:10px;
-        padding-top:50px;
-       
+        padding-top:120px;
+        padding-bottom:88px;
     }
     .containers{
-       
         width:100%;
         flex-direction: column;
     }
@@ -337,7 +334,47 @@ width:100px;
         width:100%;
     }
     .logo-feedback{
-       display:none;
+    //    display:none;
+        bottom:0;
+        right:0;
     }   
+    .contactInfo{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .box{
+            min-width:380px;
+        }
+    }
+    .contactForm{
+        min-width:500px;
+
+    }
+    .contactInfo{
+        padding:10px 10px;
+    }
 }
+
+@media only screen and (max-width: 576px) {
+    .contactForm{
+        min-width:380px;
+        height:100%;
+        margin:0;
+        padding:10px;
+        margin-bottom: 37px;
+    }
+        
+}
+@media only screen and (max-width: 390px) {
+    .contactForm{
+        min-width:300px;
+        height:100%;
+        margin:0;
+        padding:10px;
+        margin-bottom: 37px;
+    }
+        
+}
+
 `;
