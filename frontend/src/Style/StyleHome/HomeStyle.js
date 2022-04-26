@@ -6,13 +6,13 @@ export const HomeStyle = createGlobalStyle`
     overflow: hidden;
 }
 
-.open-modal {
-    background-color: #ccc;
+.home__content {
+    position: fixed !important;
+    background-color: #000;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
-
-// .fade-out {
-//     width: 100vw;
-//     height: 100vw;
-// }
 `;
 

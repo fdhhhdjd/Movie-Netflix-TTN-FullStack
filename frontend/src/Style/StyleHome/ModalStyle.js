@@ -13,9 +13,13 @@ export const ModalStyle = createGlobalStyle`
     }
 
     .modal-container {
-        position: relative;
+        position: absolute;
         height: max-content;
         max-width: 850px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         margin: 40px auto;
         background-color: #181818;
         border-radius: 8px;
