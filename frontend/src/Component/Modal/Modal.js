@@ -1,11 +1,3 @@
-// import {
-//   Add,
-//   PlayArrow,
-//   ThumbUpOutlined,
-//   Close,
-//   ListAlt,
-//   AddCircleOutline,
-// } from "@material-ui/icons";
 import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
 import { mainMovie, recMovies } from "../../imports/import";
 import { Recommend } from "../../imports/index";
