@@ -15,7 +15,7 @@ const Home = () => {
         {isOpenModal && (
           <div>
             <Modal setIsOpenModal={setIsOpenModal} />
-          </div>
+          </div> 
         )}
         <div className={isOpenModal && "home__content"}>
           <Feature setIsOpenModal={setIsOpenModal} className="test"/>

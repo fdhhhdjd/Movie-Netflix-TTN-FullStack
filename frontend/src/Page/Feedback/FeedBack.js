@@ -176,14 +176,25 @@ const Feedback = () => {
             </form>
           </div>
         </div>
-        <div className="alo-now">
-          <a href="tel:0339253073">
-            <span className="alo-phone">
-              <span className="animated infinite zoomIn alo-ph-circle"></span>
-              <span className="animated infinite pulse alo-ph-circle-fill"></span>
-              <span className="animated infinite tada alo-ph-img-circle"></span>
-            </span>
-          </a>
+        <div className="bubble-container">
+          <div className="bubble fb">
+            <a href="https://www.facebook.com/profile.php?id=100006139249437" target="_blank">
+              <span className="bubble-item">
+                <span className="animated infinite zoomIn bubble-circle fb"></span>
+                <span className="animated infinite pulse bubble-circle-fill fb"></span>
+                <span className="animated infinite tada phone-icon bubble-img-circle-fb"></span>
+              </span>
+            </a>
+          </div>
+          <div className="bubble phone">
+            <a href="tel:0339253073">
+              <span className="bubble-item">
+                <span className="animated infinite zoomIn bubble-circle phone"></span>
+                <span className="animated infinite pulse bubble-circle-fill phone"></span>
+                <span className="animated infinite tada bubble-img-circle-phone"></span>
+              </span>
+            </a>
+          </div>
         </div>
       </section>
       <div style={{ background: "black", color: "white" }}>
