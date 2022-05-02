@@ -70,6 +70,18 @@ export const LoginKidFail = (error) => ({
   type: types.LOGIN_KID_FAIL,
   payload: error,
 });
+// Film Web User
+export const FindFilmStart = () => ({
+  type: types.FIND_FILM_START,
+});
+export const FindFilmSuccess = (token) => ({
+  type: types.FIND_FILM_SUCCESS,
+  payload: token,
+});
+export const FindFilmFail = (error) => ({
+  type: types.FIND_FILM_FAIL,
+  payload: error,
+});
 //! Get All Category
 export const GetAllCategoryInitiate = (token) => {
   return async function (dispatch) {
@@ -164,6 +176,22 @@ export const LoginKidInitiate = (i_password, refreshTokens) => {
       dispatch(LoginKidSuccess(data));
     } catch (error) {
       dispatch(LoginKidFail(error));
+    }
+  };
+};
+// find phim
+export const FindFilmInitiate = (id, token) => {
+  return async function (dispatch) {
+    try {
+      dispatch(FindFilmStart());
+
+      const { data } = await axios.get(`/api/film/detail/${id}`, {
+        headers: { Authorization: token },
+      });
+
+      dispatch(FindFilmSuccess(data.data));
+    } catch (error) {
+      dispatch(FindFilmFail(error));
     }
   };
 };

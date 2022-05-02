@@ -8,8 +8,11 @@ import {
   ThumbUpOutlined,
   PlayArrowRounded,
 } from "@material-ui/icons";
+import { useDispatch, useSelector } from "react-redux";
 
 const Modal = ({ setIsOpenModal }) => {
+  const { findFilm } = useSelector((state) => state.film);
+  console.log(findFilm, "findFilm");
   const countSeason = (n) => {
     if (n > 1) {
       return `${n} seasons`;

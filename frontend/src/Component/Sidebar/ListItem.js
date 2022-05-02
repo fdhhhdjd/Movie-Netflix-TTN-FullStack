@@ -7,6 +7,8 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ListItemStyle } from "../../Style/StyleHome/ListItemStyle";
+import { useDispatch, useSelector } from "react-redux";
+import { FindFilmInitiate } from "../../Redux/Action/ActionFilmAdmin";
 export default function ListItem({
   image,
   ageLimit,
@@ -15,10 +17,17 @@ export default function ListItem({
   series,
   id,
   index,
+  setIsOpenModal,
 }) {
   const [isHovered, setIsHovered] = useState(false);
-
+  const [openModal, setOpenModal] = useState(false);
+  const { refreshTokens } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleModal = (id) => {
+    dispatch(FindFilmInitiate(id, refreshTokens));
+    setIsOpenModal(true);
+  };
   return (
     <>
       <ListItemStyle />
@@ -46,7 +55,7 @@ export default function ListItem({
                 </span>
                 <span className="icons-right">
                   <ArrowDropDownCircleOutlined
-                    onClick={() => navigate(`/home/${id}`)}
+                    onClick={() => handleModal(id)}
                   />
                 </span>
               </div>
