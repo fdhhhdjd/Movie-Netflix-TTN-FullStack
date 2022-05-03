@@ -7,6 +7,7 @@ const initialState = {
   film: [],
   rating: [],
   favourite: [],
+  findFilm: [],
 };
 const AdminFilmReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -36,6 +37,11 @@ const AdminFilmReducer = (state = initialState, action) => {
         loading: true,
       };
     case types.LOGIN_KID_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.FIND_FILM_START:
       return {
         ...state,
         loading: true,
@@ -71,6 +77,12 @@ const AdminFilmReducer = (state = initialState, action) => {
         loading: false,
         verifiedPassword: action.payload,
       };
+    case types.FIND_FILM_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        findFilm: action.payload,
+      };
     case types.GET_ALL_CATEGORY_FAIL:
       return {
         ...state,
@@ -102,6 +114,12 @@ const AdminFilmReducer = (state = initialState, action) => {
         error: action.payload,
       };
     case types.LOGIN_KID_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case types.FIND_FILM_FAIL:
       return {
         ...state,
         loading: false,

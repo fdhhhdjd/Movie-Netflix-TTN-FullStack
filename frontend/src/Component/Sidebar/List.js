@@ -6,7 +6,7 @@ import { Fragment, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { ListStyle } from "../../Style/StyleHome/listStyle";
 import { ListItem } from "../../imports/index";
-const List = () => {
+const List = ({ setIsOpenModal }) => {
   const [slideNumber, setSlideNumber] = useState(0);
   const { allFilmAdult, updateAdult } = useSelector((state) => state.adult);
   const { profile } = useSelector((state) => state.auth);
@@ -42,6 +42,7 @@ const List = () => {
                   return (
                     <Fragment key={film._id}>
                       <ListItem
+                        setIsOpenModal={setIsOpenModal}
                         image={film.image_film.url}
                         ageLimit={film.ageLimit}
                         filmLength={film.filmLength}

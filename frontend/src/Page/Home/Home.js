@@ -4,7 +4,7 @@ import { Feature, Modal, List, MetaData } from "../../imports/index";
 import { HomeStyle } from "../../Style/StyleHome/HomeStyle";
 const Home = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  
+
   console.log(isOpenModal, "isOpenModal");
   return (
     <>
@@ -18,10 +18,10 @@ const Home = () => {
           </div>
         )}
         <div className={isOpenModal && "home__content"}>
-          <Feature setIsOpenModal={setIsOpenModal} className="test"/>
-          <List />
-          <List />
-          <List />
+          <Feature setIsOpenModal={setIsOpenModal} className="test" />
+          <List setIsOpenModal={setIsOpenModal} />
+          <List setIsOpenModal={setIsOpenModal} />
+          <List setIsOpenModal={setIsOpenModal} />
           <Footer />
         </div>
       </div>

@@ -17,16 +17,16 @@ const Feedback = () => {
     subject: "",
     content: "",
   });
-  const { fullname, subject, content } = state;
+  const { fullname, subject, content, email } = state;
   const { profile } = useSelector((state) => state.auth);
   const { sendFeedBack } = useSelector((state) => state.feedback);
   const user = profile;
   const dispatch = useDispatch();
   useEffect(() => {
     if (user) {
-      user && setState(user);
+      user && setState({ fullname: user.fullname, email: user.email });
     }
-  }, [user]);
+  }, [user, sendFeedBack]);
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(SendFeedBackInitiate({ ...state }));
@@ -53,7 +53,7 @@ const Feedback = () => {
       }, 2000);
     }
   }, [sendFeedBack, dispatch]);
-
+  console.log(state, "state");
   return (
     <>
       <Header />
@@ -134,17 +134,17 @@ const Feedback = () => {
                   value={fullname || ""}
                   name="fullname"
                   onChange={handleChange}
-                  disabled={true}
+                  // disabled={true}
                 />
               </div>
               <div className="inputBox">
                 <input
                   className="form-control"
                   type="type"
-                  value={state.email || ""}
+                  value={email || ""}
                   name="email"
                   onChange={handleChange}
-                  disabled={true}
+                  // disabled={true}
                 />
               </div>
               <div className="inputBox">
