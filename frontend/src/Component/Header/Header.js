@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import swal from "sweetalert";
 import Swal from "sweetalert2";
@@ -151,9 +151,9 @@ const Header = () => {
             >
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Home <span className="sr-only">(current)</span>
-                  </a>
+                  <Link className="nav-link" to="/home">
+                    Home
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#">
@@ -171,9 +171,9 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" to="/feedback">
                     Feedback
-                  </a>
+                  </Link>
                 </li>
               </ul>
               <div className="right d-flex justify-content-between align-items-center">
@@ -201,7 +201,7 @@ const Header = () => {
                       </div>
                       <div className="profile dropdown mx-3">
                         <button
-                          class="btn btn-secondary dropdown-toggle"
+                          class="btn dropdown-toggle"
                           type="button"
                           id="dropdownMenuButton"
                           data-toggle="dropdown"
