@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import swal from "sweetalert";
 import Swal from "sweetalert2";
@@ -128,91 +128,127 @@ const Header = () => {
   return (
     <>
       <HeaderStyle />
-      <div className={isScrolled ? "navbar scrolled" : "navbar"}>
-        <div className="header__container">
-          <div className="left">
-            <img src={logo} alt="" />
-            <span to="/" className="link ">
-              <span
-                onClick={() => navigate("/home")}
-                className={` ${activeTab === "Home" ? "active" : ""}`}
-              >
-                Home
-              </span>
-            </span>
-            <span to="/series" className="link">
-              <span className="navbarmainLinks">TV Shows</span>
-            </span>
-            <span to="/movies" className="link">
-              <span className="navbarmainLinks">Movies</span>
-            </span>
-            <span>New & Popular</span>
-            <span
-              onClick={() => navigate("/feedback")}
-              className={` ${activeTab === "Feedback" ? "active" : ""}`}
+      <section className="header-section">
+        <div className="container">
+          <nav className="navbar navbar-expand-lg navbar-dark">
+            <a className="navbar-brand" href="#">
+              <img src={logo} alt="" className="img-fluid" />
+            </a>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
             >
-              Feedback
-            </span>
-          </div>
-          <div className="right">
-            <i className="icon fas fa-search" />
-
-            {isAdult === "adult" ? (
-              <>
-                <span>{profile.fullname || profile.name}</span>
-
-                <i className=" icon fas fa-bell" />
-                {profile.image.url && (
-                  <img
-                    src={profile.image.url}
-                    alt=""
-                    onClick={() => navigate("/profile")}
-                  />
-                )}
-
-                <div className="profile">
-                  <i className="fas fa-caret-down"></i>
-                  <div className="options">
-                    <span>Setting</span>
-                    <span onClick={handleLogout}>Logout</span>
-                    <span onClick={handleKidMode}>Kid Mode</span>
-                  </div>
+              <span className="navbar-toggler-icon" />
+            </button>
+            <div
+              className="collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/home">
+                    Home
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#">
+                    TV Shows
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#">
+                    Movie
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link " href="#">
+                    New & Popular
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/feedback">
+                    Feedback
+                  </Link>
+                </li>
+              </ul>
+              <div className="right d-flex justify-content-between align-items-center">
+                <div className="mr-3">
+                  <i className="icon fas fa-search " />
                 </div>
-              </>
-            ) : (
-              <>
-                {profile.image && (
-                  <img
-                    src={profile.image.url}
-                    alt=""
-                    onClick={() => navigate("/profile")}
-                  />
-                )}
-                <button onClick={handleExitKid} className="exit">
-                  Exit Kid
-                </button>
-              </>
-            )}
-          </div>
+                <div className="d-flex justify-content-between align-items-center">
+                  {isAdult === "adult" ? (
+                    <>
+                      <div className="mr-3">
+                        <span>{profile.fullname || profile.name}</span>
+                      </div>
 
-          <label htmlFor="nav-mobile-input" className="navbar_mobile">
-            <i className="fa-solid fa-bars-progress"></i>
-          </label>
-          <input
-            type="checkbox"
-            hidden
-            name=""
-            className="nav_input"
-            id="nav-mobile-input"
-          />
-          <label htmlFor="nav-mobile-input" className="navbar-overplay"></label>
-          <nav className="nav_mobile">
-            <label htmlFor="nav-mobile-input" className="nav_mobile_close">
-              <i className="fa-solid fa-circle-xmark"></i>
-            </label>
+                      <div className="mr-3">
+                        <i className=" icon fas fa-bell" />
+                      </div>
+                      <div className="mr-3">
+                        {profile.image.url && (
+                          <img
+                            src={profile.image.url}
+                            alt=""
+                            onClick={() => navigate("/profile")}
+                          />
+                        )}
+                      </div>
+                      <div className="profile dropdown mx-3">
+                        <button
+                          class="btn dropdown-toggle"
+                          type="button"
+                          id="dropdownMenuButton"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          {/* <i className=""></i> */}
+                        </button>
+
+                        <div
+                          className="options dropdown-menu"
+                          aria-labelledby="dropdownMenuButton"
+                        >
+                          <span class="dropdown-item">Setting</span>
+                          <span class="dropdown-item" onClick={handleLogout}>
+                            Logout
+                          </span>
+                          <span class="dropdown-item" onClick={handleKidMode}>
+                            Kid Mode
+                          </span>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div>
+                        {profile.image && (
+                          <img
+                            className="mr-3"
+                            src={profile.image.url}
+                            alt=""
+                            onClick={() => navigate("/profile")}
+                          />
+                        )}
+                      </div>
+                      <button onClick={handleExitKid} className="exit">
+                        Exit Kid
+                      </button>
+                    </>
+                  )}
+                </div>
+                <div></div>
+              </div>
+            </div>
           </nav>
         </div>
-      </div>
+      </section>
     </>
   );
 };

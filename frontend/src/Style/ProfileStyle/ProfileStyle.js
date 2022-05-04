@@ -2,6 +2,9 @@ import { createGlobalStyle } from "styled-components";
 
 export const ProfileStyle = createGlobalStyle`
 
+.container{
+  max-width:1800px;
+}
 .profileContainer {
   display: flex;
   height: 100vh;
