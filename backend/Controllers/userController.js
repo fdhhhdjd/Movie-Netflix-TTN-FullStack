@@ -5,9 +5,11 @@ const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const { OAuth2Client } = require("google-auth-library");
 const sendEmail = require("./SendEmail");
+const fetch = require("node-fetch");
 const CLIENT_ID = process.env.GOOGLE_CLIENT_IDS;
 const client = new OAuth2Client(CLIENT_ID);
 const path = require("path");
+const STORAGE = require("../utils/Storage");
 const CONSTANTS = require("../configs/contants");
 const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
@@ -879,6 +881,7 @@ const userCtrl = {
       .then((response) => {
         const { email, name, picture } = response;
         Users.findOne({ email, role: 0 }).exec((error, user) => {
+          console.log(user);
           if (error) {
             return res.json({
               status: 400,

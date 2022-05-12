@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import swal from "sweetalert";
 import { GlobalState } from "../../Contexts/GlobalState";
 import { logo } from "../../imports/image";
+import toastHot from "react-hot-toast";
 import {
   MetaData,
   useRequireInput,
@@ -17,10 +18,12 @@ import {
 import {
   clearErrors,
   loginGoogleInitiate,
+  loginFacebookInitiate,
   loginInitiate,
 } from "../../Redux/Action/ActionAuth";
 import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
 import LoadingSmall from "../Loading/LoadingSmall";
+import axios from "axios";
 const Login = () => {
   const DataRemember = localStorage.getItem("remember");
   const foundUser = JSON.parse(DataRemember);
@@ -57,9 +60,13 @@ const Login = () => {
     }
   };
   const responseFacebook = (response) => {
-    console.log(response);
+    console.log(response, "response");
+    if (response) {
+      dispatch(loginFacebookInitiate(response));
+    } else {
+      return toast.error(response.error);
+    }
   };
-
   const handleSubmitForm = (data) => {
     if (!token) {
       swal("Mời bạn xác thực đầy đủ 😍", {
@@ -138,8 +145,6 @@ const Login = () => {
                   className="fa fa-eye"
                   onClick={handleIsLock}
                   style={{ cursor: "pointer" }}
-
-                  
                 />
               )}
             </div>
@@ -177,8 +182,7 @@ const Login = () => {
                 )}
               />
               <FacebookLogin
-                // appId={process.env.REACT_APP_KEY_FACEBOOK}
-                appId={process.env.REACT_APP_KEY_FACEBOOK_TEST}
+                appId={process.env.REACT_APP_KEY_FACEBOOK}
                 autoLoad={false}
                 callback={responseFacebook}
                 icon="fa-facebook"
