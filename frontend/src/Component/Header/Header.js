@@ -130,33 +130,30 @@ const Header = () => {
       <HeaderStyle />
       <section className="header-section">
         <div className="container">
-          <nav className="navbar navbar-expand-lg navbar-dark">
-            <a className="navbar-brand" href="#">
-              <img src={logo} alt="" className="img-fluid" />
-            </a>
+          <nav class="navbar navbar-expand-sm navbar-dark bg-dark w-100">
             <button
-              className="navbar-toggler"
+              class="navbar-toggler d-lg-none"
               type="button"
               data-toggle="collapse"
-              data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
+              data-target="#collapsibleNavId"
+              aria-controls="collapsibleNavId"
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span className="navbar-toggler-icon" />
+              <span class="navbar-toggler-icon"></span>
             </button>
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav mr-auto">
-                <li className="nav-item">
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0 d-flex align-items-center">
+                <li class="nav-item">
+                  <img src={logo} alt="" className="img-fluid" />
+                </li>
+                <li class="nav-item">
                   <Link className="nav-link" to="/home">
                     Home
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
                     TV Shows
                   </a>
                 </li>
@@ -165,29 +162,25 @@ const Header = () => {
                     Movie
                   </a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link " href="#">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
                     New & Popular
                   </a>
                 </li>
-                <li className="nav-item">
+                <li class="nav-item">
                   <Link className="nav-link" to="/feedback">
                     Feedback
                   </Link>
                 </li>
               </ul>
-              <div className="right d-flex justify-content-between align-items-center">
+              <ul class="right navbar-nav my-2 my-lg-0 d-flex align-items-center">
                 <div className="mr-3">
                   <i className="icon fas fa-search " />
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
                   {isAdult === "adult" ? (
                     <>
-                      <div className="mr-3">
-                        <span>{profile.fullname || profile.name}</span>
-                      </div>
-
-                      <div className="mr-3">
+                      <div className="mr-2">
                         <i className=" icon fas fa-bell" />
                       </div>
                       <div className="mr-3">
@@ -199,7 +192,13 @@ const Header = () => {
                           />
                         )}
                       </div>
-                      <div className="profile dropdown mx-3">
+                      <li
+                        onClick={() => navigate("/profile")}
+                        class="nav-item dropdown mr-3"
+                      >
+                        {profile.fullname || profile.name}
+                      </li>
+                      <div className="profile dropdown mr-5">
                         <button
                           className="btn dropdown-toggle"
                           type="button"
@@ -249,8 +248,7 @@ const Header = () => {
                     </>
                   )}
                 </div>
-                <div></div>
-              </div>
+              </ul>
             </div>
           </nav>
         </div>

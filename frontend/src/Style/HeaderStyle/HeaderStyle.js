@@ -3,15 +3,25 @@ import { createGlobalStyle } from "styled-components";
 export const HeaderStyle = createGlobalStyle`
 .container{
   max-width: 1800px;
+  padding: 0 !important;
+  background: rgb(20,20,20) !important;
 }
   .header-section {
-    background: #333;
     img{
     max-width:70px;
     max-height:70px;
   }
   .navbar{
-    background: #333;
+    background: rgb(20,20,20) !important;
+    max-height: 70px !important;
+
+    .navbar-brand img {
+      width: 70px;
+    }
+
+    .nav-link {
+      font-size: 14px !important;
+    }
   }
   h3{
     color:#fff;
