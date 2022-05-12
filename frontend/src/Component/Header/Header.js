@@ -161,7 +161,7 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <a className="nav-link" href="/movies">
                     Movie
                   </a>
                 </li>
@@ -201,7 +201,7 @@ const Header = () => {
                       </div>
                       <div className="profile dropdown mx-3">
                         <button
-                          class="btn dropdown-toggle"
+                          className="btn dropdown-toggle"
                           type="button"
                           id="dropdownMenuButton"
                           data-toggle="dropdown"
@@ -215,11 +215,17 @@ const Header = () => {
                           className="options dropdown-menu"
                           aria-labelledby="dropdownMenuButton"
                         >
-                          <span class="dropdown-item">Setting</span>
-                          <span class="dropdown-item" onClick={handleLogout}>
+                          <span className="dropdown-item">Setting</span>
+                          <span
+                            className="dropdown-item"
+                            onClick={handleLogout}
+                          >
                             Logout
                           </span>
-                          <span class="dropdown-item" onClick={handleKidMode}>
+                          <span
+                            className="dropdown-item"
+                            onClick={handleKidMode}
+                          >
                             Kid Mode
                           </span>
                         </div>

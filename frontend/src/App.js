@@ -26,6 +26,7 @@ import {
   Reset,
   ResetAdmin,
   Login,
+  Movie,
 } from "./imports/index";
 import {
   Admin,
@@ -69,6 +70,9 @@ function App() {
           {/* Home   */}
           <Route element={<PrivateRouter />}>
             <Route path="/home" element={<Home />} />
+          </Route>
+          <Route element={<PrivateRouter />}>
+            <Route path="/movies" element={<Movie />} />
           </Route>
           {/* Profile User   */}
           <Route element={<PrivateRouter />}>
