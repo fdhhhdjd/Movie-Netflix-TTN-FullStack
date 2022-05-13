@@ -2,18 +2,19 @@ import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
 } from "@material-ui/icons";
-import { Fragment, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import axios from "axios";
+import { Fragment, useRef, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { ListStyle } from "../../Style/StyleHome/listStyle";
 import { ListItem } from "../../imports/index";
-const List = ({ setIsOpenModal }) => {
+import { FindFilmCategoryInitiate } from "../../Redux/Action/ActionFilmAdmin";
+const List = ({ setIsOpenModal, category }) => {
   const [slideNumber, setSlideNumber] = useState(0);
+  const [filmByCategory, setFilmByCategory] = useState([]);
   const { allFilmAdult, updateAdult } = useSelector((state) => state.adult);
-  const { profile } = useSelector((state) => state.auth);
+  const { refreshTokens, profile } = useSelector((state) => state.auth);
   const listRef = useRef();
-
-  console.log(allFilmAdult, "allFilm");
-
+  const dispatch = useDispatch();
   const handleClick = (direction) => {
     const distance = listRef.current.getBoundingClientRect().x - 50;
     if (direction === "left" && slideNumber > 0) {
@@ -25,11 +26,29 @@ const List = ({ setIsOpenModal }) => {
       listRef.current.style.transform = `translateX(${-230 + distance}px)`;
     }
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(
+          `/api/film/find/category/${category._id}`,
+          {
+            headers: { Authorization: refreshTokens },
+          }
+        );
+        setFilmByCategory(data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  console.log(profile, "film");
   return (
     <>
       <ListStyle />
       <section className="list">
-        <span className="list-title">Continue to watch</span>
+        <span className="list-title">{category.name}</span>
         <div className="wrapper">
           <ArrowBackIosOutlined
             className="slider-arrow left"
@@ -37,8 +56,30 @@ const List = ({ setIsOpenModal }) => {
             style={{ display: slideNumber === 0 && "none" }}
           />
           <div className="film-container" ref={listRef}>
-            {allFilmAdult.data
-              ? allFilmAdult.data.map((film, index) => {
+            {/* {
+              (profile.adult =
+                "kid" && allFilmAdult.data
+                  ? allFilmAdult.data.map((film, index) => {
+                      return (
+                        <Fragment key={film._id}>
+                          <ListItem
+                            setIsOpenModal={setIsOpenModal}
+                            image={film.image_film.url}
+                            ageLimit={film.ageLimit}
+                            filmLength={film.filmLength}
+                            category={film.category}
+                            series={film.seriesFilm}
+                            id={film._id}
+                            index={index}
+                          />
+                        </Fragment>
+                      );
+                    })
+                  : window.location.href("/browse"))
+            } */}
+
+            {filmByCategory
+              ? filmByCategory.map((film, index) => {
                   return (
                     <Fragment key={film._id}>
                       <ListItem

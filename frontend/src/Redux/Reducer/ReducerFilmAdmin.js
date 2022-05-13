@@ -8,6 +8,7 @@ const initialState = {
   rating: [],
   favourite: [],
   findFilm: [],
+  filmByCategory: [],
 };
 const AdminFilmReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -42,6 +43,11 @@ const AdminFilmReducer = (state = initialState, action) => {
         loading: true,
       };
     case types.FIND_FILM_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.FIND_FILM_CATEGORY_START:
       return {
         ...state,
         loading: true,
@@ -83,6 +89,12 @@ const AdminFilmReducer = (state = initialState, action) => {
         loading: false,
         findFilm: action.payload,
       };
+    case types.FIND_FILM_CATEGORY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        filmByCategory: action.payload,
+      };
     case types.GET_ALL_CATEGORY_FAIL:
       return {
         ...state,
@@ -120,6 +132,12 @@ const AdminFilmReducer = (state = initialState, action) => {
         error: action.payload,
       };
     case types.FIND_FILM_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case types.FIND_FILM_CATEGORY_FAIL:
       return {
         ...state,
         loading: false,

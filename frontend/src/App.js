@@ -25,11 +25,11 @@ import {
   Register,
   Reset,
   ResetAdmin,
+  Login,
 } from "./imports/index";
 import {
   Admin,
   Home,
-  Login,
   LoginAdmin,
   ProfileAdmin,
   Welcome,

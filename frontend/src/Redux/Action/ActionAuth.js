@@ -37,6 +37,18 @@ export const LoginGoogleFail = (error) => ({
   type: types.LOGIN_GOOGLE_FAIL,
   payload: error,
 });
+//?Login facebook
+export const LoginFacebookStart = () => ({
+  type: types.LOGIN_FACEBOOK_START,
+});
+export const LoginFacebookSuccess = (api) => ({
+  type: types.LOGIN_FACEBOOK_SUCCESS,
+  payload: api,
+});
+export const LoginFacebookFail = (error) => ({
+  type: types.LOGIN_FACEBOOK_FAIL,
+  payload: error,
+});
 //?Logout
 export const LogoutStart = () => ({
   type: types.LOGOUT_API_START,
@@ -166,6 +178,24 @@ export const loginGoogleInitiate = (response) => {
       })
       .catch((error) => {
         dispatch(LoginGoogleFail(error.data));
+      });
+  };
+};
+export const loginFacebookInitiate = (response) => {
+  return async function (dispatch) {
+    dispatch(LoginFacebookStart());
+    console.log(response.userID, "duy thinh");
+    await axios
+      .post("/api/auth/customer/loginFacebook", {
+        userID: response?.userID,
+        accessToken: response?.accessToken,
+      })
+      .then((user) => {
+        console.log(user, "user");
+        dispatch(LoginFacebookSuccess(user.data));
+      })
+      .catch((error) => {
+        dispatch(LoginFacebookFail(error.data));
       });
   };
 };

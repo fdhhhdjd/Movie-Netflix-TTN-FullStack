@@ -15,6 +15,7 @@ const initialState = {
 const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.LOGIN_API_START:
+    case types.LOGIN_FACEBOOK_START:
     case types.REGISTER_API_START:
     case types.REFRESH_TOKEN_START:
     case types.LOGOUT_API_START:
@@ -39,6 +40,7 @@ const AuthReducer = (state = initialState, action) => {
 
     case types.LOGIN_API_SUCCESS:
     case types.LOGIN_GOOGLE_SUCCESS:
+    case types.LOGIN_FACEBOOK_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -92,6 +94,7 @@ const AuthReducer = (state = initialState, action) => {
       };
     case types.LOGIN_API_FAIL:
     case types.LOGIN_GOOGLE_FAIL:
+    case types.LOGIN_FACEBOOK_FAIL:
     case types.REFRESH_TOKEN_FAIL:
     case types.LOGOUT_API_FAIL:
     case types.GET_PROFILE_FAIL:

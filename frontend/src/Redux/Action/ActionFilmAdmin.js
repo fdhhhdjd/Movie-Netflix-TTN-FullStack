@@ -82,6 +82,18 @@ export const FindFilmFail = (error) => ({
   type: types.FIND_FILM_FAIL,
   payload: error,
 });
+// Film FILM BY CATEGORY
+export const FindFilmCategoryStart = () => ({
+  type: types.FIND_FILM_CATEGORY_START,
+});
+export const FindFilmCategorySuccess = (token) => ({
+  type: types.FIND_FILM_CATEGORY_SUCCESS,
+  payload: token,
+});
+export const FindFilmCategoryFail = (error) => ({
+  type: types.FIND_FILM_CATEGORY_FAIL,
+  payload: error,
+});
 //! Get All Category
 export const GetAllCategoryInitiate = (token) => {
   return async function (dispatch) {
@@ -192,6 +204,23 @@ export const FindFilmInitiate = (id, token) => {
       dispatch(FindFilmSuccess(data.data));
     } catch (error) {
       dispatch(FindFilmFail(error));
+    }
+  };
+};
+// find phim by category
+export const FindFilmCategoryInitiate = (id, token) => {
+  console.log(id, token, "get");
+  return async function (dispatch) {
+    try {
+      dispatch(FindFilmCategoryStart());
+
+      const { data } = await axios.get(`/api/film/find/category/${id}`, {
+        headers: { Authorization: token },
+      });
+
+      dispatch(FindFilmCategorySuccess(data.data));
+    } catch (error) {
+      dispatch(FindFilmCategoryFail(error));
     }
   };
 };
