@@ -48,7 +48,7 @@ const List = ({ setIsOpenModal, category }) => {
     <>
       <ListStyle />
       <section className="list">
-        <span className="list-title">{category.name}</span>
+        <span className="list-title">{category ? category.name : "film"}</span>
         <div className="wrapper">
           <ArrowBackIosOutlined
             className="slider-arrow left"
@@ -77,7 +77,6 @@ const List = ({ setIsOpenModal, category }) => {
                     })
                   : window.location.href("/browse"))
             } */}
-
             {filmByCategory
               ? filmByCategory.map((film, index) => {
                   return (
@@ -95,7 +94,25 @@ const List = ({ setIsOpenModal, category }) => {
                     </Fragment>
                   );
                 })
-              : window.location.href("/browse")}
+              : (profile.adult =
+                  "kid" && allFilmAdult.data
+                    ? allFilmAdult.data.map((film, index) => {
+                        return (
+                          <Fragment key={film._id}>
+                            <ListItem
+                              setIsOpenModal={setIsOpenModal}
+                              image={film.image_film.url}
+                              ageLimit={film.ageLimit}
+                              filmLength={film.filmLength}
+                              category={film.category}
+                              series={film.seriesFilm}
+                              id={film._id}
+                              index={index}
+                            />
+                          </Fragment>
+                        );
+                      })
+                    : window.location.href("/browse"))}
           </div>
           <ArrowForwardIosOutlined
             className="slider-arrow right"
