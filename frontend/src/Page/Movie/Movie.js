@@ -1,7 +1,12 @@
 import React from "react";
-import { Header } from "../../imports";
+import { Header, Footer } from "../../imports";
 import { MovieStyle } from "../../Style/MovieStyle/MovieStyle";
+import { Feature, Modal, List, MetaData } from "../../imports/index";
+import { GlobalState } from "../../Contexts/GlobalState";
+import { useContext } from "react";
 const Movie = () => {
+  const data = useContext(GlobalState);
+  const [isOpenModal, setIsOpenModal] = data.modal;
   return (
     <>
       <Header />
@@ -86,10 +91,14 @@ const Movie = () => {
                   </button>
                 </div>
               </div>
+              <div className="page-movie-body">
+                <List setIsOpenModal={setIsOpenModal} />
+              </div>
             </div>
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 };
