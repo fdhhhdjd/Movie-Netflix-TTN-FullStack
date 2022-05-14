@@ -1,7 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 export const FooterStyle = createGlobalStyle`
   .footer-container {
-   background-color:#333;
     padding: 1.5vw 15vw;
     color: #808080;
     display: flex;
