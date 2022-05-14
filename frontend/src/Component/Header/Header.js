@@ -157,8 +157,8 @@ const Header = () => {
                     TV Shows
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
+                <li className="nav-item">
+                  <a className="nav-link" href="/movies">
                     Movie
                   </a>
                 </li>
@@ -178,7 +178,7 @@ const Header = () => {
                   <i className="icon fas fa-search " />
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
-                  {isAdult === "adult" ? (
+                  {isAdult === "adult" && profile.adult === "adult" ? (
                     <>
                       <div className="mr-2">
                         <i className=" icon fas fa-bell" />
@@ -200,7 +200,7 @@ const Header = () => {
                       </li>
                       <div className="profile dropdown mr-5">
                         <button
-                          class="btn dropdown-toggle"
+                          className="btn dropdown-toggle"
                           type="button"
                           id="dropdownMenuButton"
                           data-toggle="dropdown"
@@ -214,11 +214,17 @@ const Header = () => {
                           className="options dropdown-menu"
                           aria-labelledby="dropdownMenuButton"
                         >
-                          <span class="dropdown-item">Setting</span>
-                          <span class="dropdown-item" onClick={handleLogout}>
+                          <span className="dropdown-item">Setting</span>
+                          <span
+                            className="dropdown-item"
+                            onClick={handleLogout}
+                          >
                             Logout
                           </span>
-                          <span class="dropdown-item" onClick={handleKidMode}>
+                          <span
+                            className="dropdown-item"
+                            onClick={handleKidMode}
+                          >
                             Kid Mode
                           </span>
                         </div>

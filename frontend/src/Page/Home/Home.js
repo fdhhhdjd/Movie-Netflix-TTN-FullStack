@@ -1,10 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { Footer, Header } from "../../imports";
 import { Feature, Modal, List, MetaData } from "../../imports/index";
 import { HomeStyle } from "../../Style/StyleHome/HomeStyle";
 import { useSelector } from "react-redux";
+import { GlobalState } from "../../Contexts/GlobalState";
 const Home = () => {
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const data = useContext(GlobalState);
+  const [isOpenModal, setIsOpenModal] = data.modal;
   const { categories } = useSelector((state) => state.film);
   var arr = [];
   while (arr.length < 4) {
