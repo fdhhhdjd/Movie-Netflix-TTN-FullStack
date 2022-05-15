@@ -1,10 +1,10 @@
-const Favourites = require('../Model/favouriteModel.js');
+const Favourites = require("../Model/favouriteModel.js");
 
 const favouriteCtrl = {
   //Xem toàn bộ danh sách bộ phim yêu thích
   async getAllListFavourite(req, res) {
     try {
-      const data = await Favourites.find({}).populate('user').populate('film');
+      const data = await Favourites.find({}).populate("user").populate("film");
       return res.status(200).json({
         status: 200,
         success: true,
@@ -15,7 +15,7 @@ const favouriteCtrl = {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to get all list favourite films',
+        msg: "Failed to get all list favourite films",
       });
     }
   },
@@ -27,8 +27,8 @@ const favouriteCtrl = {
       const list = await Favourites.find({
         user: userId,
       })
-        .populate('user')
-        .populate('film');
+        .populate("user")
+        .populate("film");
 
       return res.status(200).json({
         status: 200,
@@ -40,54 +40,72 @@ const favouriteCtrl = {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to get list favourite films',
+        msg: "Failed to get list favourite films",
       });
     }
   },
 
-  //Thêm bộ phim vào danh sách yêu thích của người dùng
-  async addFilmIntoFavouriteList(req, res) {
+  //Thêm và xóa bộ phim vào danh sách yêu thích của người dùng
+  async addAndRemoveFilmInFavouriteList(req, res) {
     try {
       const userId = req.user.id;
       const filmId = req.params.filmId;
 
-      const newFavourite = new Favourites({
+      //kiem tra xem phim co nam trong danh sach yeu thich
+      const isFavorited = await Favourites.findOne({
         user: userId,
         film: filmId,
       });
 
-      //save in mongodb
-      await newFavourite.save();
+      if (isFavorited) {
+        await Favourites.deleteOne({
+          user: userId,
+          film: filmId,
+        });
 
-      return res.status(200).json({
-        status: 200,
-        success: true,
-        msg: 'Added film into list favourite successfully',
-      });
+        return res.status(200).json({
+          status: 200,
+          success: true,
+          msg: "Removed film from favourite list successfully",
+        });
+      } else {
+        const newFavourite = new Favourites({
+          user: userId,
+          film: filmId,
+        });
+
+        //save in mongodb
+        await newFavourite.save();
+
+        return res.status(200).json({
+          status: 200,
+          success: true,
+          msg: "Added film into list favourite successfully",
+        });
+      }
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed add film into list favourite',
+        msg: "Failed add film into list favourite",
       });
     }
   },
 
   //Xóa bộ phim khỏi danh sách yêu thích của người dùng
-  async removeFilmFromListFavourite(req, res) {
+  async removeAllFromListFavourite(req, res) {
     try {
-      const idFilm = req.params.idFilm;
-      await Favourites.deleteMany({ film: idFilm });
+      await Favourites.deleteMany({});
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: 'Removed film from list successfully',
+        msg: "Removed all film from list successfully",
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: 'Failed to remove film from list',
+        msg: "Failed to remove film from list",
       });
     }
   },
