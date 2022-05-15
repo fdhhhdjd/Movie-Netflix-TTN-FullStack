@@ -24,7 +24,7 @@ export const DataProvider = ({ children }) => {
       };
       refreshToken();
     }
-  }, [callback]);
+  }, [callback, auth]);
   const data = {
     callback: [callback, setCallback],
     remember: [rememberer, setRememberMe],

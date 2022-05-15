@@ -4,7 +4,6 @@ import { GlobalState } from "../../Contexts/GlobalState";
 import { Footer, Header } from "../../imports";
 import { Feature, List, MetaData, Modal } from "../../imports/index";
 import { HomeStyle } from "../../Style/StyleHome/HomeStyle";
-import HeadlessTippy from "@tippyjs/react/headless";
 const Home = () => {
   const data = useContext(GlobalState);
   const [isOpenModal, setIsOpenModal] = data.modal;
@@ -25,7 +24,6 @@ const Home = () => {
   }
   const handleHideResult = () => {
     setIsOpenModal(false);
-    console.log("------blur-----");
   };
   const ScrollToBottom = () => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -37,7 +35,7 @@ const Home = () => {
   }, [isOpenModal]);
 
   return (
-    <div onBlur={handleHideResult}>
+    <div>
       <HomeStyle />
       <MetaData title={`Home-Page-Movie`} />
       <div

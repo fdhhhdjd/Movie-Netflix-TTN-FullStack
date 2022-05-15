@@ -21,6 +21,11 @@ const ProfileGate = () => {
     dispatch(UpdateAdultInitiate(adult, refreshTokens));
   };
   useEffect(() => {
+    if (profile?.password === "null") {
+      navigate("/information");
+    }
+  }, [profile]);
+  useEffect(() => {
     if (updateAdult.msg === "kid") {
       navigate("/home");
     } else if (updateAdult.msg === "adult") {

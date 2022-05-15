@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import swal2 from "sweetalert2";
@@ -21,7 +21,6 @@ import {
   PrivateRouter,
   PrivateRouterAuth,
   Profile,
-  ProfileGate,
   Rating,
   Register,
   Reset,
@@ -35,22 +34,18 @@ import {
   LoginAdmin,
   ProfileAdmin,
   Welcome,
+  ProfileGate,
   NotFound,
   Information,
 } from "./imports/LazyRouter";
 function App() {
-  const navigate = useNavigate();
   const { profile } = useSelector((state) => state.auth);
-  // useEffect(() => {
-  //   if (
-  //     profile?.phone_number === undefined ||
-  //     ("" && profile?.sex === undefined) ||
-  //     ("" && profile?.date_of_birth === undefined) ||
-  //     ""
-  //   ) {
-  //     navigate("/information");
-  //   }
-  // }, []);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (profile?.adult == "" || profile?.password == "null") {
+      navigate("/browse");
+    }
+  }, [profile]);
   return (
     <>
       <Suspense fallback={<Loading />}>

@@ -19,6 +19,7 @@ import {
   loginFacebookInitiate,
   loginGoogleInitiate,
   loginInitiate,
+  ProfileInitiate,
 } from "../../Redux/Action/ActionAuth";
 import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
 import LoadingSmall from "../Loading/LoadingSmall";
@@ -43,7 +44,7 @@ const Login = () => {
   const state = useContext(GlobalState);
   const [rememberer, setRememberMe] = state.remember;
   const [token, setToken] = useState("");
-  const { auth, loading } = useSelector((state) => state.auth);
+  const { auth, loading, refreshTokens } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const location = useLocation();
   const Auth = auth;

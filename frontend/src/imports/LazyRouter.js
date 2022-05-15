@@ -13,6 +13,11 @@ export const Home = lazy(() => {
     setTimeout(() => resolve(import("../Page/Home/Home")), 2000);
   });
 });
+export const ProfileGate = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("../Page/ProfileGate/ProfileGate")), 2000);
+  });
+});
 export const Welcome = lazy(() => {
   return new Promise((resolve) => {
     setTimeout(() => resolve(import("../Page/Welcome/Welcome")), 2000);
