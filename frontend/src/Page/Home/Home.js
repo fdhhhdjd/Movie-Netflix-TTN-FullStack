@@ -14,7 +14,7 @@ const Home = () => {
     var text = a.toString();
     // console.log(text, "text");
     if (!arr.includes(categories[text])) {
-      console.log(text, "text");
+      // console.log(text, "text");
       arr.push(categories[text]);
     }
   }

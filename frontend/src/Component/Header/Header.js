@@ -48,6 +48,8 @@ const Header = () => {
     dispatch(UpdateAdultInitiate((adult = "kid"), refreshTokens));
     setIsAdult("kid");
   };
+  console.log(updateAdult, "updatefilm");
+  console.log(profile.adult, "profile");
   const handleExitKid = async () => {
     try {
       return await swal({
@@ -178,7 +180,7 @@ const Header = () => {
                   <i className="icon fas fa-search " />
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
-                  {isAdult === "adult" && profile.adult === "adult" ? (
+                  {isAdult === "adult" || profile.adult === "adult" ? (
                     <>
                       <div className="mr-2">
                         <i className=" icon fas fa-bell" />
