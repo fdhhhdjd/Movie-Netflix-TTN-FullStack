@@ -32,7 +32,7 @@ export const ModalStyle = createGlobalStyle`
         .cancel-btn {
             color: #000;
             position: absolute;
-            z-index: 1000000;
+            z-index: 10000;
             right: 0;
             margin: 10px 15px;
             cursor: pointer;
