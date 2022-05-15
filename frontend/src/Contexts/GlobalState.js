@@ -10,7 +10,9 @@ export const DataProvider = ({ children }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const { auth, refreshTokens, profile } = useSelector((state) => state.auth);
   const { updateAdult } = useSelector((state) => state.adult);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     const firstLogin = localStorage.getItem("firstLogin");
     if (firstLogin) {

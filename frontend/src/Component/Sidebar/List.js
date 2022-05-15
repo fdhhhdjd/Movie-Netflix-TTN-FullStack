@@ -14,6 +14,7 @@ const List = ({ setIsOpenModal, category }) => {
   const { allFilmAdult, updateAdult } = useSelector((state) => state.adult);
   const { refreshTokens, profile } = useSelector((state) => state.auth);
   const listRef = useRef();
+  console.log(allFilmAdult, "alo");
   const dispatch = useDispatch();
   const handleClick = (direction) => {
     const distance = listRef.current.getBoundingClientRect().x - 50;

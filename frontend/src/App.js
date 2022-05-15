@@ -1,5 +1,6 @@
-import React, { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { Suspense, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import swal2 from "sweetalert2";
 import {
@@ -35,8 +36,21 @@ import {
   ProfileAdmin,
   Welcome,
   NotFound,
+  Information,
 } from "./imports/LazyRouter";
 function App() {
+  const navigate = useNavigate();
+  const { profile } = useSelector((state) => state.auth);
+  // useEffect(() => {
+  //   if (
+  //     profile?.phone_number === undefined ||
+  //     ("" && profile?.sex === undefined) ||
+  //     ("" && profile?.date_of_birth === undefined) ||
+  //     ""
+  //   ) {
+  //     navigate("/information");
+  //   }
+  // }, []);
   return (
     <>
       <Suspense fallback={<Loading />}>
@@ -72,6 +86,9 @@ function App() {
             <Route path="/home" element={<Home />} />
           </Route>
           <Route element={<PrivateRouter />}>
+            <Route path="/information" element={<Information />} />
+          </Route>
+          <Route element={<PrivateRouter />}>
             <Route path="/movies" element={<Movie />} />
           </Route>
           {/* Profile User   */}
@@ -84,10 +101,7 @@ function App() {
           </Route>
           {/* Change Password  */}
           <Route element={<PrivateRouter />}>
-            <Route
-              path="/profile/ChangePassword"
-              element={<ChangePassword />}
-            />
+            <Route path="/profile/ChangePassword" element={<Information />} />
           </Route>
           {/* FeedBack */}
           <Route element={<PrivateRouter />}>
