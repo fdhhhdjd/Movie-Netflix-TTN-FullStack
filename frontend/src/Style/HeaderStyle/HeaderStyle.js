@@ -5,7 +5,6 @@ export const HeaderStyle = createGlobalStyle`
 .container{
   max-width: 1800px;
   padding: 0 !important;
-  background: rgb(20,20,20) !important;
 }
 
 .scrolled {
@@ -40,7 +39,7 @@ export const HeaderStyle = createGlobalStyle`
     img{
       max-width:35px;
       max-height:35px;
-  
+
         border-radius: 5px;
 
         -o-object-fit: cover;
@@ -79,7 +78,7 @@ export const HeaderStyle = createGlobalStyle`
         color: #fff;
         background: linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 0.3) 50%);
         &::hover{
-          
+
         }
       }
 

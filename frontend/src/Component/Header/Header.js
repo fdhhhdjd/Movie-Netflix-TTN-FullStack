@@ -48,8 +48,6 @@ const Header = () => {
     dispatch(UpdateAdultInitiate((adult = "kid"), refreshTokens));
     setIsAdult("kid");
   };
-  console.log(updateAdult, "updatefilm");
-  console.log(profile.adult, "profile");
   const handleExitKid = async () => {
     try {
       return await swal({
@@ -130,7 +128,13 @@ const Header = () => {
   return (
     <>
       <HeaderStyle />
-      <section className={isScrolled ? "header-section position-fixed w-100 scrolled" : "header-section position-fixed w-100"}>
+      <section
+        className={
+          isScrolled
+            ? "header-section position-fixed w-100 scrolled"
+            : "header-section position-fixed w-100"
+        }
+      >
         <div className="container">
           <nav class="navbar navbar-expand-sm navbar-dark bg-dark w-100">
             <button

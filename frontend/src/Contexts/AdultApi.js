@@ -18,7 +18,7 @@ const AdultApi = (refreshTokens, profile) => {
     } else if (updateAdult?.msg == "" || profile.adult == "adult") {
       dispatch(GetAllAdultInitiate(refreshTokens));
     }
-  }, [updateAdult, refreshTokens]);
+  }, [updateAdult, refreshTokens, profile]);
 
   return {};
 };

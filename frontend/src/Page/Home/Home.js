@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { GlobalState } from "../../Contexts/GlobalState";
 import { Footer, Header } from "../../imports";
-import { Feature, List, MetaData, Modal } from "../../imports/index";
+import { Feature, List, MetaData, Modal, Watch } from "../../imports/index";
 import { HomeStyle } from "../../Style/StyleHome/HomeStyle";
 const Home = () => {
   const data = useContext(GlobalState);
   const [isOpenModal, setIsOpenModal] = data.modal;
   const { categories } = useSelector((state) => state.film);
+  const { allFilmAdult, allFilmKid } = useSelector((state) => state.adult);
   const messageEndRef = useRef(null);
   //Random Category
   var arr = [];
@@ -33,7 +34,6 @@ const Home = () => {
       ScrollToBottom();
     }
   }, [isOpenModal]);
-
   return (
     <div>
       <HomeStyle />
@@ -57,6 +57,9 @@ const Home = () => {
           <List category={arr[1]} setIsOpenModal={setIsOpenModal} />
           <List category={arr[2]} setIsOpenModal={setIsOpenModal} />
           <List category={arr[3]} setIsOpenModal={setIsOpenModal} />
+          <Watch />
+          <br />
+          <br />
           <Footer />
         </div>
       </div>

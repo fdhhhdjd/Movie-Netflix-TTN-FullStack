@@ -8,8 +8,9 @@ export const DataProvider = ({ children }) => {
   const [callback, setCallback] = useState(false);
   const [rememberer, setRememberMe] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [dataRandom, setDataRandom] = useState();
   const { auth, refreshTokens, profile } = useSelector((state) => state.auth);
-  const { updateAdult } = useSelector((state) => state.adult);
+  const { updateAdult, allFilmAdult } = useSelector((state) => state.adult);
 
   const dispatch = useDispatch();
 
@@ -25,8 +26,15 @@ export const DataProvider = ({ children }) => {
       refreshToken();
     }
   }, [callback, auth]);
+  useEffect(() => {
+    if (allFilmAdult) {
+      let randomFilm = Math.floor(Math.random() * allFilmAdult.length);
+      setDataRandom(allFilmAdult[randomFilm]);
+    }
+  }, [allFilmAdult]);
   const data = {
     callback: [callback, setCallback],
+    dataRandom: [dataRandom],
     remember: [rememberer, setRememberMe],
     UserApi: UserApi(refreshTokens, updateAdult),
     AdultApi: AdultApi(refreshTokens, profile),

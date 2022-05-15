@@ -66,7 +66,7 @@ export const GetAllAdultInitiate = (refreshTokens) => {
         headers: { Authorization: refreshTokens },
       });
 
-      dispatch(GetAllAdultSuccess(data));
+      dispatch(GetAllAdultSuccess(data?.data));
     } catch (error) {
       dispatch(GetAllAdultFail(error));
     }
@@ -81,7 +81,7 @@ export const GetAllKidInitiate = (refreshTokens) => {
         headers: { Authorization: refreshTokens },
       });
 
-      dispatch(GetAllKidSuccess(data));
+      dispatch(GetAllKidSuccess(data?.data));
     } catch (error) {
       dispatch(GetAllKidFail(error));
     }
