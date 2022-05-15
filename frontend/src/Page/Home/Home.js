@@ -22,6 +22,7 @@ const Home = () => {
   }
   return (
     <>
+      {console.log("home")}
       <HomeStyle />
       <MetaData title={`Home-Page-Movie`} />
       <div className={`home ${isOpenModal && "open-modal"}`}>

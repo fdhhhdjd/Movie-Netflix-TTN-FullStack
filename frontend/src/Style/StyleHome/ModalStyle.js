@@ -32,7 +32,7 @@ export const ModalStyle = createGlobalStyle`
         .cancel-btn {
             color: #000;
             position: absolute;
-            z-index: 10;
+            z-index: 1000000;
             right: 0;
             margin: 10px 15px;
             cursor: pointer;
@@ -77,13 +77,13 @@ export const ModalStyle = createGlobalStyle`
                     cursor: pointer;
                     padding: 0.3vw;
                     user-select: none;
-    
+
                     &:hover {
                         border-color: #fff;
                         background-color: rgba(0, 0, 0, 0.5);
                     }
-                } 
-                
+                }
+
                 button {
                     font-size: 1.3vw;
                     display: flex;
@@ -96,19 +96,19 @@ export const ModalStyle = createGlobalStyle`
                     background: #fff;
                     font-weight: 600;
                     transition: .3s ease;
-    
+
                     &:hover {
                         background: #fff;
                         opacity: 0.8;
                     }
                 }
             }
-        }    
+        }
     }
 
-    
 
-    
+
+
     .modal-bot-cover {
         /* background: rgb(18,18,18); */
         background: linear-gradient(to top,#181818, transparent 50%);
@@ -365,7 +365,7 @@ export const ModalStyle = createGlobalStyle`
 
     .modal-info-trd {
         padding: 50px 50px 0 50px;
-        
+
     }
 
     .recommend-info {
