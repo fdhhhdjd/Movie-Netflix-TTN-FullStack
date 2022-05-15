@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import swal from "sweetalert";
 import { GlobalState } from "../../Contexts/GlobalState";
 import { logo } from "../../imports/image";
-import toastHot from "react-hot-toast";
 import {
   MetaData,
   useRequireInput,
@@ -53,6 +52,7 @@ const Login = () => {
   const { emailRequire, passwordLoginRequire } = useRequireInput();
   const { handleIsLock, isLock } = useTogglePassword();
   const HandleGoogle = (response) => {
+    console.log(response, "click");
     if (response.error) {
       return toast.error(response.error);
     } else {

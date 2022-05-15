@@ -774,6 +774,7 @@ const userCtrl = {
   //đăng nhập gg chưa sửa
   LoginGoogleCustomer: async (req, res) => {
     const { tokenId } = req.body;
+    console.log(tokenId);
     client
       .verifyIdToken({
         idToken: tokenId,
