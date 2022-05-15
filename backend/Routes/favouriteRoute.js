@@ -1,35 +1,35 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const auth = require('../middleware/auth.js');
-const authAdmin = require('../middleware/authAdmin.js');
-const authCustomer = require('../middleware/authCustomer.js');
-const favouriteCtrl = require('../Controllers/favouriteController.js');
+const auth = require("../middleware/auth.js");
+const authAdmin = require("../middleware/authAdmin.js");
+const authCustomer = require("../middleware/authCustomer.js");
+const favouriteCtrl = require("../Controllers/favouriteController.js");
 
 //Lấy ra hết bộ phim yêu thích
-router.get('/all', auth, authAdmin, favouriteCtrl.getAllListFavourite);
+router.get("/all", auth, authAdmin, favouriteCtrl.getAllListFavourite);
 
 //Lấy ra danh sách bộ phim yêu thích
 router.get(
-  '/getList',
+  "/getList",
   auth,
   authCustomer,
   favouriteCtrl.getFavouriteListOfUser
 );
 
-//Thêm bộ phim vào danh sách yêu thích
+//Thêm và xóa bộ phim trong danh sách yêu thích
 router.post(
-  '/add/:filmId',
+  "/add/:filmId",
   auth,
   authCustomer,
-  favouriteCtrl.addFilmIntoFavouriteList
+  favouriteCtrl.addAndRemoveFilmInFavouriteList
 );
 
-//Xóa bộ phim khỏi danh sách yêu thích
+//Xóa toàn bộ trong danh sách yêu thích
 router.delete(
-  '/delete/:idFilm',
+  "/delete/",
   auth,
   authCustomer,
-  favouriteCtrl.removeFilmFromListFavourite
+  favouriteCtrl.removeAllFromListFavourite
 );
 
 module.exports = router;

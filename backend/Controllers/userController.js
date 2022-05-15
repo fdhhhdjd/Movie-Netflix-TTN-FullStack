@@ -774,7 +774,6 @@ const userCtrl = {
   //đăng nhập gg chưa sửa
   LoginGoogleCustomer: async (req, res) => {
     const { tokenId } = req.body;
-    console.log(tokenId);
     client
       .verifyIdToken({
         idToken: tokenId,
@@ -782,7 +781,6 @@ const userCtrl = {
       })
       .then((response) => {
         const { email_verified, name, email, picture } = response.payload;
-        console.log(response.payload);
         if (email_verified) {
           Users.findOne({ email, role: 0 }).exec((error, user) => {
             if (error) {
