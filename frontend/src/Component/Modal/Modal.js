@@ -66,8 +66,6 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
           </div>
         </div>
 
-        <div className="fadeOut"></div>
-
         <div className="modal-info">
           <div className="modal-info-fst">
             <div className="info-left">
