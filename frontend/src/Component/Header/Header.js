@@ -160,9 +160,9 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/movies">
+                  <Link className="nav-link" to="/movies">
                     Movie
-                  </a>
+                  </Link>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">
