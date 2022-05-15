@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState, useContext } from "react";
-import { Footer, Header } from "../../imports";
-import { Feature, Modal, List, MetaData } from "../../imports/index";
-import { HomeStyle } from "../../Style/StyleHome/HomeStyle";
+import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import { GlobalState } from "../../Contexts/GlobalState";
+import { Footer, Header } from "../../imports";
+import { Feature, List, MetaData, Modal } from "../../imports/index";
+import { HomeStyle } from "../../Style/StyleHome/HomeStyle";
 const Home = () => {
   const data = useContext(GlobalState);
   const [isOpenModal, setIsOpenModal] = data.modal;
@@ -22,7 +22,6 @@ const Home = () => {
   }
   return (
     <>
-      {console.log("home")}
       <HomeStyle />
       <MetaData title={`Home-Page-Movie`} />
       <div className={`home ${isOpenModal && "open-modal"}`}>
