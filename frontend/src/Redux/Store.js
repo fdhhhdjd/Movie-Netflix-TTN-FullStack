@@ -8,9 +8,9 @@ if (process.env.NODE_ENV === "development") {
   middleware.push(logger);
 }
 const store = createStore(
-  rootReducer
+  rootReducer,
 
-  // composeWithDevTools(applyMiddleware(...middleware))
+  composeWithDevTools(applyMiddleware(...middleware))
 );
 
 export default store;
