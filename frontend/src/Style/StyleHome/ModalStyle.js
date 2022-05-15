@@ -8,8 +8,21 @@ export const ModalStyle = createGlobalStyle`
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
-        z-index: 99999;
+        z-index: 9999;
         overflow-y: scroll;
+    }
+
+    .fadeOut {
+            background-image: linear-gradient(
+              rgba(20, 20, 20, 0) 0,
+              rgba(20, 20, 20, 0.15) 15%,
+              rgba(20, 20, 20, 0.35) 29%,
+              rgba(20, 20, 20, 0.58) 44%,
+              #141414 68%,
+              #141414 100%
+            );
+            position: absolute;
+            top: 0;
     }
 
     .modal-container {
@@ -32,7 +45,7 @@ export const ModalStyle = createGlobalStyle`
         .cancel-btn {
             color: #000;
             position: absolute;
-            z-index: 10000;
+            z-index: 100000;
             right: 0;
             margin: 10px 15px;
             cursor: pointer;
