@@ -18,6 +18,7 @@ const Home = () => {
       arr.push(categories[text]);
     }
   }
+  console.log(categories, "categories");
   return (
     <>
       <HomeStyle />
