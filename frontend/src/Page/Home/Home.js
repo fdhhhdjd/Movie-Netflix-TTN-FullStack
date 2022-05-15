@@ -9,13 +9,15 @@ const Home = () => {
   const [isOpenModal, setIsOpenModal] = data.modal;
   const { categories } = useSelector((state) => state.film);
   var arr = [];
-  while (arr.length < 4) {
-    var a = Math.floor(Math.random() * categories.length);
-    var text = a.toString();
-    // console.log(text, "text");
-    if (!arr.includes(categories[text])) {
+  if (categories?.length > 0) {
+    while (arr.length < 4) {
+      var a = Math.floor(Math.random() * categories?.length);
+      var text = a.toString();
       // console.log(text, "text");
-      arr.push(categories[text]);
+      if (!arr.includes(categories[text])) {
+        // console.log(text, "text");
+        arr.push(categories[text]);
+      }
     }
   }
   return (
