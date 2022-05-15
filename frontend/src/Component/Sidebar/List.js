@@ -43,7 +43,7 @@ const List = ({ setIsOpenModal, category }) => {
 
     fetchData();
   }, []);
-  console.log(profile, "film");
+  // console.log(profile, "film");
   return (
     <>
       <ListStyle />
