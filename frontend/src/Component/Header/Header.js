@@ -132,7 +132,7 @@ const Header = () => {
       <HeaderStyle />
       <section className={isScrolled ? "header-section position-fixed w-100 scrolled" : "header-section position-fixed w-100"}>
         <div className="container">
-          <nav class="navbar navbar-expand-sm navbar-dark bg-dark w-100">
+          <nav class="navbar navbar-expand-sm w-100">
             <button
               class="navbar-toggler d-lg-none"
               type="button"
@@ -146,7 +146,7 @@ const Header = () => {
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavId">
               <ul class="navbar-nav mr-auto mt-2 mt-lg-0 d-flex align-items-center">
-                <li class="nav-item">
+                <li class="nav-item mt-2">
                   <img src={logo} alt="" className="img-fluid" />
                 </li>
                 <li class="nav-item">

@@ -12,6 +12,25 @@ export const ModalStyle = createGlobalStyle`
         overflow-y: scroll;
     }
 
+    .fadeOut {
+        background-image: linear-gradient(
+          rgba(20, 20, 20, 0) 0,
+          rgba(20, 20, 20, 0.15) 15%,
+          rgba(20, 20, 20, 0.35) 29%,
+          rgba(20, 20, 20, 0.58) 44%,
+          #181818 68%,
+          #181818 100%
+        );
+        position: absolute;
+        background-size: 100% 100%;
+        background-position: 0 top;
+        background-repeat: repeat-x;
+        background-color: transparent;
+        width: 100%;
+        height: 5vw;
+        bottom: 0px;
+      }
+
     .modal-container {
         position: absolute;
         height: max-content;
