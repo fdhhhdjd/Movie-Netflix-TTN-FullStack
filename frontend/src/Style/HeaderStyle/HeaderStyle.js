@@ -5,16 +5,18 @@ export const HeaderStyle = createGlobalStyle`
 .container{
   max-width: 1800px;
   padding: 0 !important;
-  background: rgb(20,20,20) !important;
 }
 
-.scrolled {
-  background: rgb(20,20,20) !important;
-}
+
 
   .header-section {
     z-index: 100000 !important;
     background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.3) 50%) !important;
+    transition: all 0.4s ease-in-out !important;
+
+    &.scrolled {
+        background: rgb(20,20,20) !important;
+    }
 
     img{
     max-width:70px;
