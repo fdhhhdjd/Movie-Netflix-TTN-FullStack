@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { GlobalState } from "../../Contexts/GlobalState";
 import title from "../../Image/title-test.png";
 import { FeatureStyle } from "../../Style/StyleHome/FeatureStyle";
-import Cookies from "js-cookie";
 const Feature = ({ type, setIsOpenModal }) => {
   const { profile } = useSelector((state) => state.auth);
-  const a = Cookies.get("refreshtoken");
+  const state = useContext(GlobalState);
+  const [dataRandom] = state.dataRandom;
   const handleMoreInfo = () => {
     setIsOpenModal(true);
   };
+
+  function truncate(str, n) {
+    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+  }
+  let data = dataRandom;
   return (
     <>
       <FeatureStyle />
@@ -36,19 +42,14 @@ const Feature = ({ type, setIsOpenModal }) => {
             </select>
           </div>
         )}
-        <img src="https://a-static.besthdwallpaper.com/spider-man-homecoming-phim-spiderman-va-ironman-trong-hanh-dong-hinh-nen-2560x1440-15603_51.jpg" />
+        <img src={data?.image_film?.url} />
         {profile.adult === "adult" && <span className="age-tag">18+</span>}
         {profile.adult === "kid" && <span className="age-tag">16+</span>}
 
         <div className="fadeOut"></div>
         <div className="info">
           <img src={title} alt="" />
-          <span className="desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
-            adipisci repellendus eum quasi illo, velit numquam, maxime tempora
-            sint deleniti, aliquid qui? Facilis, adipisci! Ratione hic
-            repudiandae temporibus eum earum?
-          </span>
+          <span className="desc">{truncate(data?.description, 150)}</span>
           <div className="buttons">
             <Link to="/movie" className="xin">
               <button className="play">

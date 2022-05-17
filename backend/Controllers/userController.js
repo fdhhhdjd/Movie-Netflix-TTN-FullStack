@@ -774,7 +774,6 @@ const userCtrl = {
   //đăng nhập gg chưa sửa
   LoginGoogleCustomer: async (req, res) => {
     const { tokenId } = req.body;
-    console.log(tokenId);
     client
       .verifyIdToken({
         idToken: tokenId,
@@ -782,7 +781,6 @@ const userCtrl = {
       })
       .then((response) => {
         const { email_verified, name, email, picture } = response.payload;
-        console.log(response.payload);
         if (email_verified) {
           Users.findOne({ email, role: 0 }).exec((error, user) => {
             if (error) {
@@ -881,65 +879,25 @@ const userCtrl = {
       .then((response) => response.json())
       .then((response) => {
         const { email, name, picture } = response;
-        Users.findOne({ email, role: 0 }).exec((error, user) => {
-          console.log(user);
-          if (error) {
-            return res.json({
-              status: 400,
-              success: false,
-              msg: "Invalid Authentication",
-            });
-          } else {
-            if (user) {
-              const accesstoken = STORAGE.createAccessToken({
-                id: user._id,
-                role: user.role,
-              });
-              const refreshtoken = STORAGE.createRefreshToken({
-                id: user._id,
-                role: user.role,
-              });
 
-              res.cookie("refreshtoken", refreshtoken, {
-                httpOnly: true,
-                path: "/api/auth/customer/refresh_token",
-                maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
-              });
-              const { _id, name, email, image } = user;
-              res.json({
-                status: 200,
-                success: true,
-                msg: "Login successfully",
-                accesstoken,
-                user: { _id, name, email, image },
+        if (email) {
+          Users.findOne({ email, role: 0 }).exec((error, user) => {
+            console.log(user);
+            if (error) {
+              return res.json({
+                status: 400,
+                success: false,
+                msg: "Invalid Authentication",
               });
             } else {
-              let password = email + process.env.ACCESS_TOKEN_SECRET;
-              let newUser = new Users({
-                name: name,
-                email,
-                password,
-                image: {
-                  public_id: password,
-                  url: picture.data.url,
-                },
-                verified: true,
-              });
-              newUser.save((err, data) => {
-                if (err) {
-                  return res.json({
-                    status: 400,
-                    success: false,
-                    msg: "Invalid Authentication",
-                  });
-                }
-                const accesstoken = STORAGE.createAccessToken({
-                  id: data._id,
-                  role: data.role,
+              if (user) {
+                const accesstoken = createAccessToken({
+                  id: user._id,
+                  role: user.role,
                 });
-                const refreshtoken = STORAGE.createRefreshToken({
-                  id: data._id,
-                  role: data.role,
+                const refreshtoken = createRefreshToken({
+                  id: user._id,
+                  role: user.role,
                 });
 
                 res.cookie("refreshtoken", refreshtoken, {
@@ -947,18 +905,61 @@ const userCtrl = {
                   path: "/api/auth/customer/refresh_token",
                   maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
                 });
-                const { _id, name, email, image } = newUser;
+                const { _id, name, email, image } = user;
                 res.json({
                   status: 200,
                   success: true,
-                  msg: "Register successfully",
+                  msg: "Login successfully",
                   accesstoken,
                   user: { _id, name, email, image },
                 });
-              });
+              } else {
+                let password = email + process.env.ACCESS_TOKEN_SECRET;
+                let newUser = new Users({
+                  fullname: name,
+                  email,
+                  password,
+                  image: {
+                    public_id: password,
+                    url: picture?.data?.url,
+                  },
+                  verified: true,
+                });
+                newUser.save((err, data) => {
+                  if (err) {
+                    return res.json({
+                      status: 400,
+                      success: false,
+                      msg: "Invalid Authentication",
+                    });
+                  }
+                  const accesstoken = createAccessToken({
+                    id: user._id,
+                    role: user.role,
+                  });
+                  const refreshtoken = createRefreshToken({
+                    id: user._id,
+                    role: user.role,
+                  });
+
+                  res.cookie("refreshtoken", refreshtoken, {
+                    httpOnly: true,
+                    path: "/api/auth/customer/refresh_token",
+                    maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
+                  });
+                  const { _id, name, email, image } = newUser;
+                  res.json({
+                    status: 200,
+                    success: true,
+                    msg: "Register successfully",
+                    accesstoken,
+                    user: { _id, name, email, image },
+                  });
+                });
+              }
             }
-          }
-        });
+          });
+        }
       });
   },
 
@@ -972,7 +973,6 @@ const userCtrl = {
       })
       .then((response) => {
         const { email_verified, name, email, picture } = response.payload;
-        console.log(response.payload);
         if (email_verified) {
           Users.findOne({ email, role: 1 }).exec((error, user) => {
             if (error) {

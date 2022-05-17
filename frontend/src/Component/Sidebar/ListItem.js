@@ -4,7 +4,7 @@ import {
   PlayCircleFilledWhiteRounded,
   ThumbUpOutlined,
 } from "@material-ui/icons";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ListItemStyle } from "../../Style/StyleHome/ListItemStyle";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,6 +24,7 @@ export default function ListItem({
   const { refreshTokens } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleModal = (id) => {
     dispatch(FindFilmInitiate(id, refreshTokens));
     setIsOpenModal(true);

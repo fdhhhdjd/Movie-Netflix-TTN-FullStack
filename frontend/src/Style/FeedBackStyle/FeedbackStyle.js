@@ -153,30 +153,15 @@ export const FeedbackStyle = createGlobalStyle`
     background-image:url(https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1049&q=80);
     background-color: #333;
 
-    
+
 }
 
 .contact .content{
     max-width: 800px;
     text-align: center;
-    
+
 }
-.contact .content h2{
-    font-size:36px;
-    font-weight:500;
-    color: red;
-    @media only screen and (max-width: 390px) {
-        margin-top:50px;
-    }
-}
-.contact .content p{
-    font-size:20px;
-    font-weight:500;
-    color: #fff;
-    margin-top: 15px;
-    font-weight: bold;
-    
-}
+
 .containers{
     width: 100%;
     display: flex;
@@ -186,7 +171,7 @@ export const FeedbackStyle = createGlobalStyle`
     @media only screen and (max-width: 390px) {
         margin-top:50px;
     }
-    
+
 }
 .containers .contactInfo{
     width: 50%;
@@ -206,7 +191,7 @@ export const FeedbackStyle = createGlobalStyle`
 
         width:100%;
     }
-    
+
 }
 .contact .contactInfo .box .icon{
     min-width: 60px;
@@ -239,7 +224,7 @@ export const FeedbackStyle = createGlobalStyle`
     flex-direction: column;
     font-weight:300;
     @media only screen and (max-width: 390px) {
-        
+
         word-wrap:break-word;
     }
 }
@@ -252,7 +237,7 @@ export const FeedbackStyle = createGlobalStyle`
     text-decoration: none;
     color: #fff;
     @media only screen and (max-width: 390px) {
-        
+
         word-wrap:break-word;
     }
 
@@ -260,11 +245,11 @@ export const FeedbackStyle = createGlobalStyle`
 .contact .contactInfo .box .text h3{
     font-weight: 500;
     color: white;
- 
+
 }
 .contact .contactInfo .box .text p{
     word-wrap:break-word;
- 
+
 }
 .contactForm{
     position:relative;
@@ -306,7 +291,7 @@ resize: none;
     pointer-events: none;
     transition: 0.5s;
     color: #666
-    
+
 }
 .contactForm .inputBox input:focus~span,
 .contactForm .inputBox input:valid ~span,
@@ -366,7 +351,7 @@ width:100px;
     //    display:none;
         bottom:0;
         right:0;
-    }   
+    }
     .contactInfo{
         display:flex;
         flex-direction: column;
@@ -393,7 +378,7 @@ width:100px;
         padding:10px;
         margin-bottom: 37px;
     }
-        
+
 }
 @media only screen and (max-width: 390px) {
     .contactForm{
@@ -403,7 +388,7 @@ width:100px;
         padding:10px;
         margin-bottom: 37px;
     }
-        
+
 }
 
 `;

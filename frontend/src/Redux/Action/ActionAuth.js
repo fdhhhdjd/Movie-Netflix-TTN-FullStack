@@ -110,6 +110,18 @@ export const ChangePasswordAdminFail = (error) => ({
   type: types.CHANGE_PASSWORD_FAIL,
   payload: error,
 });
+//? NewPassword
+export const NewPasswordAdminStart = () => ({
+  type: types.NEW_PASSWORD_START,
+});
+export const NewPasswordAdminSuccess = (token) => ({
+  type: types.NEW_PASSWORD_SUCCESS,
+  payload: token,
+});
+export const NewPasswordAdminFail = (error) => ({
+  type: types.NEW_PASSWORD_FAIL,
+  payload: error,
+});
 //? Get Profile
 export const GetProfileStart = () => ({
   type: types.GET_PROFILE_START,
@@ -184,14 +196,12 @@ export const loginGoogleInitiate = (response) => {
 export const loginFacebookInitiate = (response) => {
   return async function (dispatch) {
     dispatch(LoginFacebookStart());
-    console.log(response.userID, "duy thinh");
     await axios
       .post("/api/auth/customer/loginFacebook", {
         userID: response?.userID,
         accessToken: response?.accessToken,
       })
       .then((user) => {
-        console.log(user, "user");
         dispatch(LoginFacebookSuccess(user.data));
       })
       .catch((error) => {
@@ -296,6 +306,23 @@ export const ChangeAdminInitiate =
       dispatch(ChangePasswordAdminSuccess(data));
     } catch (error) {
       dispatch(ChangePasswordAdminFail(error));
+    }
+  };
+export const NewAdminInitiate =
+  (token, { ...state }) =>
+  async (dispatch) => {
+    try {
+      dispatch(NewPasswordAdminStart());
+      const { data } = await axios.patch(
+        `/api/auth/customer/newPassword`,
+        { ...state },
+        {
+          headers: { Authorization: ` ${token}` },
+        }
+      );
+      dispatch(NewPasswordAdminSuccess(data));
+    } catch (error) {
+      dispatch(NewPasswordAdminFail(error));
     }
   };
 //!CLEAR_ERRORS

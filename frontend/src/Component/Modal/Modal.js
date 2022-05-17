@@ -10,9 +10,8 @@ import {
 } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 
-const Modal = ({ setIsOpenModal }) => {
+const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const { findFilm } = useSelector((state) => state.film);
-  console.log(findFilm, "findFilm");
   const countSeason = (n) => {
     if (n > 1) {
       return `${n} seasons`;
@@ -65,6 +64,7 @@ const Modal = ({ setIsOpenModal }) => {
               />
             </div>
           </div>
+          <div className="fadeOut"></div>
         </div>
 
         <div className="modal-info">

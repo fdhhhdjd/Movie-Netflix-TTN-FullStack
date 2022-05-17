@@ -12,6 +12,25 @@ export const ModalStyle = createGlobalStyle`
         overflow-y: scroll;
     }
 
+    .fadeOut {
+        background-image: linear-gradient(
+          rgba(20, 20, 20, 0) 0,
+          rgba(20, 20, 20, 0.15) 15%,
+          rgba(20, 20, 20, 0.35) 29%,
+          rgba(20, 20, 20, 0.58) 44%,
+          #181818 68%,
+          #181818 100%
+        );
+        position: absolute;
+        background-size: 100% 100%;
+        background-position: 0 top;
+        background-repeat: repeat-x;
+        background-color: transparent;
+        width: 100%;
+        height: 5vw;
+        bottom: 0px;
+      }
+
     .modal-container {
         position: absolute;
         height: max-content;
@@ -32,7 +51,7 @@ export const ModalStyle = createGlobalStyle`
         .cancel-btn {
             color: #000;
             position: absolute;
-            z-index: 10;
+            z-index: 10000;
             right: 0;
             margin: 10px 15px;
             cursor: pointer;
@@ -77,13 +96,13 @@ export const ModalStyle = createGlobalStyle`
                     cursor: pointer;
                     padding: 0.3vw;
                     user-select: none;
-    
+
                     &:hover {
                         border-color: #fff;
                         background-color: rgba(0, 0, 0, 0.5);
                     }
-                } 
-                
+                }
+
                 button {
                     font-size: 1.3vw;
                     display: flex;
@@ -96,19 +115,19 @@ export const ModalStyle = createGlobalStyle`
                     background: #fff;
                     font-weight: 600;
                     transition: .3s ease;
-    
+
                     &:hover {
                         background: #fff;
                         opacity: 0.8;
                     }
                 }
             }
-        }    
+        }
     }
 
-    
 
-    
+
+
     .modal-bot-cover {
         /* background: rgb(18,18,18); */
         background: linear-gradient(to top,#181818, transparent 50%);
@@ -365,7 +384,7 @@ export const ModalStyle = createGlobalStyle`
 
     .modal-info-trd {
         padding: 50px 50px 0 50px;
-        
+
     }
 
     .recommend-info {

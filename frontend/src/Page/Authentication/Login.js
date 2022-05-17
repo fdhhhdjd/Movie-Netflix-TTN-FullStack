@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState, useContext } from "react";
-import GoogleLogin from "react-google-login";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import FacebookLogin from "react-facebook-login";
+import GoogleLogin from "react-google-login";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,13 +16,13 @@ import {
 } from "../../imports/index";
 import {
   clearErrors,
-  loginGoogleInitiate,
   loginFacebookInitiate,
+  loginGoogleInitiate,
   loginInitiate,
+  ProfileInitiate,
 } from "../../Redux/Action/ActionAuth";
 import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
 import LoadingSmall from "../Loading/LoadingSmall";
-import axios from "axios";
 const Login = () => {
   const DataRemember = localStorage.getItem("remember");
   const foundUser = JSON.parse(DataRemember);
@@ -44,7 +44,7 @@ const Login = () => {
   const state = useContext(GlobalState);
   const [rememberer, setRememberMe] = state.remember;
   const [token, setToken] = useState("");
-  const { auth, loading } = useSelector((state) => state.auth);
+  const { auth, loading, refreshTokens } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const location = useLocation();
   const Auth = auth;
@@ -52,7 +52,6 @@ const Login = () => {
   const { emailRequire, passwordLoginRequire } = useRequireInput();
   const { handleIsLock, isLock } = useTogglePassword();
   const HandleGoogle = (response) => {
-    console.log(response, "click");
     if (response.error) {
       return toast.error(response.error);
     } else {
@@ -60,7 +59,6 @@ const Login = () => {
     }
   };
   const responseFacebook = (response) => {
-    console.log(response, "response");
     if (response) {
       dispatch(loginFacebookInitiate(response));
     } else {
@@ -182,7 +180,7 @@ const Login = () => {
                 )}
               />
               <FacebookLogin
-                appId={process.env.REACT_APP_KEY_FACEBOOK}
+                appId={process.env.REACT_APP_KEY_FACEBOOK_TEST}
                 autoLoad={false}
                 callback={responseFacebook}
                 icon="fa-facebook"
