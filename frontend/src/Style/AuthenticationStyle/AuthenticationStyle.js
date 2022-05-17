@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import { background } from "../../imports/image";
 export const AuthenticationStyle = createGlobalStyle`
 .login {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background: linear-gradient(
         to bottom,
@@ -26,7 +26,7 @@ export const AuthenticationStyle = createGlobalStyle`
       }
     }
   
-    .container {
+    .auth__container {
       width: 100%;
       height: 100%;
       position: absolute;
@@ -37,68 +37,160 @@ export const AuthenticationStyle = createGlobalStyle`
       align-items: center;
       justify-content: center;
       color: white;
-  .loginButton1{
-    height: 40px;
-    border-radius: 5px;
-    background-color: red;
-    color: white;
+
+  .loginButton{
+    height: 45px;
+    font-size: 20px;
+    margin-top: 10px;
+    background: #e50914;
+    color: #fff;
     border: none;
-    font-size: 18px;
-    font-weight: 500;
+    outline: none;
+    border-radius: 4px;
+    font-weight: 600;
     cursor: pointer;
   }
   .loginButton2{
     text-align: center;
   }
       form {
-        width: 350px;
-        height: 360px;
-        padding: 30px;
-        border-radius: 5px;
-        background-color: #0b0b0b;
+        width: 400px;
+        max-height: 700px;
+        padding: 50px 60px;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
-        .loginButton1{
+        background-color: rgba(0, 0, 0, 0.75);
+        border-radius: 4px;
+        position: relative;
+
+        &>span {
+          margin-bottom: 10px;
+        }
+
+        a {
+          text-decoration: none;
+        }
+        h1 {
+          margin-bottom: 20px;
+          letter-spacing: 1.5px;
+        } 
+
+        .loginButton{
           text-align: center;
         }
         input {
-          height: 40px;
-          border-radius: 5px;
-          background-color: gray;
-          color: white;
-          padding-left: 10px;
-          position:relative;
-          
+          height: 45px;
+          font-size: 16px;
+          color: #fff;
+          border: none;
+          outline: none;
+          border-radius: 4px;
+          padding: 0 10px;
+          margin-bottom: 15px;
+          background: #333;
   
           &::placeholder {
             color: lightgray;
           }
         }
-        .fa{
-          position:absolute;
-          margin-left: 20rem;
-          margin-bottom:1.5rem
-        }
-  
-        button {
-          height: 40px;
-          border-radius: 5px;
-          background-color: red;
-          color: white;
-          border: none;
-          font-size: 18px;
-          font-weight: 500;
-          cursor: pointer;
-        },
-     
+        
+        .pwd-input, .email-input {
+          position: relative;
+          display: flex;
 
-        span {
-          color: lightgray;
-          b {
-            color: white;
+          input {
+            width: 100%;
+          }
+
+          i{
+            position: absolute;
+            right: 10px;
+            transform: translateY(100%)
           }
         }
+
+        .help {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 10px;
+          font-size: 14px;
+          .remember {
+            display: flex;
+            align-items: center;
+            input {
+              color: #8c8c8c;
+              border: none;
+              outline: none;
+              margin-top: 15px;
+            }
+            span {
+              margin-left: 5px;
+              color: #8c8c8c;
+            }
+          }
+          a {
+            color: #8c8c8c;
+            &:hover,
+            &:active {
+              text-decoration: underline;
+            }
+          }
+        }
+        footer {
+          display: flex;
+          flex-direction: column;
+          margin-top: 1vh;
+          line-height: 1.5;
+          .login-google {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+
+            &:hover a{
+              font-size: 1vw;
+              color: #fff;
+            }
+
+            &:hover .gg-icon {
+              font-size: 2vw;
+            }
+
+            .gg-icon {
+              color: #ea4335;
+              transition: .2s ease;
+            }
+            a {
+              font-size: 14px;
+              margin-left: 8px;
+              color: #8c8c8c;
+              transition: .2s ease;
+            }
+          }
+          .signup {
+            color: #8c8c8c;
+            margin-bottom: 14px;
+            a {
+              color: #fff;
+              margin-left: 4px;
+              font-size: 18px;
+            }
+          }
+
+          .learn-more {
+            font-size: 13px;
+            color: #8c8c8c;
+            a {
+              margin-left: 4px;
+              font-size: 14px;
+              color: #0071eb;
+              &:hover,
+              &:active {
+                text-decoration: underline;
+              }
+            }
+          }
       }
     }
   }

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const FilmSchema = new mongoose.Schema(
   {
@@ -12,23 +12,17 @@ const FilmSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    date_production: {
-      type: Date,
+    year_production: {
+      type: String,
       required: true,
+      trim: true,
+    },
+    country_production: {
+      type: String,
+      required: true,
+      trim: true,
     },
     image_film: {
-      public_id: {
-        type: String,
-        required: true,
-        trim: true,
-      },
-      url: {
-        type: String,
-        required: true,
-        trim: true,
-      },
-    },
-    video_film: {
       public_id: {
         type: String,
         required: true,
@@ -43,39 +37,57 @@ const FilmSchema = new mongoose.Schema(
     director: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Director',
-        require: true,
+        ref: "Director",
+        required: true,
       },
     ],
     category: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category',
-        require: true,
+        ref: "Category",
+        required: true,
       },
     ],
-    seriesFilm: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'SeriesFilm',
-      require: true,
-    },
+    seriesFilm: [
+      {
+        episode: {
+          type: Number,
+          required: true,
+          trim: true,
+        },
+        public_id_video: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+        url_video: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+        public_id_image: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+        url_image: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+      },
+    ],
     price: {
       type: Number,
       default: 0,
     },
-    favourite: {
-      type: Boolean,
-      default: false,
+    filmLength: {
+      type: String,
+      required: true,
     },
-    status: {
-      type: Boolean,
-      default: false,
-    },
-    average_score: {
+    ageLimit: {
       type: Number,
-      min: 0,
-      max: 5,
-      default: 0,
+      required: true,
     },
     createdAt: {
       type: Date,
@@ -89,4 +101,4 @@ const FilmSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Film', FilmSchema);
+module.exports = mongoose.model("Film", FilmSchema);

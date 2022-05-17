@@ -1,40 +1,64 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import swal from "sweetalert";
 import { logo } from "../../imports/image";
-import { FeedbackStyle } from "../../Style/FeedBackStyle.js/FeedbackStyle";
-import Header from "../../Component/Header/Header";
-import { MetaData } from "../../imports/index";
-import { useSelector } from "react-redux";
+import { MetaData, Header } from "../../imports/index";
+import {
+  clearErrors,
+  SendFeedBackInitiate,
+} from "../../Redux/Action/ActionFeedBack";
+import { FeedbackStyle } from "../../Style/FeedBackStyle/FeedbackStyle";
 const Feedback = () => {
   const [state, setState] = useState({
-    name: "",
+    fullname: "",
     email: "",
     subject: "",
-    message: "",
+    content: "",
   });
-  const { name, email, subject, message } = state;
+  const { fullname, subject, content, email } = state;
   const { profile } = useSelector((state) => state.auth);
+  const { sendFeedBack } = useSelector((state) => state.feedback);
+  const user = profile;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (user) {
+      user && setState({ fullname: user.fullname, email: user.email });
+    }
+  }, [user, sendFeedBack]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || !email || !subject || !message) {
-      toast.error("Mời bạn nhập đầy đủ vào Form !!");
-    } else {
-      setState({ name: "", email: "", subject: "", message: "" });
-      toast.success("Cảm ơn bạn đã phản hồi cho tôi!");
-    }
+    dispatch(SendFeedBackInitiate({ ...state }));
   };
-  const handleInputChange = (e) => {
-    let { name, value } = e.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
+  useEffect(() => {
+    if (sendFeedBack.status === 200) {
+      swal(`${sendFeedBack.msg}`, {
+        icon: "success",
+      });
+      setTimeout(() => {
+        dispatch(clearErrors());
+      }, 2000);
+      setState({ content: "", subject: "" });
+    } else if (sendFeedBack.status === 400) {
+      swal(`${sendFeedBack.msg}`, {
+        icon: "error",
+      });
+      setTimeout(() => {
+        dispatch(clearErrors());
+      }, 2000);
+    }
+  }, [sendFeedBack, dispatch]);
   return (
     <>
       <Header />
       <FeedbackStyle />
       <MetaData title={`Feedback-${profile.fullname || profile.name}`} />
       <section className="contact">
-        <img src={logo} className="logo-feedback" alt="" />
         <div className="content">
           <h2>Customer FeedBack </h2>
         </div>
@@ -52,15 +76,15 @@ const Feedback = () => {
             </div>
             <div className="box">
               <div className="icon">
-                <i class="far fa-envelope" style={{ color: "red" }}></i>
+                <i className="far fa-envelope" style={{ color: "red" }}></i>
               </div>
               <div className="text">
                 <h3>Email</h3>
                 <br />
                 <p>
-                  <a href="mailto:info@yoursite.com" id="feedback">
+                  <Link to="mailto:info@yoursite.com" id="feedback">
                     nguyentientai10@gmail.com
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>
@@ -80,63 +104,68 @@ const Feedback = () => {
             </div>
             <div className="box">
               <div className="icon">
-                <i class="fa fa-globe" aria-hidden="true"></i>
+                <i className="fa fa-globe" aria-hidden="true"></i>
               </div>
               <div className="text">
                 <h3>Facebook</h3>
                 <br />
                 <p>
-                  <a
-                    href="https://www.facebook.com/profile.php?id=100006139249437"
+                  <Link
+                    to="https://www.facebook.com/profile.php?id=100006139249437"
                     id="feedback"
                     target="_blank"
                   >
                     https://www.facebook.com/profile.php?id=100006139249437
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>
           </div>
           <div className="contactForm">
             <form onSubmit={handleSubmit}>
+              <img src={logo} className="logo-feedback" alt="" />
               <h2>Send Message</h2>
               <div className="inputBox">
                 <input
-                  type="text"
-                  name="name"
-                  required="required"
-                  onChange={handleInputChange}
-                  value={name}
-                />
-                <span>Full Name</span>
-              </div>
-              <div className="inputBox">
-                <input
-                  type="email"
                   className="form-control"
-                  name="email"
-                  required="required"
-                  onChange={handleInputChange}
-                  value={email}
+                  type="type"
+                  required
+                  value={fullname || ""}
+                  name="fullname"
+                  onChange={handleChange}
+                  // disabled={true}
                 />
-                <span>Email</span>
               </div>
               <div className="inputBox">
                 <input
-                  type="text"
+                  className="form-control"
+                  type="type"
+                  value={email || ""}
+                  name="email"
+                  onChange={handleChange}
+                  // disabled={true}
+                />
+              </div>
+              <div className="inputBox">
+                <input
+                  className="form-control"
+                  type="type"
+                  value={subject || ""}
                   name="subject"
-                  required="required"
-                  onChange={handleInputChange}
-                  value={subject}
+                  onChange={handleChange}
+                  required
                 />
                 <span>Subject</span>
               </div>
               <div className="inputBox">
                 <textarea
-                  name="message"
-                  onChange={handleInputChange}
-                  value={message}
-                  required="required"
+                  className="form-control"
+                  cols="10"
+                  rows="5"
+                  value={content || ""}
+                  name="content"
+                  onChange={handleChange}
+                  required
                 ></textarea>
                 <span>Type Your Message...</span>
               </div>
@@ -144,6 +173,29 @@ const Feedback = () => {
                 <input type="submit" name="" value="Send" />
               </div>
             </form>
+          </div>
+        </div>
+        <div className="bubble-container">
+          <div className="bubble fb">
+            <a
+              href="https://www.facebook.com/profile.php?id=100006139249437"
+              target="_blank"
+            >
+              <span className="bubble-item">
+                <span className="animated infinite zoomIn bubble-circle fb"></span>
+                <span className="animated infinite pulse bubble-circle-fill fb"></span>
+                <span className="animated infinite tada phone-icon bubble-img-circle-fb"></span>
+              </span>
+            </a>
+          </div>
+          <div className="bubble phone">
+            <a href="tel:0339253073">
+              <span className="bubble-item">
+                <span className="animated infinite zoomIn bubble-circle phone"></span>
+                <span className="animated infinite pulse bubble-circle-fill phone"></span>
+                <span className="animated infinite tada bubble-img-circle-phone"></span>
+              </span>
+            </a>
           </div>
         </div>
       </section>
@@ -155,9 +207,9 @@ const Feedback = () => {
         >
           Chào mừng bạn đến với Web Movie NTripleT,đây là phần phản hồi khách
           hàng đến với Team,ở đây bạn có thể phản hồi bất kì khi cảm thầy mình
-          chưa hài lòng để mình có thể sữa chưa cũng như khắc phục webside,mình
+          chưa hài lòng để mình có thể sữa chưa cũng như khắc phục website,mình
           sẽ trả lời những phản hồi của bạn sớm nhất,cảm ơn mọi người đã ghé
-          thăm,chúc các bạn xem phim vui vẻ ,
+          thăm, chúc các bạn xem phim vui vẻ...
         </marquee>
       </div>
     </>

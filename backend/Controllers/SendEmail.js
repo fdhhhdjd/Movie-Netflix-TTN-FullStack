@@ -1,9 +1,8 @@
-const nodeMailer = require('nodemailer');
-const hbs = require('nodemailer-express-handlebars');
-const path = require('path');
-const { getMaxListeners } = require('process');
+const nodeMailer = require("nodemailer");
+const hbs = require("nodemailer-express-handlebars");
+const path = require("path");
+require("dotenv").config();
 
-require('dotenv').config();
 const sendEmail = async (options) => {
   const transporter = nodeMailer.createTransport({
     host: process.env.SMPT_HOST,
@@ -11,8 +10,6 @@ const sendEmail = async (options) => {
     secure: false, // use SSL
     service: process.env.SMPT_SERVICE,
     auth: {
-      // user: 'nguyentientai10@gmail.com',
-      // pass: 'gdvjyxpfixzopsht',
       user: process.env.SMPT_MAIL,
       pass: process.env.SMPT_PASSWORD,
     },
@@ -23,23 +20,24 @@ const sendEmail = async (options) => {
 
   const handlebarOptions = {
     viewEngine: {
-      extName: '.html',
-      partialsDir: path.resolve('./views'),
+      extName: ".html",
+      partialsDir: path.resolve("./views"),
       defaultLayout: false,
     },
-    viewPath: path.resolve('./views'),
-    extName: '.html',
+    viewPath: path.resolve("./views"),
+    extName: ".html",
   };
 
-  transporter.use('compile', hbs(handlebarOptions));
+  transporter.use("compile", hbs(handlebarOptions));
 
   const mailOptions = {
-    from: process.env.SMPT_MAIL,
-    to: options.email,
+    from: options.emailFrom,
+    to: options.emailTo,
     subject: options.subject,
     attachments: options.attachments,
     template: options.template,
     context: options.context,
+    html: options.html,
   };
   await transporter.sendMail(mailOptions);
 };

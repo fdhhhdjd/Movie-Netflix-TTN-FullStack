@@ -1,119 +1,144 @@
-import React, { Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { Suspense, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import swal2 from "sweetalert2";
 import {
-  Loading,
-  NotFound,
-  Register,
-  Forget,
-  Reset,
-  UserRoutes,
-  UserRoute,
-  FeedBack,
-  Profile,
-  EditProfile,
+  Category,
   ChangePassword,
+  ChangePasswordAdmin,
+  Director,
+  EditProfile,
+  Favourite,
+  FeedBack,
+  Films,
+  Forget,
+  ForgetAdmin,
+  Loading,
+  NewDirector,
+  NewFilm,
+  NewUser,
+  PrivateRouter,
+  PrivateRouterAuth,
+  Profile,
+  Rating,
+  Register,
+  Reset,
+  ResetAdmin,
+  Login,
+  Movie,
 } from "./imports/index";
-import { Home, Welcome, Login, Movie } from "./imports/LazyRouter";
+import {
+  Admin,
+  Home,
+  LoginAdmin,
+  ProfileAdmin,
+  Welcome,
+  ProfileGate,
+  NotFound,
+  Information,
+} from "./imports/LazyRouter";
 function App() {
+  const { profile } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (profile?.adult == "" || profile?.password == "null") {
+      navigate("/browse");
+    }
+  }, [profile]);
   return (
     <>
       <Suspense fallback={<Loading />}>
         <ToastContainer position="top-center" />
         <Routes>
-          <Route
-            path="/login"
-            element={
-              <UserRoutes>
-                <Login />
-              </UserRoutes>
-            }
-          />
-          <Route
-            path="/customer/password/reset/:token"
-            element={
-              <UserRoutes>
-                <Reset />
-              </UserRoutes>
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <UserRoutes>
-                <Register />
-              </UserRoutes>
-            }
-          />
-          <Route
-            path="/forget"
-            element={
-              <UserRoutes>
-                <Forget />
-              </UserRoutes>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <UserRoutes>
-                <Welcome />
-              </UserRoutes>
-            }
-          />
-          <Route
-            path="/home"
-            element={
-              <UserRoute>
-                <Home />
-              </UserRoute>
-            }
-          />
-          <Route
-            path="/movie"
-            element={
-              <UserRoute>
-                <Movie />
-              </UserRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <UserRoute>
-                <Profile />
-              </UserRoute>
-            }
-          />
-          <Route
-            path="/profile/edit"
-            element={
-              <UserRoute>
-                <EditProfile />
-              </UserRoute>
-            }
-          />
-          <Route
-            path="/profile/ChangePassword"
-            element={
-              <UserRoute>
-                <ChangePassword />
-              </UserRoute>
-            }
-          />
-          <Route
-            path="/feedback"
-            element={
-              <UserRoute>
-                <FeedBack />
-              </UserRoute>
-            }
-          />
+          {/* ********* User ********* */}
+          {/* Login */}
+          <Route element={<PrivateRouterAuth />}>
+            <Route path="/login" element={<Login />} />
+          </Route>
+          {/* ResetPassword */}
+          <Route element={<PrivateRouterAuth />}>
+            <Route path="/customer/password/reset/:token" element={<Reset />} />
+          </Route>
+          {/* Register */}
+          <Route element={<PrivateRouterAuth />}>
+            <Route path="/signup" element={<Register />} />
+          </Route>
+          {/* Forget Password */}
+          <Route element={<PrivateRouterAuth />}>
+            <Route path="/forget" element={<Forget />} />
+          </Route>
+          {/* Intro Web  */}
+          <Route element={<PrivateRouter />}>
+            <Route path="/" element={<Welcome />} />
+          </Route>
+          {/* Choose Adult  */}
+          <Route element={<PrivateRouter />}>
+            <Route path="/browse" element={<ProfileGate />} />
+          </Route>
+          {/* Home   */}
+          <Route element={<PrivateRouter />}>
+            <Route path="/home" element={<Home />} />
+          </Route>
+          <Route element={<PrivateRouter />}>
+            <Route path="/information" element={<Information />} />
+          </Route>
+          <Route element={<PrivateRouter />}>
+            <Route path="/movies" element={<Movie />} />
+          </Route>
+          {/* Profile User   */}
+          <Route element={<PrivateRouter />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+          {/* Change profile */}
+          <Route element={<PrivateRouter />}>
+            <Route path="/profile/edit" element={<EditProfile />} />
+          </Route>
+          {/* Change Password  */}
+          <Route element={<PrivateRouter />}>
+            <Route path="/profile/ChangePassword" element={<Information />} />
+          </Route>
+          {/* FeedBack */}
+          <Route element={<PrivateRouter />}>
+            <Route path="/feedback" element={<FeedBack />} />
+          </Route>
+
+          {/* ********* ADMIN ********* */}
+          {/* Login Admin */}
+          <Route path="/loginadmin" element={<LoginAdmin />} />
+          {/* Home Admin */}
+          <Route path="/admin" element={<Admin />} />
+          {/* Forget Password Admin */}
+          <Route path="/forgetadmin" element={<ForgetAdmin />} />
+          {/* Profile Admin */}
+          <Route path="/profileadmin" element={<ProfileAdmin />} />
+          {/* Reset Password Admin */}
+          <Route path="/password/reset/:token" element={<ResetAdmin />} />
+          {/* Change Password Admin */}
+          <Route path="/changepassword/" element={<ChangePasswordAdmin />} />
+          {/* Manager Director */}
+          <Route path="/director" element={<Director />} />
+          {/* Edit Film */}
+          <Route path="/newUser/:tokens" element={<NewUser />} />
+          {/* Add Director */}
+          <Route path="/newDirector" element={<NewDirector />} />
+          {/* Manager Category */}
+          <Route path="/category" element={<Category />} />
+          {/* Manager Film */}
+          <Route path="/film" element={<Films />} />
+          {/* Add Film */}
+          <Route path="/newFilm" element={<NewFilm />} />
+          {/* Edit Film */}
+          <Route path="/newFilm:tokens" element={<NewFilm />} />
+          {/* Rating for Film */}
+          <Route path="/rating" element={<Rating />} />
+          {/* Favourite */}
+          <Route path="/favourite" element={<Favourite />} />
+          {/* Shared */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </>
   );
 }
-
 export default App;

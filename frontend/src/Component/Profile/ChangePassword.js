@@ -1,15 +1,15 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
-import "react-toastify/dist/ReactToastify.css";
-import { logo } from "../../imports/image";
-import { ChangePasswordStyle } from "../../Style/ProfileStyle/ChangePasswordStyle";
-import Header from "../../Component/Header/Header";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 import swal from "sweetalert";
+import Header from "../../Component/Header/Header";
+import { logo } from "../../imports/image";
 import {
   ChangeAdminInitiate,
-  clearErrors,
+  clearErrors
 } from "../../Redux/Action/ActionAuth";
+import { ChangePasswordStyle } from "../../Style/ProfileStyle/ChangePasswordStyle";
 const initialState = {
   oldPassword: "",
   password: "",

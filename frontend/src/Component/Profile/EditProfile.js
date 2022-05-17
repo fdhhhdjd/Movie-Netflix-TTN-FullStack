@@ -1,28 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { LoadingImg, Header, MetaData } from "../../imports/index";
+import { LoadingSmall, Header, MetaData } from "../../imports/index";
 import { useContext } from "react";
 import { GlobalState } from "../../Contexts/GlobalState";
 import { EditProfileStyle } from "../../Style/ProfileStyle/EditProfileStyle";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 import { toast } from "react-toastify";
+import {useDesUpImage} from '../../imports/index'
 const initialState = {
   fullname: "",
-
   phone_number: "",
   sex: "",
   date_of_birth: "",
 };
 const EditProfile = () => {
   const state = useContext(GlobalState);
-  const [images, setImages] = useState(false);
+
   const [onEdit, setOnEdit] = useState(false);
-  const [loading, setLoading] = useState(false);
+
   const [user, setUser] = useState(initialState);
   const { profile, refreshTokens } = useSelector((state) => state.auth);
   const [callback, setCallback] = state.callback;
+  const { loading, handleUpload, handleDestroy, images, setImages } =
+  useDesUpImage(refreshTokens);
+  console.log(state.callback);
   useEffect(() => {
     if (profile) {
       setUser({ ...profile });
@@ -64,59 +67,6 @@ const EditProfile = () => {
       alert(error.response.data.msg);
     }
   };
-  const handleDestroy = async () => {
-    try {
-      setLoading(true);
-      await axios.post(
-        "/api/destroyImageUser",
-        { public_id: images.public_id },
-        {
-          headers: {
-            Authorization: ` ${refreshTokens}`,
-          },
-        }
-      );
-      setLoading(false);
-      setImages(false);
-    } catch (err) {
-      alert(err.response.data.msg);
-    }
-  };
-  const handleUpload = async (e) => {
-    e.preventDefault();
-    try {
-      const file = e.target.files[0];
-      if (!file)
-        return swal("File not Exists", {
-          icon: "error",
-        });
-      if (file.size > 1024 * 1024)
-        // 1mb
-        return swal("Size too large!", {
-          icon: "error",
-        });
-      if (file.type !== "image/jpeg" && file.type !== "image/png")
-        // 1mb
-        return swal("File format is incorrect.", {
-          icon: "error",
-        });
-      let formData = new FormData();
-
-      formData.append("file", file);
-      setLoading(true);
-      const res = await axios.post("/api/uploadImageUser", formData, {
-        headers: {
-          "content-type": "multipart/form-data",
-          Authorization: `${refreshTokens}`,
-        },
-      });
-
-      setLoading(false);
-      setImages(res.data);
-    } catch (error) {
-      toast.error(error.response.data.msg);
-    }
-  };
   const styleUpload = {
     display: images ? "block" : "none",
   };
@@ -129,7 +79,7 @@ const EditProfile = () => {
             title={`Edit-Profile-${profile.fullname || profile.name}`}
           />
           <EditProfileStyle />
-          <div className="container1">
+          <div className="edit-profile-container">
             <div className="upload">
               <input
                 type="file"
@@ -139,7 +89,7 @@ const EditProfile = () => {
               />
               {loading ? (
                 <div id="file_img">
-                  <LoadingImg />
+                  <LoadingSmall />
                 </div>
               ) : (
                 <div id="file_img" style={styleUpload}>
@@ -158,7 +108,7 @@ const EditProfile = () => {
               <h1 className="newUserTitle">Edit Profile</h1>
               <form onSubmit={handleSubmit}>
                 <div className="newUserItem">
-                  <label htmlFor="username">Username</label>
+                  <label htmlFor="username">Username:</label>
                   <input
                     type="text"
                     placeholder="john"
@@ -169,7 +119,7 @@ const EditProfile = () => {
                 </div>
 
                 <div className="newUserItem">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">Email:</label>
                   <input
                     type="email"
                     placeholder="john@gmail.com"
@@ -178,11 +128,11 @@ const EditProfile = () => {
                     value={user.email}
                     onChange={handleChangeInput}
                     disabled
-                    style={{ color: "black" }}
+                    style={{ color: "#000" }}
                   />
                 </div>
                 <div className="newUserItem">
-                  <label htmlFor="dienthoai">Phone</label>
+                  <label htmlFor="dienthoai">Phone:</label>
                   <input
                     type="text"
                     placeholder="+1 123 456 78"
@@ -193,7 +143,7 @@ const EditProfile = () => {
                   />
                 </div>
                 <div className="newUserItem">
-                  <label htmlFor="ngaysinh">date</label>
+                  <label htmlFor="ngaysinh">Date:</label>
                   <input
                     type="date"
                     data-date=""

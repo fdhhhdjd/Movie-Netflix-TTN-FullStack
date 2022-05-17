@@ -1,13 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
-import { RegisterStyle } from "../../Style/AuthenticationStyle/RegisterStyle";
-import { useNavigate } from "react-router-dom";
-import { MetaData } from "../../imports/index";
-import { logo } from "../../imports/image";
+import React, { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { logo } from "../../imports/image";
+import {
+  MetaData,
+  useRequireInput,
+  useTogglePassword,
+} from "../../imports/index";
 import { clearErrors, RegisterInitiate } from "../../Redux/Action/ActionAuth";
+import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
 import LoadingSmall from "../Loading/LoadingSmall";
+
 const Register = () => {
   const {
     register,
@@ -21,7 +26,12 @@ const Register = () => {
   passwords.current = watch("password");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { handleIsLock, isLock, isLockConfirm, handleIsLockConfirm } =
+    useTogglePassword();
   const { authRegister, loading } = useSelector((state) => state.auth);
+  const { emailRequire, passwordRegisterRequire, usernameRequire } =
+    useRequireInput();
+
   const handleSubmitForm = (data) => {
     const { email, fullname, password } = data;
     dispatch(RegisterInitiate(fullname, email, password));
@@ -39,7 +49,7 @@ const Register = () => {
   }, [authRegister]);
   return (
     <>
-      <RegisterStyle />
+      <AuthenticationStyle />
       <MetaData title="Register-Movie" />
       <div className="login">
         <div className="top">
@@ -47,13 +57,13 @@ const Register = () => {
             <img className="logo" src={logo} alt="" />
           </div>
         </div>
-        <div className="container">
+        <div className="auth__container">
           <form onSubmit={handleSubmit(handleSubmitForm)}>
             <h1>Register</h1>
             <input
-              {...register("fullname", { required: true, maxLength: 20 })}
+              {...register("fullname", usernameRequire)}
               type="text"
-              placeholder="UserName"
+              placeholder="Username"
               name="fullname"
               id="fullname"
             />
@@ -64,10 +74,7 @@ const Register = () => {
                 "Tên của bạn không được quá 20 kí tự"}
             </span>
             <input
-              {...register("email", {
-                required: true,
-                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
-              })}
+              {...register("email", emailRequire)}
               type="email"
               placeholder="Email Address"
               name="email"
@@ -79,20 +86,29 @@ const Register = () => {
               {errors?.email?.type === "pattern" &&
                 "Email của ban không hợp lệ!"}
             </span>
-            <input
-              className="registerInput"
-              {...register("password", {
-                required: true,
-                minLength: {
-                  value: 6,
-                },
-                pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&^_-]{8,}$/,
-              })}
-              type="password"
-              placeholder="Password"
-              name="password"
-              id="password"
-            />
+            <div className="pwd-input">
+              <input
+                className="registerInput"
+                {...register("password", passwordRegisterRequire)}
+                type={isLock ? "type" : "password"}
+                placeholder="Password"
+                name="password"
+                id="password"
+              />
+              {isLock ? (
+                <i
+                  className="fa fa-eye-slash"
+                  onClick={handleIsLock}
+                  style={{ cursor: "pointer" }}
+                />
+              ) : (
+                <i
+                  className="fa fa-eye"
+                  onClick={handleIsLock}
+                  style={{ cursor: "pointer" }}
+                />
+              )}
+            </div>
 
             <span style={{ color: "red" }}>
               {errors.password?.type === "required" &&
@@ -102,19 +118,34 @@ const Register = () => {
               {errors?.password?.type === "pattern" &&
                 "Mật khẩu có kí tự in hoa,số và kí tự đặt biệt !"}
             </span>
-            <input
-              {...register("passwordConfirm", {
-                required: true,
-                validate: (value) =>
-                  value === getValues("password") ||
-                  "The passwords do not match",
-              })}
-              type="password"
-              placeholder="Confirm Password"
-              name="passwordConfirm"
-              id="passwordConfirm"
-            />
 
+            <div className="pwd-input">
+              <input
+                {...register("passwordConfirm", {
+                  required: true,
+                  validate: (value) =>
+                    value === getValues("password") ||
+                    "The passwords do not match",
+                })}
+                type={isLockConfirm ? "type" : "password"}
+                placeholder="Confirm Password"
+                name="passwordConfirm"
+                id="passwordConfirm"
+              />
+              {isLockConfirm ? (
+                <i
+                  className="fa fa-eye-slash"
+                  onClick={handleIsLockConfirm}
+                  style={{ cursor: "pointer" }}
+                />
+              ) : (
+                <i
+                  className="fa fa-eye"
+                  onClick={handleIsLockConfirm}
+                  style={{ cursor: "pointer" }}
+                />
+              )}
+            </div>
             <span style={{ color: "red" }}>
               {errors.passwordConfirm?.type === "required" &&
                 "Mời bạn nhập lại mật khẩu."}
@@ -126,22 +157,24 @@ const Register = () => {
                 <LoadingSmall />
               </span>
             ) : (
-              <button className="loginButton">Sign In</button>
+              <button className="loginButton">Sign Up</button>
             )}
 
-            <span>
-              New to Netflix ?{" "}
-              <b
-                onClick={() => navigate("/login")}
-                style={{ cursor: "pointer" }}
-              >
-                Login now.
-              </b>
-            </span>
-            <small>
-              This page is protected by Google reCAPTCHA to ensure you're not a
-              bot. <b>Learn more</b>.
-            </small>
+            <footer>
+              <span>
+                Had a netflix account yet ?{" "}
+                <b
+                  onClick={() => navigate("/login")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Login now.
+                </b>
+              </span>
+              <small>
+                This page is protected by Google reCAPTCHA to ensure you're not
+                a bot. <b style={{ cursor: "pointer" }}>Learn more</b>.
+              </small>
+            </footer>
           </form>
         </div>
       </div>

@@ -1,46 +1,76 @@
-import { useState } from "react";
-import video from "../../Image/Welcome/video.mp4";
+import {
+  AddCircleOutline,
+  ArrowDropDownCircleOutlined,
+  PlayCircleFilledWhiteRounded,
+  ThumbUpOutlined,
+} from "@material-ui/icons";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ListItemStyle } from "../../Style/StyleHome/ListItemStyle";
-export default function ListItem({ index }) {
+import { useDispatch, useSelector } from "react-redux";
+import { FindFilmInitiate } from "../../Redux/Action/ActionFilmAdmin";
+export default function ListItem({
+  image,
+  ageLimit,
+  filmLength,
+  category,
+  series,
+  id,
+  index,
+  setIsOpenModal,
+}) {
   const [isHovered, setIsHovered] = useState(false);
-  const trailer = video;
+  const [openModal, setOpenModal] = useState(false);
+  const { refreshTokens } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleModal = (id) => {
+    dispatch(FindFilmInitiate(id, refreshTokens));
+    setIsOpenModal(true);
+  };
   return (
     <>
       <ListItemStyle />
       <div
         className="listItem"
-        style={{ left: isHovered && index * 225 - 50 + index * 2.5 }}
+        style={{
+          left: isHovered && (index === 0 ? 0 : index * 225 - 45 + index * 2.5),
+        }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <img
-          src="https://static2.vieon.vn/vieplay-image/carousel_web_v4_ntc/2021/01/20/0kenhuxj_1920x1080-carousel-hauduemattroi5da40f4828611e6f2dfb3d3722723cc1_1920_1080.webp"
-          alt=""
-        />
+        <img src={image} alt="" />
 
         {isHovered && (
           <>
-            <video className="video" autoPlay progress controls>
-              {" "}
-              <source src={video} />
+            <video className="video" autoPlay progress="true" controls>
+              <source src={series && series[0].url_video} />
             </video>
-            <div className="itemInfo">
+            <div className="item-info">
               <div className="icons">
-                <i className="icon fas fa-play" />
-                <i className="fa fa-plus icon" />
-                <i className="fas fa-thumbs-up icon" />
-                <i className="fa fa-thumbs-down icon" />
+                <span className="icons-left">
+                  <PlayCircleFilledWhiteRounded />
+                  <AddCircleOutline />
+                  <ThumbUpOutlined />
+                </span>
+                <span className="icons-right">
+                  <ArrowDropDownCircleOutlined
+                    onClick={() => handleModal(id)}
+                  />
+                </span>
               </div>
-              <div className="itemInfoTop">
-                <span>1 hour 14 mins</span>
-                <span className="limit">+16</span>
-                <span>1999</span>
+              <div className="item-info-top">
+                <span className="match">94% Match</span>
+                <span className="limit">{ageLimit}+</span>
+                <span>{filmLength}</span>
+                <span>HD</span>
               </div>
-              <div className="desc">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Praesentium hic rem eveniet error possimus, neque ex doloribus.
+              <div className="genre">
+                {category.map((cat) => {
+                  return <li key={cat._id}>{cat.name}&nbsp;</li>;
+                })}
               </div>
-              <div className="genre">Action</div>
             </div>
           </>
         )}

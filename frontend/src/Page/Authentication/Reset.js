@@ -1,9 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import { AuthenticationStyle } from "../../Style/AuthenticationStyle/AuthenticationStyle";
-import { MetaData } from "../../imports/index";
+import { MetaData, useTogglePassword } from "../../imports/index";
 import { logo } from "../../imports/image";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import { clearErrors, ResetPassInitiate } from "../../Redux/Action/ActionAuth";
 const initialState = {
@@ -21,6 +22,8 @@ const Reset = () => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
+  const { handleIsLock, isLock, isLockConfirm, handleIsLockConfirm } =
+    useTogglePassword();
   const handleReset = (e) => {
     e.preventDefault();
     dispatch(ResetPassInitiate(token, password, confirmPassword));
@@ -41,14 +44,14 @@ const Reset = () => {
   return (
     <>
       <AuthenticationStyle />
-      <MetaData title="Reset-Movie" />;
+      <MetaData title="Reset-Movie" />
       <div className="login">
         <div className="top">
           <div className="wrapper">
             <img className="logo" src={logo} alt="" />
           </div>
         </div>
-        <div className="container">
+        <div className="auth__container">
           {resetPassword && resetPassword.success === true ? (
             <button className="loginButton1" onClick={() => navigate("/login")}>
               Thank Please Login Account 🥰
@@ -56,32 +59,65 @@ const Reset = () => {
           ) : (
             <form onSubmit={handleReset}>
               <h1>Reset</h1>
-              <input
-                type="password"
-                placeholder="New Password"
-                name="password"
-                value={password}
-                onChange={handleChangeInput}
-              />
 
-              <input
-                type="password"
-                type="password"
-                placeholder="confirmPassword"
-                name="confirmPassword"
-                value={confirmPassword}
-                onChange={handleChangeInput}
-              />
+              <div className="pwd-input">
+                <input
+                  placeholder="New Password"
+                  name="password"
+                  value={password}
+                  onChange={handleChangeInput}
+                  type={isLock ? "type" : "password"}
+                />
+                {isLock ? (
+                  <i
+                    className="fa fa-eye-slash"
+                    onClick={handleIsLock}
+                    style={{ cursor: "pointer" }}
+                  />
+                ) : (
+                  <i
+                    className="fa fa-eye"
+                    onClick={handleIsLock}
+                    style={{ cursor: "pointer" }}
+                  />
+                )}
+              </div>
+
+              <div className="pwd-input">
+                <input
+                  type={isLockConfirm ? "type" : "password"}
+                  placeholder="Confirm password"
+                  name="confirmPassword"
+                  value={confirmPassword}
+                  onChange={handleChangeInput}
+                />
+                {isLockConfirm ? (
+                  <i
+                    className="fa fa-eye-slash"
+                    onClick={handleIsLockConfirm}
+                    style={{ cursor: "pointer" }}
+                  />
+                ) : (
+                  <i
+                    className="fa fa-eye"
+                    onClick={handleIsLockConfirm}
+                    style={{ cursor: "pointer" }}
+                  />
+                )}
+              </div>
 
               <button className="loginButton">Reset</button>
-              <span>
-                New Password Netflix ? &nbsp;
-                <b>Thank For Love you 😇</b>
-              </span>
-              <small>
-                This page is protected by Google reCAPTCHA to ensure you're not
-                a bot. <b>Learn more</b>.
-              </small>
+              <br />
+              <footer>
+                <span className="signup">
+                  Wanna login ? &nbsp;
+                  <Link to="/login">Login now</Link>
+                </span>
+                <small>
+                  This page is protected by Google reCAPTCHA to ensure you're
+                  not a bot. <b>Learn more</b>.
+                </small>
+              </footer>
             </form>
           )}
         </div>

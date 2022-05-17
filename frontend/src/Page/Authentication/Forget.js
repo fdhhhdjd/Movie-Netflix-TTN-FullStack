@@ -55,7 +55,7 @@ const Forget = () => {
             <img className="logo" src={logo} alt="" />
           </div>
         </div>
-        <div className="container">
+        <div className="forget__container">
           <form onSubmit={handleForget}>
             <h1>Forget</h1>
             <input
@@ -75,7 +75,7 @@ const Forget = () => {
             )}
 
             <span>
-              New to Netflix?{" "}
+              Want to login?{" "}
               <b
                 onClick={() => navigate("/login")}
                 style={{ cursor: "pointer" }}

@@ -5,14 +5,14 @@ const categoryCtrl = {
   async getAllCategory(req, res) {
     try {
       const all_category = await Categories.find({});
-      return res.status(200).json({
+      return res.json({
         status: 200,
         success: true,
         msg: 'Get all categories successfully',
         data: all_category,
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         success: false,
         msg: 'Failed to get all categories',
@@ -31,13 +31,13 @@ const categoryCtrl = {
       //save mongodb
       await newCategory.save();
 
-      return res.status(200).json({
+      return res.json({
         status: 200,
         success: true,
         msg: 'Added category successfully',
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         success: false,
         msg: 'Failed to add category',
@@ -54,16 +54,17 @@ const categoryCtrl = {
         { _id: id },
         {
           name: name,
+          updatedAt: Date.now,
         }
       );
 
-      return res.status(200).json({
+      return res.json({
         status: 200,
         success: true,
         msg: 'Updated category successfully',
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         success: false,
         msg: 'Failed to update category',
@@ -76,13 +77,13 @@ const categoryCtrl = {
     try {
       const id = req.params.id;
       await Categories.findByIdAndDelete({ _id: id });
-      return res.status(200).json({
+      return res.json({
         status: 200,
         success: true,
         msg: 'Deleted category successfully',
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         success: false,
         msg: 'Failed to delete category',

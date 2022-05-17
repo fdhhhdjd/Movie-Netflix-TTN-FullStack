@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as types from "../ActionTypes";
 //?Register
+//?Register
 export const RegisterStart = () => ({
   type: types.REGISTER_API_START,
 });
@@ -34,6 +35,18 @@ export const LoginGoogleSuccess = (api) => ({
 });
 export const LoginGoogleFail = (error) => ({
   type: types.LOGIN_GOOGLE_FAIL,
+  payload: error,
+});
+//?Login facebook
+export const LoginFacebookStart = () => ({
+  type: types.LOGIN_FACEBOOK_START,
+});
+export const LoginFacebookSuccess = (api) => ({
+  type: types.LOGIN_FACEBOOK_SUCCESS,
+  payload: api,
+});
+export const LoginFacebookFail = (error) => ({
+  type: types.LOGIN_FACEBOOK_FAIL,
   payload: error,
 });
 //?Logout
@@ -74,14 +87,14 @@ export const ResetPassFail = (error) => ({
 
 //? refresh_token
 export const RefreshTokenStart = () => ({
-  type: types.REFRESH_TOKEN_ADMIN_START,
+  type: types.REFRESH_TOKEN_START,
 });
 export const RefreshTokenSuccess = (token) => ({
-  type: types.REFRESH_TOKEN_ADMIN_SUCCESS,
+  type: types.REFRESH_TOKEN_SUCCESS,
   payload: token,
 });
 export const RefreshTokenFail = (error) => ({
-  type: types.REFRESH_TOKEN_ADMIN_FAIL,
+  type: types.REFRESH_TOKEN_FAIL,
   payload: error,
 });
 
@@ -95,6 +108,18 @@ export const ChangePasswordAdminSuccess = (token) => ({
 });
 export const ChangePasswordAdminFail = (error) => ({
   type: types.CHANGE_PASSWORD_FAIL,
+  payload: error,
+});
+//? NewPassword
+export const NewPasswordAdminStart = () => ({
+  type: types.NEW_PASSWORD_START,
+});
+export const NewPasswordAdminSuccess = (token) => ({
+  type: types.NEW_PASSWORD_SUCCESS,
+  payload: token,
+});
+export const NewPasswordAdminFail = (error) => ({
+  type: types.NEW_PASSWORD_FAIL,
   payload: error,
 });
 //? Get Profile
@@ -128,20 +153,29 @@ export const RegisterInitiate =
     }
   };
 //!Login
-export const loginInitiate = (email, password) => async (dispatch) => {
-  try {
-    dispatch(LoginStart());
+export const loginInitiate =
+  (email, password, rememberer) => async (dispatch) => {
+    try {
+      dispatch(LoginStart());
 
-    const { data } = await axios.post(`/api/auth/customer/login`, {
-      email,
-      password,
-    });
-
-    dispatch(LoginSuccess(data));
-  } catch (error) {
-    dispatch(LoginFail(error));
-  }
-};
+      const { data } = await axios.post(`/api/auth/customer/login`, {
+        email,
+        password,
+      });
+      if (rememberer === true) {
+        localStorage.setItem(
+          "remember",
+          JSON.stringify({
+            email: email,
+            password: password,
+          })
+        );
+      }
+      dispatch(LoginSuccess(data));
+    } catch (error) {
+      dispatch(LoginFail(error));
+    }
+  };
 //!Login Google
 export const loginGoogleInitiate = (response) => {
   return async function (dispatch) {
@@ -156,6 +190,22 @@ export const loginGoogleInitiate = (response) => {
       })
       .catch((error) => {
         dispatch(LoginGoogleFail(error.data));
+      });
+  };
+};
+export const loginFacebookInitiate = (response) => {
+  return async function (dispatch) {
+    dispatch(LoginFacebookStart());
+    await axios
+      .post("/api/auth/customer/loginFacebook", {
+        userID: response?.userID,
+        accessToken: response?.accessToken,
+      })
+      .then((user) => {
+        dispatch(LoginFacebookSuccess(user.data));
+      })
+      .catch((error) => {
+        dispatch(LoginFacebookFail(error.data));
       });
   };
 };
@@ -216,7 +266,8 @@ export const RefreshTokenInitiate = (token) => async (dispatch) => {
     dispatch(RefreshTokenStart());
 
     const { data } = await axios.get(`/api/auth/customer/refresh_token`, {
-      headers: { Authorization: token },
+      headers: { Authorization: ` ${token}` },
+      //tat dau buôi
     });
 
     dispatch(RefreshTokenSuccess(data));
@@ -230,7 +281,7 @@ export const ProfileInitiate = (token) => async (dispatch) => {
     dispatch(GetProfileStart());
 
     const { data } = await axios.get(`/api/auth/customer/profile`, {
-      headers: { Authorization: token },
+      headers: { Authorization: ` ${token}` },
     });
 
     dispatch(GetProfileSuccess(data.user));
@@ -249,12 +300,29 @@ export const ChangeAdminInitiate =
         `/api/auth/customer/changePassword`,
         { ...state },
         {
-          headers: { Authorization: token },
+          headers: { Authorization: ` ${token}` },
         }
       );
       dispatch(ChangePasswordAdminSuccess(data));
     } catch (error) {
       dispatch(ChangePasswordAdminFail(error));
+    }
+  };
+export const NewAdminInitiate =
+  (token, { ...state }) =>
+  async (dispatch) => {
+    try {
+      dispatch(NewPasswordAdminStart());
+      const { data } = await axios.patch(
+        `/api/auth/customer/newPassword`,
+        { ...state },
+        {
+          headers: { Authorization: ` ${token}` },
+        }
+      );
+      dispatch(NewPasswordAdminSuccess(data));
+    } catch (error) {
+      dispatch(NewPasswordAdminFail(error));
     }
   };
 //!CLEAR_ERRORS
