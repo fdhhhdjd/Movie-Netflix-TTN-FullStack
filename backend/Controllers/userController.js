@@ -438,7 +438,7 @@ const userCtrl = {
   //xem profile
   profile: async (req, res) => {
     try {
-      const user = await Users.findById(req.user.id).select("-password");
+      const user = await Users.findById(req.user.id);
       if (!user)
         return res.json({
           status: 400,
@@ -555,6 +555,69 @@ const userCtrl = {
         status: 200,
         success: true,
         msg: "Change Password Successfully 😂!",
+      });
+    } catch (err) {
+      return res.json({
+        status: 400,
+        msg: err.message,
+      });
+    }
+  },
+  //New Password
+  NewPassword: async (req, res) => {
+    try {
+      const user = await Users.findById(req.user.id).select("+password");
+      const { password, confirmPassword } = req.body;
+      if (!password)
+        return res.json({
+          status: 400,
+          success: false,
+          msg: "Password are not empty.",
+        });
+
+      if (!confirmPassword)
+        return res.json({
+          status: 400,
+          success: false,
+          msg: " Confirm are not empty.",
+        });
+
+      if (password.length < 6)
+        return res.json({
+          status: 400,
+          success: false,
+          msg: "Password is at least 6 characters long.",
+        });
+
+      let reg = new RegExp(
+        "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$"
+      ).test(password);
+      if (!reg) {
+        return res.json({
+          status: 400,
+          success: false,
+          msg: "Includes 6 characters, uppercase, lowercase and some and special characters.",
+        });
+      }
+      if (confirmPassword !== password) {
+        return res.json({
+          status: 400,
+          success: false,
+          msg: "Password and confirm password does not match!",
+        });
+      }
+
+      const salt = await bcrypt.genSalt(10);
+      const passwordHash = await bcrypt.hash(password, salt);
+      const userPassword = await Users.findByIdAndUpdate(
+        { _id: user.id },
+        { password: passwordHash, updatedAt: Date.now },
+        { new: true }
+      );
+      return res.json({
+        status: 200,
+        success: true,
+        msg: "New PasswordSuccessfully 😂!",
       });
     } catch (err) {
       return res.json({
@@ -814,7 +877,9 @@ const userCtrl = {
                   user: { _id, fullname, email, image },
                 });
               } else {
-                let password = email + process.env.ACCESS_TOKEN_SECRET;
+                // let password = email + process.env.ACCESS_TOKEN_SECRET;
+                let password = "null";
+
                 let newUser = new Users({
                   fullname: name,
                   email,
@@ -914,11 +979,11 @@ const userCtrl = {
                   user: { _id, name, email, image },
                 });
               } else {
-                let password = email + process.env.ACCESS_TOKEN_SECRET;
+                let password = "null";
                 let newUser = new Users({
                   fullname: name,
                   email,
-                  password,
+                  password: password,
                   image: {
                     public_id: password,
                     url: picture?.data?.url,
@@ -960,6 +1025,9 @@ const userCtrl = {
             }
           });
         }
+      })
+      .catch((error) => {
+        console.log(error);
       });
   },
 

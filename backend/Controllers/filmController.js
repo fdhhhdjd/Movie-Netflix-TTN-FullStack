@@ -157,13 +157,41 @@ const filmCtrl = {
   },
 
   //Tìm kiếm bộ phim theo thể loại
-  async getFilmByCategory(req, res) {
+  // async getFilmByCategory(req, res) {
+  //   try {
+  //     const categoryId = req.params.id;
+
+  //     const data = await Films.find({
+  //       // category: mongoose.Types.ObjectId(categoryId),
+  //       category: categoryId,
+  //     })
+  //       .populate("director")
+  //       .populate("category")
+  //       .populate("seriesFilm");
+
+  //     return res.status(200).json({
+  //       status: 200,
+  //       success: true,
+  //       data,
+  //       msg: "Get film by category successfully",
+  //     });
+  //   } catch (err) {
+  //     return res.status(400).json({
+  //       status: 400,
+  //       success: false,
+  //       msg: "Failed to get film by category",
+  //     });
+  //   }
+  // },
+
+  //Tìm kiếm phim dành cho người lớn theo thể loại
+  async getAdultFilmByCategory(req, res) {
     try {
       const categoryId = req.params.id;
 
       const data = await Films.find({
-        // category: mongoose.Types.ObjectId(categoryId),
-        category: categoryId,
+        ageLimit: { $gte: 16 },
+        category: { $elemMatch: { $eq: categoryId } },
       })
         .populate("director")
         .populate("category")
@@ -173,13 +201,41 @@ const filmCtrl = {
         status: 200,
         success: true,
         data,
-        msg: "Get film by category successfully",
+        msg: "Get adult films by category successfully",
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: "Failed to get film by category",
+        msg: "Failed to get adult films by category",
+      });
+    }
+  },
+
+  //Tìm kiếm phim dành cho trẻ em theo thể loại
+  async getKidFilmByCategory(req, res) {
+    try {
+      const categoryId = req.params.id;
+
+      const data = await Films.find({
+        ageLimit: { $lt: 16 },
+        category: { $elemMatch: { $eq: categoryId } },
+      })
+        .populate("director")
+        .populate("category")
+        .populate("seriesFilm");
+
+      return res.status(200).json({
+        status: 200,
+        success: true,
+        data,
+        msg: "Get kid films by category successfully",
+      });
+    } catch (err) {
+      return res.status(400).json({
+        status: 400,
+        success: false,
+        msg: "Failed to get kid films by category",
       });
     }
   },
@@ -216,6 +272,7 @@ const filmCtrl = {
     try {
       const {
         title,
+        image_title,
         description,
         year_production,
         country_production,
@@ -231,6 +288,7 @@ const filmCtrl = {
 
       const newFilm = new Films({
         title,
+        image_title,
         description,
         year_production,
         country_production,
@@ -307,6 +365,7 @@ const filmCtrl = {
       const id = req.params.id;
       const {
         title,
+        image_title,
         description,
         year_production,
         country_production,
@@ -324,6 +383,7 @@ const filmCtrl = {
         { _id: id },
         {
           title,
+          image_title,
           description,
           year_production,
           country_production,

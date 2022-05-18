@@ -7,6 +7,7 @@ import { users } from "../../utils/Data/DataGate";
 import { MetaData } from "../../imports/index";
 import { UpdateAdultInitiate } from "../../Redux/Action/ActionFilmadult";
 import { ProfileGateStyle } from "../../Style/ProfileGateStyle/ProfileGateStyle";
+import { motion } from "framer-motion";
 const ProfileGate = () => {
   const [isEdit, setIsEdit] = useState(false);
   const { refreshTokens, profile } = useSelector((state) => state.auth);
@@ -40,7 +41,12 @@ const ProfileGate = () => {
       <MetaData title="Choose Adult" />
       <div className="gate__container">
         <img src={logo} className="logo" alt="" />
-        <div className="info">
+        <motion.div
+          className="info"
+          initial={{ scale: 1.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <span className="title">
             {isEdit ? "Manage Profile:" : "Who's watching?"}
           </span>
@@ -65,7 +71,7 @@ const ProfileGate = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </motion.div>
         <span className="edit-profile">
           {isEdit ? (
             <a className="done" href="/" onClick={handleClick}>
