@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { GlobalState } from "../../Contexts/GlobalState";
 import { Footer, Header } from "../../imports";
@@ -10,19 +10,20 @@ const Home = () => {
   const { categories } = useSelector((state) => state.film);
   const { allFilmAdult, allFilmKid } = useSelector((state) => state.adult);
   const messageEndRef = useRef(null);
+  const [filmTest,setFilmTest] = useState()
   //Random Category
-  var arr = [];
-  if (categories?.length > 0) {
-    while (arr.length < 4) {
-      var a = Math.floor(Math.random() * categories?.length);
-      var text = a.toString();
-      // console.log(text, "text");
-      if (!arr.includes(categories[text])) {
-        // console.log(text, "text");
-        arr.push(categories[text]);
-      }
-    }
-  }
+  // var arr = [];
+  // if (categories?.length > 0) {
+  //   while (arr.length < 4) {
+  //     var a = Math.floor(Math.random() * categories?.length);
+  //     var text = a.toString();
+  //     // console.log(text, "text");
+  //     if (!arr.includes(categories[text])) {
+  //       // console.log(text, "text");
+  //       arr.push(categories[text]);
+  //     }
+  //   }
+  // }
   const handleHideResult = () => {
     setIsOpenModal(false);
   };
@@ -34,6 +35,13 @@ const Home = () => {
       ScrollToBottom();
     }
   }, [isOpenModal]);
+  // useEffect(()=>{
+  //   allFilmAdult?.forEach(item=>{
+  //     if(item._id==='6209cecffa07aca02464524c'){
+  //       setFilmTest(item)
+  //     }
+  //   });
+  // },[])
   return (
     <div>
       <HomeStyle />
@@ -53,10 +61,18 @@ const Home = () => {
         )}
         <div className={isOpenModal && "home__content"}>
           <Feature setIsOpenModal={setIsOpenModal} className="test" />
-          <List category={arr[0]} setIsOpenModal={setIsOpenModal} />
-          <List category={arr[1]} setIsOpenModal={setIsOpenModal} />
-          <List category={arr[2]} setIsOpenModal={setIsOpenModal} />
-          <List category={arr[3]} setIsOpenModal={setIsOpenModal} />
+          {/* {
+            arr.map((film)=>{
+              return(
+                <List category={film} setIsOpenModal={setIsOpenModal} />
+              )
+            }
+            )
+          } */}
+          <List  setIsOpenModal={setIsOpenModal} />
+          <List  setIsOpenModal={setIsOpenModal} />
+          <List setIsOpenModal={setIsOpenModal} />
+          <List  setIsOpenModal={setIsOpenModal} />
           <Watch />
           <br />
           <br />

@@ -7,7 +7,7 @@ import swal from "sweetalert";
 import Swal from "sweetalert2";
 import { CheckPass, logo, True } from "../../imports/image";
 import { LogoutInitiate } from "../../Redux/Action/ActionAuth";
-import { UpdateAdultInitiate } from "../../Redux/Action/ActionFilmadult";
+import { UpdateAdultInitiate,FindFilmCateAdultInitiate,FindFilmCateKidInitiate} from "../../Redux/Action/ActionFilmadult";
 import { HeaderStyle } from "../../Style/HeaderStyle/HeaderStyle";
 const Header = () => {
   const dispatch = useDispatch();
@@ -19,6 +19,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const [isAdult, setIsAdult] = useState(updateAdult.msg || profile.adult);
+  // console.log(allFilmAdult,'film header')
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.pageYOffset !== 0);
@@ -44,6 +45,13 @@ const Header = () => {
       setActiveTab("Products");
     }
   }, [location]);
+  // useEffect(()=>{
+  //   if(profile.adult === 'adult'){
+  //     dispatch(FindFilmCateAdultInitiate(refreshTokens))
+  //   }else if(profile.adult==='kid'){
+
+  //   }
+  // },[])
   const handleKidMode = (adult) => {
     dispatch(UpdateAdultInitiate((adult = "kid"), refreshTokens));
     setIsAdult("kid");

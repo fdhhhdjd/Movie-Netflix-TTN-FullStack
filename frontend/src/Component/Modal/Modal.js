@@ -9,6 +9,7 @@ import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
 
 const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const { findFilm } = useSelector((state) => state.film);
+  console.log(findFilm,'dm duy thinh')
   const countSeason = (n) => {
     if (n > 1) {
       return `${n} seasons`;

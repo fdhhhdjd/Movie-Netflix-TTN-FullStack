@@ -19,7 +19,7 @@ const ProfileGate = () => {
     setIsEdit(!isEdit);
   };
   const handleGoToHome = (adult) => {
-    dispatch(UpdateAdultInitiate(adult, refreshTokens));
+    dispatch(UpdateAdultInitiate(adult, refreshTokens));  
   };
   useEffect(() => {
     if (profile?.password === "null") {

@@ -10,7 +10,7 @@ import { ListItem } from "../../imports/index";
 import { FindFilmCategoryInitiate } from "../../Redux/Action/ActionFilmAdmin";
 const List = ({ setIsOpenModal, category }) => {
   const [slideNumber, setSlideNumber] = useState(0);
-  const [filmByCategory, setFilmByCategory] = useState([]);
+  // const [filmByCategory, setFilmByCategory] = useState([]);
   const { allFilmAdult, updateAdult } = useSelector((state) => state.adult);
   const { refreshTokens, profile } = useSelector((state) => state.auth);
   const listRef = useRef();
@@ -26,23 +26,23 @@ const List = ({ setIsOpenModal, category }) => {
       listRef.current.style.transform = `translateX(${-230 + distance}px)`;
     }
   };
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(
-          `/api/film/find/category/${category._id}`,
-          {
-            headers: { Authorization: refreshTokens },
-          }
-        );
-        setFilmByCategory(data.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const { data } = await axios.get(
+  //         `/api/film/adult/find/category/${category._id}`,
+  //         {
+  //           headers: { Authorization: refreshTokens },
+  //         }
+  //       );
+  //       setFilmByCategory(data.data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
   return (
     <>
       <ListStyle />
@@ -55,10 +55,9 @@ const List = ({ setIsOpenModal, category }) => {
             style={{ display: slideNumber === 0 && "none" }}
           />
           <div className="film-container" ref={listRef}>
-            {/* {
-              (profile.adult =
-                "kid" && allFilmAdult.data
-                  ? allFilmAdult.data.map((film, index) => {
+            {
+              ( allFilmAdult
+                  ? allFilmAdult.map((film, index) => {
                       return (
                         <Fragment key={film._id}>
                           <ListItem
@@ -74,9 +73,9 @@ const List = ({ setIsOpenModal, category }) => {
                         </Fragment>
                       );
                     })
-                  : window.location.href("/browse"))
-            } */}
-            {filmByCategory
+                  : "")
+            }
+            {/* {filmByCategory
               ? filmByCategory.map((film, index) => {
                   return (
                     <Fragment key={film._id}>
@@ -111,7 +110,7 @@ const List = ({ setIsOpenModal, category }) => {
                           </Fragment>
                         );
                       })
-                    : window.location.href("/browse"))}
+                    : window.location.href("/browse"))} */}
           </div>
           <ArrowForwardIosOutlined
             className="slider-arrow right"
