@@ -57,7 +57,7 @@ router.delete(
 router.get("/detail/:id", auth, filmCtrl.getDetailFilm);
 
 //lấy ra những bộ phim người lớn theo thể loại
-router.get("/adult/find/category/:id", auth, filmCtrl.getAdultFilmByCategory);
+router.get("/adult/find/category/:id", filmCtrl.getAdultFilmByCategory);
 
 //lấy ra những bộ phim người lớn theo thể loại
 router.get("/kid/find/category/:id", auth, filmCtrl.getKidFilmByCategory);
