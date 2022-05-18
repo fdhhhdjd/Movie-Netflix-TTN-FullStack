@@ -14,7 +14,7 @@ const Watch = () => {
           Home
         </div>
         {/* <video className="video" autoPlay progress controls> */}
-        <video className="video" controls autoplay>
+        <video className="video" controls autoPlay>
           <source src={dataRandom?.seriesFilm[0]?.url_video} type="video/mp4" />
         </video>
       </div>

@@ -72,7 +72,8 @@ export const FeatureStyle = createGlobalStyle`
       flex-direction: column;
   
       img {
-        width: 400px;
+        max-width: 400px;
+        max-height: 180px;
       }
   
       .desc {
@@ -103,6 +104,8 @@ export const FeatureStyle = createGlobalStyle`
           &.play {
             background-color:#fff;
             color: #000;
+            border: none;
+            outline: none;
 
             &:hover{
               background-color: rgba(255,255,255,0.75);
@@ -112,6 +115,8 @@ export const FeatureStyle = createGlobalStyle`
           &.more {
             background-color: rgba(109,109,110,0.7);
             color: white;
+            outline: none; 
+            border: none;
 
             &:hover{
               background-color: rgba(109,109,110,0.4);

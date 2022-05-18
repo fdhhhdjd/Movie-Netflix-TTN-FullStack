@@ -136,9 +136,9 @@ const Header = () => {
         }
       >
         <div className="container">
-          <nav class="navbar navbar-expand-sm w-100">
+          <nav className="navbar navbar-expand-sm w-100">
             <button
-              class="navbar-toggler d-lg-none"
+              className="navbar-toggler d-lg-none"
               type="button"
               data-toggle="collapse"
               data-target="#collapsibleNavId"
@@ -146,20 +146,20 @@ const Header = () => {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon"></span>
+              <span className="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavId">
-              <ul class="navbar-nav mr-auto mt-2 mt-lg-0 d-flex align-items-center">
-                <li class="nav-item mt-2">
+            <div className="collapse navbar-collapse" id="collapsibleNavId">
+              <ul className="navbar-nav mr-auto mt-2 mt-lg-0 d-flex align-items-center">
+                <li className="nav-item mt-2">
                   <img src={logo} alt="" className="img-fluid" />
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                   <Link className="nav-link" to="/home">
                     Home
                   </Link>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
+                <li className="nav-item">
+                  <a className="nav-link" href="#">
                     TV Shows
                   </a>
                 </li>
@@ -168,18 +168,18 @@ const Header = () => {
                     Movie
                   </Link>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
+                <li className="nav-item">
+                  <a className="nav-link" href="#">
                     New & Popular
                   </a>
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                   <Link className="nav-link" to="/feedback">
                     Feedback
                   </Link>
                 </li>
               </ul>
-              <ul class="right navbar-nav my-2 my-lg-0 d-flex align-items-center">
+              <ul className="right navbar-nav my-2 my-lg-0 d-flex align-items-center">
                 <div className="mr-3">
                   <i className="icon fas fa-search " />
                 </div>
@@ -200,7 +200,7 @@ const Header = () => {
                       </div>
                       <li
                         onClick={() => navigate("/profile")}
-                        class="nav-item dropdown mr-3"
+                        className="nav-item dropdown mr-3"
                       >
                         {profile.fullname || profile.name}
                       </li>

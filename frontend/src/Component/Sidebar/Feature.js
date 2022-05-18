@@ -16,6 +16,7 @@ const Feature = ({ type, setIsOpenModal }) => {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   }
   let data = dataRandom;
+  console.log(data);
   return (
     <>
       <FeatureStyle />
@@ -48,7 +49,7 @@ const Feature = ({ type, setIsOpenModal }) => {
 
         <div className="fadeOut"></div>
         <div className="info">
-          <img src={title} alt="" />
+          <img src={data?.image_title?.url} alt="" />
           <span className="desc">{truncate(data?.description, 150)}</span>
           <div className="buttons">
             <Link to="/movie" className="xin">
