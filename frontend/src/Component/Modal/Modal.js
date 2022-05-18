@@ -1,14 +1,11 @@
-import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
+import {
+  Add, Close, PlayArrowRounded, ThumbDownAltOutlined, ThumbUpOutlined
+} from "@material-ui/icons";
+import { AnimatePresence, motion } from "framer-motion";
+import { useSelector } from "react-redux";
 import { mainMovie, recMovies } from "../../imports/import";
 import { Recommend } from "../../imports/index";
-import {
-  Close,
-  ThumbDownAltOutlined,
-  Add,
-  ThumbUpOutlined,
-  PlayArrowRounded,
-} from "@material-ui/icons";
-import { useDispatch, useSelector } from "react-redux";
+import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
 
 const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const { findFilm } = useSelector((state) => state.film);
@@ -29,10 +26,15 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
     setIsOpenModal(false);
   };
   return (
-    <>
+    <AnimatePresence>
       <ModalStyle />
-      <div className="modal-container">
-        <div className="cancel-btn" onClick={handleCloseModal}>
+      <motion.div
+        className="modal-container"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.5}}
+      >
+        <div className="cancel-btn " onClick={handleCloseModal}>
           <Close sx={{ fontSize: "40px" }} />
         </div>
 
@@ -170,8 +172,8 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
         </div>
 
         <div className="modal-bot-cover"></div>
-      </div>
-    </>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
