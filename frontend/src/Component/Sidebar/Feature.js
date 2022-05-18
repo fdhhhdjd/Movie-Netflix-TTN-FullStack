@@ -1,17 +1,19 @@
 import React, { useContext } from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { GlobalState } from "../../Contexts/GlobalState";
 import title from "../../Image/title-test.png";
 import { FeatureStyle } from "../../Style/StyleHome/FeatureStyle";
+import {FindFilmInitiate} from "../../Redux/Action/ActionFilmAdmin"
 const Feature = ({ type, setIsOpenModal }) => {
-  const { profile } = useSelector((state) => state.auth);
+  const { profile,refreshTokens } = useSelector((state) => state.auth);
   const state = useContext(GlobalState);
   const [dataRandom] = state.dataRandom;
-  const handleMoreInfo = () => {
+  const dispatch = useDispatch();
+  const handleMoreInfo = (id) => {
     setIsOpenModal(true);
+    dispatch(FindFilmInitiate(id, refreshTokens));
   };
-
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   }
@@ -59,7 +61,7 @@ const Feature = ({ type, setIsOpenModal }) => {
               </button>
             </Link>
             <div className="xin">
-              <button className="more" onClick={handleMoreInfo}>
+              <button className="more" onClick={()=>handleMoreInfo(dataRandom._id)}>
                 <i className="fas fa-info-circle" />
                 &nbsp;
                 <span>More Info</span>
