@@ -8,8 +8,19 @@ export const ModalStyle = createGlobalStyle`
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
-        z-index: 99999;
+        z-index: 99999 !important;
         overflow-y: scroll;
+    }
+
+    .modal-fade {
+        background: rgba(0, 0, 0, 0.5);
+        position: relative;
+        z-index: 99;
+        width: 100%; 
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2100px;
     }
 
     .fadeOut {
@@ -46,12 +57,12 @@ export const ModalStyle = createGlobalStyle`
         color: #fff;
         user-select: none;
         overflow: hidden;
-        z-index: 100;
+        z-index: 99999;
 
         .cancel-btn {
             color: #000;
             position: absolute;
-            z-index: 10000;
+            z-index: 99999;
             right: 0;
             margin: 10px 15px;
             cursor: pointer;
@@ -126,8 +137,6 @@ export const ModalStyle = createGlobalStyle`
     }
 
 
-
-
     .modal-bot-cover {
         /* background: rgb(18,18,18); */
         background: linear-gradient(to top,#181818, transparent 50%);
@@ -148,10 +157,16 @@ export const ModalStyle = createGlobalStyle`
         right: 0;
     }
 
+    .img_title {
+        max-width: 250px;
+        max-height: 180px;
+        margin-bottom: 10px;
+    }
+
     .modal-name-icons {
         position: absolute;
         left: 50px;
-        top: 21vw;
+        bottom: 50px;
         z-index: 100;
         text-align: left;
     }

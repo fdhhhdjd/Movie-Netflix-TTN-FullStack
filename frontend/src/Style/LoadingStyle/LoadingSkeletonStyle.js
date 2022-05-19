@@ -1,26 +1,54 @@
 import { createGlobalStyle } from "styled-components";
 
 export const LoadingSkeletonStyles = createGlobalStyle`
-.skeleton {
-	background-color: #e2e5e7;
-	// The shine that's going to move across the skeleton:
-	background-image:			
-			linear-gradient(
-				90deg, 
-				rgba(#fff, 0), 
-				rgba(#fff, 0.5),
-				rgba(#fff, 0)
-			);
-	background-size: 40px 100%; // width of the shine
-	background-repeat: no-repeat; // No need to repeat the shine effect
-	background-position: left -40px top 0; // Place shine on the left side, with offset on the left based on the width of the shine - see background-size
-	animation: shine 1s ease infinite; // increase animation time to see effect in 'slow-mo'
+.skeleton-container {
+	background: #444;
+	position: relative; 
+	overflow: hidden;
+	margin-right: 10px;
+	border-radius: 4px;
 }
 
-@keyframes shine {
-	to {
-		// Move shine from left to right, with offset on the right based on the width of the shine - see background-size
-		background-position: right -40px top 0;
-	}
+.skeleton-container.listTitle {
+	width: 100px;
+  	height: 23px;
+	margin-left: 50px;
 }
+
+.skeleton-container.listImg {
+	width: 225px;
+	height: 120px;
+}
+
+.skeleton.listImg {
+	margin-right: 5px;
+	border-radius: 5px;
+	margin-top: 100px;
+}
+
+.shimmer-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	animation: loading 2.5s infinite;
+  }
+  .shimmer {
+	width: 50%;
+	height: 100%;
+	background: rgba(255,255,255,0.2);
+	transform: skewX(-20deg);
+	box-shadow: 0 0 30px 30px rgba(255,255,255,0.2);
+  }
+  .dark .shimmer {
+	background: rgba(255,255,255,0.05);
+	box-shadow: 0 0 30px 30px rgba(255,255,255,0.05);
+  }
+  
+  @keyframes loading {
+	0% { transform: translateX(-150%) }
+	50% { transform: translateX(-60%) }
+	100% { transform: translateX(150%) }
+  }
 `;

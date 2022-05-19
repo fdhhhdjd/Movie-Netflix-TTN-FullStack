@@ -5,6 +5,13 @@ export const FeatureStyle = createGlobalStyle`
     height: 100vh;
     position: relative;
   
+    .banner {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
     .category {
       position: absolute;
       top: 80px;
@@ -44,12 +51,6 @@ export const FeatureStyle = createGlobalStyle`
       top: auto;
       bottom: -22px;
     }
-  
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
 
     .age-tag {
       position: absolute;
@@ -72,7 +73,7 @@ export const FeatureStyle = createGlobalStyle`
       flex-direction: column;
   
       img {
-        max-width: 400px;
+        max-width: 270px;
         max-height: 180px;
       }
   

@@ -28,6 +28,7 @@ export { default as ChangePassword } from "../Component/Profile/ChangePassword";
 export { default as ManageProfile } from "../Page/ProfileGate/ManageProfile";
 export { default as Recommend } from "../Component/Modal/Recommend";
 export { default as Movie } from "../Page/Movie/Movie";
+export { default as LoadingSkeleton } from "../Component/Admins/Loading/LoadingSkeleton";
 //!Admin
 export { default as LoginAdmin } from "../Page/Admins/LoginAdmin";
 export { default as ForgetAdmin } from "../Component/Admins/ForgetAdmin";

@@ -10,7 +10,7 @@ const Home = () => {
   const { categories } = useSelector((state) => state.film);
   const { allFilmAdult, allFilmKid } = useSelector((state) => state.adult);
   const messageEndRef = useRef(null);
-  const [filmTest,setFilmTest] = useState()
+  const [filmTest, setFilmTest] = useState();
   //Random Category
   // var arr = [];
   // if (categories?.length > 0) {
@@ -52,14 +52,12 @@ const Home = () => {
       >
         <Header />
         {isOpenModal && (
-          <div>
-            <Modal
-              setIsOpenModal={setIsOpenModal}
-              handleHideResult={handleHideResult}
-            />
-          </div>
+          <Modal
+            setIsOpenModal={setIsOpenModal}
+            handleHideResult={handleHideResult}
+          />
         )}
-        <div className={isOpenModal && "home__content"}>
+        <div className={isOpenModal ? "home__content" : ""}>
           <Feature setIsOpenModal={setIsOpenModal} className="test" />
           {/* {
             arr.map((film)=>{
@@ -69,10 +67,10 @@ const Home = () => {
             }
             )
           } */}
-          <List  setIsOpenModal={setIsOpenModal} />
-          <List  setIsOpenModal={setIsOpenModal} />
           <List setIsOpenModal={setIsOpenModal} />
-          <List  setIsOpenModal={setIsOpenModal} />
+          <List setIsOpenModal={setIsOpenModal} />
+          <List setIsOpenModal={setIsOpenModal} />
+          <List setIsOpenModal={setIsOpenModal} />
           <Watch />
           <br />
           <br />
