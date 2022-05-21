@@ -148,7 +148,7 @@ const Feedback = () => {
               </div>
               <div className="inputBox">
                 <input
-                  className="form-control"
+                  // className="form-control"
                   type="type"
                   value={subject || ""}
                   name="subject"
@@ -159,7 +159,7 @@ const Feedback = () => {
               </div>
               <div className="inputBox">
                 <textarea
-                  className="form-control"
+                  // className="form-control"
                   cols="10"
                   rows="5"
                   value={content || ""}

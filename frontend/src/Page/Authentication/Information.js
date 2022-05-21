@@ -46,6 +46,7 @@ const Information = () => {
   }, [newPassword]);
   return (
     <>
+      <Header/>
       <ChangePasswordStyle />
       <section className="contact">
         <img src={logo} className="logo-feedback" alt="" />

@@ -9,7 +9,7 @@ export const ChangePasswordStyle = createGlobalStyle`
 .contact{
     position: relative;
     min-height: 100vh;
-    padding: 50px 100px;
+    padding: 100px 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -134,7 +134,7 @@ resize: none;
     position: absolute;
     left: 0;
     padding:5px 0;font-size:16px;
-    margin: 10px 0;
+    margin: 5px 0;
     pointer-events: none;
     transition: 0.5s;
     color: #666;
