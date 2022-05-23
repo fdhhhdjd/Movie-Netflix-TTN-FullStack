@@ -218,9 +218,9 @@ https://docs.google.com/spreadsheets/d/1BBv4CXNniNjqdIE7tjrG9UM4nprd3NSVy2FX9oaW
 
 - Thông tin chi tiết của bộ phim và thông tin đánh giá của bộ phim: get --> http://localhost:5000/api/film/detail/:id
 
-- Tìm bộ phim người lớn theo thể loại: get --> http://localhost:5000/api/film/adult/find/category/:id
+- Hiển thị toàn bộ phim người lớn theo từng thể loại: get --> http://localhost:5000/api/film/adult/eachCategory
 
-- Tìm bộ phim trẻ em theo thể loại: get --> http://localhost:5000/api/film/kid/find/category/:id
+- Hiển thị toàn bộ phim trẻ em theo từng thể loại: get --> http://localhost:5000/api/film/kid/eachCategory
 
 - Tìm bộ phim theo đạo diễn: get --> http://localhost:5000/api/film/find/director/:id
 
