@@ -1,4 +1,4 @@
-import { LoadingSkeletonStyles } from "../../../Style/LoadingStyle/LoadingSkeletonStyle";
+import { LoadingSkeletonStyles } from "../../Style/LoadingStyle/LoadingSkeletonStyle";
 
 const LoadingSkeleton = ({ type }) => {
   return (

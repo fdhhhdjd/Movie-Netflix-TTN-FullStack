@@ -19,7 +19,7 @@ export { default as List } from "../Component/Sidebar/List";
 export { default as ListItem } from "../Component/Sidebar/ListItem";
 export { default as Modal } from "../Component/Modal/Modal";
 export { default as ProfileGate } from "../Page/ProfileGate/ProfileGate";
-export { default as Watch } from "../Component/Watch/Watch";
+export { default as Watch } from "../Page/Watch/Watch";
 export { default as Footer } from "../Component/Sidebar/Footer";
 export { default as FeedBack } from "../Page/Feedback/FeedBack";
 export { default as Profile } from "../Component/Profile/Profile";
@@ -28,7 +28,8 @@ export { default as ChangePassword } from "../Component/Profile/ChangePassword";
 export { default as ManageProfile } from "../Page/ProfileGate/ManageProfile";
 export { default as Recommend } from "../Component/Modal/Recommend";
 export { default as Movie } from "../Page/Movie/Movie";
-export { default as LoadingSkeleton } from "../Component/Admins/Loading/LoadingSkeleton";
+export { default as LoadingSkeleton } from "../Page/Loading/LoadingSkeleton";
+export { default as LoadingWatch } from "../Page/Loading/LoadingWatch";
 //!Admin
 export { default as LoginAdmin } from "../Page/Admins/LoginAdmin";
 export { default as ForgetAdmin } from "../Component/Admins/ForgetAdmin";

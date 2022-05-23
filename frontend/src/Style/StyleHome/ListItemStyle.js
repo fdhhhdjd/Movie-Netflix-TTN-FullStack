@@ -63,6 +63,16 @@ export const ListItemStyle = createGlobalStyle`
           opacity: 0.7;
         }
       }
+
+      & > span > a {
+        color: #000;
+        margin-right: 10px;
+        font-size: 35px !important;
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
     }
 
     &-top {

@@ -4,31 +4,36 @@ import {
   PlayCircleFilledWhiteRounded,
   ThumbUpOutlined,
 } from "@material-ui/icons";
-import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ListItemStyle } from "../../Style/StyleHome/ListItemStyle";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import { FindFilmInitiate } from "../../Redux/Action/ActionFilmAdmin";
+import { ListItemStyle } from "../../Style/StyleHome/ListItemStyle";
 export default function ListItem({
   image,
   ageLimit,
   filmLength,
   category,
   series,
-  id,
+  Id,
   index,
   setIsOpenModal,
 }) {
+  const [filmId, setFilmId] = useState();
   const [isHovered, setIsHovered] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
   const { refreshTokens } = useSelector((state) => state.auth);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {id}=useParams()
 
   const handleModal = (id) => {
     dispatch(FindFilmInitiate(id, refreshTokens));
     setIsOpenModal(true);
   };
+
+
+  useEffect(() => {
+    dispatch(FindFilmInitiate(id, refreshTokens));
+  }, [id]);
   return (
     <>
       <ListItemStyle />
@@ -50,7 +55,11 @@ export default function ListItem({
             <div className="item-info">
               <div className="icons">
                 <span className="icons-left">
-                  <PlayCircleFilledWhiteRounded />
+                  <Link to={`/watch/${Id}`} >
+                    <PlayCircleFilledWhiteRounded
+                     
+                    />
+                  </Link>
                   <AddCircleOutline />
                   <ThumbUpOutlined />
                 </span>

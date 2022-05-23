@@ -23,6 +23,11 @@ export const Welcome = lazy(() => {
     setTimeout(() => resolve(import("../Page/Welcome/Welcome")), 2000);
   });
 });
+export const Watch = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("../Page/Watch/Watch")), 2000);
+  });
+});
 
 //!Authentication Admin
 export const LoginAdmin = lazy(() => {

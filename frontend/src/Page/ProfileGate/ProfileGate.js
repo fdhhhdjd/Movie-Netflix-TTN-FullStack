@@ -43,9 +43,9 @@ const ProfileGate = () => {
         <img src={logo} className="logo" alt="" />
         <motion.div
           className="info"
-          initial={{ scale: 1.5, opacity: 0 }}
+          initial={{ scale: 2, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{duration: 0.2}}
         >
           <span className="title">
             {isEdit ? "Manage Profile:" : "Who's watching?"}

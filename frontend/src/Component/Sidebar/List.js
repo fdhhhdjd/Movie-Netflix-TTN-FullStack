@@ -12,12 +12,16 @@ import { LoadingSkeleton } from "../../imports/index";
 
 const List = ({ setIsOpenModal, category }) => {
   const [slideNumber, setSlideNumber] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(true);
-    }, 4000);
+    const handle = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(handle);
   }, []);
+
   // const [filmByCategory, setFilmByCategory] = useState([]);
   const { allFilmAdult, updateAdult } = useSelector((state) => state.adult);
   const { refreshTokens, profile } = useSelector((state) => state.auth);
@@ -56,7 +60,7 @@ const List = ({ setIsOpenModal, category }) => {
       <ListStyle />
       <section className="list">
         <span className="list-title">
-          {loading ? (
+          {!loading ? (
             category ? (
               category?.name
             ) : (
@@ -77,7 +81,7 @@ const List = ({ setIsOpenModal, category }) => {
               allFilmAdult.map((film, index) => {
                 return (
                   <Fragment key={film._id}>
-                    {loading ? (
+                    {!loading ? (
                       <ListItem
                         setIsOpenModal={setIsOpenModal}
                         image={film.image_film.url}
@@ -85,7 +89,7 @@ const List = ({ setIsOpenModal, category }) => {
                         filmLength={film.filmLength}
                         category={film.category}
                         series={film.seriesFilm}
-                        id={film._id}
+                        Id={film._id}
                         index={index}
                       />
                     ) : (
