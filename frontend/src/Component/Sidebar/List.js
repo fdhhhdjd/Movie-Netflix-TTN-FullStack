@@ -89,7 +89,7 @@ const List = ({ setIsOpenModal, category }) => {
                         filmLength={film.filmLength}
                         category={film.category}
                         series={film.seriesFilm}
-                        Id={film._id}
+                        id={film._id}
                         index={index}
                       />
                     ) : (

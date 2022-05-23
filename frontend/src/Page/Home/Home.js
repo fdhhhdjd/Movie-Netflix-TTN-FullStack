@@ -10,7 +10,7 @@ const Home = () => {
   const { categories } = useSelector((state) => state.film);
   const { allFilmAdult, allFilmKid } = useSelector((state) => state.adult);
   const messageEndRef = useRef(null);
-  const [filmTest, setFilmTest] = useState();
+  const [film, setFilm] = useState();
   //Random Category
   // var arr = [];
   // if (categories?.length > 0) {
@@ -71,7 +71,7 @@ const Home = () => {
           <List setIsOpenModal={setIsOpenModal} />
           <List setIsOpenModal={setIsOpenModal} />
           <List setIsOpenModal={setIsOpenModal} />
-          <Watch autoPlay={false} home={false} />
+          {/* <Watch autoPlay={false} home={false} /> */}
           <br />
           <br />
           <Footer />

@@ -89,7 +89,7 @@ function App() {
           </Route>
           {/* Watch */}
           <Route element={<PrivateRouter />}>
-            <Route path="/watch/:id" element={<Watch />} />
+            <Route path="/watch" element={<Watch />} />
           </Route>
           {/* Profile User   */}
           <Route element={<PrivateRouter />}>
