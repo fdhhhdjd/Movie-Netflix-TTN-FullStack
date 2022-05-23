@@ -1,3 +1,4 @@
+//! User
 export { default as Login } from "../Page/Authentication/Login";
 export { default as Register } from "../Page/Authentication/Register";
 export { default as Forget } from "../Page/Authentication/Forget";
@@ -18,7 +19,7 @@ export { default as List } from "../Component/Sidebar/List";
 export { default as ListItem } from "../Component/Sidebar/ListItem";
 export { default as Modal } from "../Component/Modal/Modal";
 export { default as ProfileGate } from "../Page/ProfileGate/ProfileGate";
-export { default as Watch } from "../Component/Watch/Watch";
+export { default as Watch } from "../Page/Watch/Watch";
 export { default as Footer } from "../Component/Sidebar/Footer";
 export { default as FeedBack } from "../Page/Feedback/FeedBack";
 export { default as Profile } from "../Component/Profile/Profile";
@@ -27,6 +28,8 @@ export { default as ChangePassword } from "../Component/Profile/ChangePassword";
 export { default as ManageProfile } from "../Page/ProfileGate/ManageProfile";
 export { default as Recommend } from "../Component/Modal/Recommend";
 export { default as Movie } from "../Page/Movie/Movie";
+export { default as LoadingSkeleton } from "../Page/Loading/LoadingSkeleton";
+export { default as LoadingWatch } from "../Page/Loading/LoadingWatch";
 //!Admin
 export { default as LoginAdmin } from "../Page/Admins/LoginAdmin";
 export { default as ForgetAdmin } from "../Component/Admins/ForgetAdmin";
@@ -50,6 +53,7 @@ export { default as useDesUpImage } from "../CustomHook/useDesUpImage";
 export { default as InputField } from "../CustomHook/useInputField";
 export { default as useRequireInput } from "../CustomHook/useRequireInput";
 export { default as useTogglePassword } from "../CustomHook/useTogglePassword";
+export { default as useMotionStyle } from "../CustomHook/useMotionStyle";
 //!Private Route Admin
 export { default as LoadingToRedirectAdmin } from "../Page/PrivateRouterAdmin/LoadingToRedirectAdmin";
 export { default as LoadingToRedirectAuth } from "../Page/PrivateRouterAdmin/LoadingToRedirectAuth";

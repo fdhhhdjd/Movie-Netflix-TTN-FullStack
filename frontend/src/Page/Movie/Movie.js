@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Header, Footer } from "../../imports";
 import { MovieStyle } from "../../Style/MovieStyle/MovieStyle";
 import { Feature, Modal, List, MetaData } from "../../imports/index";
 import { GlobalState } from "../../Contexts/GlobalState";
 import { useContext } from "react";
+import { spacing } from "@material-ui/system";
 const Movie = () => {
   const data = useContext(GlobalState);
   const [isOpenModal, setIsOpenModal] = data.modal;
+  const [openSort,setOpenSort]= useState(false);
   return (
     <>
       <Header />
       <MovieStyle />
-      <section className="page-movie mt-5">
+      <section className="page-movie">
         <div className="container">
           <div className="row">
             <div className="col">
@@ -37,19 +39,20 @@ const Movie = () => {
                         Action
                       </a>
                       <a className="dropdown-item" href="#">
-                        Another action
+                        Adventure
                       </a>
                       <a className="dropdown-item" href="#">
-                        Something else here
+                        Animals
                       </a>
                     </div>
                   </div>
                 </div>
-                <div className="d-flex align-items-cente">
+                <div className="d-flex align-items-center justify-content-center">
                   <button
                     className="btn-sort"
                     aria-label="View in list view"
                     tabindex="0"
+                    onClick={()=>setOpenSort(false)}
                   >
                     <svg
                       width="24"
@@ -72,6 +75,7 @@ const Movie = () => {
                     aria-label="View in grid View"
                     className="btn-sort"
                     tabindex="0"
+                    onClick={()=>setOpenSort(true)}
                   >
                     <svg
                       width="24"
@@ -88,10 +92,29 @@ const Movie = () => {
                         fill="currentColor"
                       ></path>
                     </svg>
+                    {
+                      openSort && (
+                      
+                        <div class="dropdown dropdown-sort">
+                          <span class="btn dropdown-toggle suggestion" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Suggestions For You
+                          </span>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">suggestions for you</a>
+                            <a class="dropdown-item" href="#">Year Released</a>
+                            <a class="dropdown-item" href="#">A-Z</a>
+                            <a class="dropdown-item" href="#">Z-A</a>
+                        </div>
+</div>
+                      )
+                    }
                   </button>
                 </div>
               </div>
               <div className="page-movie-body">
+                <List setIsOpenModal={setIsOpenModal} />
+                <List setIsOpenModal={setIsOpenModal} />
+                <List setIsOpenModal={setIsOpenModal} />
                 <List setIsOpenModal={setIsOpenModal} />
               </div>
             </div>

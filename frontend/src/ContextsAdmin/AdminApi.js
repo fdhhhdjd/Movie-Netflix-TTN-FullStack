@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   InfoAdminInitiate,
-  GetAllDirectorInitiate
+  GetAllDirectorInitiate,
 } from "../Redux/Action/ActionAdminAuth";
 const AdminApi = (tokens, callback) => {
   const [call, setCall] = useState(false);

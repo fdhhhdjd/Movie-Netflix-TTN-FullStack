@@ -438,7 +438,7 @@ const userCtrl = {
   //xem profile
   profile: async (req, res) => {
     try {
-      const user = await Users.findById(req.user.id).select("-password");
+      const user = await Users.findById(req.user.id);
       if (!user)
         return res.json({
           status: 400,
@@ -563,6 +563,69 @@ const userCtrl = {
       });
     }
   },
+  //New Password
+  NewPassword: async (req, res) => {
+    try {
+      const user = await Users.findById(req.user.id).select("+password");
+      const { password, confirmPassword } = req.body;
+      if (!password)
+        return res.json({
+          status: 400,
+          success: false,
+          msg: "Password are not empty.",
+        });
+
+      if (!confirmPassword)
+        return res.json({
+          status: 400,
+          success: false,
+          msg: " Confirm are not empty.",
+        });
+
+      if (password.length < 6)
+        return res.json({
+          status: 400,
+          success: false,
+          msg: "Password is at least 6 characters long.",
+        });
+
+      let reg = new RegExp(
+        "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$"
+      ).test(password);
+      if (!reg) {
+        return res.json({
+          status: 400,
+          success: false,
+          msg: "Includes 6 characters, uppercase, lowercase and some and special characters.",
+        });
+      }
+      if (confirmPassword !== password) {
+        return res.json({
+          status: 400,
+          success: false,
+          msg: "Password and confirm password does not match!",
+        });
+      }
+
+      const salt = await bcrypt.genSalt(10);
+      const passwordHash = await bcrypt.hash(password, salt);
+      const userPassword = await Users.findByIdAndUpdate(
+        { _id: user.id },
+        { password: passwordHash, updatedAt: Date.now },
+        { new: true }
+      );
+      return res.json({
+        status: 200,
+        success: true,
+        msg: "New PasswordSuccessfully 😂!",
+      });
+    } catch (err) {
+      return res.json({
+        status: 400,
+        msg: err.message,
+      });
+    }
+  },
 
   //quên mật khẩu tài khoản khách hàng
   forgetPasswordCustomer: async (req, res) => {
@@ -586,11 +649,11 @@ const userCtrl = {
 
     await user.save({ validateBeforeSave: false });
 
-    const resetPasswordUrl = `${req.protocol}://${req.get(
-      "host"
-    )}/customer/password/reset/${resetToken}`;
-    // const resetPasswordUrl = `${process.env.FRONTEND_URL}/customer/password/reset/${resetToken}`;
-    //const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
+    // const resetPasswordUrl = `${req.protocol}://${req.get(
+    //   "host"
+    // )}/customer/password/reset/${resetToken}`;
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}/customer/password/reset/${resetToken}`;
+    const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
     try {
       await sendEmail({
         emailFrom: process.env.SMPT_MAIL,
@@ -814,7 +877,9 @@ const userCtrl = {
                   user: { _id, fullname, email, image },
                 });
               } else {
-                let password = email + process.env.ACCESS_TOKEN_SECRET;
+                // let password = email + process.env.ACCESS_TOKEN_SECRET;
+                let password = "null";
+
                 let newUser = new Users({
                   fullname: name,
                   email,
@@ -879,65 +944,25 @@ const userCtrl = {
       .then((response) => response.json())
       .then((response) => {
         const { email, name, picture } = response;
-        Users.findOne({ email, role: 0 }).exec((error, user) => {
-          console.log(user);
-          if (error) {
-            return res.json({
-              status: 400,
-              success: false,
-              msg: "Invalid Authentication",
-            });
-          } else {
-            if (user) {
-              const accesstoken = STORAGE.createAccessToken({
-                id: user._id,
-                role: user.role,
-              });
-              const refreshtoken = STORAGE.createRefreshToken({
-                id: user._id,
-                role: user.role,
-              });
 
-              res.cookie("refreshtoken", refreshtoken, {
-                httpOnly: true,
-                path: "/api/auth/customer/refresh_token",
-                maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
-              });
-              const { _id, name, email, image } = user;
-              res.json({
-                status: 200,
-                success: true,
-                msg: "Login successfully",
-                accesstoken,
-                user: { _id, name, email, image },
+        if (email) {
+          Users.findOne({ email, role: 0 }).exec((error, user) => {
+            console.log(user);
+            if (error) {
+              return res.json({
+                status: 400,
+                success: false,
+                msg: "Invalid Authentication",
               });
             } else {
-              let password = email + process.env.ACCESS_TOKEN_SECRET;
-              let newUser = new Users({
-                name: name,
-                email,
-                password,
-                image: {
-                  public_id: password,
-                  url: picture.data.url,
-                },
-                verified: true,
-              });
-              newUser.save((err, data) => {
-                if (err) {
-                  return res.json({
-                    status: 400,
-                    success: false,
-                    msg: "Invalid Authentication",
-                  });
-                }
-                const accesstoken = STORAGE.createAccessToken({
-                  id: data._id,
-                  role: data.role,
+              if (user) {
+                const accesstoken = createAccessToken({
+                  id: user._id,
+                  role: user.role,
                 });
-                const refreshtoken = STORAGE.createRefreshToken({
-                  id: data._id,
-                  role: data.role,
+                const refreshtoken = createRefreshToken({
+                  id: user._id,
+                  role: user.role,
                 });
 
                 res.cookie("refreshtoken", refreshtoken, {
@@ -945,18 +970,64 @@ const userCtrl = {
                   path: "/api/auth/customer/refresh_token",
                   maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
                 });
-                const { _id, name, email, image } = newUser;
+                const { _id, name, email, image } = user;
                 res.json({
                   status: 200,
                   success: true,
-                  msg: "Register successfully",
+                  msg: "Login successfully",
                   accesstoken,
                   user: { _id, name, email, image },
                 });
-              });
+              } else {
+                let password = "null";
+                let newUser = new Users({
+                  fullname: name,
+                  email,
+                  password: password,
+                  image: {
+                    public_id: password,
+                    url: picture?.data?.url,
+                  },
+                  verified: true,
+                });
+                newUser.save((err, data) => {
+                  if (err) {
+                    return res.json({
+                      status: 400,
+                      success: false,
+                      msg: "Invalid Authentication",
+                    });
+                  }
+                  const accesstoken = createAccessToken({
+                    id: user._id,
+                    role: user.role,
+                  });
+                  const refreshtoken = createRefreshToken({
+                    id: user._id,
+                    role: user.role,
+                  });
+
+                  res.cookie("refreshtoken", refreshtoken, {
+                    httpOnly: true,
+                    path: "/api/auth/customer/refresh_token",
+                    maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
+                  });
+                  const { _id, name, email, image } = newUser;
+                  res.json({
+                    status: 200,
+                    success: true,
+                    msg: "Register successfully",
+                    accesstoken,
+                    user: { _id, name, email, image },
+                  });
+                });
+              }
             }
-          }
-        });
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
       });
   },
 
@@ -970,7 +1041,6 @@ const userCtrl = {
       })
       .then((response) => {
         const { email_verified, name, email, picture } = response.payload;
-        console.log(response.payload);
         if (email_verified) {
           Users.findOne({ email, role: 1 }).exec((error, user) => {
             if (error) {

@@ -5,6 +5,13 @@ export const FeatureStyle = createGlobalStyle`
     height: 100vh;
     position: relative;
   
+    .banner {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
     .category {
       position: absolute;
       top: 80px;
@@ -44,12 +51,6 @@ export const FeatureStyle = createGlobalStyle`
       top: auto;
       bottom: -22px;
     }
-  
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
 
     .age-tag {
       position: absolute;
@@ -72,7 +73,8 @@ export const FeatureStyle = createGlobalStyle`
       flex-direction: column;
   
       img {
-        width: 400px;
+        max-width: 270px;
+        max-height: 180px;
       }
   
       .desc {
@@ -103,6 +105,8 @@ export const FeatureStyle = createGlobalStyle`
           &.play {
             background-color:#fff;
             color: #000;
+            border: none;
+            outline: none;
 
             &:hover{
               background-color: rgba(255,255,255,0.75);
@@ -112,6 +116,8 @@ export const FeatureStyle = createGlobalStyle`
           &.more {
             background-color: rgba(109,109,110,0.7);
             color: white;
+            outline: none; 
+            border: none;
 
             &:hover{
               background-color: rgba(109,109,110,0.4);

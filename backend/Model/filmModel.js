@@ -34,6 +34,18 @@ const FilmSchema = new mongoose.Schema(
         trim: true,
       },
     },
+    image_title: {
+      public_id: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+      url: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+    },
     director: [
       {
         type: mongoose.Schema.Types.ObjectId,

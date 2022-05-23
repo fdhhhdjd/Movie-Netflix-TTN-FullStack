@@ -53,7 +53,6 @@ const Feedback = () => {
       }, 2000);
     }
   }, [sendFeedBack, dispatch]);
-  console.log(state, "state");
   return (
     <>
       <Header />
@@ -149,7 +148,7 @@ const Feedback = () => {
               </div>
               <div className="inputBox">
                 <input
-                  className="form-control"
+                  // className="form-control"
                   type="type"
                   value={subject || ""}
                   name="subject"
@@ -160,7 +159,7 @@ const Feedback = () => {
               </div>
               <div className="inputBox">
                 <textarea
-                  className="form-control"
+                  // className="form-control"
                   cols="10"
                   rows="5"
                   value={content || ""}
@@ -178,7 +177,10 @@ const Feedback = () => {
         </div>
         <div className="bubble-container">
           <div className="bubble fb">
-            <a href="https://www.facebook.com/profile.php?id=100006139249437" target="_blank">
+            <a
+              href="https://www.facebook.com/profile.php?id=100006139249437"
+              target="_blank"
+            >
               <span className="bubble-item">
                 <span className="animated infinite zoomIn bubble-circle fb"></span>
                 <span className="animated infinite pulse bubble-circle-fill fb"></span>

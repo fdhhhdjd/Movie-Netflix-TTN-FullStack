@@ -186,6 +186,8 @@ https://docs.google.com/spreadsheets/d/1BBv4CXNniNjqdIE7tjrG9UM4nprd3NSVy2FX9oaW
 
 - Thay đổi mật khẩu : patch --> http://localhost:5000/api/auth/customer/changePassword
 
+- Thay đổi mật khẩu mới khi đăng ký bằng email hoặc facebook : patch --> http://localhost:5000/api/auth/customer/newPassword
+
 - Quên mật khẩu tài khoản khách hàng: post --> http://localhost:5000/api/auth/customer/forget
 
 - Link reset mật khẩu khi quên: put --> http://localhost:5000/api/auth/customer/password/reset/:token

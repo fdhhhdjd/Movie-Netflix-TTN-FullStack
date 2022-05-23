@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import * as types from "../ActionTypes";
-//ADMIN API
+//?ADMIN API
 export const AdminRegisterStart = () => ({
   type: types.REGISTER_ADMIN_API_START,
 });
@@ -13,7 +13,7 @@ export const AdminRegisterFail = (error) => ({
   type: types.REGISTER_ADMIN_API_FAIL,
   payload: error,
 });
-//ADMIN LOGIN
+//?ADMIN LOGIN
 export const AdminLoginStart = () => ({
   type: types.ADMIN_LOGIN_API_START,
 });
@@ -37,7 +37,7 @@ export const AdminLoginGoogleFail = (error) => ({
   type: types.ADMIN_LOGIN_GOOGLE_FAIL,
   payload: error,
 });
-//?Logout AMDIN
+//?Logout admin
 export const AdminLogoutStart = () => ({
   type: types.ADMIN_LOGOUT_API_START,
 });

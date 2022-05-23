@@ -11,6 +11,7 @@ const initialState = {
   changePassword: [],
   forgetPassword: [],
   resetPassword: [],
+  newPassword: [],
 };
 const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -23,6 +24,7 @@ const AuthReducer = (state = initialState, action) => {
     case types.CHANGE_PASSWORD_START:
     case types.FORGET_PASS_START:
     case types.RESET_PASSWORD_START:
+    case types.NEW_PASSWORD_START:
       return {
         ...state,
         loading: true,
@@ -72,6 +74,12 @@ const AuthReducer = (state = initialState, action) => {
         loading: false,
         changePassword: action.payload,
       };
+    case types.NEW_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        newPassword: action.payload,
+      };
     case types.FORGET_PASS_SUCCESS:
       return {
         ...state,
@@ -91,6 +99,7 @@ const AuthReducer = (state = initialState, action) => {
         authRegister: [],
         changePassword: [],
         forgetPassword: [],
+        newPassword: [],
       };
     case types.LOGIN_API_FAIL:
     case types.LOGIN_GOOGLE_FAIL:
@@ -101,6 +110,7 @@ const AuthReducer = (state = initialState, action) => {
     case types.CHANGE_PASSWORD_FAIL:
     case types.FORGET_PASS_FAIL:
     case types.RESET_PASSWORD_FAIL:
+    case types.NEW_PASSWORD_FAIL:
       return {
         ...state,
         loading: false,

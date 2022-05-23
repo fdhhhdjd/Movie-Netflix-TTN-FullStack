@@ -1,5 +1,6 @@
-import React, { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { Suspense, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import swal2 from "sweetalert2";
 import {
@@ -20,13 +21,13 @@ import {
   PrivateRouter,
   PrivateRouterAuth,
   Profile,
-  ProfileGate,
   Rating,
   Register,
   Reset,
   ResetAdmin,
   Login,
   Movie,
+  Watch,
 } from "./imports/index";
 import {
   Admin,
@@ -34,9 +35,18 @@ import {
   LoginAdmin,
   ProfileAdmin,
   Welcome,
+  ProfileGate,
   NotFound,
+  Information,
 } from "./imports/LazyRouter";
 function App() {
+  const { profile } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (profile?.adult == "" || profile?.password == "null") {
+      navigate("/browse");
+    }
+  }, [profile]);
   return (
     <>
       <Suspense fallback={<Loading />}>
@@ -72,7 +82,14 @@ function App() {
             <Route path="/home" element={<Home />} />
           </Route>
           <Route element={<PrivateRouter />}>
+            <Route path="/information" element={<Information />} />
+          </Route>
+          <Route element={<PrivateRouter />}>
             <Route path="/movies" element={<Movie />} />
+          </Route>
+          {/* Watch */}
+          <Route element={<PrivateRouter />}>
+            <Route path="/watch/:id" element={<Watch />} />
           </Route>
           {/* Profile User   */}
           <Route element={<PrivateRouter />}>
@@ -84,10 +101,7 @@ function App() {
           </Route>
           {/* Change Password  */}
           <Route element={<PrivateRouter />}>
-            <Route
-              path="/profile/ChangePassword"
-              element={<ChangePassword />}
-            />
+            <Route path="/profile/ChangePassword" element={<Information />} />
           </Route>
           {/* FeedBack */}
           <Route element={<PrivateRouter />}>
