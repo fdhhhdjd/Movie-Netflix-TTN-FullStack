@@ -303,6 +303,7 @@ const filmCtrl = {
     try {
       const {
         title,
+        image_title,
         description,
         year_production,
         country_production,
@@ -318,6 +319,7 @@ const filmCtrl = {
 
       const newFilm = new Films({
         title,
+        image_title,
         description,
         year_production,
         country_production,
@@ -394,6 +396,7 @@ const filmCtrl = {
       const id = req.params.id;
       const {
         title,
+        image_title,
         description,
         year_production,
         country_production,
@@ -411,6 +414,7 @@ const filmCtrl = {
         { _id: id },
         {
           title,
+          image_title,
           description,
           year_production,
           country_production,

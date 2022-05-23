@@ -9,8 +9,12 @@ export const HeaderWelcomeStyle = createGlobalStyle`
   }
 
   a {
-    color: #fff;
+    color: #fff =;
     text-decoration: none;
+    &:hover {
+      color: #fff;
+      text-decoration: none;
+    }
   }
 
   p {
@@ -118,6 +122,8 @@ export const HeaderWelcomeStyle = createGlobalStyle`
     border-radius: 5px;
     background: #e50914;
     padding:12px;
+    border: none;
+    outline: none;
   }
 
   .btn-xl {

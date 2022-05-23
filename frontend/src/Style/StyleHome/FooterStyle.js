@@ -1,3 +1,4 @@
+
 import { createGlobalStyle } from "styled-components";
 export const FooterStyle = createGlobalStyle`
   .footer-container {
@@ -18,7 +19,7 @@ export const FooterStyle = createGlobalStyle`
           opacity: .8;
         }
       }
-      
+
       i {
         margin-right: 2.2vw;
       }
@@ -26,7 +27,7 @@ export const FooterStyle = createGlobalStyle`
 
     .content {
       display: flex;
-      flex-wrap: wrap; 
+      flex-wrap: wrap;
       flex-direction: row;
       align-items: flex-start;
 

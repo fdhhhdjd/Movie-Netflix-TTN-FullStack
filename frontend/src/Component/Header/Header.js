@@ -7,7 +7,7 @@ import swal from "sweetalert";
 import Swal from "sweetalert2";
 import { CheckPass, logo, True } from "../../imports/image";
 import { LogoutInitiate } from "../../Redux/Action/ActionAuth";
-import { UpdateAdultInitiate } from "../../Redux/Action/ActionFilmadult";
+import { UpdateAdultInitiate,FindFilmCateAdultInitiate,FindFilmCateKidInitiate} from "../../Redux/Action/ActionFilmadult";
 import { HeaderStyle } from "../../Style/HeaderStyle/HeaderStyle";
 const Header = () => {
   const dispatch = useDispatch();
@@ -19,6 +19,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const [isAdult, setIsAdult] = useState(updateAdult.msg || profile.adult);
+  // console.log(allFilmAdult,'film header')
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.pageYOffset !== 0);
@@ -44,12 +45,17 @@ const Header = () => {
       setActiveTab("Products");
     }
   }, [location]);
+  // useEffect(()=>{
+  //   if(profile.adult === 'adult'){
+  //     dispatch(FindFilmCateAdultInitiate(refreshTokens))
+  //   }else if(profile.adult==='kid'){
+
+  //   }
+  // },[])
   const handleKidMode = (adult) => {
     dispatch(UpdateAdultInitiate((adult = "kid"), refreshTokens));
     setIsAdult("kid");
   };
-  console.log(updateAdult, "updatefilm");
-  console.log(profile.adult, "profile");
   const handleExitKid = async () => {
     try {
       return await swal({
@@ -130,11 +136,17 @@ const Header = () => {
   return (
     <>
       <HeaderStyle />
-      <section className="header-section">
+      <section
+        className={
+          isScrolled
+            ? "header-section position-fixed w-100 scrolled"
+            : "header-section position-fixed w-100"
+        }
+      >
         <div className="container">
-          <nav class="navbar navbar-expand-sm navbar-dark bg-dark w-100">
+          <nav className="navbar navbar-expand-sm w-100">
             <button
-              class="navbar-toggler d-lg-none"
+              className="navbar-toggler d-lg-none"
               type="button"
               data-toggle="collapse"
               data-target="#collapsibleNavId"
@@ -142,20 +154,20 @@ const Header = () => {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon"></span>
+              <span className="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavId">
-              <ul class="navbar-nav mr-auto mt-2 mt-lg-0 d-flex align-items-center">
-                <li class="nav-item">
+            <div className="collapse navbar-collapse" id="collapsibleNavId">
+              <ul className="navbar-nav mr-auto mt-2 mt-lg-0 d-flex align-items-center">
+                <li className="nav-item mt-2">
                   <img src={logo} alt="" className="img-fluid" />
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                   <Link className="nav-link" to="/home">
                     Home
                   </Link>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
+                <li className="nav-item">
+                  <a className="nav-link" href="#">
                     TV Shows
                   </a>
                 </li>
@@ -164,18 +176,18 @@ const Header = () => {
                     Movie
                   </Link>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
+                <li className="nav-item">
+                  <a className="nav-link" href="#">
                     New & Popular
                   </a>
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                   <Link className="nav-link" to="/feedback">
                     Feedback
                   </Link>
                 </li>
               </ul>
-              <ul class="right navbar-nav my-2 my-lg-0 d-flex align-items-center">
+              <ul className="right navbar-nav my-2 my-lg-0 d-flex align-items-center">
                 <div className="mr-3">
                   <i className="icon fas fa-search " />
                 </div>
@@ -196,7 +208,7 @@ const Header = () => {
                       </div>
                       <li
                         onClick={() => navigate("/profile")}
-                        class="nav-item dropdown mr-3"
+                        className="nav-item dropdown mr-3"
                       >
                         {profile.fullname || profile.name}
                       </li>

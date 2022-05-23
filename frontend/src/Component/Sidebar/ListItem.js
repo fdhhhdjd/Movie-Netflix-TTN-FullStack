@@ -5,10 +5,10 @@ import {
   ThumbUpOutlined,
 } from "@material-ui/icons";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ListItemStyle } from "../../Style/StyleHome/ListItemStyle";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { FindFilmInitiate } from "../../Redux/Action/ActionFilmAdmin";
+import { ListItemStyle } from "../../Style/StyleHome/ListItemStyle";
 export default function ListItem({
   image,
   ageLimit,
@@ -20,14 +20,14 @@ export default function ListItem({
   setIsOpenModal,
 }) {
   const [isHovered, setIsHovered] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
   const { refreshTokens } = useSelector((state) => state.auth);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleModal = (id) => {
     dispatch(FindFilmInitiate(id, refreshTokens));
     setIsOpenModal(true);
   };
+
   return (
     <>
       <ListItemStyle />
@@ -49,7 +49,9 @@ export default function ListItem({
             <div className="item-info">
               <div className="icons">
                 <span className="icons-left">
-                  <PlayCircleFilledWhiteRounded />
+                  <Link to={`/watch/${id}`}>
+                    <PlayCircleFilledWhiteRounded />
+                  </Link>
                   <AddCircleOutline />
                   <ThumbUpOutlined />
                 </span>

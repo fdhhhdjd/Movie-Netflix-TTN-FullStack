@@ -1,18 +1,19 @@
-import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
+import {
+  Add,
+  Close,
+  PlayArrowRounded,
+  ThumbDownAltOutlined,
+  ThumbUpOutlined,
+} from "@material-ui/icons";
+import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
 import { mainMovie, recMovies } from "../../imports/import";
 import { Recommend } from "../../imports/index";
-import {
-  Close,
-  ThumbDownAltOutlined,
-  Add,
-  ThumbUpOutlined,
-  PlayArrowRounded,
-} from "@material-ui/icons";
-import { useDispatch, useSelector } from "react-redux";
+import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
 
-const Modal = ({ setIsOpenModal }) => {
+const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const { findFilm } = useSelector((state) => state.film);
-  console.log(findFilm, "findFilm");
+
   const countSeason = (n) => {
     if (n > 1) {
       return `${n} seasons`;
@@ -31,8 +32,14 @@ const Modal = ({ setIsOpenModal }) => {
   return (
     <>
       <ModalStyle />
-      <div className="modal-container">
-        <div className="cancel-btn" onClick={handleCloseModal}>
+      <div className="modal-fade"></div>
+      <motion.div
+        className="modal-container"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="cancel-btn " onClick={handleCloseModal}>
           <Close sx={{ fontSize: "40px" }} />
         </div>
 
@@ -40,12 +47,16 @@ const Modal = ({ setIsOpenModal }) => {
           className="modal-backdrop"
           style={{
             backgroundImage: `url(
-                        ${mainMovie.backgroundImg}
+                        ${findFilm[0]?.image_film?.url}
                     )`,
           }}
         >
           <div className="modal-name-icons">
-            <h1>{mainMovie.title}</h1>
+            <img
+              className="img_title"
+              src={findFilm[0]?.image_title?.url}
+              alt="img_title"
+            />
             <div className="modal-btn-icons">
               <button className="modal-playbtn">
                 <PlayArrowRounded
@@ -65,6 +76,7 @@ const Modal = ({ setIsOpenModal }) => {
               />
             </div>
           </div>
+          <div className="fadeOut"></div>
         </div>
 
         <div className="modal-info">
@@ -72,14 +84,14 @@ const Modal = ({ setIsOpenModal }) => {
             <div className="info-left">
               {/* release year, description,... */}
               <span className="info-vote">{mainMovie.rate}% rate</span>
-              <span className="info-year">{mainMovie.year_production}</span>
+              <span className="info-year">{findFilm[0]?.year_production}</span>
               <span className="info-season">
                 {mainMovie.type === "tvShows"
                   ? countSeason(mainMovie.seasons)
                   : countRuntime(mainMovie.runtime)}
               </span>
               <span className="info-HD">HD</span>
-              <div className="info-des">{mainMovie.desc}</div>
+              <div className="info-des">{findFilm[0]?.description}</div>
             </div>
 
             <div className="info-right" style={{ fontSize: "1vw" }}>
@@ -102,10 +114,10 @@ const Modal = ({ setIsOpenModal }) => {
                 <span className="preview-genre" style={{ color: "grey" }}>
                   Genres:{" "}
                 </span>
-                {mainMovie.genres &&
-                  mainMovie.genres.map((genre, index) => (
+                {findFilm[0]?.category &&
+                  findFilm[0]?.category.map((genre, index) => (
                     <span key={genre.id} className="genre">
-                      <a>{(index ? ", " : "") + `${genre}`}</a>
+                      <a>{(index ? ", " : "") + `${genre?.name}`}</a>
                     </span>
                   ))}
               </div>
@@ -169,7 +181,7 @@ const Modal = ({ setIsOpenModal }) => {
         </div>
 
         <div className="modal-bot-cover"></div>
-      </div>
+      </motion.div>
     </>
   );
 };

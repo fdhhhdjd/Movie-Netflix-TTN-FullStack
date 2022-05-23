@@ -1,18 +1,28 @@
 import { createGlobalStyle } from "styled-components";
 
 export const HeaderStyle = createGlobalStyle`
+
 .container{
   max-width: 1800px;
   padding: 0 !important;
-  background: rgb(20,20,20) !important;
 }
+
+
+
   .header-section {
+    z-index: 10000 !important;
+    background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.3) 50%) !important;
+    transition: all 0.4s ease-in-out !important;
+
+    &.scrolled {
+        background: rgb(20,20,20) !important;
+    }
+
     img{
     max-width:70px;
     max-height:70px;
   }
   .navbar{
-    background: rgb(20,20,20) !important;
     max-height: 70px !important;
 
     .navbar-brand img {
@@ -21,6 +31,7 @@ export const HeaderStyle = createGlobalStyle`
 
     .nav-link {
       font-size: 14px !important;
+      color: #fff !important;
     }
   }
   h3{
@@ -31,7 +42,7 @@ export const HeaderStyle = createGlobalStyle`
     img{
       max-width:35px;
       max-height:35px;
-  
+
         border-radius: 5px;
 
         -o-object-fit: cover;
@@ -70,7 +81,7 @@ export const HeaderStyle = createGlobalStyle`
         color: #fff;
         background: linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 0.3) 50%);
         &::hover{
-          
+
         }
       }
 
