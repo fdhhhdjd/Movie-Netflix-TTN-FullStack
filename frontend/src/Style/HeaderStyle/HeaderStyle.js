@@ -10,7 +10,7 @@ export const HeaderStyle = createGlobalStyle`
 
 
   .header-section {
-    z-index: 100000 !important;
+    z-index: 10000 !important;
     background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.3) 50%) !important;
     transition: all 0.4s ease-in-out !important;
 

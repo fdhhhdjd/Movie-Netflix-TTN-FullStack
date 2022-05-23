@@ -1,5 +1,9 @@
 import {
-  Add, Close, PlayArrowRounded, ThumbDownAltOutlined, ThumbUpOutlined
+  Add,
+  Close,
+  PlayArrowRounded,
+  ThumbDownAltOutlined,
+  ThumbUpOutlined,
 } from "@material-ui/icons";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSelector } from "react-redux";
@@ -9,7 +13,8 @@ import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
 
 const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const { findFilm } = useSelector((state) => state.film);
-  console.log(findFilm,'dm duy thinh')
+  console.log(findFilm[0], "dm duy thinh");
+
   const countSeason = (n) => {
     if (n > 1) {
       return `${n} seasons`;
@@ -26,13 +31,14 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
     setIsOpenModal(false);
   };
   return (
-    <AnimatePresence>
+    <>
       <ModalStyle />
+      <div className="modal-fade"></div>
       <motion.div
         className="modal-container"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        transition={{ duration: 0.5}}
+        transition={{ duration: 0.5 }}
       >
         <div className="cancel-btn " onClick={handleCloseModal}>
           <Close sx={{ fontSize: "40px" }} />
@@ -42,12 +48,16 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
           className="modal-backdrop"
           style={{
             backgroundImage: `url(
-                        ${mainMovie.backgroundImg}
+                        ${findFilm[0]?.image_film?.url}
                     )`,
           }}
         >
           <div className="modal-name-icons">
-            <h1>{mainMovie.title}</h1>
+            <img
+              class="img_title"
+              src={findFilm[0]?.image_title?.url}
+              alt="img_title"
+            />
             <div className="modal-btn-icons">
               <button className="modal-playbtn">
                 <PlayArrowRounded
@@ -75,14 +85,14 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
             <div className="info-left">
               {/* release year, description,... */}
               <span className="info-vote">{mainMovie.rate}% rate</span>
-              <span className="info-year">{mainMovie.year_production}</span>
+              <span className="info-year">{findFilm[0]?.year_production}</span>
               <span className="info-season">
                 {mainMovie.type === "tvShows"
                   ? countSeason(mainMovie.seasons)
                   : countRuntime(mainMovie.runtime)}
               </span>
               <span className="info-HD">HD</span>
-              <div className="info-des">{mainMovie.desc}</div>
+              <div className="info-des">{findFilm[0]?.description}</div>
             </div>
 
             <div className="info-right" style={{ fontSize: "1vw" }}>
@@ -105,10 +115,10 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
                 <span className="preview-genre" style={{ color: "grey" }}>
                   Genres:{" "}
                 </span>
-                {mainMovie.genres &&
-                  mainMovie.genres.map((genre, index) => (
+                {findFilm[0]?.category &&
+                  findFilm[0]?.category.map((genre, index) => (
                     <span key={genre.id} className="genre">
-                      <a>{(index ? ", " : "") + `${genre}`}</a>
+                      <a>{(index ? ", " : "") + `${genre?.name}`}</a>
                     </span>
                   ))}
               </div>
@@ -173,7 +183,7 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
 
         <div className="modal-bot-cover"></div>
       </motion.div>
-    </AnimatePresence>
+    </>
   );
 };
 

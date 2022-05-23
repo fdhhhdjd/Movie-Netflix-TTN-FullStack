@@ -8,8 +8,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { ListStyle } from "../../Style/StyleHome/listStyle";
 import { ListItem } from "../../imports/index";
 import { FindFilmCategoryInitiate } from "../../Redux/Action/ActionFilmAdmin";
+import { LoadingSkeleton } from "../../imports/index";
+
 const List = ({ setIsOpenModal, category }) => {
   const [slideNumber, setSlideNumber] = useState(0);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(true);
+    }, 4000);
+  }, []);
   // const [filmByCategory, setFilmByCategory] = useState([]);
   const { allFilmAdult, updateAdult } = useSelector((state) => state.adult);
   const { refreshTokens, profile } = useSelector((state) => state.auth);
@@ -47,7 +55,17 @@ const List = ({ setIsOpenModal, category }) => {
     <>
       <ListStyle />
       <section className="list">
-        <span className="list-title">{category ? category.name : "film"}</span>
+        <span className="list-title">
+          {loading ? (
+            category ? (
+              category?.name
+            ) : (
+              "film"
+            )
+          ) : (
+            <LoadingSkeleton type="listTitle"></LoadingSkeleton>
+          )}
+        </span>
         <div className="wrapper">
           <ArrowBackIosOutlined
             className="slider-arrow left"
@@ -55,26 +73,27 @@ const List = ({ setIsOpenModal, category }) => {
             style={{ display: slideNumber === 0 && "none" }}
           />
           <div className="film-container" ref={listRef}>
-            {
-              ( allFilmAdult
-                  ? allFilmAdult.map((film, index) => {
-                      return (
-                        <Fragment key={film._id}>
-                          <ListItem
-                            setIsOpenModal={setIsOpenModal}
-                            image={film.image_film.url}
-                            ageLimit={film.ageLimit}
-                            filmLength={film.filmLength}
-                            category={film.category}
-                            series={film.seriesFilm}
-                            id={film._id}
-                            index={index}
-                          />
-                        </Fragment>
-                      );
-                    })
-                  : "")
-            }
+            {allFilmAdult &&
+              allFilmAdult.map((film, index) => {
+                return (
+                  <Fragment key={film._id}>
+                    {loading ? (
+                      <ListItem
+                        setIsOpenModal={setIsOpenModal}
+                        image={film.image_film.url}
+                        ageLimit={film.ageLimit}
+                        filmLength={film.filmLength}
+                        category={film.category}
+                        series={film.seriesFilm}
+                        id={film._id}
+                        index={index}
+                      />
+                    ) : (
+                      <LoadingSkeleton type="listImg"></LoadingSkeleton>
+                    )}
+                  </Fragment>
+                );
+              })}
             {/* {filmByCategory
               ? filmByCategory.map((film, index) => {
                   return (

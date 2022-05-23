@@ -45,7 +45,7 @@ const Feature = ({ type, setIsOpenModal }) => {
             </select>
           </div>
         )}
-        <img src={data?.image_film?.url} />
+        <img className="banner" src={data?.image_film?.url} />
         {profile.adult === "adult" && <span className="age-tag">18+</span>}
         {profile.adult === "kid" && <span className="age-tag">16+</span>}
 
