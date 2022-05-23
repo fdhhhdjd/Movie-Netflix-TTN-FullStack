@@ -3,7 +3,13 @@ import { createGlobalStyle } from "styled-components";
 export const WatchStyle = createGlobalStyle`
 .watch {
     width: 100vw;
-    height: auto;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+
+    .nav-link {
+      padding: 0 !important;
+    }
   
     .back {
       display: flex;
@@ -14,11 +20,15 @@ export const WatchStyle = createGlobalStyle`
       color: white;
       cursor: pointer;
       z-index: 2;
+
+      i {
+        margin-right: 10px;
+      }
     }
   
     .video {
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       object-fit: cover;
     }
   }

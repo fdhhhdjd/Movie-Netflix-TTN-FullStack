@@ -54,7 +54,7 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
         >
           <div className="modal-name-icons">
             <img
-              class="img_title"
+              className="img_title"
               src={findFilm[0]?.image_title?.url}
               alt="img_title"
             />

@@ -71,7 +71,7 @@ const Home = () => {
           <List setIsOpenModal={setIsOpenModal} />
           <List setIsOpenModal={setIsOpenModal} />
           <List setIsOpenModal={setIsOpenModal} />
-          <Watch />
+          <Watch autoPlay={false} home={false} />
           <br />
           <br />
           <Footer />

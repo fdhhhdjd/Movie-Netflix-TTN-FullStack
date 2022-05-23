@@ -37,6 +37,7 @@ import {
   ProfileGate,
   NotFound,
   Information,
+  Watch
 } from "./imports/LazyRouter";
 function App() {
   const { profile } = useSelector((state) => state.auth);
@@ -85,6 +86,10 @@ function App() {
           </Route>
           <Route element={<PrivateRouter />}>
             <Route path="/movies" element={<Movie />} />
+          </Route>
+          {/* Watch */}
+          <Route element={<PrivateRouter />}>
+            <Route path="/watch/:id" element={<Watch />} />
           </Route>
           {/* Profile User   */}
           <Route element={<PrivateRouter />}>
