@@ -3,7 +3,7 @@ import {
   Close,
   PlayArrowRounded,
   ThumbDownAltOutlined,
-  ThumbUpOutlined
+  ThumbUpOutlined,
 } from "@material-ui/icons";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
@@ -13,7 +13,6 @@ import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
 
 const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const { findFilm } = useSelector((state) => state.film);
-  console.log(findFilm[0], "dm duy thinh");
 
   const countSeason = (n) => {
     if (n > 1) {

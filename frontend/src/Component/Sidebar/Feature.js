@@ -20,7 +20,7 @@ const Feature = ({ type, setIsOpenModal }) => {
   const handleWatch = (id) => {
     dispatch(FindFilmInitiate(id, refreshTokens));
   };
-  
+
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   }
@@ -60,7 +60,7 @@ const Feature = ({ type, setIsOpenModal }) => {
           <img src={data?.image_title?.url} alt="" />
           <span className="desc">{truncate(data?.description, 150)}</span>
           <div className="buttons">
-            <Link to="/watch" className="xin">
+            <Link to={`/watch/${dataRandom?._id}`} className="xin">
               <button
                 className="play"
                 onClick={() => handleWatch(dataRandom._id)}

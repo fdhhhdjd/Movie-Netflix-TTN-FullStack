@@ -27,6 +27,7 @@ import {
   ResetAdmin,
   Login,
   Movie,
+  Watch,
 } from "./imports/index";
 import {
   Admin,
@@ -37,7 +38,6 @@ import {
   ProfileGate,
   NotFound,
   Information,
-  Watch
 } from "./imports/LazyRouter";
 function App() {
   const { profile } = useSelector((state) => state.auth);
@@ -89,7 +89,7 @@ function App() {
           </Route>
           {/* Watch */}
           <Route element={<PrivateRouter />}>
-            <Route path="/watch" element={<Watch />} />
+            <Route path="/watch/:id" element={<Watch />} />
           </Route>
           {/* Profile User   */}
           <Route element={<PrivateRouter />}>

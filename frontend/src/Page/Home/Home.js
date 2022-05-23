@@ -11,19 +11,6 @@ const Home = () => {
   const { allFilmAdult, allFilmKid } = useSelector((state) => state.adult);
   const messageEndRef = useRef(null);
   const [film, setFilm] = useState();
-  //Random Category
-  // var arr = [];
-  // if (categories?.length > 0) {
-  //   while (arr.length < 4) {
-  //     var a = Math.floor(Math.random() * categories?.length);
-  //     var text = a.toString();
-  //     // console.log(text, "text");
-  //     if (!arr.includes(categories[text])) {
-  //       // console.log(text, "text");
-  //       arr.push(categories[text]);
-  //     }
-  //   }
-  // }
   const handleHideResult = () => {
     setIsOpenModal(false);
   };
@@ -35,13 +22,6 @@ const Home = () => {
       ScrollToBottom();
     }
   }, [isOpenModal]);
-  // useEffect(()=>{
-  //   allFilmAdult?.forEach(item=>{
-  //     if(item._id==='6209cecffa07aca02464524c'){
-  //       setFilmTest(item)
-  //     }
-  //   });
-  // },[])
   return (
     <div>
       <HomeStyle />

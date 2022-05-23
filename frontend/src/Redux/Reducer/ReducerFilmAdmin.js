@@ -137,6 +137,12 @@ const AdminFilmReducer = (state = initialState, action) => {
         categories: [],
         verifiedPassword: [],
       };
+    case types.CLEAR_ERRORS_DETAIL_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        findFilm: [],
+      };
     default:
       return state;
   }

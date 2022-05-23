@@ -228,3 +228,7 @@ export const FindFilmCategoryInitiate = (id, token) => {
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: types.CLEAR_ERRORS_SUCCESS });
 };
+//!CLEAR_ERRORS
+export const removeSelectedMovieOrShow = () => async (dispatch) => {
+  dispatch({ type: types.CLEAR_ERRORS_DETAIL_SUCCESS });
+};
