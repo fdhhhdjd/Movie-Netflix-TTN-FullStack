@@ -1,14 +1,17 @@
 import { LoadingWatchStyle } from "../../Style/LoadingStyle/LoadingWatchStyle";
 
-const LoadingWatch = () => {
+const LoadingWatch = ({film_img}) => {
   return (
     <>
       <LoadingWatchStyle />
-      <div className="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+      <div id="wrapper">
+        <div id="loading">
+          <div class="bulletouter">
+            <div class="bulletinner"></div>
+            <div class="mask"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
       </div>
     </>
   );

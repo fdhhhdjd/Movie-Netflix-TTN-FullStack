@@ -1,39 +1,74 @@
 import { createGlobalStyle } from "styled-components";
 
 export const LoadingWatchStyle = createGlobalStyle`
-.lds-ring {
-    display: inline-block;
-    position: relative;
-    width: 80px;
-    height: 80px;
+@keyframes loadinganim {
+  0% { 
+    transform: rotate(360deg);
   }
-  .lds-ring div {
-    box-sizing: border-box;
-    display: block;
-    position: absolute;
-    width: 64px;
-    height: 64px;
-    margin: 8px;
-    border: 8px solid #000;
-    border-radius: 50%;
-    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #000 transparent transparent transparent;
+  100% { 
+    transform: rotate(0deg);
   }
-  .lds-ring div:nth-child(1) {
-    animation-delay: -0.45s;
-  }
-  .lds-ring div:nth-child(2) {
-    animation-delay: -0.3s;
-  }
-  .lds-ring div:nth-child(3) {
-    animation-delay: -0.15s;
-  }
-  @keyframes lds-ring {
-    0% {
-      transform: rotate(0deg);
+}
+
+#wrapper{
+  background: #141414;
+  color: white;
+  text-align: center;
+  display: table;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  
+  #loading{
+    display: table-cell;
+    width: 100%;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    vertical-align: middle;
+    font-family: helvetica, sans-serif;
+    
+    .bulletouter{
+      animation: loadinganim 1s infinite; 
+      animation-timing-function: linear;
+      animation-direction: reverse;
+      width: 50px;
+      height: 50px;
+      background: #e50914;
+      border-radius: 50%;
+      margin: 0 auto;
+      .bulletinner{
+        position: relative;
+        left: -5px;
+        width: 45px;
+        height: 45px;
+        background: #141414;
+        border-radius: 50%;
+        margin: 0 auto;
+      }
+      .mask{
+        position: relative;
+        left: -5px;
+        top: -15px;
+        width: 50px;
+        height: 25px;
+        background: #141414;
+        transform: rotate(45deg);
+      }
+      .dot{
+        position: relative;
+        left: 33px;
+        top: -32px;
+        width: 8px;
+        height: 8px;
+        background: #e50914;
+        border-radius: 50%;
+      }
     }
-    100% {
-      transform: rotate(360deg);
+    p{
+      padding-top: 23px;
     }
   }
+}
 `;
