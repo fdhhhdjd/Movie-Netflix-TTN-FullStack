@@ -2,11 +2,11 @@ import {
   AddCircleOutline,
   ArrowDropDownCircleOutlined,
   PlayCircleFilledWhiteRounded,
-  ThumbUpOutlined,
+  ThumbUpOutlined
 } from "@material-ui/icons";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FindFilmInitiate } from "../../Redux/Action/ActionFilmAdmin";
 import { ListItemStyle } from "../../Style/StyleHome/ListItemStyle";
 export default function ListItem({
@@ -15,25 +15,22 @@ export default function ListItem({
   filmLength,
   category,
   series,
-  Id,
+  id,
   index,
   setIsOpenModal,
 }) {
-  const [filmId, setFilmId] = useState();
   const [isHovered, setIsHovered] = useState(false);
   const { refreshTokens } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const {id}=useParams()
 
   const handleModal = (id) => {
     dispatch(FindFilmInitiate(id, refreshTokens));
     setIsOpenModal(true);
   };
 
-
-  useEffect(() => {
+  const handleWatch = (id) => {
     dispatch(FindFilmInitiate(id, refreshTokens));
-  }, [id]);
+  };
   return (
     <>
       <ListItemStyle />
@@ -55,9 +52,9 @@ export default function ListItem({
             <div className="item-info">
               <div className="icons">
                 <span className="icons-left">
-                  <Link to={`/watch/${Id}`} >
+                  <Link to="/watch">
                     <PlayCircleFilledWhiteRounded
-                     
+                      onClick={() => handleWatch(id)}
                     />
                   </Link>
                   <AddCircleOutline />

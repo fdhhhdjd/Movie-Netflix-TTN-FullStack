@@ -3,9 +3,9 @@ import {
   Close,
   PlayArrowRounded,
   ThumbDownAltOutlined,
-  ThumbUpOutlined,
+  ThumbUpOutlined
 } from "@material-ui/icons";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { mainMovie, recMovies } from "../../imports/import";
 import { Recommend } from "../../imports/index";

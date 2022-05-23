@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GlobalState } from "../../Contexts/GlobalState";
 import { WatchStyle } from "../../Style/WatchStyle/WatchStyle";
@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 
 const Watch = ({ autoPlay = true, home = true }) => {
   const { findFilm } = useSelector((state) => state.film);
-  console.log(findFilm[0]?.title, "find film");
 
+  console.log(findFilm && findFilm[0]?.title);
   return (
     <>
       <WatchStyle />

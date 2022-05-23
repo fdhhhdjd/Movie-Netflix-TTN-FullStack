@@ -1,13 +1,16 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { GlobalState } from "../../Contexts/GlobalState";
 import { FindFilmInitiate } from "../../Redux/Action/ActionFilmAdmin";
 import { FeatureStyle } from "../../Style/StyleHome/FeatureStyle";
 const Feature = ({ type, setIsOpenModal }) => {
+  const [film, setFilm] = useState();
   const { profile, refreshTokens } = useSelector((state) => state.auth);
+  const { findFilm } = useSelector((state) => state.film);
   const state = useContext(GlobalState);
   const [dataRandom] = state.dataRandom;
+
   const dispatch = useDispatch();
   const handleMoreInfo = (id) => {
     setIsOpenModal(true);
@@ -16,11 +19,7 @@ const Feature = ({ type, setIsOpenModal }) => {
 
   const handleWatch = (id) => {
     dispatch(FindFilmInitiate(id, refreshTokens));
-  }
-
-  useEffect(() => {
-    dispatch(FindFilmInitiate(dataRandom?._id, refreshTokens));
-  }, [dataRandom?._id])
+  };
   
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
