@@ -157,120 +157,33 @@ const filmCtrl = {
     }
   },
 
-  //Hiển thị tất cả phim dành cho người lớn theo từng thể loại
-  async getAdultFilmByEachCategory(req, res) {
+
+async getFilmByCategory(req, res) {
     try {
-      const listAdultFilms = await Films.find({
-        ageLimit: { $gte: 16 },
-      });
+      const categoryId = req.params.id;
 
-      var listCategories = [];
-
-      listAdultFilms.forEach((film) => {
-        listCategories.push(film.category);
-      });
-
-      listCategories = listCategories.flat();
-
-      var listAdultCategories = listCategories.map((category) => {
-        return category.toString();
-      });
-
-      //Hien thi mang chua cac the loai cua phim nguoi lon
-      //Loai bo phan tu trung trong mang
-      listAdultCategories = [...new Set(listAdultCategories)];
-
-      var result = {};
-
-      for (var i = 0; i < listAdultCategories.length; i++) {
-        var category = await Categories.findById(listAdultCategories[i]).select(
-          "name"
-        );
-
-        var listFilms = await Films.find({
-          ageLimit: { $gte: 16 },
-          category: { $elemMatch: { $eq: listAdultCategories[i] } },
-        })
-          .populate("director")
-          .populate("category")
-          .populate("seriesFilm");
-
-        result[category.name] = listFilms;
-      }
+      const data = await Films.find({
+        // category: mongoose.Types.ObjectId(categoryId),
+        category: categoryId,
+      })
+        .populate("director")
+        .populate("category")
+        .populate("seriesFilm");
 
       return res.status(200).json({
         status: 200,
         success: true,
-        msg: "Get adult films by each category successfully",
-        result,
+        data,
+        msg: "Get film by category successfully",
       });
     } catch (err) {
-      console.log(err.message);
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: "Failed to get adult films by each category",
+        msg: "Failed to get film by category",
       });
     }
   },
-
-  //Hiển thị phim dành cho trẻ em theo từng thể loại
-  async getKidFilmByEachCategory(req, res) {
-    try {
-      const listKidFilms = await Films.find({
-        ageLimit: { $lt: 16 },
-      });
-
-      var listCategories = [];
-
-      listKidFilms.forEach((film) => {
-        listCategories.push(film.category);
-      });
-
-      listCategories = listCategories.flat();
-
-      var listKidCategories = listCategories.map((category) => {
-        return category.toString();
-      });
-
-      //Hien thi mang chua cac the loai cua phim tre em
-      //Loai bo phan tu trung trong mang
-      listKidCategories = [...new Set(listKidCategories)];
-
-      var result = {};
-
-      for (var i = 0; i < listKidCategories.length; i++) {
-        var category = await Categories.findById(listKidCategories[i]).select(
-          "name"
-        );
-
-        var listFilms = await Films.find({
-          ageLimit: { $lt: 16 },
-          category: { $elemMatch: { $eq: listKidCategories[i] } },
-        })
-          .populate("director")
-          .populate("category")
-          .populate("seriesFilm");
-
-        result[category.name] = listFilms;
-      }
-
-      return res.status(200).json({
-        status: 200,
-        success: true,
-        msg: "Get kid films by each category successfully",
-        result,
-      });
-    } catch (err) {
-      console.log(err.message);
-      return res.status(400).json({
-        status: 400,
-        success: false,
-        msg: "Failed to get kid films by each category",
-      });
-    }
-  },
-
   //Tìm kiếm bộ phim theo đạo diễn
   async getFilmByDirector(req, res) {
     try {

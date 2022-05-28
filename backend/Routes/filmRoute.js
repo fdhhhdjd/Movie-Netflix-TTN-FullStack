@@ -55,12 +55,12 @@ router.delete(
 
 //Xem thông tin chi tiết bộ phim
 router.get("/detail/:id", auth, filmCtrl.getDetailFilm);
+router.get("/find/category/:id", auth, filmCtrl.getFilmByCategory);
+// //lấy ra những bộ phim người lớn theo từng thể loại
+// router.get("/adult/eachCategory", auth, filmCtrl.getAdultFilmByEachCategory);
 
-//lấy ra những bộ phim người lớn theo từng thể loại
-router.get("/adult/eachCategory", auth, filmCtrl.getAdultFilmByEachCategory);
-
-//lấy ra những bộ phim trẻ em theo từng thể loại
-router.get("/kid/eachCategory", auth, filmCtrl.getKidFilmByEachCategory);
+// //lấy ra những bộ phim trẻ em theo từng thể loại
+// router.get("/kid/eachCategory", auth, filmCtrl.getKidFilmByEachCategory);
 
 //lấy ra những bộ phim theo đạo diễn
 router.get("/find/director/:id", auth, filmCtrl.getFilmByDirector);

@@ -7,19 +7,19 @@ import swal from "sweetalert";
 import Swal from "sweetalert2";
 import { CheckPass, logo, True } from "../../imports/image";
 import { LogoutInitiate } from "../../Redux/Action/ActionAuth";
-import { UpdateAdultInitiate,FindFilmCateAdultInitiate,FindFilmCateKidInitiate} from "../../Redux/Action/ActionFilmadult";
+import { UpdateAdultInitiate,GetFilmAdultByCategoryInitiate,GetFilmKidByCategoryInitiate} from "../../Redux/Action/ActionFilmadult";
 import { HeaderStyle } from "../../Style/HeaderStyle/HeaderStyle";
 const Header = () => {
   const dispatch = useDispatch();
   const { profile, refreshTokens } = useSelector((state) => state.auth);
-  const { allFilmAdult, updateAdult } = useSelector((state) => state.adult);
+  const { updateAdult } = useSelector((state) => state.adult);
   const { verifiedPassword } = useSelector((state) => state.film);
   const [activeTab, setActiveTab] = useState("Home");
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const [isAdult, setIsAdult] = useState(updateAdult.msg || profile.adult);
-  // console.log(allFilmAdult,'film header')
+  // console.log(catAdultorKid,'catAdultorKid')
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.pageYOffset !== 0);
@@ -45,13 +45,6 @@ const Header = () => {
       setActiveTab("Products");
     }
   }, [location]);
-  // useEffect(()=>{
-  //   if(profile.adult === 'adult'){
-  //     dispatch(FindFilmCateAdultInitiate(refreshTokens))
-  //   }else if(profile.adult==='kid'){
-
-  //   }
-  // },[])
   const handleKidMode = (adult) => {
     dispatch(UpdateAdultInitiate((adult = "kid"), refreshTokens));
     setIsAdult("kid");

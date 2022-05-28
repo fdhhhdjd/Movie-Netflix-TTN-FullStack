@@ -7,13 +7,11 @@ import { Fragment, useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ListStyle } from "../../Style/StyleHome/listStyle";
 import { ListItem } from "../../imports/index";
-import { FindFilmCategoryInitiate } from "../../Redux/Action/ActionFilmAdmin";
+import { } from "../../Redux/Action/ActionFilmAdmin";
 import { LoadingSkeleton } from "../../imports/index";
-
-const List = ({ setIsOpenModal, category }) => {
+const List = ({ setIsOpenModal, category,name }) => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const handle = setTimeout(() => {
       setLoading(false);
@@ -22,7 +20,7 @@ const List = ({ setIsOpenModal, category }) => {
     return () => clearTimeout(handle);
   }, []);
 
-  // const [filmByCategory, setFilmByCategory] = useState([]);
+  const [filmByCategory, setFilmByCategory] = useState([]);
   const { allFilmAdult, updateAdult } = useSelector((state) => state.adult);
   const { refreshTokens, profile } = useSelector((state) => state.auth);
   const listRef = useRef();
@@ -38,31 +36,32 @@ const List = ({ setIsOpenModal, category }) => {
       listRef.current.style.transform = `translateX(${-230 + distance}px)`;
     }
   };
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const { data } = await axios.get(
-  //         `/api/film/adult/find/category/${category._id}`,
-  //         {
-  //           headers: { Authorization: refreshTokens },
-  //         }
-  //       );
-  //       setFilmByCategory(data.data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(
+          `/api/film/find/category/${category}`,
+          {
+            headers: { Authorization: refreshTokens },
+          }
+        );
+        setFilmByCategory(data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  //   fetchData();
-  // }, []);
+    fetchData();
+  }, [category]);
+  // console.log(filmByCategory,'film')
   return (
     <>
       <ListStyle />
       <section className="list">
-        <span className="list-title">
+      <span className="list-title">
           {!loading ? (
-            category ? (
-              category?.name
+            name ? (
+              name
             ) : (
               "film"
             )
@@ -77,7 +76,7 @@ const List = ({ setIsOpenModal, category }) => {
             style={{ display: slideNumber === 0 && "none" }}
           />
           <div className="film-container" ref={listRef}>
-            {allFilmAdult &&
+            {/* {allFilmAdult &&
               allFilmAdult.map((film, index) => {
                 return (
                   <Fragment key={film._id}>
@@ -97,8 +96,8 @@ const List = ({ setIsOpenModal, category }) => {
                     )}
                   </Fragment>
                 );
-              })}
-            {/* {filmByCategory
+              })} */}
+            {filmByCategory
               ? filmByCategory.map((film, index) => {
                   return (
                     <Fragment key={film._id}>
@@ -133,7 +132,7 @@ const List = ({ setIsOpenModal, category }) => {
                           </Fragment>
                         );
                       })
-                    : window.location.href("/browse"))} */}
+                    : window.location.href("/browse"))}
           </div>
           <ArrowForwardIosOutlined
             className="slider-arrow right"
