@@ -7,10 +7,9 @@ import { HomeStyle } from "../../Style/StyleHome/HomeStyle";
 const Home = () => {
   const data = useContext(GlobalState);
   const [isOpenModal, setIsOpenModal] = data.modal;
-  const { categories } = useSelector((state) => state.film);
-  const { allFilmAdult, allFilmKid } = useSelector((state) => state.adult);
-  const messageEndRef = useRef(null);
-  const [film, setFilm] = useState();
+  const { allFilmAdult} = useSelector((state) => state.adult);
+  const [allCategory,setAllCategory]=useState([])
+  const messageEndRef = useRef(null); 
   const handleHideResult = () => {
     setIsOpenModal(false);
   };
@@ -22,6 +21,35 @@ const Home = () => {
       ScrollToBottom();
     }
   }, [isOpenModal]);
+  
+  useEffect(()=>{
+    var catall=[];
+    allFilmAdult.forEach(element => {
+    element.category.forEach(cat=>{
+        catall.push(
+          {
+            id:cat._id,
+            name:cat.name
+          });
+      })
+    }) 
+    const uniqueIds = [];
+    const unique = catall.filter(element => {
+      const isDuplicate = uniqueIds.includes(element.id);
+    
+      if (!isDuplicate) {
+        uniqueIds.push(element.id);
+    
+        return true;
+      }
+    
+      return false;
+    });
+    setAllCategory(unique) 
+  },[allFilmAdult])
+
+  // console.log(allCategory,'cat')
+  // console.log(allFilmAdult,'film')
   return (
     <div>
       <HomeStyle />
@@ -39,19 +67,14 @@ const Home = () => {
         )}
         <div className={isOpenModal ? "home__content" : ""}>
           <Feature setIsOpenModal={setIsOpenModal} className="test" />
-          {/* {
-            arr.map((film)=>{
+          {
+            allCategory?.map((film)=>{
               return(
-                <List category={film} setIsOpenModal={setIsOpenModal} />
+                <List  key={film.id} category={film.id} name={film.name} setIsOpenModal={setIsOpenModal} />
               )
             }
             )
-          } */}
-          <List setIsOpenModal={setIsOpenModal} />
-          <List setIsOpenModal={setIsOpenModal} />
-          <List setIsOpenModal={setIsOpenModal} />
-          <List setIsOpenModal={setIsOpenModal} />
-          {/* <Watch autoPlay={false} home={false} /> */}
+          }
           <br />
           <br />
           <Footer />
