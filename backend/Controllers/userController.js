@@ -220,6 +220,7 @@ const userCtrl = {
 
       //url to be used in the email
       const currentUrl = "http://localhost:5000/";
+      // const currentUrl = `${req.protocol}://${req.get("host")}/`;
       const uniqueString = uuidv4() + newUser.id;
 
       //hash unique string
