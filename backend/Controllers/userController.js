@@ -177,17 +177,21 @@ const userCtrl = {
         req.body;
 
       const user = await Users.findOne({ email });
-
-      //nếu email tồn tại
-      if (user) {
+      if (user)
         return res.json({
           status: 400,
           success: false,
-          msg: "The email already exists",
+          msg: "The email already exists.",
         });
-      }
 
-      //kiểm tra format pasword
+      if (password.length < 6)
+        return res.json({
+          status: 400,
+          success: false,
+          msg: "Password is at least 6 characters long.",
+        });
+
+      //kiểm tra format password
       let reg = new RegExp(
         "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$"
       ).test(password);
@@ -196,23 +200,22 @@ const userCtrl = {
           status: 400,
           success: false,
           message:
-            "Password must contain at least one number and one uppercase and lowercase and special letter, and at least 6 or more characters",
+            "Password must contain at least one number and one uppercase and lowercase and special letter, and at least 6 or more characters ",
         });
       }
 
-      //mã hóa mật khẩu
+      // Password Encryption
       const passwordHash = await bcrypt.hash(password, 10);
       const newUser = new Users({
         fullname,
         email,
         password: passwordHash,
-        role: 1,
         sex,
         date_of_birth,
         phone_number,
       });
 
-      //lưu thông tin vừa đăng ký vào db
+      // Save mongodb
       await newUser.save();
 
       //url to be used in the email
@@ -226,23 +229,34 @@ const userCtrl = {
         userId: newUser.id,
         uniqueString: hashedUniqueString,
         createdAt: Date.now(),
-        expiresAt: Date.now() + 3600000,
+        expiresAt: Date.now() + 21600000,
       });
 
       await newVerification.save();
+
+      const confirmEmailUrl =
+        currentUrl +
+        "api/auth/customer/verify/" +
+        newUser.id +
+        "/" +
+        uniqueString;
 
       //send email verification
       await sendEmail({
         emailFrom: process.env.SMPT_MAIL,
         emailTo: email,
         subject: `Verify Your Email`,
-        html: `<p>Verify your email address to complete the signup and login into your account.</p><p>This link <b>expires in 6 hours</b>.</p><p>Press <a href= ${
-          currentUrl +
-          "api/auth/admin/verify/" +
-          newUser.id +
-          "/" +
-          uniqueString
-        }>here</a> to proceed.</p>`,
+        template: "confirm-email",
+        attachments: [
+          {
+            filename: "netflix.png",
+            path: path.resolve("./views", "images", "netflix.png"),
+            cid: "netflix_logo",
+          },
+        ],
+        context: {
+          confirmEmailUrl,
+        },
       });
 
       return res.json({

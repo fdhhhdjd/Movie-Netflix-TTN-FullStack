@@ -27,7 +27,6 @@ const Watch = ({ autoPlay = true, home = true }) => {
       };
     }
   }, [id]);
-  console.log(loading, "loading");
   return (
     <>
       {loading ? (
