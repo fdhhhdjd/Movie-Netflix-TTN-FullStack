@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { spacing } from "@material-ui/system";
 const Movie = () => {
   const data = useContext(GlobalState);
+  const [allCategory,setAllCategory] = data.AdultApi.cat;
   const [isOpenModal, setIsOpenModal] = data.modal;
   const [openSort,setOpenSort]= useState(false);
   return (
@@ -112,10 +113,14 @@ const Movie = () => {
                 </div>
               </div>
               <div className="page-movie-body">
-                <List setIsOpenModal={setIsOpenModal} />
-                <List setIsOpenModal={setIsOpenModal} />
-                <List setIsOpenModal={setIsOpenModal} />
-                <List setIsOpenModal={setIsOpenModal} />
+              {
+                allCategory?.map((film)=>{
+                  return(
+                    <List  key={film.id} category={film.id} name={film.name} setIsOpenModal={setIsOpenModal} />
+                  )
+                }
+                )
+              }
               </div>
             </div>
           </div>
