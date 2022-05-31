@@ -7,9 +7,9 @@ import { Fragment, useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ListStyle } from "../../Style/StyleHome/listStyle";
 import { ListItem } from "../../imports/index";
-import { } from "../../Redux/Action/ActionFilmAdmin";
+import {} from "../../Redux/Action/ActionFilmAdmin";
 import { LoadingSkeleton } from "../../imports/index";
-const List = ({ setIsOpenModal, category,name }) => {
+const List = ({ setIsOpenModal, category, name }) => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -58,7 +58,7 @@ const List = ({ setIsOpenModal, category,name }) => {
     <>
       <ListStyle />
       <section className="list">
-      <span className="list-title">
+        <span className="list-title">
           {!loading ? (
             name ? (
               name
@@ -101,16 +101,20 @@ const List = ({ setIsOpenModal, category,name }) => {
               ? filmByCategory.map((film, index) => {
                   return (
                     <Fragment key={film._id}>
-                      <ListItem
-                        setIsOpenModal={setIsOpenModal}
-                        image={film.image_film.url}
-                        ageLimit={film.ageLimit}
-                        filmLength={film.filmLength}
-                        category={film.category}
-                        series={film.seriesFilm}
-                        id={film._id}
-                        index={index}
-                      />
+                      {!loading ? (
+                        <ListItem
+                          setIsOpenModal={setIsOpenModal}
+                          image={film.image_film.url}
+                          ageLimit={film.ageLimit}
+                          filmLength={film.filmLength}
+                          category={film.category}
+                          series={film.seriesFilm}
+                          id={film._id}
+                          index={index}
+                        />
+                      ) : (
+                        <LoadingSkeleton type="listImg" />
+                      )}
                     </Fragment>
                   );
                 })
@@ -119,16 +123,20 @@ const List = ({ setIsOpenModal, category,name }) => {
                     ? allFilmAdult.data.map((film, index) => {
                         return (
                           <Fragment key={film._id}>
-                            <ListItem
-                              setIsOpenModal={setIsOpenModal}
-                              image={film.image_film.url}
-                              ageLimit={film.ageLimit}
-                              filmLength={film.filmLength}
-                              category={film.category}
-                              series={film.seriesFilm}
-                              id={film._id}
-                              index={index}
-                            />
+                            {!loading ? (
+                              <ListItem
+                                setIsOpenModal={setIsOpenModal}
+                                image={film.image_film.url}
+                                ageLimit={film.ageLimit}
+                                filmLength={film.filmLength}
+                                category={film.category}
+                                series={film.seriesFilm}
+                                id={film._id}
+                                index={index}
+                              />
+                            ) : (
+                              <LoadingSkeleton type="listImg" />
+                            )}
                           </Fragment>
                         );
                       })

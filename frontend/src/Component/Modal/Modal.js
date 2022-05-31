@@ -6,13 +6,16 @@ import {
   ThumbUpOutlined,
 } from "@material-ui/icons";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { mainMovie, recMovies } from "../../imports/import";
-import { Recommend } from "../../imports/index";
+import { Recommend, Comment } from "../../imports/index";
+import { getCommentInitiate } from "../../Redux/Action/ActionComment";
 import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
 
 const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const { findFilm } = useSelector((state) => state.film);
+  const dispatch = useDispatch();
 
   const countSeason = (n) => {
     if (n > 1) {
@@ -124,16 +127,7 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
             </div>
           </div>
 
-          {/* div Episodes if tv show */}
-          {/* {bannerMId.type === "tvShows" && (
-            <TvEpisodes
-              movies={movies}
-              tvId={bannerMId.bannerMovie}
-              apiKey={API_KEY}
-            />
-          )} */}
-
-          {/* div More Like this */}
+          <Comment />
           <Recommend recommend={recMovies} />
 
           {/* div about this movie */}

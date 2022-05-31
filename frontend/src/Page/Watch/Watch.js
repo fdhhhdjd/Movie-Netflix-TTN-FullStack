@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { GlobalState } from "../../Contexts/GlobalState";
-import { WatchStyle } from "../../Style/WatchStyle/WatchStyle";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import {
   FindFilmInitiate,
-  removeSelectedMovieOrShow,
+  removeSelectedMovieOrShow
 } from "../../Redux/Action/ActionFilmAdmin";
+import { WatchStyle } from "../../Style/WatchStyle/WatchStyle";
 import LoadingWatch from "../Loading/LoadingWatch";
 
 const Watch = ({ autoPlay = true, home = true }) => {
@@ -32,7 +31,7 @@ const Watch = ({ autoPlay = true, home = true }) => {
   return (
     <>
       {loading ? (
-        <LoadingWatch />
+        <LoadingWatch/>
       ) : (
         <>
           {findFilm.length > 0 && (

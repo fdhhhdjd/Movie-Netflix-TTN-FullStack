@@ -30,6 +30,7 @@ export { default as Recommend } from "../Component/Modal/Recommend";
 export { default as Movie } from "../Page/Movie/Movie";
 export { default as LoadingSkeleton } from "../Page/Loading/LoadingSkeleton";
 export { default as LoadingWatch } from "../Page/Loading/LoadingWatch";
+export { default as Comment } from "../Component/Admins/Comment";
 //!Admin
 export { default as LoginAdmin } from "../Page/Admins/LoginAdmin";
 export { default as ForgetAdmin } from "../Component/Admins/ForgetAdmin";

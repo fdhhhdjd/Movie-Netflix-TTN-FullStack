@@ -23,7 +23,7 @@ const Home = () => {
   }, [isOpenModal]);
   
   useEffect(()=>{
-    var catall=[];
+    let catall=[];
     allFilmAdult.forEach(element => {
     element.category.forEach(cat=>{
         catall.push(

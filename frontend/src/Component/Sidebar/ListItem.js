@@ -2,11 +2,12 @@ import {
   AddCircleOutline,
   ArrowDropDownCircleOutlined,
   PlayCircleFilledWhiteRounded,
-  ThumbUpOutlined,
+  ThumbUpOutlined
 } from "@material-ui/icons";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getCommentInitiate } from "../../Redux/Action/ActionComment";
 import { FindFilmInitiate } from "../../Redux/Action/ActionFilmAdmin";
 import { ListItemStyle } from "../../Style/StyleHome/ListItemStyle";
 export default function ListItem({
@@ -25,6 +26,7 @@ export default function ListItem({
 
   const handleModal = (id) => {
     dispatch(FindFilmInitiate(id, refreshTokens));
+    dispatch(getCommentInitiate(id, refreshTokens));
     setIsOpenModal(true);
   };
 
