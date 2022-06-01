@@ -1,13 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { GlobalState } from "../../Contexts/GlobalState";
+import { getCommentInitiate } from "../../Redux/Action/ActionComment";
 import { FindFilmInitiate } from "../../Redux/Action/ActionFilmAdmin";
 import { FeatureStyle } from "../../Style/StyleHome/FeatureStyle";
+
 const Feature = ({ type, setIsOpenModal }) => {
   const [film, setFilm] = useState();
   const { profile, refreshTokens } = useSelector((state) => state.auth);
   const { findFilm } = useSelector((state) => state.film);
+
   const state = useContext(GlobalState);
   const [dataRandom] = state.dataRandom;
 
@@ -15,6 +18,7 @@ const Feature = ({ type, setIsOpenModal }) => {
   const handleMoreInfo = (id) => {
     setIsOpenModal(true);
     dispatch(FindFilmInitiate(id, refreshTokens));
+    dispatch(getCommentInitiate(  id,refreshTokens ));
   };
 
   const handleWatch = (id) => {

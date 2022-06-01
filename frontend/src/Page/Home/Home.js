@@ -23,6 +23,31 @@ const Home = () => {
     }
   }, [isOpenModal]);
   
+  useEffect(()=>{
+    let catall=[];
+    allFilmAdult.forEach(element => {
+    element.category.forEach(cat=>{
+        catall.push(
+          {
+            id:cat._id,
+            name:cat.name
+          });
+      })
+    }) 
+    const uniqueIds = [];
+    const unique = catall.filter(element => {
+      const isDuplicate = uniqueIds.includes(element.id);
+    
+      if (!isDuplicate) {
+        uniqueIds.push(element.id);
+    
+        return true;
+      }
+    
+      return false;
+    });
+    setAllCategory(unique) 
+  },[allFilmAdult])
 
 
   console.log(allCategory,'cat')

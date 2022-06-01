@@ -209,7 +209,6 @@ export const FindFilmInitiate = (id, token) => {
 };
 // find phim by category
 export const FindFilmCategoryInitiate = (id, token) => {
-  console.log(id, token, "get");
   return async function (dispatch) {
     try {
       dispatch(FindFilmCategoryStart());
