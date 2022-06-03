@@ -8,29 +8,22 @@ import { GlobalStateAdmin } from "../../ContextsAdmin/GlobalStateAdmin";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 import { toast } from "react-toastify";
-import {
-    TopBar,
-    SideBarAdmins,
-  } from "../../imports/importAdmin/importsAdmin";
-  import { GlobalStyleAmin } from "../../Style/Admin/GlobalStyleAmin";
 const initialState = {
   _id: "",
   name: "",
   image: "",    
 };
-const NewUsers = () => {
+const ChangeDirectors = () => {
     const state = useContext(GlobalStateAdmin);
     const [images, setImages] = useState(false);
     const [onEdit, setOnEdit] = useState(false);
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState(initialState);
-    const { allUsers,token } = useSelector((state) => state.admin);
-    const [fullname,setFullName] = useState(user.fullname)
+    const { allDirectors, token } = useSelector((state) => state.admin);
+    console.log(allDirectors,'allDirectors');
     const [callback, setCallback] = state.callback;
     const navigate = useNavigate();
     const { tokens } = useParams();
-    console.log(user._id,'allUsers');
-    console.log(token.accessToken,'token');
     const handleChangeInput = (e) => {
       const { name, value } = e.target;
       setUser({ ...user, [name]: value });
@@ -38,7 +31,7 @@ const NewUsers = () => {
     useEffect(() => {
       if (tokens) {
         setOnEdit(true);
-        allUsers.forEach((product) => {
+        allDirectors.forEach((product) => {
         console.log(product,'tientai')
           if (product._id == tokens) {
             setUser(product);
@@ -52,10 +45,9 @@ const NewUsers = () => {
       } else {
         setOnEdit(false);
         setUser(initialState);
-        console.log(initialState,'int')
         setImages(false);
       }
-    }, [tokens, allUsers]);
+    }, [tokens, allDirectors]);
     const handleUpload = async (e) => {
       e.preventDefault();
       try {
@@ -78,13 +70,12 @@ const NewUsers = () => {
   
         formData.append("file", file);
         setLoading(true);
-        const res = await axios.post("/api/uploadImageUser", formData, {
+        const res = await axios.post("/api/uploadImageDirector", formData, {
           headers: {
             "content-type": "multipart/form-data",
             Authorization: ` ${token.accessToken}`,
           },
         });
-        console.log(res,'res')
   
         setLoading(false);
         setImages(res.data);
@@ -101,13 +92,11 @@ const NewUsers = () => {
         });
       try {
         await axios.patch(
-        //   `/api/director/update/${user._id}`,
-          `/api/auth/admin/customerAccount/${user?._id}/update/info`,
-          { fullname, image: images },
-          console.log(fullname,'user'),
+          `/api/director/update/${user._id}`,
+          { ...user, image: images },
           {
             headers: {
-              Authorization: `${token?.accessToken}`,
+              Authorization: `${token.accessToken}`,
             },
           }
         );
@@ -115,7 +104,7 @@ const NewUsers = () => {
           icon: "success",
         });
         setCallback(!callback);
-        navigate("/users");
+        navigate("/director");
       } catch (error) {
         alert(error.response.data.msg);
       }
@@ -124,7 +113,7 @@ const NewUsers = () => {
       try {
         setLoading(true);
         await axios.post(
-          "/api/destroyImageUser",
+          "/api/destroyImageDirector",
           { public_id: images.public_id },
           {
             headers: {
@@ -142,13 +131,9 @@ const NewUsers = () => {
       display: images ? "block" : "none",
     };
   
-  return (
-    <>
-        <GlobalStyleAmin />
-      <TopBar />
-      <div className="admin__container">
-        <SideBarAdmins />
-        
+    return (
+      <>
+        <UserListStyle />
         <div className="upload">
           <input type="file" name="file" id="file_up" onChange={handleUpload} />
           {loading ? (
@@ -183,18 +168,16 @@ const NewUsers = () => {
               <input
                 type="text"
                 placeholder="john"
-                name="fullname"
-                value={fullname}
-                onChange={(e)=>setFullName(e.target.value)}
+                name="name"
+                value={user.name}
+                onChange={handleChangeInput}
               />
             </div>
             <button className="newUserButton">SAVE</button>
           </form>
         </div>
-        <UserListStyle />
-      </div>
-    </>
-  )
+      </>
+    );
 }
 
-export default NewUsers
+export default ChangeDirectors

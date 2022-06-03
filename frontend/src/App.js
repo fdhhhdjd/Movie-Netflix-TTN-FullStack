@@ -17,7 +17,7 @@ import {
   Loading,
   NewDirector,
   NewFilm,
-  NewUser,
+  ChangeDirector,
   PrivateRouter,
   PrivateRouterAuth,
   Profile,
@@ -28,6 +28,8 @@ import {
   Login,
   Movie,
   Watch,
+  Users,
+  NewUsers
 } from "./imports/index";
 import {
   Admin,
@@ -122,11 +124,13 @@ function App() {
           {/* Change Password Admin */}
           <Route path="/changepassword/" element={<ChangePasswordAdmin />} />
           {/* Manager Director */}
+          <Route path="/users" element={<Users />} />
+          <Route path="/newusers/:tokens" element={<NewUsers />} />
           <Route path="/director" element={<Director />} />
           {/* Edit Film */}
-          <Route path="/newUser/:tokens" element={<NewUser />} />
+          <Route path="/changeDirector/:tokens" element={<ChangeDirector />} />
           {/* Add Director */}
-          <Route path="/newDirector" element={<NewDirector />} />
+          <Route path="/newDirector" element={<NewDirector/>} />
           {/* Manager Category */}
           <Route path="/category" element={<Category />} />
           {/* Manager Film */}

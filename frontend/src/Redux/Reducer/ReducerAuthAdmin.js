@@ -7,13 +7,12 @@ const initialState = {
   AdminRegister: [],
   isLogout: false,
   changePassword: [],
-  allUser: [],
-  allUsers: [],
   uploadImg: [],
   allAdmins: [],
   forget: [],
   newAccount: [],
   allDirectors: [],
+  allUsers: [],
   resetPassword:[],
 
   };
@@ -65,6 +64,11 @@ const initialState = {
         ...state,
         loading: true,
     }
+    case types.GET_ALL_USERS_START:
+      return{
+        ...state,
+        loading: true,
+    }
     case types.ADMIN_LOGIN_API_SUCCESS:
       return {
         ...state,
@@ -90,6 +94,13 @@ const initialState = {
                   ...state,
                   loading: false,
                   allDirectors: action.payload,
+                  
+                };
+              case types.GET_ALL_USERS_SUCCESS:
+                return {
+                  ...state,
+                  loading: false,
+                  allUsers: action.payload,
                   
                 };
                 case types.ADMIN_RESET_PASSWORD_SUCCESS:
@@ -170,6 +181,12 @@ const initialState = {
             error: action.payload
         }
         case types.GET_ALL_DIRECTOR_FAIL:
+        return{
+            ...state,
+            loading: false,
+            error: action.payload
+        }
+        case types.GET_ALL_USERS_FAIL:
         return{
             ...state,
             loading: false,
