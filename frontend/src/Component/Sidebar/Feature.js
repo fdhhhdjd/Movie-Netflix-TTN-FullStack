@@ -15,10 +15,11 @@ const Feature = ({ type, setIsOpenModal }) => {
   const [dataRandom] = state.dataRandom;
 
   const dispatch = useDispatch();
+
   const handleMoreInfo = (id) => {
     setIsOpenModal(true);
     dispatch(FindFilmInitiate(id, refreshTokens));
-    dispatch(getCommentInitiate(  id,refreshTokens ));
+    dispatch(getCommentInitiate(id, refreshTokens));
   };
 
   const handleWatch = (id) => {

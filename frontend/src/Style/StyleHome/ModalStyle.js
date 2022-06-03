@@ -50,7 +50,7 @@ export const ModalStyle = createGlobalStyle`
         left: 0;
         right: 0;
         bottom: 0;
-        margin: 40px auto;
+        margin: 70px auto;
         background-color: #181818;
         border-radius: 8px;
         text-align: center;
