@@ -180,7 +180,7 @@ const Login = () => {
                 )}
               />
               <FacebookLogin
-                appId={process.env.REACT_APP_KEY_FACEBOOK_TEST}
+                appId={process.env.REACT_APP_KEY_FACEBOOK}
                 autoLoad={false}
                 callback={responseFacebook}
                 icon="fa-facebook"
