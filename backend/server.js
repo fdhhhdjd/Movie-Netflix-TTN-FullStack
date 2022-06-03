@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
   require("dotenv").config({ path: ".env" });
 }
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Tai heo Fa" });
+  res.json({ message: "Welcome to Tai heo Fa ^-^" });
 });
 
 const PORT = process.env.PORT || 5000;
