@@ -13,5 +13,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Tai heo Fa" });
 });
 
-const PORT = 5000 || process.env.PORT;
-app.listen(PORT, () => console.log(`server is listening `));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () =>
+  console.log(`server is listening on port:http://localhost:${PORT}`)
+);
