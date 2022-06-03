@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import { AiFillDelete } from "../../imports/importAdmin/Icons";
 import { DataGrid } from "@material-ui/data-grid";
 import { Link } from "react-router-dom";
-import { UserLists } from "../../Style/Admin/UserLists";
+import { DirectorLists } from "../../Style/Admin/DirectorLists";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import "moment/locale/vi";
@@ -12,7 +12,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import { toast } from "react-toastify";
 
-const UserList = () => {
+const DirectorList = () => {
     const state = useContext(GlobalStateAdmin);
     const { token } = useSelector((state) => state.admin);
     const [callback, setCallback] = state.callback;
@@ -99,7 +99,7 @@ const UserList = () => {
         renderCell: (params) => {
           return (
             <>
-              <Link to={"/newUser/" + params.row._id}>
+              <Link to={"/changeDirector/" + params.row._id}>
                 <button className="userListEdit">Edit</button>
               </Link>
               <AiFillDelete
@@ -113,7 +113,7 @@ const UserList = () => {
     ];
     return (
       <>
-        <UserLists />
+      <DirectorLists />
         
         <div className="userList">
           <Link to="/newDirector">
@@ -143,4 +143,4 @@ const UserList = () => {
   
 }
 
-export default UserList 
+export default DirectorList 

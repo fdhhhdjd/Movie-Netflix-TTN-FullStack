@@ -27,9 +27,9 @@ const SideBarAdmins = () => {
       } else if (location.pathname === "/profileAdmin") {
         setActiveTab("Profile");
       } else if (location.pathname === "/director") {
+        setActiveTab("Directors");
+      } else if (location.pathname === "/Users") {
         setActiveTab("Users");
-      } else if (location.pathname === "/seriesFilm") {
-        setActiveTab("Products");
       } else if (location.pathname === "/film") {
         setActiveTab("Films");
       } else if (location.pathname === "/favourite") {
@@ -101,23 +101,23 @@ const SideBarAdmins = () => {
               <Link to="/director" className="link">
                 <li
                   className={` sidebarListItem  ${
-                    activeTab === "Users" ? "active" : ""
+                    activeTab === "Directors" ? "active" : ""
                   }`}
-                  onClick={() => setActiveTab("Users")}
+                  onClick={() => setActiveTab("Directors")}
                 >
                   <i className="fa-solid fa-user-tie sidebarIcon"></i>
                   Director
                 </li>
               </Link>
-              <Link to="/seriesFilm" className="link">
+              <Link to="/users" className="link">
                 <li
                   className={` sidebarListItem  ${
-                    activeTab === "SeriesFilm" ? "active" : ""
+                    activeTab === "Users" ? "active" : ""
                   }`}
-                  onClick={() => setActiveTab("SeriesFilm")}
+                  onClick={() => setActiveTab("Users")}
                 >
-                  <i className="fa-solid fa-film sidebarIcon"> </i>
-                   SeriesFilm
+                  <i className="fa-solid fa-user"></i> &nbsp;
+                   Users
                 </li>
               </Link>
               <Link to="/category" className="link">

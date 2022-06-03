@@ -2,20 +2,20 @@ import React from "react";
 import {
   TopBar,
   SideBarAdmins,
-  NewUsers,
+  ChangeDirectors,
 } from "../../imports/importAdmin/importsAdmin";
 import { GlobalStyleAmin } from "../../Style/Admin/GlobalStyleAmin";
-const NewUser = () => {
+const ChangeDirector = () => {
   return (
     <>
       <GlobalStyleAmin />
       <TopBar />
       <div className="admin__container">
         <SideBarAdmins />
-        <NewUsers />
+        <ChangeDirectors />
       </div>
     </>
   );
 };
 
-export default NewUser;
+export default ChangeDirector;

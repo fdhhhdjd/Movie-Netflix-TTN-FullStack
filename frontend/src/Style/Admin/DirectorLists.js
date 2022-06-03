@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-export const UserLists = createGlobalStyle`
+export const DirectorLists = createGlobalStyle`
 .userList {
     flex: 4;
   }
