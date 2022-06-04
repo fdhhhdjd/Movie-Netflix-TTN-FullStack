@@ -180,7 +180,7 @@ const filmCtrl = {
       //Loai bo phan tu trung trong mang
       listAdultCategories = [...new Set(listAdultCategories)];
 
-      var result = {};
+      var results = [];
 
       for (var i = 0; i < listAdultCategories.length; i++) {
         var category = await Categories.findById(listAdultCategories[i]).select(
@@ -195,14 +195,19 @@ const filmCtrl = {
           .populate("category")
           .populate("seriesFilm");
 
-        result[category.name] = listFilms;
+        var result = {
+          category: category.name,
+          data: listFilms,
+        };
+
+        results.push(result);
       }
 
       return res.status(200).json({
         status: 200,
         success: true,
         msg: "Get adult films by each category successfully",
-        result,
+        results,
       });
     } catch (err) {
       console.log(err.message);
@@ -237,7 +242,7 @@ const filmCtrl = {
       //Loai bo phan tu trung trong mang
       listKidCategories = [...new Set(listKidCategories)];
 
-      var result = {};
+      var results = [];
 
       for (var i = 0; i < listKidCategories.length; i++) {
         var category = await Categories.findById(listKidCategories[i]).select(
@@ -252,14 +257,19 @@ const filmCtrl = {
           .populate("category")
           .populate("seriesFilm");
 
-        result[category.name] = listFilms;
+        var result = {
+          category: category.name,
+          data: listFilms,
+        };
+
+        results.push(result);
       }
 
       return res.status(200).json({
         status: 200,
         success: true,
         msg: "Get kid films by each category successfully",
-        result,
+        results,
       });
     } catch (err) {
       console.log(err.message);
