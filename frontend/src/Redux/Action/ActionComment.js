@@ -27,6 +27,20 @@ export const addCommentsFail = (err) => ({
   payload: err,
 });
 
+//* remove comments
+export const removeCommentsStart = () => ({
+  type: types.REMOVE_COMMENTS_FAIL,
+});
+
+export const removeCommentsSuccess = () => ({
+  type: types.REMOVE_COMMENTS_SUCCESS,
+});
+
+export const removeCommentsFail = (err) => ({
+  type: types.REMOVE_COMMENTS_FAIL,
+  payload: err,
+});
+
 //* update comments
 export const updateCommentsStart = () => ({
   type: types.UPDATE_COMMENTS_START,
@@ -39,31 +53,60 @@ export const updateCommentsFail = (err) => ({
   type: types.UPDATE_COMMENTS_FAIL,
   payload: err,
 });
-export const  getCommentInitiate= (id,refreshTokens) => async (dispatch) => {
+
+export const getCommentInitiate = (id, refreshTokens) => async (dispatch) => {
   try {
     dispatch(getCommentsStart());
 
     const { data } = await axios.get(`/api/comment/get/${id}`, {
-      headers: { Authorization: refreshTokens},
+      headers: { Authorization: refreshTokens },
     });
 
-    dispatch(getCommentsSuccess(data));
+    dispatch(getCommentsSuccess(data?.data));
   } catch (error) {
     dispatch(getCommentsFail(error));
-  } 
+  }
 };
 
+export const addCommentInitiate =
+  (id, refreshTokens, content) => async (dispatch) => {
+    try {
+      dispatch(addCommentsStart());
 
+      const { data } = await axios.post(
+        `/api/comment/add/${id}`,
+        {
+          content,
+        },
+        {
+          headers: { Authorization: refreshTokens },
+        }
+      );
 
-export const addCommentInitiate = (token, id) => async (dispatch) => {
+      dispatch(addCommentsSuccess(data));
+    } catch (error) {
+      dispatch(addCommentsFail(error));
+    }
+  };
+
+export const removeCommentInitiate = (token, id) => async (dispatch) => {
   try {
-    dispatch(addCommentsStart());
-    const { data } = await axios.get(`/api/comment/add/${id}`, {
-      headers: { Authorization: token },
-    });
+    dispatch(removeCommentsStart());
 
-    dispatch(getCommentsSuccess(data.data));
-  } catch (err) {
-    dispatch(addCommentsFail(err));
+    const { data } = await axios.patch(
+      `api/comment/softDelete/${id}`,
+      {},
+      {
+        headers: { Authorization: token },
+      }
+    );
+
+    dispatch(removeCommentsSuccess(data));
+  } catch (error) {
+    dispatch(removeCommentsFail(error));
   }
+};
+
+export const resetCommentState = () => async (dispatch) => {
+  dispatch({ type: types.CLEAR_ERRORS_COMMENT });
 };

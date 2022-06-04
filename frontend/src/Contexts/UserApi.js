@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ProfileInitiate } from "../Redux/Action/ActionAuth";
+import { getCommentInitiate } from "../Redux/Action/ActionComment";
 import { GetAllCategoryInitiate } from "../Redux/Action/ActionFilmAdmin";
 const UserApi = (token, updateAdult, rememberer) => {
   const dispatch = useDispatch();

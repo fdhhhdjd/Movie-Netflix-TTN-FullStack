@@ -40,7 +40,6 @@ const commentCtrl = {
       return res.status(400).json({
         status: 400,
         success: false,
-        data: data,
         msg: "Failed to get comments of film",
       });
     }

@@ -34,6 +34,13 @@ const CommentReducer = (state = initalState, action) => {
         loading: false,
         error: action.payload,
       };
+    case types.CLEAR_ERRORS_COMMENT:
+      return {
+        ...state,
+        loading: false,
+        getAllComment: [],
+        addComment: [],
+      };
     default:
       return state;
   }

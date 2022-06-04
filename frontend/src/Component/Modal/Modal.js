@@ -6,11 +6,10 @@ import {
   ThumbUpOutlined,
 } from "@material-ui/icons";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mainMovie, recMovies } from "../../imports/import";
-import { Recommend, Comment } from "../../imports/index";
-import { getCommentInitiate } from "../../Redux/Action/ActionComment";
+import { Comment, Recommend } from "../../imports/index";
+import { resetCommentState } from "../../Redux/Action/ActionComment";
 import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
 
 const Modal = ({ setIsOpenModal, handleHideResult }) => {
@@ -31,6 +30,7 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
 
   const handleCloseModal = () => {
     setIsOpenModal(false);
+    dispatch(resetCommentState());
   };
   return (
     <>
@@ -127,7 +127,7 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
             </div>
           </div>
 
-          <Comment />
+          <Comment filmId={findFilm.length > 0 && findFilm[0]._id} />
           <Recommend recommend={recMovies} />
 
           {/* div about this movie */}
