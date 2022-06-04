@@ -6,6 +6,25 @@ const fileUpload = require("express-fileupload");
 const cors = require("cors");
 const path = require("path");
 const bodyParser = require("body-parser");
+const compression = require("compression");
+app.enable("trust proxy");
+app.use(
+  compression({
+    level: 6,
+    threshold: 100 * 1000,
+    filter: (req, res) => {
+      if (req.headers["x-no-compression"]) {
+        return false;
+      }
+      return compression.filter(req, res);
+    },
+  })
+);
+app.use(
+  express.json({
+    verify: (req, res, buffer) => (req["rawBody"] = buffer),
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());

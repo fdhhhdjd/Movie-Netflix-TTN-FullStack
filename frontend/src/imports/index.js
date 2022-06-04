@@ -30,13 +30,14 @@ export { default as Recommend } from "../Component/Modal/Recommend";
 export { default as Movie } from "../Page/Movie/Movie";
 export { default as LoadingSkeleton } from "../Page/Loading/LoadingSkeleton";
 export { default as LoadingWatch } from "../Page/Loading/LoadingWatch";
+export { default as Comment } from "../Component/Admins/Comment";
 //!Admin
 export { default as LoginAdmin } from "../Page/Admins/LoginAdmin";
 export { default as ForgetAdmin } from "../Component/Admins/ForgetAdmin";
 export { default as ResetAdmin } from "../Component/Admins/ResetAdmin";
 export { default as ChangePasswordAdmin } from "../Page/Admins/ChangePasswordAdmin";
 export { default as Director } from "../Page/Admins/Director";
-export { default as NewUser } from "../Component/Admins/NewUser";
+export { default as ChangeDirector } from "../Component/Admins/ChangeDirector";
 export { default as LoadingImage } from "../Component/Admins/Loading/LoadingImage";
 export { default as NewDirector } from "../Component/Admins/NewDirector";
 export { default as Category } from "../Component/Admins/Category";
@@ -44,6 +45,8 @@ export { default as SeriesFilm } from "../Component/Admins/SeriesFilm";
 export { default as Films } from "../Page/Admins/Films";
 export { default as NewFilm } from "../Component/Admins/NewFilm";
 export { default as Favourite } from "../Component/Admins/Favourite";
+export { default as Users } from "../Component/Admins/Users";
+export { default as NewUsers } from "../Component/Admins/NewUsers";
 export { Rating } from "../Component/Admins/Rating";
 //!file Small Context
 export { default as UserApi } from "../Contexts/UserApi";

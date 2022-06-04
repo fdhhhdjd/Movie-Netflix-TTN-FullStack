@@ -2,7 +2,7 @@ import React from "react";
 import {
   TopBar,
   SideBarAdmins,
-  UserList,
+  DirectorList,
 } from "../../imports/importAdmin/importsAdmin";
 import { GlobalStyleAmin } from "../../Style/Admin/GlobalStyleAmin";
 const Director = () => {
@@ -12,7 +12,7 @@ const Director = () => {
       <TopBar />
       <div className="admin__container">
         <SideBarAdmins />
-        <UserList />
+        <DirectorList />
       </div>
     </>
   );

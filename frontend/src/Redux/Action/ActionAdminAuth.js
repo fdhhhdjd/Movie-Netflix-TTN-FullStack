@@ -131,6 +131,18 @@ export const GetAllDirectorFail = (error) => ({
   type: types.GET_ALL_DIRECTOR_FAIL,
   payload: error,
 });
+//? GetAll User
+export const GetAllUsersStart = () => ({
+  type: types.GET_ALL_USERS_START,
+});
+export const GetAllUsersSuccess = (token) => ({
+  type: types.GET_ALL_USERS_SUCCESS,
+  payload: token,
+});
+export const GetAllUsersFail = (error) => ({
+  type: types.GET_ALL_USERS_FAIL,
+  payload: error,
+});
 
 //ADMIN CALL api
 //!Register
@@ -304,7 +316,7 @@ export const ChangeAdminsInitiate =
       dispatch(ChangePasswordAdminsFail(error));
     }
   };
-//!Get All User
+//!Get All Director
 export const GetAllDirectorInitiate = (token) => {
   return async function (dispatch) {
     try {
@@ -317,6 +329,21 @@ export const GetAllDirectorInitiate = (token) => {
       dispatch(GetAllDirectorSuccess(data.data));
     } catch (error) {
       dispatch(GetAllDirectorFail(error));
+    }
+  };
+};
+export const GetAllUsersInitiate = (token) => {
+  return async function (dispatch) {
+    try {
+      dispatch(GetAllUsersStart());
+
+      const { data } = await axios.get(`/api/auth/admin/getAllCustomer`, {
+        headers: { Authorization: token },
+      });
+
+      dispatch(GetAllUsersSuccess(data.data));
+    } catch (error) {
+      dispatch(GetAllUsersFail(error));
     }
   };
 };

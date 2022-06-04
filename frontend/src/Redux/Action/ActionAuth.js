@@ -1,7 +1,6 @@
 import axios from "axios";
 import * as types from "../ActionTypes";
 //?Register
-//?Register
 export const RegisterStart = () => ({
   type: types.REGISTER_API_START,
 });

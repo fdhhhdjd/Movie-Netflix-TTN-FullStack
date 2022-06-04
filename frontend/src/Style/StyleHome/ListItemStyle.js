@@ -55,6 +55,13 @@ export const ListItemStyle = createGlobalStyle`
         color: #000;
       }
 
+      a svg {
+        background: #fff;
+        font-size: 30px;
+        margin-bottom: 2px;
+        border-radius: 50%;
+      }
+
       & > span > * {
         margin-right: 10px;
         font-size: 35px;

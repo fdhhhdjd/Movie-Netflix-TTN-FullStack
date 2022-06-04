@@ -157,7 +157,6 @@ const filmCtrl = {
     }
   },
 
-  //Hiển thị tất cả phim dành cho người lớn theo từng thể loại
   async getAdultFilmByEachCategory(req, res) {
     try {
       const listAdultFilms = await Films.find({
@@ -210,11 +209,10 @@ const filmCtrl = {
         results,
       });
     } catch (err) {
-      console.log(err.message);
       return res.status(400).json({
         status: 400,
         success: false,
-        msg: "Failed to get adult films by each category",
+        msg: "Failed to get film by category",
       });
     }
   },
