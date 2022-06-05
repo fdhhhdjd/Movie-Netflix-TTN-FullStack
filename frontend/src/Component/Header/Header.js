@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -7,19 +7,24 @@ import swal from "sweetalert";
 import Swal from "sweetalert2";
 import { CheckPass, logo, True } from "../../imports/image";
 import { LogoutInitiate } from "../../Redux/Action/ActionAuth";
-import { UpdateAdultInitiate } from "../../Redux/Action/ActionFilmadult";
+import {
+  UpdateAdultInitiate,
+  FindFilmCateAdultInitiate,
+  FindFilmCateKidInitiate,
+} from "../../Redux/Action/ActionFilmadult";
 import { HeaderStyle } from "../../Style/HeaderStyle/HeaderStyle";
 const Header = () => {
   const dispatch = useDispatch();
   const { profile, refreshTokens } = useSelector((state) => state.auth);
-  const { updateAdult,allFilmAdult } = useSelector((state) => state.adult);
+  const { updateAdult, allFilmAdult, findFilmAdult } = useSelector(
+    (state) => state.adult
+  );
   const { verifiedPassword } = useSelector((state) => state.film);
   const [activeTab, setActiveTab] = useState("Home");
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const [isAdult, setIsAdult] = useState(updateAdult.msg || profile.adult);
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.pageYOffset !== 0);
@@ -49,7 +54,14 @@ const Header = () => {
     dispatch(UpdateAdultInitiate((adult = "kid"), refreshTokens));
     setIsAdult("kid");
   };
-  
+  useEffect(() => {
+    if (profile.adult === "adult" ) {
+      dispatch(FindFilmCateAdultInitiate(refreshTokens));
+    } else if (profile.adult === "kid") {
+      dispatch(FindFilmCateKidInitiate(refreshTokens));
+    }
+  }, [profile.adult]);
+
   const handleExitKid = async () => {
     try {
       return await swal({
@@ -265,4 +277,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);
