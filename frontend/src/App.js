@@ -72,9 +72,9 @@ function App() {
             <Route path="/forget" element={<Forget />} />
           </Route>
           {/* Intro Web  */}
-          <Route element={<PrivateRouter />}>
+          {/* <Route element={<PrivateRouter />}> */}
             <Route path="/" element={<Welcome />} />
-          </Route>
+          {/* </Route> */}
           {/* Choose Adult  */}
           <Route element={<PrivateRouter />}>
             <Route path="/browse" element={<ProfileGate />} />
