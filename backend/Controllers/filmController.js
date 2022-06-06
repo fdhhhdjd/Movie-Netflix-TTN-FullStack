@@ -159,9 +159,7 @@ const filmCtrl = {
 
   async getAdultFilmByEachCategory(req, res) {
     try {
-      const listAdultFilms = await Films.find({
-        ageLimit: { $gte: 16 },
-      });
+      const listAdultFilms = await Films.find({});
 
       var listCategories = [];
 
@@ -187,7 +185,6 @@ const filmCtrl = {
         );
 
         var listFilms = await Films.find({
-          ageLimit: { $gte: 16 },
           category: { $elemMatch: { $eq: listAdultCategories[i] } },
         })
           .populate("director")
