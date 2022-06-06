@@ -55,139 +55,88 @@ const billCtrl = {
     }
   },
 
-  //Mua 1 bộ phim
-  // async purchaseFilm(req, res) {
-  //   try {
-  //     const userId = req.user.id;
-  //     const filmId = req.params.filmId;
-  //     const { mode_of_payment, id_payment } = req.body;
+  //Tạo hóa đơn paypal
+  async createPaypalBill(req, res) {
+    try {
+      const userId = req.user.id;
+      const { mode_of_payment, id_payment, filmId, price } = req.body;
 
-  //     //kiểm tra phim này có miễn phí không
-  //     const freeFilm = await Films.findOne({
-  //       film: filmId,
-  //       $eq: { price: 0 },
-  //     });
+      const newBill = new Bills({
+        user: userId,
+        film: filmId,
+        price,
+        mode_of_payment,
+        id_payment,
+      });
 
-  //     if (freeFilm) {
-  //       return res.status(200).json({
-  //         canWatch: true,
-  //       });
-  //     } else {
-  //       //Kiểm tra trong bill của người dùng này đã mua bộ phim này chưa
-  //       const boughtFilm = await Bills.findOne({
-  //         user: userId,
-  //         film: filmId,
-  //       });
+      await newBill.save();
 
-  //       if (boughtFilm) {
-  //         return res.status(400).json({
-  //           status: 400,
-  //           success: false,
-  //           msg: "You have purchased this film, so you can watch this film",
-  //           canWatch: true,
-  //         });
-  //       }
-
-  //       const film = await Films.findById({ _id: filmId }).select(
-  //         "title price"
-  //       );
-  //       if (!film) {
-  //         return res.status(400).json({
-  //           status: 400,
-  //           success: false,
-  //           msg: "Not found film",
-  //         });
-  //       }
-
-  //       const newBill = new Bills({
-  //         user: userId,
-  //         film: filmId,
-  //         price: film.price,
-  //         mode_of_payment,
-  //         id_payment,
-  //       });
-
-  //       await newBill.save();
-
-  //       return res.status(200).json({
-  //         status: 200,
-  //         success: true,
-  //         msg: "Purchased film success",
-  //       });
-  //     }
-  //   } catch (error) {
-  //     return res.status(400).json({
-  //       status: 400,
-  //       success: false,
-  //       msg: "Faild to purchase",
-  //     });
-  //   }
-  // },
+      return res.status(200).json({
+        status: 200,
+        success: true,
+        msg: "Purchased film success, you can watch this film",
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        success: false,
+        msg: "Failed to purchase",
+      });
+    }
+  },
 
   //Kiểm tra bộ phim này có xem được không
-  // async checkWatchFilm(req, res) {
-  //   try {
-  //     const filmId = req.params.filmId;
-  //     const userId = req.user.id;
+  async checkCanWatchFilm(req, res) {
+    try {
+      const filmId = req.params.filmId;
+      const userId = req.user.id;
 
-  //     //kiểm tra phim này có miễn phí không
-  //     const freeFilm = await Films.findOne({
-  //       film: filmId,
-  //       $eq: { price: 0 },
-  //     });
+      //kiểm tra phim này có miễn phí không
+      const freeFilm = await Films.findOne({ _id: filmId, price: { $eq: 0 } });
 
-  //     //nếu miễn phí thì người dùng được xem phim
-  //     if (freeFilm) {
-  //       const newBill = new Bills({
-  //         user: userId,
-  //         film: filmId,
-  //         price: 0,
-  //         mode_of_payment: mongoose.Types.ObjectId("62135813bf17f53843c4d7b0"),
-  //         id_payment: FREE,
-  //       });
+      //nếu miễn phí thì người dùng được xem phim
+      if (freeFilm) {
+        return res.status(200).json({
+          status: 200,
+          success: true,
+          msg: "You can watch film",
+          canWatch: true,
+        });
+      } else {
+        //nếu phim mất phí thì kiểm tra trong các hóa đơn mua phim của người dùng đang đăng nhập đã mua phim này chưa
+        const purchased = await Bills.findOne({
+          film: filmId,
+          user: userId,
+        });
 
-  //       await newBill.save();
-
-  //       return res.status(200).json({
-  //         status: 200,
-  //         success: true,
-  //         msg: "You can watch film",
-  //         canWatch: true,
-  //       });
-  //     } else {
-  //       //nếu phim mất phí thì kiểm tra trong các hóa đơn mua phim của người dùng đang đăng nhập đã mua phim này chưa
-  //       const purchased = await Bills.findOne({
-  //         film: filmId,
-  //         user: userId,
-  //       });
-
-  //       //nếu chưa thì hiện thông báo bắt người dùng phải mua
-  //       if (!purchased) {
-  //         return res.status(400).json({
-  //           status: 400,
-  //           succes: false,
-  //           msg: "You must purchase to see this film ",
-  //           canWatch: false,
-  //         });
-  //       } else {
-  //         //nếu đã mua rồi thì có thể xem phim
-  //         return res.status(200).json({
-  //           status: 200,
-  //           success: true,
-  //           msg: "You can watch film",
-  //           canWatch: true,
-  //         });
-  //       }
-  //     }
-  //   } catch (error) {
-  //     return res.status(400).json({
-  //       status: 400,
-  //       succes: true,
-  //       msg: "Checked fail",
-  //       canWatch: false,
-  //     });
-  //   }
-  // },
+        //nếu chưa mua phim thì bắt người dùng phải mua
+        if (!purchased) {
+          return res.status(200).json({
+            status: 200,
+            succes: true,
+            msg: "Please purchase to watch this film",
+            canWatch: false,
+          });
+        } else {
+          //nếu đã mua rồi thì có thể xem phim
+          return res.status(200).json({
+            status: 200,
+            success: true,
+            msg: "You can watch film",
+            canWatch: true,
+          });
+        }
+      }
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        succes: true,
+        msg: "Check failed",
+        error: error.message,
+        canWatch: false,
+      });
+    }
+  },
 };
 
 module.exports = billCtrl;
