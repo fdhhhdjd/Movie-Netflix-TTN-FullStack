@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import {
@@ -9,28 +9,21 @@ import { WatchStyle } from "../../Style/WatchStyle/WatchStyle";
 import LoadingWatch from "../Loading/LoadingWatch";
 
 const Watch = ({ autoPlay = true, home = true }) => {
-  const { findFilm } = useSelector((state) => state.film);
+  const { findFilm, loading } = useSelector((state) => state.film);
   const { refreshTokens } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const [loading, setLoading] = useState(false);
   useEffect(() => {
-    setLoading(true);
-    if (id) {
-      setTimeout(() => {
-        dispatch(FindFilmInitiate(id, refreshTokens));
-        setLoading(false);
-      }, 2000);
+    dispatch(FindFilmInitiate(id, refreshTokens));
 
-      return () => {
-        dispatch(removeSelectedMovieOrShow());
-      };
-    }
+    return () => {
+      dispatch(removeSelectedMovieOrShow());
+    };
   }, [id]);
   return (
     <>
       {loading ? (
-        <LoadingWatch/>
+        <LoadingWatch />
       ) : (
         <>
           {findFilm.length > 0 && (

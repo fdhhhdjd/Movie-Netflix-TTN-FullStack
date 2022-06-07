@@ -1,9 +1,8 @@
 import {
-  Add,
   Close,
   PlayArrowRounded,
   ThumbDownAltOutlined,
-  ThumbUpOutlined,
+  ThumbUpOutlined
 } from "@material-ui/icons";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,6 +26,10 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const countRuntime = (n) => {
     return `${Math.floor(n / 60)}h ${n % 60}m`;
   };
+
+  const handleRate = (id) => {
+    console.log(id);
+  }
 
   const handleCloseModal = () => {
     setIsOpenModal(false);
@@ -68,7 +71,6 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
                 <span>Play</span>
               </button>
 
-              <Add sx={{ fontSize: "2.5vw" }} className="modal-icon" />
               <ThumbUpOutlined
                 sx={{ fontSize: "2.5vw" }}
                 className="modal-icon"
@@ -86,6 +88,16 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
           <div className="modal-info-fst">
             <div className="info-left">
               {/* release year, description,... */}
+              <div class="wrapper">
+                {[...Array(5).keys()].map((item) => {
+                  return (
+                    <>
+                      <input type="radio" name="rate" id={item} onClick={() => handleRate(item)}/>
+                      <label for={item}></label>
+                    </>
+                  );
+                })}
+              </div>
               <span className="info-vote">{mainMovie.rate}% rate</span>
               <span className="info-year">{findFilm[0]?.year_production}</span>
               <span className="info-season">
