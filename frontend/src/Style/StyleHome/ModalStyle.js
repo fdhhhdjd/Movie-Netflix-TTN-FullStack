@@ -157,6 +157,42 @@ export const ModalStyle = createGlobalStyle`
         right: 0;
     }
 
+    .wrapper {
+        transform: rotateY(180deg);
+        display: flex;
+        justify-content: flex-end;
+    }
+    .wrapper input {
+        display: none;
+    }
+    .wrapper label {
+        display: block;
+        cursor: pointer;
+    }
+    .wrapper label:before {
+        content: '★';
+        position: relative;
+        display: block;
+        font-size: 2.5vw;
+        color: #ccc;
+    }
+    .wrapper label:after {
+        content: '★';
+        position: absolute;
+        display: block;
+        font-size: 2.5vw;
+        color: #ffdf00;
+        top: 0;
+        opacity: 0;
+        transition: .6s;
+    }
+    .wrapper label:hover:after, .wrapper label:hover~label:after, .wrapper input:checked~label:after {
+        opacity: 1;
+    }
+    .rate-stars {
+        cursor: pointer;
+    }
+
     .img_title {
         max-width: 250px;
         max-height: 180px;
