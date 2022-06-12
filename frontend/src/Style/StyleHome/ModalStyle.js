@@ -127,6 +127,13 @@ export const ModalStyle = createGlobalStyle`
                     font-weight: 600;
                     transition: .3s ease;
 
+                    a {
+                        display: flex;
+                        align-items: center;
+                        color: #000;
+                        text-decoration: none;
+                    }
+
                     &:hover {
                         background: #fff;
                         opacity: 0.8;
@@ -165,6 +172,7 @@ export const ModalStyle = createGlobalStyle`
     .wrapper input {
         display: none;
     }
+    
     .wrapper label {
         display: block;
         cursor: pointer;

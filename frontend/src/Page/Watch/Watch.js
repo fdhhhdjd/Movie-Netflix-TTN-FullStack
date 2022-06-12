@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import { Navigation } from "@material-ui/icons";
+import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { GlobalState } from "../../Contexts/GlobalState";
 import {
   FindFilmInitiate,
   removeSelectedMovieOrShow
@@ -9,16 +11,23 @@ import { WatchStyle } from "../../Style/WatchStyle/WatchStyle";
 import LoadingWatch from "../Loading/LoadingWatch";
 
 const Watch = ({ autoPlay = true, home = true }) => {
+  const data = useContext(GlobalState);
+  const [isOpenModal, setIsOpenModal] = data.modal;
+
   const { findFilm, loading } = useSelector((state) => state.film);
   const { refreshTokens } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { id } = useParams();
+  const navigation = useNavigate();
+
   useEffect(() => {
     dispatch(FindFilmInitiate(id, refreshTokens));
 
-    return () => {
-      dispatch(removeSelectedMovieOrShow());
-    };
+    if(!isOpenModal) {
+      return () => {
+        dispatch(removeSelectedMovieOrShow());
+      };
+    }
   }, [id]);
   return (
     <>
@@ -31,12 +40,12 @@ const Watch = ({ autoPlay = true, home = true }) => {
               <WatchStyle />
               <div className="watch">
                 {home && (
-                  <Link className="nav-link" to="/home">
+                  <div className="nav-link" onClick={() => navigation("/home")}>
                     <div className="back">
                       <i className="fas fa-arrow-left" />
                       Home
                     </div>
-                  </Link>
+                  </div>
                 )}
 
                 {/* <video className="video" autoPlay progress controls> */}
