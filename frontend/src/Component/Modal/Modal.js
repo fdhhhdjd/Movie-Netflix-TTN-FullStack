@@ -1,11 +1,9 @@
 import {
-  Close,
-  PlayArrowRounded,
-  ThumbDownAltOutlined,
-  ThumbUpOutlined
+  Close, FavoriteBorder, PlayArrowRounded
 } from "@material-ui/icons";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { mainMovie, recMovies } from "../../imports/import";
 import { Comment, Recommend } from "../../imports/index";
 import { resetCommentState } from "../../Redux/Action/ActionComment";
@@ -29,12 +27,19 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
 
   const handleRate = (id) => {
     console.log(id);
-  }
+  };
+
+  console.log(findFilm[0], "findfilmmmm");
 
   const handleCloseModal = () => {
     setIsOpenModal(false);
     dispatch(resetCommentState());
   };
+
+  const handlePlay = () => {
+    // dispatch(FindFilmInitiate(id, refreshTokens));
+  };
+
   return (
     <>
       <ModalStyle />
@@ -65,17 +70,15 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
             />
             <div className="modal-btn-icons">
               <button className="modal-playbtn">
-                <PlayArrowRounded
-                  sx={{ marginRight: "10px", fontSize: "1.8em" }}
-                />
-                <span>Play</span>
+                <Link to={`/watch/${findFilm[0]?._id}`}>
+                  <PlayArrowRounded
+                    sx={{ marginRight: "10px", fontSize: "1.8em" }}
+                  />
+                  <span>Play</span>
+                </Link>
               </button>
 
-              <ThumbUpOutlined
-                sx={{ fontSize: "2.5vw" }}
-                className="modal-icon"
-              />
-              <ThumbDownAltOutlined
+              <FavoriteBorder
                 sx={{ fontSize: "2.5vw" }}
                 className="modal-icon"
               />
@@ -89,10 +92,15 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
             <div className="info-left">
               {/* release year, description,... */}
               <div class="wrapper">
-                {[...Array(5).keys()].map((item) => {
+                {[...Array(5).keys()].reverse().map((item) => {
                   return (
                     <>
-                      <input type="radio" name="rate" id={item} onClick={() => handleRate(item)}/>
+                      <input
+                        type="radio"
+                        name="rate"
+                        id={item}
+                        onClick={() => handleRate(item + 1)}
+                      />
                       <label for={item}></label>
                     </>
                   );
