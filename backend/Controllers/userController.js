@@ -213,6 +213,7 @@ const userCtrl = {
         sex,
         date_of_birth,
         phone_number,
+        role: 1, //admin
       });
 
       // Save mongodb
@@ -235,11 +236,7 @@ const userCtrl = {
       await newVerification.save();
 
       const confirmEmailUrl =
-        currentUrl +
-        "api/auth/customer/verify/" +
-        newUser.id +
-        "/" +
-        uniqueString;
+        currentUrl + "api/auth/admin/verify/" + newUser.id + "/" + uniqueString;
 
       //send email verification
       await sendEmail({
@@ -848,7 +845,7 @@ const userCtrl = {
     });
   },
 
-  //đăng nhập gg chưa sửa
+  //đăng nhập gg
   LoginGoogleCustomer: async (req, res) => {
     const { tokenId } = req.body;
     client
@@ -858,6 +855,9 @@ const userCtrl = {
       })
       .then((response) => {
         const { email_verified, name, email, picture } = response.payload;
+        // return res.json({
+        //   data: response.payload,
+        // });
         if (email_verified) {
           Users.findOne({ email, role: 0 }).exec((error, user) => {
             if (error) {

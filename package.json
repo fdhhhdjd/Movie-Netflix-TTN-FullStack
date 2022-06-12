@@ -1,7 +1,7 @@
 {
   "name": "ecommerce",
   "version": "1.0.0",
-  "description": "",
+  "description": "https://docs.google.com/spreadsheets/d/1BBv4CXNniNjqdIE7tjrG9UM4nprd3NSVy2FX9oaWq0Q/edit#gid=0",
   "main": "backend/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -22,12 +22,13 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
-    "express": "^4.17.2",
+    "express": "^4.18.1",
     "express-fileupload": "^1.2.1",
+    "express-session": "^1.17.3",
     "google-auth-library": "^7.11.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.3",
-    "mongoose": "^6.1.4",
+    "mongoose": "^6.3.5",
     "node-fetch": "^2.6.7",
     "nodemailer": "^6.7.2",
     "nodemailer-express-handlebars": "^4.0.0",
@@ -40,5 +41,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Squirrel1610/Movie-Netflix-TTN-FullStack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Squirrel1610/Movie-Netflix-TTN-FullStack/issues"
+  },
+  "homepage": "https://github.com/Squirrel1610/Movie-Netflix-TTN-FullStack#readme"
 }
