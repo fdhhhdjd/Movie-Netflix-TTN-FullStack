@@ -3,7 +3,6 @@ const Ratings = require("../Model/ratingModel.js");
 const Users = require("../Model/userModel");
 const Categories = require("../Model/categoryModel.js");
 const bcrypt = require("bcrypt");
-
 const filmCtrl = {
   //lựa chọn bộ phim cho người lớn hay trẻ em
   async selectFilmForKidOrAdult(req, res) {

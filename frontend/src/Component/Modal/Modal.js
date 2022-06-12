@@ -11,11 +11,15 @@ import { mainMovie, recMovies } from "../../imports/import";
 import { Comment, Recommend } from "../../imports/index";
 import { resetCommentState } from "../../Redux/Action/ActionComment";
 import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
-
+import {
+  getDetailInfomationDirectorInitiate
+} from "../../Redux/Action/ActionDirector";
 const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const { findFilm } = useSelector((state) => state.film);
+  const { refreshTokens } = useSelector((state) => state.auth);
+  
   const dispatch = useDispatch();
-
+  // console.log(findFilm,'findFilm')
   const countSeason = (n) => {
     if (n > 1) {
       return `${n} seasons`;
@@ -32,6 +36,11 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
     setIsOpenModal(false);
     dispatch(resetCommentState());
   };
+  const handleInfomationDirector = (id) => {
+    console.log("idneeeeeeeeeeeeeeeeee",id)
+    dispatch(getDetailInfomationDirectorInitiate(id,refreshTokens));
+    
+  }
   return (
     <>
       <ModalStyle />
@@ -103,14 +112,27 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
                 <span className="preview-cast" style={{ color: "grey" }}>
                   Cast:{" "}
                 </span>
-                {mainMovie.casts &&
-                  mainMovie.casts.map((cast, index) => (
-                    <span key={index} className="cast">
-                      <a>{(index ? ", " : "") + `${cast}`}</a>
-                    </span>
-                  ))}
+                {findFilm ?
+                  findFilm?.map((filmDetail) => (
+              
+                   <>
+
+                    {filmDetail?.director.map((director)=>{
+                      return(
+                        <span key={director?._id} className="cast">
+                        <a onClick={()=>handleInfomationDirector(director?._id)}>{ `${director?.name}`+(director?._id ? ", " : "")}</a>
+                      </span>
+                        
+                        
+                      )
+                    })}
+                   </>
+                    
+
+                   
+                  )):"Don't have director"}
                 <span className="cast" style={{ fontStyle: "italic" }}>
-                  <a>, more</a>
+                  <a>more</a>
                 </span>
               </div>
               <div className="info-genres">
