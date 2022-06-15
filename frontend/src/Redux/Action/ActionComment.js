@@ -54,6 +54,32 @@ export const updateCommentsFail = (err) => ({
   payload: err,
 });
 
+//* ADD Rating
+export const addRatingStart = () => ({
+  type: types.ADD_RATING_START,
+});
+
+export const addRatingSuccess = () => ({
+  type: types.ADD_RATING_SUCCESS,
+});
+
+export const addRatingFail = () => ({
+  type: types.ADD_RATING_FAIL,
+});
+
+//* Toggle Fav
+export const toggleFavStart = () => ({
+  type: types.TOGGLE_FAV_START,
+});
+
+export const toggleFavSucess = () => ({
+  type: types.TOGGLE_FAV_SUCCESS,
+});
+
+export const toggleFavFail = () => ({
+  type: types.TOGGLE_FAV_FAIL,
+});
+
 export const getCommentInitiate = (id, refreshTokens) => async (dispatch) => {
   try {
     dispatch(getCommentsStart());
@@ -110,3 +136,23 @@ export const removeCommentInitiate = (token, id) => async (dispatch) => {
 export const resetCommentState = () => async (dispatch) => {
   dispatch({ type: types.CLEAR_ERRORS_COMMENT });
 };
+
+export const addRatingInitial = () => async (dispatch) => {
+  // try {
+  //   dispatch(addRatingStart);
+  //   const {data}  = await axios.
+  // } catch (error) {
+  // }
+};
+
+// export const toggleFavInitial = (token, id) => async (dispatch) => {
+//   try {
+//     dispatch(toggleFavStart());
+
+//     const { data } = await axios.post(`/favourite/add/${id}`, {
+//       headers: { Authorization: token },
+//     });
+
+//     dispatch(toggleFavSucess(data))
+//   } catch (error) {}
+// };

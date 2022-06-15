@@ -127,6 +127,13 @@ export const ModalStyle = createGlobalStyle`
                     font-weight: 600;
                     transition: .3s ease;
 
+                    a {
+                        display: flex;
+                        align-items: center;
+                        color: #000;
+                        text-decoration: none;
+                    }
+
                     &:hover {
                         background: #fff;
                         opacity: 0.8;
@@ -155,6 +162,43 @@ export const ModalStyle = createGlobalStyle`
         position: absolute;
         left: 0;
         right: 0;
+    }
+
+    .wrapper {
+        transform: rotateY(180deg);
+        display: flex;
+        justify-content: flex-end;
+    }
+    .wrapper input {
+        display: none;
+    }
+    
+    .wrapper label {
+        display: block;
+        cursor: pointer;
+    }
+    .wrapper label:before {
+        content: '★';
+        position: relative;
+        display: block;
+        font-size: 2.5vw;
+        color: #ccc;
+    }
+    .wrapper label:after {
+        content: '★';
+        position: absolute;
+        display: block;
+        font-size: 2.5vw;
+        color: #ffdf00;
+        top: 0;
+        opacity: 0;
+        transition: .6s;
+    }
+    .wrapper label:hover:after, .wrapper label:hover~label:after, .wrapper input:checked~label:after {
+        opacity: 1;
+    }
+    .rate-stars {
+        cursor: pointer;
     }
 
     .img_title {
