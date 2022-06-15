@@ -1,12 +1,9 @@
 import {
-  Add,
-  Close,
-  PlayArrowRounded,
-  ThumbDownAltOutlined,
-  ThumbUpOutlined,
+  Close, FavoriteBorder, PlayArrowRounded
 } from "@material-ui/icons";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { mainMovie, recMovies } from "../../imports/import";
 import { Comment, Recommend } from "../../imports/index";
 import { resetCommentState } from "../../Redux/Action/ActionComment";
@@ -32,6 +29,12 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
     return `${Math.floor(n / 60)}h ${n % 60}m`;
   };
 
+  const handleRate = (id) => {
+    console.log(id);
+  };
+
+  console.log(findFilm[0], "findfilmmmm");
+
   const handleCloseModal = () => {
     setIsOpenModal(false);
     dispatch(resetCommentState());
@@ -41,6 +44,11 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
     dispatch(getDetailInfomationDirectorInitiate(id,refreshTokens));
     
   }
+
+  const handlePlay = () => {
+    // dispatch(FindFilmInitiate(id, refreshTokens));
+  };
+
   return (
     <>
       <ModalStyle />
@@ -71,18 +79,15 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
             />
             <div className="modal-btn-icons">
               <button className="modal-playbtn">
-                <PlayArrowRounded
-                  sx={{ marginRight: "10px", fontSize: "1.8em" }}
-                />
-                <span>Play</span>
+                <Link to={`/watch/${findFilm[0]?._id}`}>
+                  <PlayArrowRounded
+                    sx={{ marginRight: "10px", fontSize: "1.8em" }}
+                  />
+                  <span>Play</span>
+                </Link>
               </button>
 
-              <Add sx={{ fontSize: "2.5vw" }} className="modal-icon" />
-              <ThumbUpOutlined
-                sx={{ fontSize: "2.5vw" }}
-                className="modal-icon"
-              />
-              <ThumbDownAltOutlined
+              <FavoriteBorder
                 sx={{ fontSize: "2.5vw" }}
                 className="modal-icon"
               />
@@ -95,6 +100,21 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
           <div className="modal-info-fst">
             <div className="info-left">
               {/* release year, description,... */}
+              <div class="wrapper">
+                {[...Array(5).keys()].reverse().map((item) => {
+                  return (
+                    <>
+                      <input
+                        type="radio"
+                        name="rate"
+                        id={item}
+                        onClick={() => handleRate(item + 1)}
+                      />
+                      <label for={item}></label>
+                    </>
+                  );
+                })}
+              </div>
               <span className="info-vote">{mainMovie.rate}% rate</span>
               <span className="info-year">{findFilm[0]?.year_production}</span>
               <span className="info-season">
