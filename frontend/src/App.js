@@ -29,7 +29,8 @@ import {
   Movie,
   Watch,
   Users,
-  NewUsers
+  NewUsers,
+  Directors
 } from "./imports/index";
 import {
   Admin,
@@ -108,6 +109,9 @@ function App() {
           {/* FeedBack */}
           <Route element={<PrivateRouter />}>
             <Route path="/feedback" element={<FeedBack />} />
+          </Route>
+          <Route element={<PrivateRouter />}>
+            <Route path="/directors" element={<Directors />} />
           </Route>
 
           {/* ********* ADMIN ********* */}

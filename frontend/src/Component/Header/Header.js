@@ -12,6 +12,7 @@ import {
   FindFilmCateAdultInitiate,
   FindFilmCateKidInitiate,
 } from "../../Redux/Action/ActionFilmadult";
+
 import { HeaderStyle } from "../../Style/HeaderStyle/HeaderStyle";
 const Header = () => {
   const dispatch = useDispatch();
