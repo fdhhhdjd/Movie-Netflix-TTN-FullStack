@@ -52,11 +52,12 @@ const Login = () => {
   const { emailRequire, passwordLoginRequire } = useRequireInput();
   const { handleIsLock, isLock } = useTogglePassword();
   const HandleGoogle = (response) => {
-    if (response.error) {
-      return toast.error(response.error);
-    } else {
-      dispatch(loginGoogleInitiate(response));
-    }
+    console.log(response, "google");
+    // if (response.error) {
+    //   return toast.error(response.error);
+    // } else {
+    //   dispatch(loginGoogleInitiate(response));
+    // }
   };
   const responseFacebook = (response) => {
     if (response) {

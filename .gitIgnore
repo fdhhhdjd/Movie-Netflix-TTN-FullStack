@@ -4,6 +4,7 @@
 /frontend/.pnp
 /frontend/.pnp.js
 
+/vscode
 
 # testing
 /frontend/coverage
