@@ -36,7 +36,30 @@ export const GetAllKidFail = (error) => ({
   type: types.GET_ALL_ADULT_FAIL,
   payload: error,
 });
-
+//?Get film by category film kid 
+export const FindFilmCateKidStart = () => ({
+  type: types.GET_FILM_CATEGORY_KID_START,
+});
+export const FindFilmCateKidSuccess = (token) => ({
+  type: types.GET_FILM_CATEGORY_KID_SUCCESS,
+  payload: token,
+});
+export const FindFilmCateKidFail = (error) => ({
+  type: types.GET_FILM_CATEGORY_KID_FAIL,
+  payload: error,
+});
+//?Get film by category film adult 
+export const FindFilmCateAdultStart = () => ({
+  type: types.GET_FILM_CATEGORY_ADULT_START,
+});
+export const FindFilmCateAdultSuccess = (token) => ({
+  type: types.GET_FILM_CATEGORY_ADULT_SUCCESS,
+  payload: token,
+});
+export const FindFilmCateAdultFail = (error) => ({
+  type: types.GET_FILM_CATEGORY_ADULT_FAIL,
+  payload: error,
+});
 //!Update Adult
 export const UpdateAdultInitiate = (adult, refreshTokens) => {
   return async function (dispatch) {
@@ -88,3 +111,35 @@ export const GetAllKidInitiate = (refreshTokens) => {
     }
   };
 };
+//?Get film by category film adult 
+export const FindFilmCateAdultInitiate = (token) => {
+  return async function (dispatch) {
+    try {
+      dispatch(FindFilmCateAdultStart());
+      const { data } = await axios.get(`/api/film/adult/eachCategory`, {
+        headers: { Authorization: token },
+      });
+  
+      dispatch(FindFilmCateAdultSuccess(data.results));
+    } catch (error) {
+      dispatch(FindFilmCateAdultFail(error));
+    }
+  };
+};
+//?Get film by category film kid 
+export const FindFilmCateKidInitiate = ( token) => {
+  return async function (dispatch) {
+    try {
+      dispatch(FindFilmCateKidStart());
+      const { data } = await axios.get(`/api/film/kid/eachCategory`, {
+        headers: { Authorization: token },
+      });
+      
+      dispatch(FindFilmCateKidSuccess(data.results));
+    } catch (error) {
+      dispatch(FindFilmCateKidFail(error));
+    }
+  };
+};
+
+

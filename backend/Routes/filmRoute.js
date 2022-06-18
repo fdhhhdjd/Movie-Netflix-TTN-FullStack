@@ -17,7 +17,7 @@ router.post(
 router.get("/adult", auth, authCustomer, filmCtrl.getFilmForAdult);
 
 //Danh sách phim dành cho trẻ em
-router.get("/kid", filmCtrl.getFilmForKid);
+router.get("/kid", auth, authCustomer, filmCtrl.getFilmForKid);
 
 //Thoát khỏi chế độ cho trẻ em
 router.post("/kid/exit", auth, authCustomer, filmCtrl.exitKidMode);
@@ -55,12 +55,12 @@ router.delete(
 
 //Xem thông tin chi tiết bộ phim
 router.get("/detail/:id", auth, filmCtrl.getDetailFilm);
-router.get("/find/category/:id", auth, filmCtrl.getFilmByCategory);
-// //lấy ra những bộ phim người lớn theo từng thể loại
-// router.get("/adult/eachCategory", auth, filmCtrl.getAdultFilmByEachCategory);
 
-// //lấy ra những bộ phim trẻ em theo từng thể loại
-// router.get("/kid/eachCategory", auth, filmCtrl.getKidFilmByEachCategory);
+//lấy ra những bộ phim người lớn theo từng thể loại
+router.get("/adult/eachCategory", auth, filmCtrl.getAdultFilmByEachCategory);
+
+//lấy ra những bộ phim trẻ em theo từng thể loại
+router.get("/kid/eachCategory", auth, filmCtrl.getKidFilmByEachCategory);
 
 //lấy ra những bộ phim theo đạo diễn
 router.get("/find/director/:id", auth, filmCtrl.getFilmByDirector);

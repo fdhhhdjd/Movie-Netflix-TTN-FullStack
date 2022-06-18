@@ -1,22 +1,22 @@
 import {
-  Add,
-  Close,
-  PlayArrowRounded,
-  ThumbDownAltOutlined,
-  ThumbUpOutlined,
+  Close, FavoriteBorder, PlayArrowRounded
 } from "@material-ui/icons";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { mainMovie, recMovies } from "../../imports/import";
-import { Recommend, Comment } from "../../imports/index";
-import { getCommentInitiate } from "../../Redux/Action/ActionComment";
+import { Comment, Recommend } from "../../imports/index";
+import { resetCommentState } from "../../Redux/Action/ActionComment";
 import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
-
+import {
+  getDetailInfomationDirectorInitiate
+} from "../../Redux/Action/ActionDirector";
 const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const { findFilm } = useSelector((state) => state.film);
+  const { refreshTokens } = useSelector((state) => state.auth);
+  
   const dispatch = useDispatch();
-
+  // console.log(findFilm,'findFilm')
   const countSeason = (n) => {
     if (n > 1) {
       return `${n} seasons`;
@@ -29,9 +29,26 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
     return `${Math.floor(n / 60)}h ${n % 60}m`;
   };
 
+  const handleRate = (id) => {
+    console.log(id);
+  };
+
+  console.log(findFilm[0], "findfilmmmm");
+
   const handleCloseModal = () => {
     setIsOpenModal(false);
+    dispatch(resetCommentState());
   };
+  const handleInfomationDirector = (id) => {
+    console.log("idneeeeeeeeeeeeeeeeee",id)
+    dispatch(getDetailInfomationDirectorInitiate(id,refreshTokens));
+    
+  }
+
+  const handlePlay = () => {
+    // dispatch(FindFilmInitiate(id, refreshTokens));
+  };
+
   return (
     <>
       <ModalStyle />
@@ -62,18 +79,15 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
             />
             <div className="modal-btn-icons">
               <button className="modal-playbtn">
-                <PlayArrowRounded
-                  sx={{ marginRight: "10px", fontSize: "1.8em" }}
-                />
-                <span>Play</span>
+                <Link to={`/watch/${findFilm[0]?._id}`}>
+                  <PlayArrowRounded
+                    sx={{ marginRight: "10px", fontSize: "1.8em" }}
+                  />
+                  <span>Play</span>
+                </Link>
               </button>
 
-              <Add sx={{ fontSize: "2.5vw" }} className="modal-icon" />
-              <ThumbUpOutlined
-                sx={{ fontSize: "2.5vw" }}
-                className="modal-icon"
-              />
-              <ThumbDownAltOutlined
+              <FavoriteBorder
                 sx={{ fontSize: "2.5vw" }}
                 className="modal-icon"
               />
@@ -86,6 +100,21 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
           <div className="modal-info-fst">
             <div className="info-left">
               {/* release year, description,... */}
+              <div class="wrapper">
+                {[...Array(5).keys()].reverse().map((item) => {
+                  return (
+                    <>
+                      <input
+                        type="radio"
+                        name="rate"
+                        id={item}
+                        onClick={() => handleRate(item + 1)}
+                      />
+                      <label for={item}></label>
+                    </>
+                  );
+                })}
+              </div>
               <span className="info-vote">{mainMovie.rate}% rate</span>
               <span className="info-year">{findFilm[0]?.year_production}</span>
               <span className="info-season">
@@ -103,14 +132,27 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
                 <span className="preview-cast" style={{ color: "grey" }}>
                   Cast:{" "}
                 </span>
-                {mainMovie.casts &&
-                  mainMovie.casts.map((cast, index) => (
-                    <span key={index} className="cast">
-                      <a>{(index ? ", " : "") + `${cast}`}</a>
-                    </span>
-                  ))}
+                {findFilm ?
+                  findFilm?.map((filmDetail) => (
+              
+                   <>
+
+                    {filmDetail?.director.map((director)=>{
+                      return(
+                        <span key={director?._id} className="cast">
+                        <a onClick={()=>handleInfomationDirector(director?._id)}>{ `${director?.name}`+(director?._id ? ", " : "")}</a>
+                      </span>
+                        
+                        
+                      )
+                    })}
+                   </>
+                    
+
+                   
+                  )):"Don't have director"}
                 <span className="cast" style={{ fontStyle: "italic" }}>
-                  <a>, more</a>
+                  <a>more</a>
                 </span>
               </div>
               <div className="info-genres">
@@ -127,7 +169,7 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
             </div>
           </div>
 
-          <Comment />
+          <Comment filmId={findFilm.length > 0 && findFilm[0]._id} />
           <Recommend recommend={recMovies} />
 
           {/* div about this movie */}

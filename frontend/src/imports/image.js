@@ -8,6 +8,8 @@ import four from "../Image/Welcome/4.png";
 import True from "../Image/true.png";
 import CheckPass from "../Image/giphy.gif";
 import footer from "../Image/footer.jpg";
+import logoNetFlix from "../Image/logoNetFilx.png";
+import texure from "../Image/texure.jpg";
 export {
   logo,
   footer,
@@ -19,4 +21,6 @@ export {
   four,
   CheckPass,
   True,
+  logoNetFlix,
+  texure,
 };

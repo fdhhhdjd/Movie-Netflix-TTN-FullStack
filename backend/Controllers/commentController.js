@@ -4,7 +4,7 @@ const commentCtrl = {
   //Xem tất cả bình luận
   async getAllComment(req, res) {
     try {
-      const data = await Comments.find({ deleted: true })
+      const data = await Comments.find({ deleted: false })
         .populate("user")
         .populate("film");
       return res.status(200).json({
@@ -40,7 +40,6 @@ const commentCtrl = {
       return res.status(400).json({
         status: 400,
         success: false,
-        data: data,
         msg: "Failed to get comments of film",
       });
     }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState,memo } from "react";
 import { useSelector } from "react-redux";
 import { GlobalState } from "../../Contexts/GlobalState";
 import { Footer, Header } from "../../imports";
@@ -8,8 +8,9 @@ const Home = () => {
   const data = useContext(GlobalState);
   const [isOpenModal, setIsOpenModal] = data.modal;
   const [allCategory,setAllCategory] = data.AdultApi.cat;
-  const { allFilmAdult} = useSelector((state) => state.adult);
-
+  const { allFilmAdult,findFilmAdult} = useSelector((state) => state.adult);
+  const { InfoDirector} = useSelector((state) => state.director);
+  console.log(InfoDirector,'InfoDirector');
   const messageEndRef = useRef(null); 
   const handleHideResult = () => {
     setIsOpenModal(false);
@@ -50,7 +51,7 @@ const Home = () => {
   },[allFilmAdult])
 
 
-  console.log(allCategory,'cat')
+  // console.log(allCategory,'cat')
   // console.log(allFilmAdult,'film')
   return (
     <div>
@@ -69,13 +70,23 @@ const Home = () => {
         )}
         <div className={isOpenModal ? "home__content" : ""}>
           <Feature setIsOpenModal={setIsOpenModal} className="test" />
-          {
+          {/* {
             allCategory?.map((film)=>{
               return(
                 <List  key={film.id} category={film.id} name={film.name} setIsOpenModal={setIsOpenModal} />
               )
             }
             )
+          } */}
+          {
+            findFilmAdult?.map((film,index)=>{
+              console.log(film,'filmmm')
+              return(
+
+                <List key={index} category={film.category} dataFilmCategory={film.data} setIsOpenModal={setIsOpenModal} />
+              )
+              
+            })
           }
           <br />
           <br />
@@ -86,4 +97,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default memo(Home);

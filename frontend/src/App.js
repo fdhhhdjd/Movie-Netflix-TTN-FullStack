@@ -29,7 +29,8 @@ import {
   Movie,
   Watch,
   Users,
-  NewUsers
+  NewUsers,
+  Directors
 } from "./imports/index";
 import {
   Admin,
@@ -72,9 +73,9 @@ function App() {
             <Route path="/forget" element={<Forget />} />
           </Route>
           {/* Intro Web  */}
-          <Route element={<PrivateRouter />}>
+          {/* <Route element={<PrivateRouter />}> */}
             <Route path="/" element={<Welcome />} />
-          </Route>
+          {/* </Route> */}
           {/* Choose Adult  */}
           <Route element={<PrivateRouter />}>
             <Route path="/browse" element={<ProfileGate />} />
@@ -108,6 +109,9 @@ function App() {
           {/* FeedBack */}
           <Route element={<PrivateRouter />}>
             <Route path="/feedback" element={<FeedBack />} />
+          </Route>
+          <Route element={<PrivateRouter />}>
+            <Route path="/directors" element={<Directors />} />
           </Route>
 
           {/* ********* ADMIN ********* */}

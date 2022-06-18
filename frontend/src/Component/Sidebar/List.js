@@ -9,7 +9,7 @@ import { ListStyle } from "../../Style/StyleHome/listStyle";
 import { ListItem } from "../../imports/index";
 import {} from "../../Redux/Action/ActionFilmAdmin";
 import { LoadingSkeleton } from "../../imports/index";
-const List = ({ setIsOpenModal, category, name }) => {
+const List = ({ setIsOpenModal, category, dataFilmCategory }) => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -36,23 +36,23 @@ const List = ({ setIsOpenModal, category, name }) => {
       listRef.current.style.transform = `translateX(${-230 + distance}px)`;
     }
   };
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(
-          `/api/film/find/category/${category}`,
-          {
-            headers: { Authorization: refreshTokens },
-          }
-        );
-        setFilmByCategory(data.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const { data } = await axios.get(
+  //         `/api/film/find/category/${category}`,
+  //         {
+  //           headers: { Authorization: refreshTokens },
+  //         }
+  //       );
+  //       setFilmByCategory(data.data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [category]);
+  //   fetchData();
+  // }, [category]);
   // console.log(filmByCategory,'film')
   return (
     <>
@@ -60,8 +60,8 @@ const List = ({ setIsOpenModal, category, name }) => {
       <section className="list">
         <span className="list-title">
           {!loading ? (
-            name ? (
-              name
+            category ? (
+              category
             ) : (
               "film"
             )
@@ -97,8 +97,8 @@ const List = ({ setIsOpenModal, category, name }) => {
                   </Fragment>
                 );
               })} */}
-            {filmByCategory
-              ? filmByCategory.map((film, index) => {
+            {dataFilmCategory
+              ? dataFilmCategory.map((film, index) => {
                   return (
                     <Fragment key={film._id}>
                       {!loading ? (
