@@ -50,7 +50,6 @@ const Home = () => {
   }, [allFilmAdult]);
 
   console.log(allCategory, "cat");
-  // console.log(allFilmAdult,'film')
   return (
     <div>
       <HomeStyle />
