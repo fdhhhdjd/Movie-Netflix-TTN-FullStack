@@ -31,8 +31,10 @@ const Comment = ({ filmId }) => {
   };
 
   useEffect(() => {
+    console.log("effect");
     dispatch(getCommentInitiate(filmId, refreshTokens));
   }, [addComment, filmId]);
+console.log(filmId,"film");
 
   return (
     <>

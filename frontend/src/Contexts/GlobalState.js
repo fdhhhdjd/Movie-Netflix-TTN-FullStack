@@ -40,6 +40,8 @@ export const DataProvider = ({ children }) => {
     UserApi: UserApi(refreshTokens, updateAdult),
     AdultApi: AdultApi(refreshTokens, profile,allFilmAdult ),
     modal: [isOpenModal, setIsOpenModal],
+
+
   };
   return <GlobalState.Provider value={data}>{children}</GlobalState.Provider>;
 };
