@@ -188,6 +188,11 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="nav-item">
+                  <Link className="nav-link" to="/favourite">
+                    Favourite
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link className="nav-link" to="/feedback">
                     Feedback
                   </Link>

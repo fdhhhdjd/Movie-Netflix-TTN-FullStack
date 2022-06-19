@@ -31,6 +31,8 @@ export { default as Movie } from "../Page/Movie/Movie";
 export { default as LoadingSkeleton } from "../Page/Loading/LoadingSkeleton";
 export { default as LoadingWatch } from "../Page/Loading/LoadingWatch";
 export { default as Comment } from "../Component/Admins/Comment";
+export { default as Favourite } from "../Page/Favourite/Favourite";
+
 //!Admin
 export { default as LoginAdmin } from "../Page/Admins/LoginAdmin";
 export { default as ForgetAdmin } from "../Component/Admins/ForgetAdmin";
@@ -44,7 +46,7 @@ export { default as Category } from "../Component/Admins/Category";
 export { default as SeriesFilm } from "../Component/Admins/SeriesFilm";
 export { default as Films } from "../Page/Admins/Films";
 export { default as NewFilm } from "../Component/Admins/NewFilm";
-export { default as Favourite } from "../Component/Admins/Favourite";
+// export { default as Favourite } from "../Component/Admins/Favourite";
 export { default as Users } from "../Component/Admins/Users";
 export { default as NewUsers } from "../Component/Admins/NewUsers";
 export { Rating } from "../Component/Admins/Rating";

@@ -63,7 +63,7 @@ const List = ({ setIsOpenModal, category, dataFilmCategory }) => {
             category ? (
               category
             ) : (
-              "film"
+              "Favourite Films"
             )
           ) : (
             <LoadingSkeleton type="listTitle"></LoadingSkeleton>

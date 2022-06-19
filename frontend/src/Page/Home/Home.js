@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState,memo } from "react";
+import React, { useContext, useEffect, useRef, useState, memo } from "react";
 import { useSelector } from "react-redux";
 import { GlobalState } from "../../Contexts/GlobalState";
 import { Footer, Header } from "../../imports";
@@ -7,10 +7,10 @@ import { HomeStyle } from "../../Style/StyleHome/HomeStyle";
 const Home = () => {
   const data = useContext(GlobalState);
   const [isOpenModal, setIsOpenModal] = data.modal;
-  const [allCategory,setAllCategory] = data.AdultApi.cat;
-  const { allFilmAdult,findFilmAdult} = useSelector((state) => state.adult);
-  console.log(findFilmAdult,'adult')
-  const messageEndRef = useRef(null); 
+  const [allCategory, setAllCategory] = data.AdultApi.cat;
+  const { allFilmAdult, findFilmAdult } = useSelector((state) => state.adult);
+
+  const messageEndRef = useRef(null);
   const handleHideResult = () => {
     setIsOpenModal(false);
   };
@@ -22,35 +22,33 @@ const Home = () => {
       ScrollToBottom();
     }
   }, [isOpenModal]);
-  
-  useEffect(()=>{
-    let catall=[];
-    allFilmAdult.forEach(element => {
-    element.category.forEach(cat=>{
-        catall.push(
-          {
-            id:cat._id,
-            name:cat.name
-          });
-      })
-    }) 
+
+  useEffect(() => {
+    let catall = [];
+    allFilmAdult.forEach((element) => {
+      element.category.forEach((cat) => {
+        catall.push({
+          id: cat._id,
+          name: cat.name,
+        });
+      });
+    });
     const uniqueIds = [];
-    const unique = catall.filter(element => {
+    const unique = catall.filter((element) => {
       const isDuplicate = uniqueIds.includes(element.id);
-    
+
       if (!isDuplicate) {
         uniqueIds.push(element.id);
-    
+
         return true;
       }
-    
+
       return false;
     });
-    setAllCategory(unique) 
-  },[allFilmAdult])
+    setAllCategory(unique);
+  }, [allFilmAdult]);
 
-
-  console.log(allCategory,'cat')
+  console.log(allCategory, "cat");
   // console.log(allFilmAdult,'film')
   return (
     <div>
@@ -77,16 +75,16 @@ const Home = () => {
             }
             )
           } */}
-          {
-            findFilmAdult?.map((film,index)=>{
-              console.log(film,'filmmm')
-              return(
-
-                <List key={index} category={film.category} dataFilmCategory={film.data} setIsOpenModal={setIsOpenModal} />
-              )
-              
-            })
-          }
+          {findFilmAdult?.map((film, index) => {
+            return (
+              <List
+                key={index}
+                category={film.category}
+                dataFilmCategory={film.data}
+                setIsOpenModal={setIsOpenModal}
+              />
+            );
+          })}
           <br />
           <br />
           <Footer />

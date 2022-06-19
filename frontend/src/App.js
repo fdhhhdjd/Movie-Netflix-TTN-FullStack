@@ -109,6 +109,9 @@ function App() {
           <Route element={<PrivateRouter />}>
             <Route path="/feedback" element={<FeedBack />} />
           </Route>
+          <Route element={<PrivateRouter />}>
+            <Route path="/favourite" element={<Favourite />} />
+          </Route>
 
           {/* ********* ADMIN ********* */}
           {/* Login Admin */}
@@ -142,7 +145,7 @@ function App() {
           {/* Rating for Film */}
           <Route path="/rating" element={<Rating />} />
           {/* Favourite */}
-          <Route path="/favourite" element={<Favourite />} />
+          {/* <Route path="/favourite" element={<Favourite />} /> */}
           {/* Shared */}
           <Route path="*" element={<NotFound />} />
         </Routes>
