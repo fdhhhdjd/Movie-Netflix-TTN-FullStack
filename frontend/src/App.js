@@ -29,7 +29,8 @@ import {
   Movie,
   Watch,
   Users,
-  NewUsers
+  NewUsers,
+  Directors
 } from "./imports/index";
 import {
   Admin,
@@ -111,6 +112,7 @@ function App() {
           </Route>
           <Route element={<PrivateRouter />}>
             <Route path="/favourite" element={<Favourite />} />
+            <Route path="/directors" element={<Directors />} />
           </Route>
 
           {/* ********* ADMIN ********* */}

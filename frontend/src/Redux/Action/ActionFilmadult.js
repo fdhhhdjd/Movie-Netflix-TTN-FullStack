@@ -119,7 +119,7 @@ export const FindFilmCateAdultInitiate = (token) => {
       const { data } = await axios.get(`/api/film/adult/eachCategory`, {
         headers: { Authorization: token },
       });
-      console.log(data,'data')
+  
       dispatch(FindFilmCateAdultSuccess(data.results));
     } catch (error) {
       dispatch(FindFilmCateAdultFail(error));
@@ -134,7 +134,7 @@ export const FindFilmCateKidInitiate = ( token) => {
       const { data } = await axios.get(`/api/film/kid/eachCategory`, {
         headers: { Authorization: token },
       });
-      console.log(data,'data')
+      
       dispatch(FindFilmCateKidSuccess(data.results));
     } catch (error) {
       dispatch(FindFilmCateKidFail(error));
