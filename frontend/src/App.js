@@ -1,45 +1,28 @@
-import React, { Suspense, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Suspense, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import swal2 from "sweetalert2";
 import {
-  Category,
-  ChangePassword,
-  ChangePasswordAdmin,
-  Director,
-  EditProfile,
+  Category, ChangeDirector, ChangePasswordAdmin,
+  Director, Directors, EditProfile,
   Favourite,
   FeedBack,
   Films,
   Forget,
   ForgetAdmin,
-  Loading,
-  NewDirector,
-  NewFilm,
-  ChangeDirector,
-  PrivateRouter,
+  Loading, Login,
+  Movie, NewDirector,
+  NewFilm, NewUsers, PrivateRouter,
   PrivateRouterAuth,
   Profile,
   Rating,
   Register,
   Reset,
-  ResetAdmin,
-  Login,
-  Movie,
-  Watch,
-  Users,
-  NewUsers
+  ResetAdmin, Users, Watch
 } from "./imports/index";
 import {
   Admin,
-  Home,
-  LoginAdmin,
-  ProfileAdmin,
-  Welcome,
-  ProfileGate,
-  NotFound,
-  Information,
+  Home, Information, LoginAdmin, NotFound, ProfileAdmin, ProfileGate, Welcome
 } from "./imports/LazyRouter";
 function App() {
   const { profile } = useSelector((state) => state.auth);
@@ -73,7 +56,7 @@ function App() {
           </Route>
           {/* Intro Web  */}
           {/* <Route element={<PrivateRouter />}> */}
-            <Route path="/" element={<Welcome />} />
+          <Route path="/" element={<Welcome />} />
           {/* </Route> */}
           {/* Choose Adult  */}
           <Route element={<PrivateRouter />}>
@@ -112,6 +95,9 @@ function App() {
           <Route element={<PrivateRouter />}>
             <Route path="/favourite" element={<Favourite />} />
           </Route>
+          <Route element={<PrivateRouter />}>
+            <Route path="/directors" element={<Directors />} />
+          </Route>
 
           {/* ********* ADMIN ********* */}
           {/* Login Admin */}
@@ -133,7 +119,7 @@ function App() {
           {/* Edit Film */}
           <Route path="/changeDirector/:tokens" element={<ChangeDirector />} />
           {/* Add Director */}
-          <Route path="/newDirector" element={<NewDirector/>} />
+          <Route path="/newDirector" element={<NewDirector />} />
           {/* Manager Category */}
           <Route path="/category" element={<Category />} />
           {/* Manager Film */}

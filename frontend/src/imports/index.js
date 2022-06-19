@@ -32,7 +32,7 @@ export { default as LoadingSkeleton } from "../Page/Loading/LoadingSkeleton";
 export { default as LoadingWatch } from "../Page/Loading/LoadingWatch";
 export { default as Comment } from "../Component/Admins/Comment";
 export { default as Favourite } from "../Page/Favourite/Favourite";
-
+export { default as Directors } from "../Component/Director/Directors";
 //!Admin
 export { default as LoginAdmin } from "../Page/Admins/LoginAdmin";
 export { default as ForgetAdmin } from "../Component/Admins/ForgetAdmin";

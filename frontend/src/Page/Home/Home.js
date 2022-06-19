@@ -7,10 +7,11 @@ import { HomeStyle } from "../../Style/StyleHome/HomeStyle";
 const Home = () => {
   const data = useContext(GlobalState);
   const [isOpenModal, setIsOpenModal] = data.modal;
-  const [allCategory, setAllCategory] = data.AdultApi.cat;
-  const { allFilmAdult, findFilmAdult } = useSelector((state) => state.adult);
-
-  const messageEndRef = useRef(null);
+  const [allCategory,setAllCategory] = data.AdultApi.cat;
+  const { allFilmAdult,findFilmAdult} = useSelector((state) => state.adult);
+  const { InfoDirector} = useSelector((state) => state.director);
+  console.log(InfoDirector,'InfoDirector');
+  const messageEndRef = useRef(null); 
   const handleHideResult = () => {
     setIsOpenModal(false);
   };
