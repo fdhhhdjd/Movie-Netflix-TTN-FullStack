@@ -1,20 +1,27 @@
 import {
-  Close, FavoriteBorder, PlayArrowRounded
+  Close,
+  FavoriteBorder, FavoriteOutlined, PlayArrowRounded
 } from "@material-ui/icons";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { mainMovie, recMovies } from "../../imports/import";
 import { Comment, Recommend } from "../../imports/index";
-import { resetCommentState } from "../../Redux/Action/ActionComment";
-import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
+import {
+  resetCommentState,
+  toggleFavInitial
+} from "../../Redux/Action/ActionComment";
 import {
   getDetailInfomationDirectorInitiate
 } from "../../Redux/Action/ActionDirector";
+import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
 const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const { findFilm } = useSelector((state) => state.film);
   const { refreshTokens } = useSelector((state) => state.auth);
-  
+  const { favFilm } = useSelector((state) => state.comment);
+  const [favBtn, setFavBTn] = useState(false);
+
   const dispatch = useDispatch();
   // console.log(findFilm,'findFilm')
   const countSeason = (n) => {
@@ -33,8 +40,6 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
     console.log(id);
   };
 
-  console.log(findFilm[0], "findfilmmmm");
-
   const handleCloseModal = () => {
     setIsOpenModal(false);
     dispatch(resetCommentState());
@@ -45,9 +50,20 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
     
   }
 
-  const handlePlay = () => {
-    // dispatch(FindFilmInitiate(id, refreshTokens));
+  const handleToggleFav = () => {
+    dispatch(toggleFavInitial(refreshTokens, findFilm[0]._id));
+    setFavBTn(!favBtn);
   };
+
+  useEffect(() => {
+    if (findFilm.length > 0 && favFilm.length > 0) {
+      favFilm.map((item) => {
+        if (findFilm[0]._id === item.film._id) {
+          setFavBTn(true);
+        }
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -87,10 +103,19 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
                 </Link>
               </button>
 
-              <FavoriteBorder
-                sx={{ fontSize: "2.5vw" }}
-                className="modal-icon"
-              />
+              {favBtn ? (
+                <FavoriteOutlined
+                  sx={{ fontSize: "2.5vw" }}
+                  className="modal-icon"
+                  onClick={() => handleToggleFav()}
+                />
+              ) : (
+                <FavoriteBorder
+                  onClick={() => handleToggleFav()}
+                  sx={{ fontSize: "2.5vw" }}
+                  className="modal-icon"
+                />
+              )}
             </div>
           </div>
           <div className="fadeOut"></div>

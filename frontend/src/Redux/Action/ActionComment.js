@@ -67,13 +67,29 @@ export const addRatingFail = () => ({
   type: types.ADD_RATING_FAIL,
 });
 
+//* get fav
+export const getFavStart = () => ({
+  type: types.GET_FAV_START,
+});
+
+export const getFavSuccess = (api) => ({
+  type: types.GET_FAV_SUCCESS,
+  payload:api
+
+});
+
+export const getFavFail = () => ({
+  type: types.GET_FAV_FAIL,
+});
+
 //* Toggle Fav
 export const toggleFavStart = () => ({
   type: types.TOGGLE_FAV_START,
 });
 
-export const toggleFavSucess = () => ({
+export const toggleFavSucess = (api) => ({
   type: types.TOGGLE_FAV_SUCCESS,
+  payload: api
 });
 
 export const toggleFavFail = () => ({
@@ -145,14 +161,34 @@ export const addRatingInitial = () => async (dispatch) => {
   // }
 };
 
-// export const toggleFavInitial = (token, id) => async (dispatch) => {
-//   try {
-//     dispatch(toggleFavStart());
+export const getFavInitial = (token) => async (dispatch) => {
+  try {
+    dispatch(getFavStart());
 
-//     const { data } = await axios.post(`/favourite/add/${id}`, {
-//       headers: { Authorization: token },
-//     });
+    const { data } = await axios.get("/api/favourite/getList", {
+      headers: { Authorization: token },
+    });
 
-//     dispatch(toggleFavSucess(data))
-//   } catch (error) {}
-// };
+    dispatch(getFavSuccess(data?.data));
+  } catch (error) {
+    dispatch(getFavFail(error));
+  }
+};
+
+export const toggleFavInitial = (token, id) => async (dispatch) => {
+  try {
+    dispatch(toggleFavStart());
+
+    const { data } = await axios.post(
+      `api/favourite/add/${id}`,
+      {},
+      {
+        headers: { Authorization: token },
+      }
+    );
+
+    dispatch(toggleFavSucess(data));
+  } catch (error) {
+    dispatch(toggleFavFail(error));
+  }
+};

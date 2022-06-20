@@ -107,6 +107,7 @@ export const ModalStyle = createGlobalStyle`
                     cursor: pointer;
                     padding: 0.3vw;
                     user-select: none;
+                    transition: all 0.5s ease-in-out;
 
                     &:hover {
                         border-color: #fff;
