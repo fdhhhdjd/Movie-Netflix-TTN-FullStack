@@ -14,10 +14,10 @@ router.post(
 );
 
 //Danh sách phim dành cho người lớn
-router.get("/adult", auth, authCustomer, filmCtrl.getFilmForAdult);
+router.get("/adult", auth, filmCtrl.getFilmForAdult);
 
 //Danh sách phim dành cho trẻ em
-router.get("/kid", auth, authCustomer, filmCtrl.getFilmForKid);
+router.get("/kid", auth, filmCtrl.getFilmForKid);
 
 //Thoát khỏi chế độ cho trẻ em
 router.post("/kid/exit", auth, authCustomer, filmCtrl.exitKidMode);

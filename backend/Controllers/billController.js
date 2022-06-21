@@ -1,8 +1,8 @@
 const Bills = require("../Model/billModel.js");
 const Films = require("../Model/filmModel");
+const Users = require("../Model/userModel");
 const dotenv = require("dotenv");
 dotenv.config();
-const mongoose = require("mongoose");
 
 const billCtrl = {
   //Lấy ra toàn bộ bill
@@ -134,6 +134,31 @@ const billCtrl = {
         msg: "Check failed",
         error: error.message,
         canWatch: false,
+      });
+    }
+  },
+
+  //lấy ra ds bill theo id khách hàng
+  async getListBillByUserId(req, res) {
+    try {
+      const userId = req.params.userId;
+      let listBills = await Bills.find({ user: userId })
+        .populate("user")
+        .populate("film")
+        .populate("mode_of_payment");
+
+      return res.json({
+        status: 200,
+        success: true,
+        msg: `Get list bill by userId (${userId}) successfully`,
+        data: listBills,
+      });
+    } catch (error) {
+      console.log(error.message);
+      return res.json({
+        status: 400,
+        success: false,
+        msg: "Failed to get list bill by userId",
       });
     }
   },

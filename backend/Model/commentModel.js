@@ -17,14 +17,6 @@ const CommentSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
-    updatedAt: {
-      type: Date,
-      default: Date.now,
-    },
     deleted: {
       type: Boolean,
       default: false,
