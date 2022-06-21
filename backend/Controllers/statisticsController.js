@@ -1,4 +1,5 @@
 const Users = require("../Model/userModel");
+const Bills = require("../Model/billModel");
 
 const staticticsCtrl = {
   //Thống kê những người dùng đăng ký gần đây
@@ -34,6 +35,73 @@ const staticticsCtrl = {
         status: 400,
         success: false,
         msg: "Failed to statistics of recently registered users",
+      });
+    }
+  },
+
+  //Thống kê doanh thu từng tháng trong năm
+  async statisticsMonthlyRevenue(req, res) {
+    try {
+      const monthly = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+      const year_now = new Date().getFullYear();
+
+      var statistics = await Bills.aggregate([
+        {
+          $project: {
+            month: { $month: "$date_purchase" },
+            year: { $year: "$date_purchase" },
+            price: 1,
+          },
+        },
+        {
+          $match: {
+            month: { $in: monthly },
+            year: { $eq: year_now },
+          },
+        },
+        {
+          $group: {
+            // _id: {
+            //   month: "$month",
+            // },
+            _id: "$month",
+            revenue: { $sum: "$price" },
+          },
+        },
+        { $sort: { _id: 1 } },
+      ]);
+
+      var monthlyRevenue = [];
+
+      for (let i = 0; i < statistics.length; i++) {
+        if (monthly.includes(statistics[i]._id)) {
+          var index = monthly.indexOf(statistics[i]._id);
+          monthly.splice(index, 1);
+        }
+      }
+
+      var missing_statistics = [];
+      for (let i = 0; i < monthly.length; i++) {
+        missing_statistics.push({
+          _id: monthly[i],
+          revenue: 0,
+        });
+      }
+
+      monthlyRevenue = statistics.concat(missing_statistics);
+
+      return res.json({
+        status: 200,
+        success: true,
+        msg: "Statistics monthly revenue successfully",
+        data: monthlyRevenue,
+      });
+    } catch (error) {
+      console.log(error.message);
+      return res.json({
+        status: 400,
+        success: false,
+        msg: "Failed to get monthly revenue",
       });
     }
   },

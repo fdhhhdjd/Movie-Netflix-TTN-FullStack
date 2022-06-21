@@ -65,4 +65,7 @@ router.get("/kid/eachCategory", auth, filmCtrl.getKidFilmByEachCategory);
 //lấy ra những bộ phim theo đạo diễn
 router.get("/find/director/:id", auth, filmCtrl.getFilmByDirector);
 
+//danh sách film theo categoryId
+router.get("/find/category/:categoryId", auth, filmCtrl.getFilmByCategoryId);
+
 module.exports = router;

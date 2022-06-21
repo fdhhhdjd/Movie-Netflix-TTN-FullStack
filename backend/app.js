@@ -89,9 +89,7 @@ app.use("/api/bill", bill);
 app.use("/api", upload);
 
 //Statistics
-const auth = require("./middleware/auth");
-const authAdmin = require("./middleware/authAdmin");
-app.use("/api/statistics/", auth, authAdmin, statistics);
+app.use("/api/statistics/", statistics);
 
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 
