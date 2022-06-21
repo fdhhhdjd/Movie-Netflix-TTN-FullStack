@@ -48,6 +48,7 @@ const modeOfPayment = require("./Routes/modeOfPaymentRoute.js");
 const feedback = require("./Routes/feedbackRoute.js");
 const bill = require("./Routes/billRoute.js");
 const upload = require("./Routes/UploadCloud.js");
+const statistics = require("./Routes/statisticsRoute");
 
 //!Link router Main
 
@@ -86,6 +87,11 @@ app.use("/api/bill", bill);
 
 //Upload
 app.use("/api", upload);
+
+//Statistics
+const auth = require("./middleware/auth");
+const authAdmin = require("./middleware/authAdmin");
+app.use("/api/statistics/", auth, authAdmin, statistics);
 
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 

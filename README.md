@@ -158,6 +158,11 @@ https://docs.google.com/spreadsheets/d/1BBv4CXNniNjqdIE7tjrG9UM4nprd3NSVy2FX9oaW
 
 - Lấy ra toàn bộ hóa đơn: get -> http://localhost:5000/api/bill/all
 
+- Lấy ra danh sách hóa đơn theo mã khách hàng: get -> http://localhost:5000/api/bill/:userId/listBill
+
+## Statistics
+- Thống kê những người dùng đăng ký gần đây (3 ngày) : get -> http://localhost:5000/api/statistics/registeredUser/recently
+
 ## 2. API dành cho khách hàng
 
 ## Upload:

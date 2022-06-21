@@ -13,12 +13,15 @@ router.get("/history", auth, authCustomer, billCtrl.getHistoryBill);
 //Tạo hóa đơn Paypal
 router.post("/Paypal/create/", auth, authCustomer, billCtrl.createPaypalBill);
 
-// //Kiểm tra người dùng có thể xem phim được không
+//Kiểm tra người dùng có thể xem phim được không
 router.get(
   "/checkCanWatchFilm/:filmId",
   auth,
   authCustomer,
   billCtrl.checkCanWatchFilm
 );
+
+//Lấy ra danh sách bill theo mã khách hàng
+router.get("/:userId/listBill", auth, authAdmin, billCtrl.getListBillByUserId);
 
 module.exports = router;
