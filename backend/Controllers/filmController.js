@@ -539,6 +539,31 @@ const filmCtrl = {
       });
     }
   },
+
+  //lấy phim theo thể loại
+  async getFilmByCategoryId(req, res) {
+    const categoryId = req.params.categoryId;
+
+    try {
+      var listFilm = await Films.find({
+        category: { $elemMatch: { $eq: categoryId } },
+      });
+
+      return res.json({
+        status: 200,
+        success: true,
+        msg: "Get list film by categoryId " + categoryId + " successfully",
+        data: listFilm,
+      });
+    } catch (error) {
+      console.log(error.message);
+      return res.json({
+        status: 400,
+        success: false,
+        msg: "Failed to get list film by categoryId",
+      });
+    }
+  },
 };
 
 module.exports = filmCtrl;
