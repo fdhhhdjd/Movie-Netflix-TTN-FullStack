@@ -71,7 +71,7 @@ const Feedback = () => {
               <div className="text">
                 <h3>Address</h3>
                 <br />
-                <p>Tổ 9 Thị Trấn Vạn Giã Vạn Ninh,Khánh Hòa</p>
+                <p> Ninh An - Ninh Hoa - Khanh Hoa</p>
               </div>
             </div>
             <div className="box">
@@ -83,7 +83,7 @@ const Feedback = () => {
                 <br />
                 <p>
                   <Link to="mailto:info@yoursite.com" id="feedback">
-                    nguyentientai10@gmail.com
+                    nguyenthanhtat258@gmail.com
                   </Link>
                 </p>
               </div>
@@ -97,7 +97,7 @@ const Feedback = () => {
                 <br />
                 <p>
                   <a href="tel://0798805741" id="feedback">
-                    +0798805741
+                    + 84 931612273
                   </a>
                 </p>
               </div>
@@ -111,11 +111,11 @@ const Feedback = () => {
                 <br />
                 <p>
                   <Link
-                    to="https://www.facebook.com/profile.php?id=100006139249437"
+                    to="https://www.facebook.com/kocan.yeuai.5/"
                     id="feedback"
                     target="_blank"
                   >
-                    https://www.facebook.com/profile.php?id=100006139249437
+                    Nguyen Thanh Tat
                   </Link>
                 </p>
               </div>
@@ -205,11 +205,11 @@ const Feedback = () => {
           style={{ fontSize: "22px" }}
           className="marquee1"
         >
-          Chào mừng bạn đến với Web Movie NTripleT,đây là phần phản hồi khách
-          hàng đến với Team,ở đây bạn có thể phản hồi bất kì khi cảm thầy mình
-          chưa hài lòng để mình có thể sữa chưa cũng như khắc phục website,mình
-          sẽ trả lời những phản hồi của bạn sớm nhất,cảm ơn mọi người đã ghé
-          thăm, chúc các bạn xem phim vui vẻ...
+         Welcome to Web Movie NTripleT, here is the guest feedback
+          Goods come to Team, here you can give any feedback when you feel your teacher
+          unsatisfied so that I can fix it as well as fix the website, I
+          I will reply to your feedback as soon as possible, thank you everyone for visiting
+          visit, wish you a happy movie watching...
         </marquee>
       </div>
     </>
