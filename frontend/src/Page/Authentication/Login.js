@@ -68,7 +68,7 @@ const Login = () => {
   };
   const handleSubmitForm = (data) => {
     if (!token) {
-      swal("Mời bạn xác thực đầy đủ 😍", {
+      swal("Please verify the recapcha 😍", {
         icon: "error",
       });
       return;

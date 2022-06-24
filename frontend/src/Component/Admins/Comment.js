@@ -50,7 +50,7 @@ const Comment = ({ filmId }) => {
           />
         </div>
         <div className="send_btn">
-          <button onClick={handleSubmit}>Đăng</button>
+          <button onClick={handleSubmit}>Post</button>
         </div>
         <div className="comments_container">
           {getAllComment?.length > 0 &&
@@ -82,9 +82,9 @@ const Comment = ({ filmId }) => {
                           onClick={() => handleRemoveComment(comment?._id)}
                           class="dropdown-item"
                         >
-                          Xóa bình luận
+                          Delete Comment
                         </div>
-                        <div class="dropdown-item">Chỉnh sửa bình luận</div>
+                        <div class="dropdown-item">Edit Comment</div>
                       </div>
                     </div>
                   </div>
