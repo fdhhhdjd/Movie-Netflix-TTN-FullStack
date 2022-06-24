@@ -45,7 +45,7 @@ const Login = () => {
   const [rememberer, setRememberMe] = state.remember;
   const [token, setToken] = useState("");
   const { auth, loading, refreshTokens } = useSelector((state) => state.auth);
-  console.log(refreshTokens,'token')
+  console.log(refreshTokens, "token");
   const navigate = useNavigate();
   const location = useLocation();
   const Auth = auth;
@@ -53,12 +53,11 @@ const Login = () => {
   const { emailRequire, passwordLoginRequire } = useRequireInput();
   const { handleIsLock, isLock } = useTogglePassword();
   const HandleGoogle = (response) => {
-    console.log(response, "google");
-    // if (response.error) {
-    //   return toast.error(response.error);
-    // } else {
-    //   dispatch(loginGoogleInitiate(response));
-    // }
+    if (response.error) {
+      return toast.error(response.error);
+    } else {
+      dispatch(loginGoogleInitiate(response));
+    }
   };
   const responseFacebook = (response) => {
     if (response) {

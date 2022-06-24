@@ -40,7 +40,7 @@ const userCtrl = {
       let reg = new RegExp(
         "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$"
       ).test(password);
-      
+
       if (!reg) {
         return res.json({
           status: 400,
