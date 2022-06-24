@@ -48,13 +48,27 @@ export const NewFilmStyle = createGlobalStyle`
   justify-content: space-around;
 }
 .upload{
-  max-width: 450px;
-  height: 500px;
+  ${'' /* max-width: 450px; */}
+  height: 300px;
   width: 100%;
   border: 1px solid #ddd;
   padding: 15px;
-  margin: 20px;
+  ${'' /* margin: 20px; */}
   position: relative;
+  .image-upload{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    height:90%
+  }
+  img{
+    max-height: 100%;
+  }
+}
+.destroy{
+  position:absolute;
+  top:0;
+  right:0;
 }
 #file_up{
   position: relative;
