@@ -21,11 +21,8 @@ const initialState = {
 };
 const NewFilms = () => {
   const [images, setImages] = useState(false);
-<<<<<<< HEAD
-=======
   const [imageTitle, setImageTitle] = useState(false);
   const [videoFilm, setVideoFilm] = useState(false);
->>>>>>> b442689c7809a9ebd016b1d2a0f4425e8d81b4f0
   const state = useContext(GlobalStateAdmin);
   const { film, categories } = useSelector((state) => state.film);
   const { token, allDirectors } = useSelector((state) => state.admin);
@@ -34,13 +31,7 @@ const NewFilms = () => {
   const [loading, setLoading] = useState(false);
   const [loadingForm, setLoadingForm] = useState(false);
   const [addSeriesFilm, setAddSeriesFilm] = useState(false);
-<<<<<<< HEAD
-  const [video, setVideo] = useState(false);
   const [callback, setCallback] = state.callback;
-  console.log(allDirectors, "director");
-=======
-  const [callback, setCallback] = state.callback;
->>>>>>> b442689c7809a9ebd016b1d2a0f4425e8d81b4f0
   const navigate = useNavigate();
   const { tokens } = useParams();
   useEffect(() => {
@@ -49,11 +40,7 @@ const NewFilms = () => {
       film.forEach((product) => {
         if (product._id == tokens) {
           setFilms(product);
-<<<<<<< HEAD
-          console.log(product);
-=======
-     
->>>>>>> b442689c7809a9ebd016b1d2a0f4425e8d81b4f0
+
           if (product.image_film.url === "") {
             setImages(product.url);
           } else {
@@ -72,12 +59,8 @@ const NewFilms = () => {
     const { name, value } = e.target;
     setFilms({ ...films, [name]: value });
   };
-<<<<<<< HEAD
-  const handleUpload = async (e) => {
-=======
 
   const handleUploadVideoFilm = async (e) => {
->>>>>>> b442689c7809a9ebd016b1d2a0f4425e8d81b4f0
     e.preventDefault();
     try {
       const file = e.target.files[0];
@@ -85,8 +68,6 @@ const NewFilms = () => {
         return swal("File not Exists", {
           icon: "error",
         });
-<<<<<<< HEAD
-=======
       if (file.type !== "video/mp4")
         // 1mb
         return swal("File format is incorrect.", {
@@ -122,7 +103,6 @@ const NewFilms = () => {
         return swal("File not Exists", {
           icon: "error",
         });
->>>>>>> b442689c7809a9ebd016b1d2a0f4425e8d81b4f0
       if (file.size > 1024 * 1024)
         // 1mb
         return swal("Size too large!", {
@@ -136,9 +116,6 @@ const NewFilms = () => {
       let formData = new FormData();
 
       formData.append("file", file);
-<<<<<<< HEAD
-      setLoading(true);
-=======
       if (images !== false) {
         setLoading(true);
       }
@@ -183,7 +160,6 @@ const NewFilms = () => {
 
       setLoading(true);
 
->>>>>>> b442689c7809a9ebd016b1d2a0f4425e8d81b4f0
       const res = await axios.post("/api/uploadImageFilm", formData, {
         headers: {
           "content-type": "multipart/form-data",
@@ -192,55 +168,12 @@ const NewFilms = () => {
       });
 
       setLoading(false);
-<<<<<<< HEAD
-      setImages(res.data);
-    } catch (error) {
-      toast.error(error.response.data.msg);
-    }
-  };
-  const handleVideo = async (e) => {
-    e.preventDefault();
-    try {
-      const file = e.target.files[0];
-      if (!file)
-        return swal("File not Exists", {
-          icon: "error",
-        });
-      let formData = new FormData();
-
-      formData.append("file", file);
-      setLoading(true);
-      const res = await axios.post("/api/uploadVideoFilm", formData, {
-        headers: {
-          "content-type": "multipart/form-data",
-          Authorization: ` ${token.accessToken}`,
-        },
-      });
-
-      setLoading(false);
-      setVideo(res.data);
-=======
 
       setImageTitle(res.data);
->>>>>>> b442689c7809a9ebd016b1d2a0f4425e8d81b4f0
     } catch (error) {
       toast.error(error.response.data.msg);
     }
   };
-<<<<<<< HEAD
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // if (!images)
-    //   return swal("No Image Upload 😅.", {
-    //     icon: "error",
-    //   });
-
-    try {
-      if (onEdit) {
-        await axios.patch(
-          `/api/film/update/${films.id}`,
-          { ...films, public_id: images.public_id, url: images.url },
-=======
   // console.log(imageTitle, "image title: ");
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -253,7 +186,8 @@ const NewFilms = () => {
         // console.log(films,'filmasdasdasdasdasadaasd')
         await axios.patch(
           `/api/film/update/${films.id}`,
-          { ...films,
+          {
+            ...films,
             director: [films.director],
             category: [films.category],
             image_film: {
@@ -273,8 +207,7 @@ const NewFilms = () => {
                 public_id_image: images.public_id,
               },
             ],
-              },
->>>>>>> b442689c7809a9ebd016b1d2a0f4425e8d81b4f0
+          },
           {
             headers: {
               Authorization: ` ${token.accessToken}`,
@@ -285,17 +218,11 @@ const NewFilms = () => {
           icon: "success",
         });
       } else {
-<<<<<<< HEAD
+        console.log(films, "filmasdasdasdasdasadaasd");
         await axios.post(
           "/api/film/add",
           {
             ...films,
-=======
-         console.log(films,'filmasdasdasdasdasadaasd')
-        await axios.post(
-          "/api/film/add",
-          { ...films,
->>>>>>> b442689c7809a9ebd016b1d2a0f4425e8d81b4f0
             director: [films.director],
             category: [films.category],
             image_film: {
@@ -303,33 +230,19 @@ const NewFilms = () => {
               url: images.url,
             },
             image_title: {
-<<<<<<< HEAD
-              public_id: images.public_id,
-              url: images.url,
-=======
               public_id: imageTitle.public_id,
               url: imageTitle.url,
->>>>>>> b442689c7809a9ebd016b1d2a0f4425e8d81b4f0
             },
             seriesFilm: [
               {
                 episode: "1",
-<<<<<<< HEAD
-                public_id_video: video.public_id,
-                url_video: video.url,
-=======
                 public_id_video: videoFilm.public_id,
                 url_video: videoFilm.url,
->>>>>>> b442689c7809a9ebd016b1d2a0f4425e8d81b4f0
                 url_image: images.url,
                 public_id_image: images.public_id,
               },
             ],
-<<<<<<< HEAD
           },
-=======
-              },
->>>>>>> b442689c7809a9ebd016b1d2a0f4425e8d81b4f0
           {
             headers: {
               Authorization: ` ${token.accessToken}`,
@@ -368,65 +281,11 @@ const NewFilms = () => {
   const styleUpload = {
     display: images ? "block" : "none",
   };
-<<<<<<< HEAD
-=======
-
->>>>>>> b442689c7809a9ebd016b1d2a0f4425e8d81b4f0
   return (
     <>
       <NewFilmStyle />
       <div className="newProduct">
         <div className="create_product">
-<<<<<<< HEAD
-          <div className="upload">
-            <input
-              type="file"
-              name="file"
-              id="file_up"
-              onChange={handleUpload}
-            />
-            {loading ? (
-              <div id="file_img">
-                <LoadingImage />
-              </div>
-            ) : (
-              <div id="file_img" style={styleUpload}>
-                <img src={images ? images.url : images} alt="" />
-                <span onClick={handleDestroy}>X</span>
-              </div>
-            )}
-          </div>
-
-          <form onSubmit={handleSubmit}>
-            <div className="row">
-              <label htmlFor="product_id">Name Film</label>
-              <input
-                type="text"
-                name="title"
-                id="tensp"
-                required
-                value={films.title}
-                onChange={handleChangeInput}
-              />
-            </div>
-            <input
-              type="file"
-              name="files"
-              id="file_up"
-              style={{ border: "red" }}
-              onChange={handleVideo}
-            />
-            <div className="row">
-              <label htmlFor="product_id">Series Film Film &nbsp;</label>
-            </div>
-            <div className="row">
-              <label htmlFor="director">Directors: </label>
-              <select
-                name="director"
-                value={films.director}
-                onChange={handleChangeInput}
-              >
-=======
           <div className="row">
             <div className="d-flex flex-column align-items-center mx-2">
               <label htmlFor="product_id">Image Film</label>
@@ -443,9 +302,19 @@ const NewFilms = () => {
                     <LoadingImage />
                   </div>
                 ) : (
-                  <div className="image-upload" id="file_img1" style={styleUpload}>
-                    <img src={images ? images.url : images} alt="" className="img-fluid mt-2" />
-                    <span className="destroy" onClick={handleDestroy}>X</span>
+                  <div
+                    className="image-upload"
+                    id="file_img1"
+                    style={styleUpload}
+                  >
+                    <img
+                      src={images ? images.url : images}
+                      alt=""
+                      className="img-fluid mt-2"
+                    />
+                    <span className="destroy" onClick={handleDestroy}>
+                      X
+                    </span>
                   </div>
                 )}
               </div>
@@ -464,7 +333,11 @@ const NewFilms = () => {
                     <LoadingImage />
                   </div>
                 ) : (
-                  <div className="image-upload" id="file_img2" style={styleUpload}>
+                  <div
+                    className="image-upload"
+                    id="file_img2"
+                    style={styleUpload}
+                  >
                     <img
                       src={imageTitle ? imageTitle.url : imageTitle}
                       alt=""
@@ -489,15 +362,23 @@ const NewFilms = () => {
                     <LoadingImage />
                   </div>
                 ) : (
-                  <div className="image-upload" id="file_img3" style={styleUpload}>
-                    <img src={videoFilm ? videoFilm.url : videoFilm} alt="" className="img-fluid mt-2" />
+                  <div
+                    className="image-upload"
+                    id="file_img3"
+                    style={styleUpload}
+                  >
+                    <img
+                      src={videoFilm ? videoFilm.url : videoFilm}
+                      alt=""
+                      className="img-fluid mt-2"
+                    />
                     {/* <span onClick={handleDestroy}>X</span> */}
                   </div>
                 )}
               </div>
             </div>
           </div>
-  
+
           <form onSubmit={handleSubmit}>
             <div className="row">
               <label htmlFor="product_id">Name Film</label>
@@ -513,7 +394,7 @@ const NewFilms = () => {
 
             {/* <div className="row">
                         <label htmlFor="product_id">Series Film Film &nbsp;</label>
-            
+
                         <button className='btnform' onClick={()=>{setAddSeriesFilm(!addSeriesFilm)}}>series film</button>
                         {addSeriesFilm && (
                           <>
@@ -529,8 +410,11 @@ const NewFilms = () => {
                     </div> */}
             <div className="row">
               <label htmlFor="director">Directors: </label>
-              <select name="director" value={films.director} onChange={handleChangeInput}>
->>>>>>> b442689c7809a9ebd016b1d2a0f4425e8d81b4f0
+              <select
+                name="director"
+                value={films.director}
+                onChange={handleChangeInput}
+              >
                 <option value="">Please select a director</option>
                 {allDirectors.map((director) => (
                   <option value={director._id} key={director._id}>
@@ -610,15 +494,11 @@ const NewFilms = () => {
 
             <div className="row">
               <label htmlFor="categories">Categories: </label>
-<<<<<<< HEAD
               <select
                 name="category"
                 value={films.category}
                 onChange={handleChangeInput}
               >
-=======
-              <select name="category" value={films.category} onChange={handleChangeInput}>
->>>>>>> b442689c7809a9ebd016b1d2a0f4425e8d81b4f0
                 <option value="">Please select a category</option>
                 {categories.map((category) => (
                   <option value={category._id} key={category._id}>
@@ -635,11 +515,5 @@ const NewFilms = () => {
     </>
   );
 };
-<<<<<<< HEAD
 
 export default NewFilms;
-=======
-
-export default NewFilms;
-
->>>>>>> b442689c7809a9ebd016b1d2a0f4425e8d81b4f0
