@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { LoadingSmall, MetaData, Header } from "../../imports/index";
 const Profile = () => {
   const { profile, loading } = useSelector((state) => state.auth);
-  const auth = profile; 
+  const auth = profile;
   return (
     <>
       <Header />
