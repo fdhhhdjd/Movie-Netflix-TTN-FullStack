@@ -14,10 +14,9 @@ import {
   } from "../../imports/importAdmin/importsAdmin";
   import { GlobalStyleAmin } from "../../Style/Admin/GlobalStyleAmin";
 const initialState = {
-   phone_number:'',
-    date_of_birth:'',
-     sex:'',
-  fullname: "", 
+  _id: "",
+  name: "",
+  image: "",    
 };
 const NewUsers = () => {
     const state = useContext(GlobalStateAdmin);
@@ -26,11 +25,12 @@ const NewUsers = () => {
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState(initialState);
     const { allUsers,token } = useSelector((state) => state.admin);
-    
-    // const [fullname,setFullName] = useState(user.fullname)
+    const [fullname,setFullName] = useState(user.fullname)
     const [callback, setCallback] = state.callback;
     const navigate = useNavigate();
     const { tokens } = useParams();
+    console.log(user._id,'allUsers');
+    console.log(token.accessToken,'token');
     const handleChangeInput = (e) => {
       const { name, value } = e.target;
       setUser({ ...user, [name]: value });
@@ -39,8 +39,8 @@ const NewUsers = () => {
       if (tokens) {
         setOnEdit(true);
         allUsers.forEach((product) => {
-        // console.log(product,'tientai')
-          if (product._id===tokens) {
+        console.log(product,'tientai')
+          if (product._id == tokens) {
             setUser(product);
             if (product.url === "") {
               setImages(product.image.url);
@@ -56,7 +56,6 @@ const NewUsers = () => {
         setImages(false);
       }
     }, [tokens, allUsers]);
-    console.log(allUsers,'allUsers')
     const handleUpload = async (e) => {
       e.preventDefault();
       try {
@@ -101,11 +100,11 @@ const NewUsers = () => {
           icon: "error",
         });
       try {
-        let id=user._id
         await axios.patch(
         //   `/api/director/update/${user._id}`,
-          `/api/auth/admin/customerAccount/${id}/update/info`,
-          { ...user, image: images },
+          `/api/auth/admin/customerAccount/${user?._id}/update/info`,
+          { fullname, image: images },
+          console.log(fullname,'user'),
           {
             headers: {
               Authorization: `${token?.accessToken}`,
@@ -142,10 +141,10 @@ const NewUsers = () => {
     const styleUpload = {
       display: images ? "block" : "none",
     };
-    console.log(user,'phone_numer')
+  
   return (
     <>
-      <GlobalStyleAmin />
+        <GlobalStyleAmin />
       <TopBar />
       <div className="admin__container">
         <SideBarAdmins />
@@ -169,7 +168,15 @@ const NewUsers = () => {
           <form onSubmit={handleSubmit}>
             <div className="newUserItem">
               <label htmlFor="username">ID</label>
-          
+              <input
+                type="text"
+                placeholder="john"
+                name="_id"
+                id="id"
+                value={user._id}
+                onChange={handleChangeInput}
+                disabled
+              />
             </div>
             <div className="newUserItem">
               <label htmlFor="username">Username</label>
@@ -177,58 +184,10 @@ const NewUsers = () => {
                 type="text"
                 placeholder="john"
                 name="fullname"
-                value={user.fullname}
-                onChange={handleChangeInput}
+                value={fullname}
+                onChange={(e)=>setFullName(e.target.value)}
               />
             </div>
-         
-            <div className="newUserItem">
-              <label htmlFor="dienthoai">Phone</label>
-              <input
-                type="text"
-                placeholder="+1 123 456 78"
-                name="phone_number"
-                id="phone_number"
-                value={user.phone_number}
-                onChange={handleChangeInput}
-              />
-            </div>
-            <div className="newUserItem">
-              <label htmlFor="">date</label>
-              <input
-                type="date"
-                data-date=""
-                data-date-format="DD MMMM YYYY"
-                name="date_of_birth"
-                id="date_of_birth"
-                value={user.date_of_birth}
-                onChange={handleChangeInput}
-              />
-            </div>
-            <div className="newUserItem">
-            <label htmlFor="sex">Gender</label>
-            <div className="newUserGender">
-              <input
-                type="radio"
-                value="1"
-                id="sex"
-                name="sex"
-                checked={user.sex == 1}
-                onChange={handleChangeInput}
-              />
-              <label htmlFor="male">Nam</label>
-              <input
-                type="radio"
-                name="sex"
-                id="sex"
-                value="0"
-                checked={user.sex == 0}
-                onChange={handleChangeInput}
-              />
-              <label htmlFor="female">Nữ</label>
-            </div>
-          </div>
-        
             <button className="newUserButton">SAVE</button>
           </form>
         </div>
