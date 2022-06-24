@@ -40,7 +40,7 @@ const Comment = ({ filmId }) => {
       <div className="cmt_container">
         <div className="input_container">
           <div className="profileImg">
-            {profile.image.url && <img src={profile.image.url} alt="" />}
+            {profile.image?.url && <img src={profile.image?.url} alt="" />}
           </div>
           <input
             type="text"
@@ -58,11 +58,11 @@ const Comment = ({ filmId }) => {
               <Fragment key={id}>
                 <div className="comments">
                   <div className="profileImg">
-                    <img src={comment.user.image.url} />
+                    <img src={comment.user?.image.url} />
                   </div>
                   <div className="info_right">
                     <div>
-                      <div className="username">{comment.user.fullname}</div>
+                      <div className="username">{comment.user?.fullname}</div>
                       <div className="content">{comment.content}</div>
                     </div>
                     <div class="dropdown">

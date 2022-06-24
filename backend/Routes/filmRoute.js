@@ -14,10 +14,10 @@ router.post(
 );
 
 //Danh sách phim dành cho người lớn
-router.get("/adult", auth, authCustomer, filmCtrl.getFilmForAdult);
+router.get("/adult", auth, filmCtrl.getFilmForAdult);
 
 //Danh sách phim dành cho trẻ em
-router.get("/kid", auth, authCustomer, filmCtrl.getFilmForKid);
+router.get("/kid", auth, filmCtrl.getFilmForKid);
 
 //Thoát khỏi chế độ cho trẻ em
 router.post("/kid/exit", auth, authCustomer, filmCtrl.exitKidMode);
@@ -64,5 +64,8 @@ router.get("/kid/eachCategory", auth, filmCtrl.getKidFilmByEachCategory);
 
 //lấy ra những bộ phim theo đạo diễn
 router.get("/find/director/:id", auth, filmCtrl.getFilmByDirector);
+
+//danh sách film theo categoryId
+router.get("/find/category/:categoryId", auth, filmCtrl.getFilmByCategoryId);
 
 module.exports = router;
