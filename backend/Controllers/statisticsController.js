@@ -90,6 +90,8 @@ const staticticsCtrl = {
 
       monthlyRevenue = statistics.concat(missing_statistics);
 
+      monthlyRevenue.sort((a, b) => a._id - b._id)
+
       return res.json({
         status: 200,
         success: true,
