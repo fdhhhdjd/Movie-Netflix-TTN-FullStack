@@ -7,7 +7,6 @@ import {logoNetFlix} from '../../imports/image'
 import Footer from "../Sidebar/Footer";
 const Directors = () => {
     const { InfoDirector} = useSelector((state) => state.director)  
-    console.log(InfoDirector,'info director')
   return (
     <>
       <Header />

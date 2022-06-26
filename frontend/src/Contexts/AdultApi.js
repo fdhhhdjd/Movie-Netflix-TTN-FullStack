@@ -44,7 +44,7 @@ const AdultApi = (refreshTokens, profile,allFilmAdult ) => {
     });
     setAllCategory(unique) 
   },[allFilmAdult])
-  console.log(allCategory,'allCategory')
+
   return {
     cat:[allCategory,setAllCategory],
   };

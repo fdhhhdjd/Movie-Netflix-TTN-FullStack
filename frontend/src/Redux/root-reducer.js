@@ -6,6 +6,7 @@ import FeedBackReducer from "./Reducer/ReducerFeedBack";
 import ReducerFilmAdult from "./Reducer/ReducerFilmadult";
 import CommentReducer from "./Reducer/ReducerComment";
 import ReducerDirector from "./Reducer/ReducerDirector";
+import PaymentReducer from "./Reducer/ReducerPayment";
 
 const rootReducer = combineReducers({
   auth: AuthReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   adult: ReducerFilmAdult,
   comment: CommentReducer,
   director: ReducerDirector,
+  payment: PaymentReducer,
 });
 
 export default rootReducer;

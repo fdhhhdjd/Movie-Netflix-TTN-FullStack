@@ -96,15 +96,15 @@ const Movie = () => {
                     {
                       openSort && (
                       
-                        <div class="dropdown dropdown-sort">
-                          <span class="btn dropdown-toggle suggestion" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div className="dropdown dropdown-sort">
+                          <span className="btn dropdown-toggle suggestion" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Suggestions For You
                           </span>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">suggestions for you</a>
-                            <a class="dropdown-item" href="#">Year Released</a>
-                            <a class="dropdown-item" href="#">A-Z</a>
-                            <a class="dropdown-item" href="#">Z-A</a>
+                          <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a className="dropdown-item" href="#">suggestions for you</a>
+                            <a className="dropdown-item" href="#">Year Released</a>
+                            <a className="dropdown-item" href="#">A-Z</a>
+                            <a className="dropdown-item" href="#">Z-A</a>
                         </div>
 </div>
                       )
