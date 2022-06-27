@@ -1,15 +1,16 @@
-import React, { useState } from "react";
-import { Header, Footer } from "../../imports";
-import { MovieStyle } from "../../Style/MovieStyle/MovieStyle";
-import { Feature, Modal, List, MetaData } from "../../imports/index";
+import { useContext, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { GlobalState } from "../../Contexts/GlobalState";
-import { useContext } from "react";
-import { spacing } from "@material-ui/system";
+import { Footer, Header } from "../../imports";
+import { List } from "../../imports/index";
+import { MovieStyle } from "../../Style/MovieStyle/MovieStyle";
 const Movie = () => {
   const data = useContext(GlobalState);
-  const [allCategory,setAllCategory] = data.AdultApi.cat;
-  const [isOpenModal, setIsOpenModal] = data.modal;
+  // const [allCategory,setAllCategory] = data.AdultApi.cat;
+  const [ setIsOpenModal] = data.modal;
   const [openSort,setOpenSort]= useState(false);
+  const { findFilmAdult} = useSelector((state) => state.adult);
   return (
     <>
       <Header />
@@ -36,15 +37,15 @@ const Movie = () => {
                       className="dropdown-menu"
                       aria-labelledby="dropdownMenuButton"
                     >
-                      <a className="dropdown-item" href="#">
+                      <Link to='' className="dropdown-item" href="#">
                         Action
-                      </a>
-                      <a className="dropdown-item" href="#">
+                      </Link>
+                      <Link to='' className="dropdown-item" href="#">
                         Adventure
-                      </a>
-                      <a className="dropdown-item" href="#">
+                      </Link>
+                      <Link to='' className="dropdown-item" href="#">
                         Animals
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -101,10 +102,10 @@ const Movie = () => {
                           Suggestions For You
                           </span>
                           <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a className="dropdown-item" href="#">suggestions for you</a>
-                            <a className="dropdown-item" href="#">Year Released</a>
-                            <a className="dropdown-item" href="#">A-Z</a>
-                            <a className="dropdown-item" href="#">Z-A</a>
+                            <Link to='' className="dropdown-item" href="#">suggestions for you</Link>
+                            <Link to='' className="dropdown-item" href="#">Year Released</Link>
+                            <Link to='' className="dropdown-item" href="#">A-Z</Link>
+                            <Link to='' className="dropdown-item" href="#">Z-A</Link>
                         </div>
 </div>
                       )
@@ -113,14 +114,16 @@ const Movie = () => {
                 </div>
               </div>
               <div className="page-movie-body">
-              {
-                allCategory?.map((film)=>{
-                  return(
-                    <List  key={film.id} category={film.id} name={film.name} setIsOpenModal={setIsOpenModal} />
-                  )
-                }
-                )
-              }
+              {findFilmAdult?.map((film, index) => {
+            return (
+              <List
+                key={index}
+                category={film.category}
+                dataFilmCategory={film.data}
+                setIsOpenModal={setIsOpenModal}
+              />
+            );
+          })}
               </div>
             </div>
           </div>

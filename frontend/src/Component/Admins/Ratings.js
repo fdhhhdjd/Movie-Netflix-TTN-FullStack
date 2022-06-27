@@ -1,22 +1,22 @@
-import React, { useState, useContext, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
-import { GlobalStateAdmin } from "../../ContextsAdmin/GlobalStateAdmin";
-import { RatingStyle } from "../../Style/Admin/RatingStyle";
-import { useSelector,useDispatch } from "react-redux";
 import axios from "axios";
-import swal from "sweetalert";
 import moment from "moment";
 import "moment/locale/vi";
-import {GetAllRateInitiate}  from "../../Redux/Action/ActionFilmAdmin"
+import { useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import swal from "sweetalert";
+import { GlobalStateAdmin } from "../../ContextsAdmin/GlobalStateAdmin";
+import { GetAllRateInitiate } from "../../Redux/Action/ActionFilmAdmin";
+import { RatingStyle } from "../../Style/Admin/RatingStyle";
 const Ratings = () => {
   const { rating } = useSelector((state) => state.film);
+  // console.log("rating",rating)
   const { token } = useSelector((state) => state.admin);
   const state = useContext(GlobalStateAdmin);
   const [callback, setCallback] = state.callback;
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  console.log(rating)
+  // console.log(rating)
   const img =
     "https://png.pngtree.com/png-clipart/20190924/original/pngtree-businessman-user-avatar-free-vector-png-image_4827807.jpg";
 
@@ -53,18 +53,15 @@ const Ratings = () => {
   };
   const columns = [
     { field: "_id", headerName: "ID", width: 90 },
-    { field: "__id", headerName: "ID", width: 90,
-    renderCell: (params) => {
-      return <div className="productListItem">{params.row.user._id}</div>;
-    },
-     },
     {
-      field: "ten_hinhthuc",
-      headerName: "User",
-      width: 250,
+      field: "user",
+      headerName: "UseName",
+      width:160 ,
       renderCell: (params) => {
+        console.log("params", params);
         return (
           <div className="productListItem">
+            {" "}
             <img
               className="productListImg"
               src={params.row.user.image.url || img}
@@ -75,11 +72,40 @@ const Ratings = () => {
         );
       },
     },
-    { field: "score", headerName: "Rating Star ⭐", width: 170 },
+    // {
+    //   field: "user",
+    //   headerName: "user",
+    //   width: 250,
+    //   renderCell: (params) => {
+    //     console.log('params',params)
+    //     return (
+    //       <div className="productListItem">
+    //         <img
+    //           className="productListImg"
+    //           src={params.row.user.image.url || img}
+    //           alt=""
+    //         />
+    //         {params.row.user.fullname}
+    //       </div>
+    //     );
+    //   },
+    // },
     {
-      field: "title",
-      headerName: " Film",
-      width: 400,
+      field: "score",
+      headerName: "Rating Star ⭐",
+      width: 190,
+      renderCell: (params) => {
+        return (
+          <div className="productListItem">
+            <span>{params.row.score} ⭐</span>
+          </div>
+        );
+      },
+    },
+    {
+      field: " Films are rated",
+      headerName: " Films are rated",
+      width: 300,
       renderCell: (params) => {
         return <div className="productListItem">
                       <img
@@ -95,7 +121,7 @@ const Ratings = () => {
       headerName: "Date Create",
       width: 160,
       renderCell: (params) => {
-        console.log(params);
+        // console.log(params);
         return (
           <div className="userListUser">
             {moment(`${params.row.createdAt}`).format("Do MMM YYYY")}
@@ -108,7 +134,7 @@ const Ratings = () => {
       headerName: "Date UpdateAt",
       width: 170,
       renderCell: (params) => {
-        console.log(params);
+        // console.log(params);
         return (
           <div className="userListUser">
             {moment(`${params.row.updatedAt}`).format("Do MMM YYYY")}
@@ -116,21 +142,21 @@ const Ratings = () => {
         );
       },
     },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 150,
-      renderCell: (params) => {
-        return (
-          <>
-            <DeleteOutline
-              className="productListDelete"
-              onClick={() => handleDelete(params.row._id)}
-            />
-          </>
-        );
-      },
-    },
+    // {
+    //   field: "action",
+    //   headerName: "Action",
+    //   width: 150,
+    //   renderCell: (params) => {
+    //     return (
+    //       <>
+    //         <DeleteOutline
+    //           className="productListDelete"
+    //           onClick={() => handleDelete(params.row._id)}
+    //         />
+    //       </>
+    //     );
+    //   },
+    // },
   ];
   return (
     <>
@@ -147,6 +173,6 @@ const Ratings = () => {
       </div>
     </>
   );
-}
+};
 
-export default Ratings
+export default Ratings;

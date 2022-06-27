@@ -197,7 +197,7 @@ export const loginAdminGoogleInitiate = (response) => {
       .then((user) => {
         dispatch(
           AdminLoginGoogleSuccess(user.data),
-          localStorage.setItem("firstLogin", true)
+          localStorage.setItem("firstLoginAdmin", true)
         );
       })
       .catch((error) => {
@@ -213,7 +213,7 @@ export const AdminLogoutInitiate = () => async (dispatch) => {
     await axios.get(`/api/auth/admin/logout`);
     dispatch(
       AdminLogoutSuccess(
-        localStorage.removeItem("firstLogin"),
+        localStorage.removeItem("firstLoginAdmin"),
         (window.location.href = "/loginadmin")
       )
     );

@@ -1,18 +1,18 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAdminInitiate } from '../../Redux/Action/ActionAdminAuth';
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import {GlobalStateAdmin} from '../../ContextsAdmin/GlobalStateAdmin'
+import { GlobalStateAdmin } from '../../ContextsAdmin/GlobalStateAdmin';
+import { loginAdminInitiate } from '../../Redux/Action/ActionAdminAuth';
 const LoginAd = () => {
-  const [state, setState] = useState({
-    email: "",
-    password: "",
-  });
+  // const [state, setState] = useState({
+  //   email: "",
+  //   password: "",
+  // });
   const [isLock, setIsLock] = useState(false);
   const states = useContext(GlobalStateAdmin);
-  const [callback, setCallback] = states.callback;
+  // const [callback, setCallback] = states.callback;
   const {
     register,
     formState: { errors },
@@ -20,7 +20,7 @@ const LoginAd = () => {
     watch,
   } = useForm();
   const dispatch = useDispatch();
-  const navigator = useNavigate();
+  // const navigator = useNavigate();
   const passwords = useRef({});
   passwords.current = watch("password");
   const { Admin } = useSelector((state) => state.admin);
@@ -34,7 +34,7 @@ const LoginAd = () => {
   useEffect(() => {
     if (Admin.status === 200) {
       window.location.href ='/admin'
-      localStorage.setItem("firstLogin", true);
+      localStorage.setItem("firstLoginAdmin", true);
       toast.success(`${Admin.msg} 🥰`);
     } else if (Admin.status === 400) {
       toast.error(Admin.msg);

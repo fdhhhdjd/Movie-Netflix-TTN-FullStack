@@ -1,14 +1,11 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import {
-  GetAllCategoryInitiate,
-  GetAllSeriesFilmInitiate,
-  GetAllFilmInitiate,
-  GetAllRateInitiate,
-  GetAllFavouriteInitiate,
+  GetAllCategoryInitiate, GetAllFavouriteInitiate, GetAllFilmInitiate,
+  GetAllRateInitiate, GetAllSeriesFilmInitiate
 } from "../Redux/Action/ActionFilmAdmin";
 const FilmApi = (tokens, callback) => {
+  console.log(tokens,'tokens')
   const [call, setCall] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
