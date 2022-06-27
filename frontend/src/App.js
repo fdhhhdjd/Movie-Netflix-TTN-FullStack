@@ -18,20 +18,17 @@ import {
   Rating,
   Register,
   Reset,
-  ResetAdmin, Users, Watch,FavouriteAdmin
+  ResetAdmin, Users, Watch
 } from "./imports/index";
 import {
   Admin,
   Home, Information, LoginAdmin, NotFound, ProfileAdmin, ProfileGate, Welcome
 } from "./imports/LazyRouter";
-import PrivateRouterAdmin from "./Page/PrivateRouterUser/PrivateRouterAdmin";
-import PrivateAdmin from "./Page/PrivateRouterUser/PrivateAdmin"
-
 function App() {
   const { profile } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   useEffect(() => {
-    if (profile?.adult === "" || profile?.password === "null") {
+    if (profile?.adult == "" || profile?.password == "null") {
       navigate("/browse");
     }
   }, [profile]);
@@ -104,73 +101,37 @@ function App() {
 
           {/* ********* ADMIN ********* */}
           {/* Login Admin */}
-          <Route element={<PrivateRouterAdmin />}>
-
           <Route path="/loginadmin" element={<LoginAdmin />} />
-          </Route>
           {/* Home Admin */}
-          <Route element={<PrivateAdmin />}>
-
           <Route path="/admin" element={<Admin />} />
-          </Route>
           {/* Forget Password Admin */}
-          <Route element={<PrivateAdmin />}>
-          </Route>
           <Route path="/forgetadmin" element={<ForgetAdmin />} />
           {/* Profile Admin */}
-          <Route element={<PrivateAdmin />}>
           <Route path="/profileadmin" element={<ProfileAdmin />} />
-          </Route>
           {/* Reset Password Admin */}
           <Route path="/password/reset/:token" element={<ResetAdmin />} />
           {/* Change Password Admin */}
-          <Route element={<PrivateAdmin />}>
           <Route path="/changepassword/" element={<ChangePasswordAdmin />} />
-          </Route>
           {/* Manager Director */}
-          <Route element={<PrivateAdmin />}>
           <Route path="/users" element={<Users />} />
-          </Route>
-          <Route element={<PrivateAdmin />}>
           <Route path="/newusers/:tokens" element={<NewUsers />} />
-          </Route>
-          <Route element={<PrivateAdmin />}>
           <Route path="/director" element={<Director />} />
-          </Route>
           {/* Edit Film */}
-          <Route element={<PrivateAdmin />}>
           <Route path="/changeDirector/:tokens" element={<ChangeDirector />} />
-          </Route>
           {/* Add Director */}
-          <Route element={<PrivateAdmin />}>
           <Route path="/newDirector" element={<NewDirector />} />
-          </Route>
           {/* Manager Category */}
-          <Route element={<PrivateAdmin />}>
           <Route path="/category" element={<Category />} />
-          </Route>
           {/* Manager Film */}
-          <Route element={<PrivateAdmin />}>
           <Route path="/film" element={<Films />} />
-          </Route>
           {/* Add Film */}
-          <Route element={<PrivateAdmin />}>
           <Route path="/newFilm" element={<NewFilm />} />
-          </Route>
           {/* Edit Film */}
-          <Route element={<PrivateAdmin />}>
           <Route path="/newFilm:tokens" element={<NewFilm />} />
-          </Route>
           {/* Rating for Film */}
-          <Route element={<PrivateAdmin />}>
           <Route path="/rating" element={<Rating />} />
-          </Route>
           {/* Favourite */}
-          <Route element={<PrivateAdmin />}>
-
-          <Route path="/favouriteadmin" element={<FavouriteAdmin />} />
-          </Route>
-
+          {/* <Route path="/favourite" element={<Favourite />} /> */}
           {/* Shared */}
           <Route path="*" element={<NotFound />} />
         </Routes>

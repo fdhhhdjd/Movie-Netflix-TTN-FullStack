@@ -1,5 +1,7 @@
 import axios from "axios";
 import * as types from "../ActionTypes";
+import { toast } from "react-toastify";
+import swal from "sweetalert";
 //?get all Categories
 export const GetAllCategoryStart = () => ({
   type: types.GET_ALL_CATEGORY_START,
@@ -146,7 +148,7 @@ export const GetAllRateInitiate = (token) => {
       const { data } = await axios.get(`/api/rating/all`, {
         headers: { Authorization: token },
       });
-      // console.log('dataRating',data);
+
       dispatch(GetAllRateSuccess(data.data));
     } catch (error) {
       dispatch(GetAllRateFail(error));

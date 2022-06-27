@@ -11,7 +11,7 @@ const LoadingToRedirect = () => {
       setCount((currentCount) => --currentCount);
     }, 1000);
     count === 0 &&
-      navigate("/loginadmin", { replace: true, state: { from: location } });
+      navigate("/loginAdmin", { replace: true, state: { from: location } });
     count === 0 &&
       toast.warning("Please Login Admin when you to the Manger Admin 😵");
     return () => clearInterval(interval);

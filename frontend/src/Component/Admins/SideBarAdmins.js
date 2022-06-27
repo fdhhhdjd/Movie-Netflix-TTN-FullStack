@@ -1,12 +1,18 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
-  AiOutlineLogout, IoMdAnalytics,
-  MdCategory, MdLineStyle
-} from "../../imports/importAdmin/Icons";
-import { AdminLogoutInitiate } from "../../Redux/Action/ActionAdminAuth";
 import { SidebarAdmin } from "../../Style/Admin/SidebarAdmin";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  MdLineStyle,
+  MdPermIdentity,
+  MdStorefront,
+  IoMdAnalytics,
+  MdCategory,
+  AiOutlineLogout,
+  MdCreate,
+} from "../../imports/importAdmin/Icons";
+import { AdminLogoutInitiate} from "../../Redux/Action/ActionAdminAuth";
+import { useDispatch } from "react-redux";
 const SideBarAdmins = () => {
     const [activeTab, setActiveTab] = useState("Home");
     const dispatch = useDispatch();
@@ -26,7 +32,7 @@ const SideBarAdmins = () => {
         setActiveTab("Users");
       } else if (location.pathname === "/film") {
         setActiveTab("Films");
-      } else if (location.pathname === "/favouriteadmin") {
+      } else if (location.pathname === "/favourite") {
         setActiveTab("Favourite");
       } else if (location.pathname === "/category") {
         setActiveTab("Category");
@@ -185,7 +191,7 @@ const SideBarAdmins = () => {
                   Rating
                 </li>
               </Link>
-              <Link to="/favouriteadmin" className="link">
+              <Link to="/favourite" className="link">
                 <li
                   className={` sidebarListItem  ${
                     activeTab === "Favourite" ? "active" : ""

@@ -12,8 +12,8 @@ export const DataAdminProvider = ({ children }) => {
   const tokens = token.accessToken;
   const dispatch = useDispatch();
   useEffect(() => {
-    const firstLoginAdmin = localStorage.getItem("firstLoginAdmin");
-    if (firstLoginAdmin) {
+    const firstLogin = localStorage.getItem("firstLogin");
+    if (firstLogin) {
       const refreshToken = async () => {
         dispatch(RefreshTokenAdminInitiate(Admin.accessToken));
         setTimeout(() => {

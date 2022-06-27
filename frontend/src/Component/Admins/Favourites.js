@@ -55,8 +55,8 @@ const Favourites = () => {
     { field: "_id", headerName: "ID", width: 150 },
 
     {
-      field: "UserName",
-      headerName: "UserName",
+      field: "ten_hinhthu   c",
+      headerName: "Name Payment",
       width: 250,
       renderCell: (params) => {
         return (
@@ -111,21 +111,21 @@ const Favourites = () => {
         );
       },
     },
-    // {
-    //   field: "action",
-    //   headerName: "Action",
-    //   width: 150,
-    //   renderCell: (params) => {
-    //     return (
-    //       <>
-    //         <DeleteOutline
-    //           className="productListDelete"
-    //           onClick={() => handleDelete(params.row.id)}
-    //         />
-    //       </>
-    //     );
-    //   },
-    // },
+    {
+      field: "action",
+      headerName: "Action",
+      width: 150,
+      renderCell: (params) => {
+        return (
+          <>
+            <DeleteOutline
+              className="productListDelete"
+              onClick={() => handleDelete(params.row.id)}
+            />
+          </>
+        );
+      },
+    },
   ];
   return (
     <>

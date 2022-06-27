@@ -47,7 +47,6 @@ const ratingCtrl = {
       return res.status(200).json({
         status: 200,
         success: true,
-        score:score,
         msg: 'Rated film successfully',
       });
     } catch (err) {

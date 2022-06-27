@@ -15,7 +15,6 @@ import {
 import {
   getDetailInfomationDirectorInitiate
 } from "../../Redux/Action/ActionDirector";
-import { RatingFilmInitiate } from "../../Redux/Action/ActionFilmadult";
 import { CheckPaymentInitiate } from "../../Redux/Action/ActionPayment";
 import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
 const Modal = ({ setIsOpenModal, handleHideResult }) => {
@@ -23,11 +22,11 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const { refreshTokens } = useSelector((state) => state.auth);
   const { favFilm } = useSelector((state) => state.comment);
   const { checkPayment } = useSelector((state) => state.payment);
-  const { ratingFilm } = useSelector((state) => state.adult);
   const [favBtn, setFavBTn] = useState(false);
 
   const dispatch = useDispatch();
-  console.log(ratingFilm,'ratingFilm')
+  console.log(findFilm,'findFilm')
+  console.log(checkPayment,'checkPayment')
   const countSeason = (n) => {
     if (n > 1) {
       return `${n} seasons`;
@@ -40,8 +39,8 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
     return `${Math.floor(n / 60)}h ${n % 60}m`;
   };
 
-  const handleRate = (score) => {
-    dispatch(RatingFilmInitiate(refreshTokens,score,findFilm[0]._id))
+  const handleRate = (id) => {
+    console.log(id);
   };
 
   const handleCloseModal = () => {
@@ -187,7 +186,7 @@ useEffect(() => {
                     {filmDetail?.director.map((director)=>{
                       return(
                         <span key={director?._id} className="cast">
-                        <Link to='' onClick={()=>handleInfomationDirector(director?._id)}>{ `${director?.name}`+(director?._id ? ", " : "")}</Link>
+                        <a onClick={()=>handleInfomationDirector(director?._id)}>{ `${director?.name}`+(director?._id ? ", " : "")}</a>
                       </span>
                         
                         
@@ -199,7 +198,7 @@ useEffect(() => {
                    
                   )):"Don't have director"}
                 <span className="cast" style={{ fontStyle: "italic" }}>
-                  <Link to=''>more</Link>
+                  <a>more</a>
                 </span>
               </div>
               <div className="info-genres">
@@ -209,7 +208,7 @@ useEffect(() => {
                 {findFilm[0]?.category &&
                   findFilm[0]?.category.map((genre, index) => (
                     <span key={genre.id} className="genre">
-                      <Link to=''>{(index ? ", " : "") + `${genre?.name}`}</Link>
+                      <a>{(index ? ", " : "") + `${genre?.name}`}</a>
                     </span>
                   ))}
               </div>
@@ -232,7 +231,7 @@ useEffect(() => {
               <div className="about-creator about">
                 <span style={{ color: "grey" }}>Creators: </span>
                 {("movies" === "movies" || "movies" === undefined) && (
-                  <span className="cast">Thanh Tat</span>
+                  <span className="cast">Gia Bao</span>
                 )}
                 {/* {bannerMId.type === "tvShows" &&
                   movies.creatorTv.map((cre, index) => (

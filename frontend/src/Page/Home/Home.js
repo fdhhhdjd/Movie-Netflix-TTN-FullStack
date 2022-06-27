@@ -1,15 +1,15 @@
-import { memo, useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState, memo } from "react";
 import { useSelector } from "react-redux";
 import { GlobalState } from "../../Contexts/GlobalState";
 import { Footer, Header } from "../../imports";
-import { Feature, List, MetaData, Modal } from "../../imports/index";
+import { Feature, List, MetaData, Modal, Watch } from "../../imports/index";
 import { HomeStyle } from "../../Style/StyleHome/HomeStyle";
 const Home = () => {
   const data = useContext(GlobalState);
   const [isOpenModal, setIsOpenModal] = data.modal;
-  const [setAllCategory] = data.AdultApi.cat;
+  const [allCategory,setAllCategory] = data.AdultApi.cat;
   const { allFilmAdult,findFilmAdult} = useSelector((state) => state.adult);
-
+  const { InfoDirector} = useSelector((state) => state.director);
 
   const messageEndRef = useRef(null); 
   const handleHideResult = () => {
