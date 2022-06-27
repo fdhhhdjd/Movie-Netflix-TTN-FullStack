@@ -12,7 +12,7 @@ const Users = () => {
     <TopBar />
     <div className="admin__container">
       <SideBarAdmins />
-      <ManagerUsers />
+      <ManagerUsers /> 
     </div>
   </>
   )
