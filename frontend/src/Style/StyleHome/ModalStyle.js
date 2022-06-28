@@ -22,7 +22,9 @@ export const ModalStyle = createGlobalStyle`
         right: 0;
         height: 2100px;
     }
-
+    .modal-buy-film{
+        background-color:red !important;
+    }
     .fadeOut {
         background-image: linear-gradient(
           rgba(20, 20, 20, 0) 0,

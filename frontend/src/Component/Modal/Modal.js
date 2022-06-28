@@ -15,15 +15,18 @@ import {
 import {
   getDetailInfomationDirectorInitiate
 } from "../../Redux/Action/ActionDirector";
+import { CheckPaymentInitiate } from "../../Redux/Action/ActionPayment";
 import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
 const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const { findFilm } = useSelector((state) => state.film);
   const { refreshTokens } = useSelector((state) => state.auth);
   const { favFilm } = useSelector((state) => state.comment);
+  const { checkPayment } = useSelector((state) => state.payment);
   const [favBtn, setFavBTn] = useState(false);
 
   const dispatch = useDispatch();
-  // console.log(findFilm,'findFilm')
+  console.log(findFilm,'findFilm')
+  console.log(checkPayment,'checkPayment')
   const countSeason = (n) => {
     if (n > 1) {
       return `${n} seasons`;
@@ -49,7 +52,13 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
     dispatch(getDetailInfomationDirectorInitiate(id,refreshTokens));
     
   }
-
+useEffect(() => {
+  if(findFilm.length > 0){
+    dispatch(CheckPaymentInitiate(findFilm[0]?._id,refreshTokens));
+  }
+},[findFilm])
+  
+ 
   const handleToggleFav = () => {
     dispatch(toggleFavInitial(refreshTokens, findFilm[0]._id));
     setFavBTn(!favBtn);
@@ -94,14 +103,26 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
               alt="img_title"
             />
             <div className="modal-btn-icons">
-              <button className="modal-playbtn">
+              
+              {checkPayment.canWatch ? 
+                <button className="modal-playbtn">
                 <Link to={`/watch/${findFilm[0]?._id}`}>
                   <PlayArrowRounded
                     sx={{ marginRight: "10px", fontSize: "1.8em" }}
                   />
                   <span>Play</span>
                 </Link>
+                </button>
+                :
+                <button className="modal-buy-film">
+                <Link to=''>
+                  <PlayArrowRounded
+                    sx={{ marginRight: "10px", fontSize: "1.8em" }}
+                  />
+                  <span>BUY MOVIE</span>
+                </Link>
               </button>
+              }
 
               {favBtn ? (
                 <FavoriteOutlined
@@ -125,7 +146,7 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
           <div className="modal-info-fst">
             <div className="info-left">
               {/* release year, description,... */}
-              <div class="wrapper">
+              <div className="wrapper">
                 {[...Array(5).keys()].reverse().map((item) => {
                   return (
                     <>

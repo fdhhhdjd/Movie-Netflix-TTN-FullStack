@@ -65,9 +65,9 @@ const Comment = ({ filmId }) => {
                       <div className="username">{comment.user?.fullname}</div>
                       <div className="content">{comment.content}</div>
                     </div>
-                    <div class="dropdown">
+                    <div className="dropdown">
                       <button
-                        class="btn btn-secondary dropdown-toggle"
+                        className="btn btn-secondary dropdown-toggle"
                         type="button"
                         id="dropdownMenuButton"
                         data-toggle="dropdown"
@@ -75,16 +75,16 @@ const Comment = ({ filmId }) => {
                         aria-expanded="false"
                       ></button>
                       <div
-                        class="dropdown-menu"
+                        className="dropdown-menu"
                         aria-labelledby="dropdownMenuButton"
                       >
                         <div
                           onClick={() => handleRemoveComment(comment?._id)}
-                          class="dropdown-item"
+                          className="dropdown-item"
                         >
                           Delete Comment
                         </div>
-                        <div class="dropdown-item">Edit Comment</div>
+                        <div className="dropdown-item">Edit Comment</div>
                       </div>
                     </div>
                   </div>
