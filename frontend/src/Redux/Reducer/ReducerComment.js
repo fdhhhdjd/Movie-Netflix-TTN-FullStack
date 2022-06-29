@@ -5,6 +5,7 @@ const initalState = {
   error: null,
   getAllComment: [],
   addComment: [],
+  allfavFilm: [],
   favFilm: [],
 };
 
@@ -34,12 +35,13 @@ const CommentReducer = (state = initalState, action) => {
       return {
         ...state,
         loading: false,
-        favFilm: action.payload,
+        allfavFilm: action.payload,
       };
     case types.TOGGLE_FAV_SUCCESS: {
       return {
         ...state,
         loading: false,
+        favFilm: action.payload,
       };
     }
     case types.GET_COMMENTS_FAIL:

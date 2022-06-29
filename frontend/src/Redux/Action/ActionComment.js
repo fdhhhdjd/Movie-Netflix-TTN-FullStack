@@ -186,7 +186,7 @@ export const toggleFavInitial = (token, id) => async (dispatch) => {
         headers: { Authorization: token },
       }
     );
-console.log(data,'data')
+
     dispatch(toggleFavSucess(data));
   } catch (error) {
     dispatch(toggleFavFail(error));
