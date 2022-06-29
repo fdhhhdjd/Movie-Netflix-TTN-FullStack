@@ -3,26 +3,43 @@ import { useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import {
-  Category, ChangeDirector, ChangePasswordAdmin,
-  Director, Directors, EditProfile,
+  Category,
+  ChangeDirector,
+  ChangePasswordAdmin,
+  Director,
+  Directors,
+  EditProfile,
   Favourite,
   FeedBack,
   Films,
   Forget,
   ForgetAdmin,
-  Loading, Login,
-  Movie, NewDirector,
-  NewFilm, NewUsers, PrivateRouter,
+  Loading,
+  Login,
+  Movie,
+  NewDirector,
+  NewFilm,
+  NewUsers,
+  PrivateRouter,
   PrivateRouterAuth,
   Profile,
   Rating,
   Register,
   Reset,
-  ResetAdmin, Users, Watch
+  ResetAdmin,
+  Users,
+  Watch,
+  PaymentTransfers,
 } from "./imports/index";
 import {
   Admin,
-  Home, Information, LoginAdmin, NotFound, ProfileAdmin, ProfileGate, Welcome
+  Home,
+  Information,
+  LoginAdmin,
+  NotFound,
+  ProfileAdmin,
+  ProfileGate,
+  Welcome,
 } from "./imports/LazyRouter";
 function App() {
   const { profile } = useSelector((state) => state.auth);
@@ -97,6 +114,9 @@ function App() {
           </Route>
           <Route element={<PrivateRouter />}>
             <Route path="/directors" element={<Directors />} />
+          </Route>
+          <Route element={<PrivateRouter />}>
+            <Route path="/paymentTransfer/:id" element={<PaymentTransfers />} />
           </Route>
 
           {/* ********* ADMIN ********* */}

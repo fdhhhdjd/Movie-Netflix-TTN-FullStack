@@ -15,7 +15,7 @@ const List = ({ setIsOpenModal, category, dataFilmCategory }) => {
   useEffect(() => {
     const handle = setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(handle);
   }, []);

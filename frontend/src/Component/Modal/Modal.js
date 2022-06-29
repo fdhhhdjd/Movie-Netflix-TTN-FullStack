@@ -1,20 +1,20 @@
 import {
   Close,
-  FavoriteBorder, FavoriteOutlined, PlayArrowRounded
+  FavoriteBorder,
+  FavoriteOutlined,
+  PlayArrowRounded,
 } from "@material-ui/icons";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { mainMovie, recMovies } from "../../imports/import";
 import { Comment, Recommend } from "../../imports/index";
 import {
   resetCommentState,
-  toggleFavInitial
+  toggleFavInitial,
 } from "../../Redux/Action/ActionComment";
-import {
-  getDetailInfomationDirectorInitiate
-} from "../../Redux/Action/ActionDirector";
+import { getDetailInfomationDirectorInitiate } from "../../Redux/Action/ActionDirector";
 import { CheckPaymentInitiate } from "../../Redux/Action/ActionPayment";
 import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
 const Modal = ({ setIsOpenModal, handleHideResult }) => {
@@ -23,10 +23,8 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const { favFilm } = useSelector((state) => state.comment);
   const { checkPayment } = useSelector((state) => state.payment);
   const [favBtn, setFavBTn] = useState(false);
-
+  const Navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(findFilm,'findFilm')
-  console.log(checkPayment,'checkPayment')
   const countSeason = (n) => {
     if (n > 1) {
       return `${n} seasons`;
@@ -48,17 +46,14 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
     dispatch(resetCommentState());
   };
   const handleInfomationDirector = (id) => {
-    console.log("idneeeeeeeeeeeeeeeeee",id)
-    dispatch(getDetailInfomationDirectorInitiate(id,refreshTokens));
-    
-  }
-useEffect(() => {
-  if(findFilm.length > 0){
-    dispatch(CheckPaymentInitiate(findFilm[0]?._id,refreshTokens));
-  }
-},[findFilm])
-  
- 
+    dispatch(getDetailInfomationDirectorInitiate(id, refreshTokens));
+  };
+  useEffect(() => {
+    if (findFilm.length > 0) {
+      dispatch(CheckPaymentInitiate(findFilm[0]?._id, refreshTokens));
+    }
+  }, [findFilm]);
+
   const handleToggleFav = () => {
     dispatch(toggleFavInitial(refreshTokens, findFilm[0]._id));
     setFavBTn(!favBtn);
@@ -103,26 +98,25 @@ useEffect(() => {
               alt="img_title"
             />
             <div className="modal-btn-icons">
-              
-              {checkPayment.canWatch ? 
+              {checkPayment.canWatch ? (
                 <button className="modal-playbtn">
-                <Link to={`/watch/${findFilm[0]?._id}`}>
-                  <PlayArrowRounded
-                    sx={{ marginRight: "10px", fontSize: "1.8em" }}
-                  />
-                  <span>Play</span>
-                </Link>
+                  <Link to={`/watch/${findFilm[0]?._id}`}>
+                    <PlayArrowRounded
+                      sx={{ marginRight: "10px", fontSize: "1.8em" }}
+                    />
+                    <span>Play</span>
+                  </Link>
                 </button>
-                :
+              ) : (
                 <button className="modal-buy-film">
-                <Link to=''>
-                  <PlayArrowRounded
-                    sx={{ marginRight: "10px", fontSize: "1.8em" }}
-                  />
-                  <span>BUY MOVIE</span>
-                </Link>
-              </button>
-              }
+                  <Link to={`/paymentTransfer/${findFilm[0]?._id}`}>
+                    <PlayArrowRounded
+                      sx={{ marginRight: "10px", fontSize: "1.8em" }}
+                    />
+                    <span>BUY MOVIE</span>
+                  </Link>
+                </button>
+              )}
 
               {favBtn ? (
                 <FavoriteOutlined
@@ -178,25 +172,26 @@ useEffect(() => {
                 <span className="preview-cast" style={{ color: "grey" }}>
                   Cast:{" "}
                 </span>
-                {findFilm ?
-                  findFilm?.map((filmDetail) => (
-              
-                   <>
-
-                    {filmDetail?.director.map((director)=>{
-                      return(
-                        <span key={director?._id} className="cast">
-                        <a onClick={()=>handleInfomationDirector(director?._id)}>{ `${director?.name}`+(director?._id ? ", " : "")}</a>
-                      </span>
-                        
-                        
-                      )
-                    })}
-                   </>
-                    
-
-                   
-                  )):"Don't have director"}
+                {findFilm
+                  ? findFilm?.map((filmDetail) => (
+                      <>
+                        {filmDetail?.director.map((director) => {
+                          return (
+                            <span key={director?._id} className="cast">
+                              <a
+                                onClick={() =>
+                                  handleInfomationDirector(director?._id)
+                                }
+                              >
+                                {`${director?.name}` +
+                                  (director?._id ? ", " : "")}
+                              </a>
+                            </span>
+                          );
+                        })}
+                      </>
+                    ))
+                  : "Don't have director"}
                 <span className="cast" style={{ fontStyle: "italic" }}>
                   <a>more</a>
                 </span>
