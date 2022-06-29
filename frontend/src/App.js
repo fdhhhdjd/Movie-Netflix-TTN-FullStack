@@ -29,7 +29,7 @@ import {
   ResetAdmin,
   Users,
   Watch,
-  FavouriteAdmin,
+  PaymentTransfers,
 } from "./imports/index";
 import {
   Admin,
@@ -116,6 +116,9 @@ function App() {
           </Route>
           <Route element={<PrivateRouter />}>
             <Route path="/directors" element={<Directors />} />
+          </Route>
+          <Route element={<PrivateRouter />}>
+            <Route path="/paymentTransfer/:id" element={<PaymentTransfers />} />
           </Route>
 
           {/* ********* ADMIN ********* */}

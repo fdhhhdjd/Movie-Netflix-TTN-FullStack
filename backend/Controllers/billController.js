@@ -60,7 +60,7 @@ const billCtrl = {
     try {
       const userId = req.user.id;
       const { mode_of_payment, id_payment, filmId, price } = req.body;
-
+      console.log(mode_of_payment, id_payment, filmId, price);
       const newBill = new Bills({
         user: userId,
         film: filmId,
@@ -77,7 +77,7 @@ const billCtrl = {
         msg: "Purchased film success, you can watch this film",
       });
     } catch (error) {
-      return res.status(400).json({
+      return res.json({
         status: 400,
         success: false,
         msg: "Failed to purchase",

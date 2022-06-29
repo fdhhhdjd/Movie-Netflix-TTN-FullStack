@@ -2,15 +2,17 @@ import * as types from "../ActionTypes";
 const initialState = {
   loading: false,
   error: null,
-  checkPayment:[],
-  createBill:[],
-  modeOfPayment:[],
+  checkPayment: [],
+  createBill: [],
+  modeOfPayment: [],
+  paypal: [],
 };
 const CheckPaymentReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.CHECK_PAYMENT_START:
     case types.CREATE_BILL_START:
     case types.GET_ALL_MODE_PAYMENT_START:
+    case types.PAYMENT_PAYPAL_START:
       return {
         ...state,
         loading: true,
@@ -33,10 +35,16 @@ const CheckPaymentReducer = (state = initialState, action) => {
         loading: false,
         modeOfPayment: action.payload,
       };
-
+    case types.PAYMENT_PAYPAL_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        paypal: action.payload,
+      };
     case types.CHECK_PAYMENT_FAIL:
     case types.CREATE_BILL_FAIL:
     case types.GET_ALL_MODE_PAYMENT_FAIL:
+    case types.PAYMENT_PAYPAL_FAIL:
       return {
         ...state,
         loading: false,

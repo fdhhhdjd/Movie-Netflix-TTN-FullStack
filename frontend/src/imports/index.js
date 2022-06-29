@@ -48,6 +48,8 @@ export { default as Films } from "../Page/Admins/Films";
 export { default as NewFilm } from "../Component/Admins/NewFilm";
 // export { default as NewFilm } from "../Component/Admins/NewFilm";
 export { default as FavouriteAdmin } from "../Component/Admins/Favourite";
+export { default as PaymentTransfers } from "../Component/PaymentTransfers/PaymentTransfers";
+// export { default as Favourite } from "../Component/Admins/Favourite";
 export { default as Users } from "../Component/Admins/Users";
 export { default as NewUsers } from "../Component/Admins/NewUsers";
 export { Rating } from "../Component/Admins/Rating";
