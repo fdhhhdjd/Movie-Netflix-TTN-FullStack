@@ -10,7 +10,7 @@ const Home = () => {
   const [allCategory,setAllCategory] = data.AdultApi.cat;
   const { allFilmAdult,findFilmAdult} = useSelector((state) => state.adult);
   const { InfoDirector} = useSelector((state) => state.director);
-
+  console.log(allFilmAdult)
   const messageEndRef = useRef(null); 
   const handleHideResult = () => {
     setIsOpenModal(false);

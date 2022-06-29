@@ -18,7 +18,7 @@ import {
   Rating,
   Register,
   Reset,
-  ResetAdmin, Users, Watch
+  ResetAdmin, Users, Watch,FavouriteAdmin
 } from "./imports/index";
 import {
   Admin,
@@ -131,7 +131,7 @@ function App() {
           {/* Rating for Film */}
           <Route path="/rating" element={<Rating />} />
           {/* Favourite */}
-          {/* <Route path="/favourite" element={<Favourite />} /> */}
+          <Route path="/favouriteAdmin" element={<FavouriteAdmin />} />
           {/* Shared */}
           <Route path="*" element={<NotFound />} />
         </Routes>
