@@ -17,12 +17,16 @@ import {
 import { getDetailInfomationDirectorInitiate } from "../../Redux/Action/ActionDirector";
 import { CheckPaymentInitiate } from "../../Redux/Action/ActionPayment";
 import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
+import { RatingFilmInitiate } from "../../Redux/Action/ActionFilmadult";
 const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const { findFilm } = useSelector((state) => state.film);
   const { refreshTokens } = useSelector((state) => state.auth);
   const { favFilm } = useSelector((state) => state.comment);
   const { checkPayment } = useSelector((state) => state.payment);
   const [favBtn, setFavBTn] = useState(false);
+  const { ratingFilm } = useSelector((state) => state.adult);
+
+  console.log(favFilm ,'favFilm ')
   const Navigate = useNavigate();
   const dispatch = useDispatch();
   const countSeason = (n) => {
@@ -37,8 +41,8 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
     return `${Math.floor(n / 60)}h ${n % 60}m`;
   };
 
-  const handleRate = (id) => {
-    console.log(id);
+  const handleRate = (score) => {
+    dispatch(RatingFilmInitiate(refreshTokens,score,findFilm[0]._id))
   };
 
   const handleCloseModal = () => {
@@ -193,7 +197,7 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
                     ))
                   : "Don't have director"}
                 <span className="cast" style={{ fontStyle: "italic" }}>
-                  <a>more</a>
+                <Link to=''>more</Link>
                 </span>
               </div>
               <div className="info-genres">
@@ -203,7 +207,7 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
                 {findFilm[0]?.category &&
                   findFilm[0]?.category.map((genre, index) => (
                     <span key={genre.id} className="genre">
-                      <a>{(index ? ", " : "") + `${genre?.name}`}</a>
+                    <Link to=''>{(index ? ", " : "") + `${genre?.name}`}</Link>
                     </span>
                   ))}
               </div>
@@ -226,7 +230,7 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
               <div className="about-creator about">
                 <span style={{ color: "grey" }}>Creators: </span>
                 {("movies" === "movies" || "movies" === undefined) && (
-                  <span className="cast">Gia Bao</span>
+                  <span className="cast">Thanh Tat</span>
                 )}
                 {/* {bannerMId.type === "tvShows" &&
                   movies.creatorTv.map((cre, index) => (

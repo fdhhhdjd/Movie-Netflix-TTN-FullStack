@@ -5,11 +5,14 @@ import { Feature, Modal, List, MetaData } from "../../imports/index";
 import { GlobalState } from "../../Contexts/GlobalState";
 import { useContext } from "react";
 import { spacing } from "@material-ui/system";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Movie = () => {
   const data = useContext(GlobalState);
   const [allCategory,setAllCategory] = data.AdultApi.cat;
   const [isOpenModal, setIsOpenModal] = data.modal;
   const [openSort,setOpenSort]= useState(false);
+  const { findFilmAdult} = useSelector((state) => state.adult);
   return (
     <>
       <Header />
@@ -36,15 +39,15 @@ const Movie = () => {
                       className="dropdown-menu"
                       aria-labelledby="dropdownMenuButton"
                     >
-                      <a className="dropdown-item" href="#">
+                      <Link to="" className="dropdown-item" href="#">
                         Action
-                      </a>
-                      <a className="dropdown-item" href="#">
+                      </Link>
+                      <Link to="" className="dropdown-item" href="#">
                         Adventure
-                      </a>
-                      <a className="dropdown-item" href="#">
+                      </Link>
+                      <Link to="" className="dropdown-item" href="#">
                         Animals
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -113,14 +116,16 @@ const Movie = () => {
                 </div>
               </div>
               <div className="page-movie-body">
-              {
-                allCategory?.map((film)=>{
-                  return(
-                    <List  key={film.id} category={film.id} name={film.name} setIsOpenModal={setIsOpenModal} />
-                  )
-                }
-                )
-              }
+              {findFilmAdult?.map((film, index) => {
+            return (
+              <List
+                key={index}
+                category={film.category}
+                dataFilmCategory={film.data}
+                setIsOpenModal={setIsOpenModal}
+              />
+            );
+          })}
               </div>
             </div>
           </div>

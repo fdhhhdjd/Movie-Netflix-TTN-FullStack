@@ -16,7 +16,7 @@ const Ratings = () => {
   const [callback, setCallback] = state.callback;
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  console.log(rating)
+  // console.log(rating)
   const img =
     "https://png.pngtree.com/png-clipart/20190924/original/pngtree-businessman-user-avatar-free-vector-png-image_4827807.jpg";
 
@@ -59,9 +59,9 @@ const Ratings = () => {
     },
      },
     {
-      field: "ten_hinhthuc",
-      headerName: "User",
-      width: 250,
+      field: "user",
+      headerName: "UseName",
+      width:160 ,
       renderCell: (params) => {
         return (
           <div className="productListItem">
@@ -75,11 +75,22 @@ const Ratings = () => {
         );
       },
     },
-    { field: "score", headerName: "Rating Star ⭐", width: 170 },
     {
-      field: "title",
-      headerName: " Film",
-      width: 400,
+      field: "score",
+      headerName: "Rating Star ⭐",
+      width: 190,
+      renderCell: (params) => {
+        return (
+          <div className="productListItem">
+            <span>{params.row.score} ⭐</span>
+          </div>
+        );
+      },
+    },
+    {
+      field: " Films are rated",
+      headerName: " Films are rated",
+      width: 300,
       renderCell: (params) => {
         return <div className="productListItem">
                       <img

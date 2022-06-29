@@ -41,11 +41,13 @@ import {
   ProfileGate,
   Welcome,
 } from "./imports/LazyRouter";
+import PrivateRouterAdmin from "./Page/PrivateRouterUser/PrivateRouterAdmin";
+import PrivateAdmin from "./Page/PrivateRouterUser/PrivateAdmin";
 function App() {
   const { profile } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   useEffect(() => {
-    if (profile?.adult == "" || profile?.password == "null") {
+    if (profile?.adult === "" || profile?.password === "null") {
       navigate("/browse");
     }
   }, [profile]);
@@ -121,37 +123,72 @@ function App() {
 
           {/* ********* ADMIN ********* */}
           {/* Login Admin */}
-          <Route path="/loginadmin" element={<LoginAdmin />} />
+          <Route element={<PrivateRouterAdmin />}>
+            <Route path="/loginadmin" element={<LoginAdmin />} />
+          </Route>
           {/* Home Admin */}
-          <Route path="/admin" element={<Admin />} />
+          <Route element={<PrivateAdmin />}>
+            <Route path="/admin" element={<Admin />} />
+          </Route>
           {/* Forget Password Admin */}
           <Route path="/forgetadmin" element={<ForgetAdmin />} />
           {/* Profile Admin */}
-          <Route path="/profileadmin" element={<ProfileAdmin />} />
+          <Route element={<PrivateAdmin />}>
+            <Route path="/profileadmin" element={<ProfileAdmin />} />
+          </Route>
           {/* Reset Password Admin */}
           <Route path="/password/reset/:token" element={<ResetAdmin />} />
           {/* Change Password Admin */}
-          <Route path="/changepassword/" element={<ChangePasswordAdmin />} />
+          <Route element={<PrivateAdmin />}>
+            <Route path="/changepassword/" element={<ChangePasswordAdmin />} />
+          </Route>
           {/* Manager Director */}
-          <Route path="/users" element={<Users />} />
-          <Route path="/newusers/:tokens" element={<NewUsers />} />
-          <Route path="/director" element={<Director />} />
+          <Route element={<PrivateAdmin />}>
+            <Route path="/users" element={<Users />} />
+          </Route>
+
+          <Route element={<PrivateAdmin />}>
+            <Route path="/newusers/:tokens" element={<NewUsers />} />
+          </Route>
+
+          <Route element={<PrivateAdmin />}>
+            <Route path="/director" element={<Director />} />
+          </Route>
           {/* Edit Film */}
-          <Route path="/changeDirector/:tokens" element={<ChangeDirector />} />
+          <Route element={<PrivateAdmin />}>
+            <Route
+              path="/changeDirector/:tokens"
+              element={<ChangeDirector />}
+            />
+          </Route>
           {/* Add Director */}
-          <Route path="/newDirector" element={<NewDirector />} />
+          <Route element={<PrivateAdmin />}>
+            <Route path="/newDirector" element={<NewDirector />} />
+          </Route>
           {/* Manager Category */}
-          <Route path="/category" element={<Category />} />
+          <Route element={<PrivateAdmin />}>
+            <Route path="/category" element={<Category />} />
+          </Route>
           {/* Manager Film */}
-          <Route path="/film" element={<Films />} />
+          <Route element={<PrivateAdmin />}>
+            <Route path="/film" element={<Films />} />
+          </Route>
           {/* Add Film */}
-          <Route path="/newFilm" element={<NewFilm />} />
+          <Route element={<PrivateAdmin />}>
+            <Route path="/newFilm" element={<NewFilm />} />
+          </Route>
           {/* Edit Film */}
-          <Route path="/newFilm:tokens" element={<NewFilm />} />
+          <Route element={<PrivateAdmin />}>
+            <Route path="/newFilm:tokens" element={<NewFilm />} />
+          </Route>
           {/* Rating for Film */}
-          <Route path="/rating" element={<Rating />} />
+          <Route element={<PrivateAdmin />}>
+            <Route path="/rating" element={<Rating />} />
+          </Route>
           {/* Favourite */}
-          {/* <Route path="/favourite" element={<Favourite />} /> */}
+          <Route element={<PrivateAdmin />}>
+            <Route path="/favouriteadmin" element={<FavouriteAdmin />} />
+          </Route>
           {/* Shared */}
           <Route path="*" element={<NotFound />} />
         </Routes>

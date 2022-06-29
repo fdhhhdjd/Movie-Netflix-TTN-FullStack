@@ -32,7 +32,7 @@ const SideBarAdmins = () => {
         setActiveTab("Users");
       } else if (location.pathname === "/film") {
         setActiveTab("Films");
-      } else if (location.pathname === "/favourite") {
+      } else if (location.pathname === "/favouriteAdmin") {
         setActiveTab("Favourite");
       } else if (location.pathname === "/category") {
         setActiveTab("Category");
@@ -191,7 +191,7 @@ const SideBarAdmins = () => {
                   Rating
                 </li>
               </Link>
-              <Link to="/favourite" className="link">
+              <Link to="/favouriteAdmin" className="link">
                 <li
                   className={` sidebarListItem  ${
                     activeTab === "Favourite" ? "active" : ""

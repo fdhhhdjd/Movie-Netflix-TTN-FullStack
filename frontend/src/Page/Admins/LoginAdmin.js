@@ -17,7 +17,7 @@ const LoginAdmin = () => {
   useEffect(() => {
     if (AdminRegister.status === 200) {
       setFlag(false);
-      localStorage.setItem("firstLogin", true);
+      localStorage.setItem("firstLoginAdmin", true);
       toast.success(`${AdminRegister.msg}`);
       dispatch(clearErrors());
     }
