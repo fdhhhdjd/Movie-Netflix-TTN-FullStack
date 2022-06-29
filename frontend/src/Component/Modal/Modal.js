@@ -13,6 +13,7 @@ import { Comment, Recommend } from "../../imports/index";
 import {
   resetCommentState,
   toggleFavInitial,
+  ToggleFavInitiate,
 } from "../../Redux/Action/ActionComment";
 import { getDetailInfomationDirectorInitiate } from "../../Redux/Action/ActionDirector";
 import { CheckPaymentInitiate } from "../../Redux/Action/ActionPayment";
@@ -21,12 +22,12 @@ import { RatingFilmInitiate } from "../../Redux/Action/ActionFilmadult";
 const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const { findFilm } = useSelector((state) => state.film);
   const { refreshTokens } = useSelector((state) => state.auth);
-  const { favFilm } = useSelector((state) => state.comment);
+  const { favFilm,allfavFilm } = useSelector((state) => state.comment);
   const { checkPayment } = useSelector((state) => state.payment);
   const [favBtn, setFavBTn] = useState(false);
   const { ratingFilm } = useSelector((state) => state.adult);
 
-  console.log(favFilm ,'favFilm ')
+  console.log(allfavFilm ,'allfavFilm')
   const Navigate = useNavigate();
   const dispatch = useDispatch();
   const countSeason = (n) => {
@@ -126,11 +127,11 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
                 <FavoriteOutlined
                   sx={{ fontSize: "2.5vw" }}
                   className="modal-icon"
-                  onClick={() => handleToggleFav()}
+                  onClick={ handleToggleFav}
                 />
               ) : (
                 <FavoriteBorder
-                  onClick={() => handleToggleFav()}
+                  onClick={ handleToggleFav}
                   sx={{ fontSize: "2.5vw" }}
                   className="modal-icon"
                 />

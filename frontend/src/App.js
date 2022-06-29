@@ -30,6 +30,7 @@ import {
   Users,
   Watch,
   PaymentTransfers,
+  FavouriteAdmin
 } from "./imports/index";
 import {
   Admin,
@@ -40,6 +41,7 @@ import {
   ProfileAdmin,
   ProfileGate,
   Welcome,
+  
 } from "./imports/LazyRouter";
 import PrivateRouterAdmin from "./Page/PrivateRouterUser/PrivateRouterAdmin";
 import PrivateAdmin from "./Page/PrivateRouterUser/PrivateAdmin";
