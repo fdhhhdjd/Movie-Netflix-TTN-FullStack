@@ -55,8 +55,8 @@ const Favourites = () => {
     { field: "_id", headerName: "ID", width: 150 },
 
     {
-      field: "ten_hinhthu   c",
-      headerName: "Name Payment",
+      field: "UserName",
+      headerName: "UserName",
       width: 250,
       renderCell: (params) => {
         return (
@@ -90,7 +90,7 @@ const Favourites = () => {
       headerName: "Date Create",
       width: 160,
       renderCell: (params) => {
-        console.log(params);
+      
         return (
           <div className="userListUser">
             {moment(`${params.row.createdAt}`).format("Do MMM YYYY")}
@@ -103,7 +103,7 @@ const Favourites = () => {
       headerName: "Date UpdateAt",
       width: 170,
       renderCell: (params) => {
-        console.log(params);
+     
         return (
           <div className="userListUser">
             {moment(`${params.row.updatedAt}`).format("Do MMM YYYY")}

@@ -60,6 +60,18 @@ export const FindFilmCateAdultFail = (error) => ({
   type: types.GET_FILM_CATEGORY_ADULT_FAIL,
   payload: error,
 });
+//user action rating
+export const RatingFilmStart = () => ({
+  type: types.RATING_FILM_START,
+});
+export const RatingFilmSuccess = (token) => ({
+  type: types.RATING_FILM_SUCCESS,
+  payload: token,
+});
+export const RatingFilmFail = (error) => ({
+  type: types.RATING_FILM_FAIL,
+  payload: error,
+});
 //!Update Adult
 export const UpdateAdultInitiate = (adult, refreshTokens) => {
   return async function (dispatch) {
@@ -138,6 +150,25 @@ export const FindFilmCateKidInitiate = ( token) => {
       dispatch(FindFilmCateKidSuccess(data.results));
     } catch (error) {
       dispatch(FindFilmCateKidFail(error));
+    }
+  };
+};
+//user action rating
+export const RatingFilmInitiate = ( token,score,id) => {
+  return async function (dispatch) {
+    try {
+      dispatch(RatingFilmStart());
+      const { data } = await axios.post(`/api/rating/add/${id}`, {
+        score,
+      },
+      {
+       
+        headers: { Authorization: token },
+      });
+      console.log('datarating',data)
+      dispatch(RatingFilmSuccess(data));
+    } catch (error) {
+      dispatch(RatingFilmFail(error));
     }
   };
 };
