@@ -17,18 +17,18 @@ const Favourite = () => {
   const data = useContext(GlobalState);
   const [isOpenModal, setIsOpenModal] = data.modal;
   const { refreshTokens } = useSelector((state) => state.auth);
-  const { favFilm } = useSelector((state) => state.comment);
+  const { favFilm,allfavFilm } = useSelector((state) => state.comment);
   const dispatch = useDispatch();
   const favList = [];
-
+  console.log('allfavFil',allfavFilm)
   useEffect(() => {
     if (refreshTokens.length > 0) {
       dispatch(getFavInitial(refreshTokens));
     }
   }, [refreshTokens]);
 
-  if (favFilm.length > 0) {
-    favFilm.map((item) => {
+  if (allfavFilm.length > 0) {
+    allfavFilm.map((item) => {
       favList.push(item.film);
     });
   }

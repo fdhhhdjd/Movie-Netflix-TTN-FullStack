@@ -6,6 +6,7 @@ const initialState = {
   allFilmAdult: [],
   findFilmAdult: [],
   ratingFilm:[],
+  ratingOfUser:[],
 };
 const AdultReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -15,6 +16,7 @@ const AdultReducer = (state = initialState, action) => {
     case types.GET_FILM_CATEGORY_ADULT_START:
     case types.GET_FILM_CATEGORY_KID_START:
       case types.RATING_FILM_START:
+      case types.RATING_OF_USER_START:
       return {
         ...state,
         loading: true,
@@ -38,6 +40,12 @@ const AdultReducer = (state = initialState, action) => {
           loading: false,
           ratingFilm: action.payload,
         };
+      case types.RATING_OF_USER_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          ratingOfUser: action.payload,
+        };
     case types.GET_FILM_CATEGORY_ADULT_SUCCESS:
     case types.GET_FILM_CATEGORY_KID_SUCCESS:
       return {
@@ -52,6 +60,7 @@ const AdultReducer = (state = initialState, action) => {
     case types.GET_FILM_CATEGORY_ADULT_FAIL:
     case types.GET_FILM_CATEGORY_KID_FAIL:
       case types.RATING_FILM_FAIL:
+      case types.RATING_OF_USER_FAIL:
       return {
         ...state,
         loading: false,

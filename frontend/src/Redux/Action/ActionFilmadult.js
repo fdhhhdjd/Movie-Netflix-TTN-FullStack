@@ -72,6 +72,18 @@ export const RatingFilmFail = (error) => ({
   type: types.RATING_FILM_FAIL,
   payload: error,
 });
+//user action rating
+export const RatingOfUserStart = () => ({
+  type: types.RATING_OF_USER_START,
+});
+export const RatingOfUserSuccess = (token) => ({
+  type: types.RATING_OF_USER_SUCCESS,
+  payload: token,
+});
+export const RatingOfUserFail = (error) => ({
+  type: types.RATING_OF_USER_FAIL,
+  payload: error,
+});
 //!Update Adult
 export const UpdateAdultInitiate = (adult, refreshTokens) => {
   return async function (dispatch) {
@@ -169,6 +181,21 @@ export const RatingFilmInitiate = ( token,score,id) => {
       dispatch(RatingFilmSuccess(data));
     } catch (error) {
       dispatch(RatingFilmFail(error));
+    }
+  };
+};
+//user action rating
+export const RatingOfUserInitiate = (refreshTokens) => {
+  return async function (dispatch) {
+    try {
+      dispatch(RatingOfUserStart());
+      const { data } = await axios.get(`/api/rating/allrating`, {
+        headers: { Authorization: refreshTokens },
+      });
+      console.log('datarating',data)
+      dispatch(RatingOfUserSuccess(data?.data));
+    } catch (error) {
+      dispatch(RatingOfUserFail(error));
     }
   };
 };

@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Paypal from "../../Component/Paypal/Paypal";
+import {PaymentStyle} from '../../Style/Payment/PaymentStyle'
 import { PaypalInitiate } from "../../Redux/Action/ActionPayment";
+import Header from "../Header/Header";
+import Footer from "../Sidebar/Footer";
 const PaymentTransfers = () => {
   const { id } = useParams();
   const { allFilmAdult } = useSelector((state) => state.adult);
@@ -39,14 +42,23 @@ const PaymentTransfers = () => {
   }, [paypal]);
   return (
     <React.Fragment>
+    <PaymentStyle/>
+    <Header />
+    <div className="payment  d-flex justify-content-center flex-column align-items-center">
+    
+      <h2 className="mb-5">Payment methods</h2>
+      <div className="d-flex  justify-content-between">
       {total > 0 && (
-        <button>
+        <button >
           <Paypal total={total} tranSuccess={tranSuccess} />
         </button>
       )}
 
-      <button>Stripe</button>
-      <button>An Binh</button>
+      <button className='mode-payment mx-5'>Stripe</button>
+      <button className='mode-payment'> An Binh</button>
+       </div>
+    </div>
+    <Footer />
     </React.Fragment>
   );
 };

@@ -11,7 +11,11 @@ const Home = () => {
   const [allCategory, setAllCategory] = data.AdultApi.cat;
   const { allFilmAdult, findFilmAdult } = useSelector((state) => state.adult);
   const { InfoDirector } = useSelector((state) => state.director);
-
+  const { ratingOfUser, ratingFilm } = useSelector((state) => state.adult);
+  const { refreshTokens,profile } = useSelector((state) => state.auth);
+  const UserHaveRating = ratingOfUser?.filter(
+    (pro) => pro.user._id === profile._id
+    );
   const messageEndRef = useRef(null);
   const handleHideResult = () => {
     setIsOpenModal(false);
@@ -59,10 +63,11 @@ const Home = () => {
         ref={messageEndRef}
       >
         <Header />
-        {isOpenModal && (
+        {isOpenModal &&  (
           <Modal
             setIsOpenModal={setIsOpenModal}
             handleHideResult={handleHideResult}
+            UserHaveRating={UserHaveRating}
           />
         )}
         <div className={isOpenModal ? "home__content" : ""}>

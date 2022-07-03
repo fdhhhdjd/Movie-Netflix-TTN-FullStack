@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCommentInitiate } from "../../Redux/Action/ActionComment";
 import { FindFilmInitiate } from "../../Redux/Action/ActionFilmAdmin";
+import { RatingOfUserInitiate } from "../../Redux/Action/ActionFilmadult";
 import { ListItemStyle } from "../../Style/StyleHome/ListItemStyle";
 export default function ListItem({
   image,
@@ -27,6 +28,7 @@ export default function ListItem({
   const handleModal = (id) => {
     dispatch(FindFilmInitiate(id, refreshTokens));
     dispatch(getCommentInitiate(id, refreshTokens));
+    // dispatch(RatingOfUserInitiate(refreshTokens))
     setIsOpenModal(true);
   };
 

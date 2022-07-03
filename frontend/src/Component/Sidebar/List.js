@@ -59,15 +59,13 @@ const List = ({ setIsOpenModal, category, dataFilmCategory }) => {
       <ListStyle />
       <section className="list">
         <span className="list-title">
-          {!loading ? (
+          {
             category ? (
               category
             ) : (
               "Favourite Films"
             )
-          ) : (
-            <LoadingSkeleton type="listTitle"></LoadingSkeleton>
-          )}
+        }
         </span>
         <div className="wrapper">
           <ArrowBackIosOutlined
@@ -101,7 +99,7 @@ const List = ({ setIsOpenModal, category, dataFilmCategory }) => {
               ? dataFilmCategory.map((film, index) => {
                   return (
                     <Fragment key={film._id}>
-                      {!loading ? (
+                      {
                         <ListItem
                           setIsOpenModal={setIsOpenModal}
                           image={film.image_film.url}
@@ -112,9 +110,7 @@ const List = ({ setIsOpenModal, category, dataFilmCategory }) => {
                           id={film._id}
                           index={index}
                         />
-                      ) : (
-                        <LoadingSkeleton type="listImg" />
-                      )}
+                      }
                     </Fragment>
                   );
                 })
@@ -123,7 +119,7 @@ const List = ({ setIsOpenModal, category, dataFilmCategory }) => {
                     ? allFilmAdult.data.map((film, index) => {
                         return (
                           <Fragment key={film._id}>
-                            {!loading ? (
+                            {
                               <ListItem
                                 setIsOpenModal={setIsOpenModal}
                                 image={film.image_film.url}
@@ -134,9 +130,7 @@ const List = ({ setIsOpenModal, category, dataFilmCategory }) => {
                                 id={film._id}
                                 index={index}
                               />
-                            ) : (
-                              <LoadingSkeleton type="listImg" />
-                            )}
+                            }
                           </Fragment>
                         );
                       })
