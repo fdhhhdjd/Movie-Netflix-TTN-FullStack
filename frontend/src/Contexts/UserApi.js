@@ -4,6 +4,7 @@ import { ProfileInitiate } from "../Redux/Action/ActionAuth";
 import { getCommentInitiate, getFavInitial } from "../Redux/Action/ActionComment";
 import { getInfomationDirectorInitiate } from "../Redux/Action/ActionDirector";
 import { GetAllCategoryInitiate } from "../Redux/Action/ActionFilmAdmin";
+import { RatingOfUserInitiate } from "../Redux/Action/ActionFilmadult";
 
 const UserApi = (token, updateAdult) => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const UserApi = (token, updateAdult) => {
       dispatch(GetAllCategoryInitiate(token));
       dispatch(getInfomationDirectorInitiate(token))
       dispatch(getFavInitial(token))
+      dispatch(RatingOfUserInitiate(token))
     }
   }, [token, updateAdult]);
 

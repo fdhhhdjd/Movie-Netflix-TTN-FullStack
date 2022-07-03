@@ -24,7 +24,7 @@ const Profile = () => {
             <div>
               <div>
                 <h4>Full Name</h4>
-                <p>{auth.fullname || "Chưa thêm đầy đủ tên"}</p>
+                <p>{auth.fullname || "Full name not added yet"}</p>
               </div>
               <div>
                 <h4>Email</h4>
@@ -32,20 +32,20 @@ const Profile = () => {
               </div>
               <div>
                 <h4>Phone</h4>
-                <p>{auth.phone_number || "Chưa thêm số điện thoại"}</p>
+                <p>{auth.phone_number || "No phone number added yet"}</p>
               </div>
               <div>
                 <h4>Sex</h4>
                 <p>
-                  {(profile.sex === 1 && "Nam") ||
-                    (profile.sex === 0 && "Nữ ") ||
-                    "Chưa có giới tính !"}
+                  {(profile.sex === 1 && "Male") ||
+                    (profile.sex === 0 && "Female ") ||
+                    "No gender yet !"}
                 </p>
               </div>
               <div>
                 <h4>Date</h4>
 
-                <p>{auth.date_of_birth || "Chưa thêm Ngày sinh"}</p>
+                <p>{auth.date_of_birth || "No Date of Birth added yet"}</p>
               </div>
               <div>
                 <h4>Joined On</h4>
@@ -54,7 +54,7 @@ const Profile = () => {
               </div>
 
               <div>
-                <Link to="/orders">My Orders</Link>
+                <Link to="/favourite">My Favourite Film</Link>
                 <Link to="/profile/ChangePassword">Change Password</Link>
               </div>
             </div>

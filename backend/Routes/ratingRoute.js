@@ -8,6 +8,9 @@ const ratingCtrl = require('../Controllers/ratingController.js');
 //Xem đánh giá toàn bộ người dùng
 router.get('/all', auth, authAdmin, ratingCtrl.getAllRating);
 
+//Xem đánh giá toàn bộ người dùng 
+router.get('/allrating', auth, ratingCtrl.getAllRating);
+
 //Đánh giá sao cho bộ phim
 router.post('/add/:filmId', auth, authCustomer, ratingCtrl.ratingFilm);
 

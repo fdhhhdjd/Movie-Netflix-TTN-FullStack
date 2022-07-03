@@ -10,7 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { mainMovie, recMovies } from "../../imports/import";
 import { Comment, Recommend } from "../../imports/index";
+import ReactStars from "react-rating-stars-component";
 import {
+  getFavInitial,
   resetCommentState,
   toggleFavInitial,
   ToggleFavInitiate,
@@ -18,16 +20,40 @@ import {
 import { getDetailInfomationDirectorInitiate } from "../../Redux/Action/ActionDirector";
 import { CheckPaymentInitiate } from "../../Redux/Action/ActionPayment";
 import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
-import { RatingFilmInitiate } from "../../Redux/Action/ActionFilmadult";
-const Modal = ({ setIsOpenModal, handleHideResult }) => {
+import { RatingFilmInitiate, RatingOfUserInitiate } from "../../Redux/Action/ActionFilmadult";
+const Modal = ({ setIsOpenModal, handleHideResult,UserHaveRating }) => {
   const { findFilm } = useSelector((state) => state.film);
-  const { refreshTokens } = useSelector((state) => state.auth);
-  const { favFilm,allfavFilm } = useSelector((state) => state.comment);
+  const { refreshTokens,profile } = useSelector((state) => state.auth);
+  const { favFilm, allfavFilm } = useSelector((state) => state.comment);
   const { checkPayment } = useSelector((state) => state.payment);
-  const [favBtn, setFavBTn] = useState(false);
-  const { ratingFilm } = useSelector((state) => state.adult);
+  const { ratingOfUser, ratingFilm } = useSelector((state) => state.adult);
+   const FavOfFilm = allfavFilm?.find(
+     (pro) => pro.film._id === findFilm[0]?._id
+     );
+     const [favBtn, setFavBTn] = useState(false);
+     useEffect(()=>{
+       if(FavOfFilm)
+       setFavBTn(!favBtn)
+      },[FavOfFilm])
+      console.log("FavOfFilm", FavOfFilm);
+      console.log("favBtn", favBtn);
+      console.log("favFilm", favFilm);
+      const RateOfFilm = UserHaveRating?.find(
+     (pro) => pro.film._id === findFilm[0]?._id
+     );
+     useEffect(() => {
+       if (RateOfFilm?.score) {
+         setScoreRating(RateOfFilm?.score);
+        }
+      }, [RateOfFilm?.score]); 
+      useEffect(()=>{
+        if(RateOfFilm === undefined) {
+          dispatch(RatingOfUserInitiate(refreshTokens))
+          }
 
-  console.log(allfavFilm ,'allfavFilm')
+      },[RateOfFilm])
+      const [scoreRating, setScoreRating] = useState(RateOfFilm?.score);
+      
   const Navigate = useNavigate();
   const dispatch = useDispatch();
   const countSeason = (n) => {
@@ -41,11 +67,9 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
   const countRuntime = (n) => {
     return `${Math.floor(n / 60)}h ${n % 60}m`;
   };
-
-  const handleRate = (score) => {
-    dispatch(RatingFilmInitiate(refreshTokens,score,findFilm[0]._id))
+  const ratingChanged = (newRating) => {
+    dispatch(RatingFilmInitiate(refreshTokens, newRating, findFilm[0]._id));
   };
-
   const handleCloseModal = () => {
     setIsOpenModal(false);
     dispatch(resetCommentState());
@@ -73,10 +97,12 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
       });
     }
   }, []);
-
+ 
   return (
     <>
       <ModalStyle />
+    
+
       <div className="modal-fade"></div>
       <motion.div
         className="modal-container"
@@ -127,11 +153,11 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
                 <FavoriteOutlined
                   sx={{ fontSize: "2.5vw" }}
                   className="modal-icon"
-                  onClick={ handleToggleFav}
+                  onClick={handleToggleFav}
                 />
               ) : (
                 <FavoriteBorder
-                  onClick={ handleToggleFav}
+                  onClick={handleToggleFav}
                   sx={{ fontSize: "2.5vw" }}
                   className="modal-icon"
                 />
@@ -145,20 +171,32 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
           <div className="modal-info-fst">
             <div className="info-left">
               {/* release year, description,... */}
+              <ReactStars
+                count={5}
+                onChange={ratingChanged}
+                size={24}
+                value={scoreRating}
+                emptyIcon={<i className="far fa-star"></i>}
+                fullIcon={<i className="fa fa-star"></i>}
+                activeColor="#ffd700"
+              />
               <div className="wrapper">
-                {[...Array(5).keys()].reverse().map((item) => {
+                {/* {[...Array(5).keys()].reverse().map((item) => {
                   return (
                     <>
-                      <input
+            
+                      
+                       <input
                         type="radio"
                         name="rate"
+                        value={RateOfFilm?.score}
                         id={item}
                         onClick={() => handleRate(item + 1)}
                       />
-                      <label for={item}></label>
+                      <label  onClick={() => handleRate(item + 1)} for=''><i className="fa-solid fa-star"></i></label> 
                     </>
                   );
-                })}
+                })} */}
               </div>
               <span className="info-vote">{mainMovie.rate}% rate</span>
               <span className="info-year">{findFilm[0]?.year_production}</span>
@@ -198,7 +236,7 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
                     ))
                   : "Don't have director"}
                 <span className="cast" style={{ fontStyle: "italic" }}>
-                <Link to=''>more</Link>
+                  <Link to="">more</Link>
                 </span>
               </div>
               <div className="info-genres">
@@ -208,7 +246,9 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
                 {findFilm[0]?.category &&
                   findFilm[0]?.category.map((genre, index) => (
                     <span key={genre.id} className="genre">
-                    <Link to=''>{(index ? ", " : "") + `${genre?.name}`}</Link>
+                      <Link to="">
+                        {(index ? ", " : "") + `${genre?.name}`}
+                      </Link>
                     </span>
                   ))}
               </div>
@@ -264,6 +304,7 @@ const Modal = ({ setIsOpenModal, handleHideResult }) => {
 
         <div className="modal-bot-cover"></div>
       </motion.div>
+    
     </>
   );
 };
