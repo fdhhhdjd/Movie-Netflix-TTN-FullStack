@@ -177,7 +177,6 @@ export const RatingFilmInitiate = ( token,score,id) => {
        
         headers: { Authorization: token },
       });
-      console.log('datarating',data)
       dispatch(RatingFilmSuccess(data));
     } catch (error) {
       dispatch(RatingFilmFail(error));
@@ -192,7 +191,6 @@ export const RatingOfUserInitiate = (refreshTokens) => {
       const { data } = await axios.get(`/api/rating/allrating`, {
         headers: { Authorization: refreshTokens },
       });
-      console.log('datarating',data)
       dispatch(RatingOfUserSuccess(data?.data));
     } catch (error) {
       dispatch(RatingOfUserFail(error));

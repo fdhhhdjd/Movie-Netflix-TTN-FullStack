@@ -94,7 +94,7 @@ const Header = () => {
                   }
                 )
                 .then((res) => {
-                  console.log(res.data, "res");
+            
 
                   if (res.data.status === 400) {
                     return Swal.showValidationMessage(
@@ -130,7 +130,6 @@ const Header = () => {
               });
             }
 
-            console.log(result, "result");
           });
         } else {
           swal("Thank you for 😆'!");

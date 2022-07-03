@@ -47,7 +47,7 @@ const DirectorList = () => {
     };
   
     const { allDirectors } = useSelector((state) => state.admin);
-    console.log(allDirectors,'allDirectors ')
+
     const img =
       "https://png.pngtree.com/png-clipart/20190924/original/pngtree-businessman-user-avatar-free-vector-png-image_4827807.jpg";
     const columns = [
@@ -70,7 +70,7 @@ const DirectorList = () => {
         headerName: "Date Create",
         width: 160,
         renderCell: (params) => {
-          console.log(params);
+   
           return (
             <div className="userListUser">
               {moment(`${params.row.createdAt}`).format("Do MMM YYYY")}
@@ -83,7 +83,7 @@ const DirectorList = () => {
         headerName: "Date UpdateAt",
         width: 170,
         renderCell: (params) => {
-          console.log(params);
+     
           return (
             <div className="userListUser">
               {moment(`${params.row.updatedAt}`).format("Do MMM YYYY")}

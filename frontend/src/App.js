@@ -30,7 +30,8 @@ import {
   Users,
   Watch,
   PaymentTransfers,
-  FavouriteAdmin
+  FavouriteAdmin,
+  CommentAdmin
 } from "./imports/index";
 import {
   Admin,
@@ -190,6 +191,9 @@ function App() {
           {/* Favourite */}
           <Route element={<PrivateAdmin />}>
             <Route path="/favouriteadmin" element={<FavouriteAdmin />} />
+          </Route>
+          <Route element={<PrivateAdmin />}>
+            <Route path="/commentadmin" element={<CommentAdmin />} />
           </Route>
           {/* Shared */}
           <Route path="*" element={<NotFound />} />

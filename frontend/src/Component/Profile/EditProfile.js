@@ -25,7 +25,6 @@ const EditProfile = () => {
   const [callback, setCallback] = state.callback;
   const { loading, handleUpload, handleDestroy, images, setImages } =
   useDesUpImage(refreshTokens);
-  console.log(state.callback);
   useEffect(() => {
     if (profile) {
       setUser({ ...profile });

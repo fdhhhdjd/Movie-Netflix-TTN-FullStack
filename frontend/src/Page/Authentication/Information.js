@@ -21,7 +21,6 @@ const Information = () => {
   const { newPassword, refreshTokens, profile } = useSelector(
     (state) => state.auth
   );
-  console.log(refreshTokens,'refreshTokens')
   const { password, confirmPassword } = state;
   const handleChangeInput = (e) => {
     const { name, value } = e.target;

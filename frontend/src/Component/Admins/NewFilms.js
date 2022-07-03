@@ -134,7 +134,6 @@ const NewFilms = () => {
       toast.error(error.response.data.msg);
     }
   };
-  console.log(images, "image phim12312321");
   //upload iamge title films
   const handleUploadImageTitleFilm = async (e) => {
     e.preventDefault();
@@ -218,7 +217,6 @@ const NewFilms = () => {
           icon: "success",
         });
       } else {
-        console.log(films, "filmasdasdasdasdasadaasd");
         await axios.post(
           "/api/film/add",
           {

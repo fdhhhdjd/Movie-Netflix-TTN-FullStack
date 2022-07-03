@@ -15,7 +15,7 @@ const Film = () => {
     const state = useContext(GlobalStateAdmin);
     const [callback, setCallback] = state.callback;
     const [loading, setLoading] = useState(false);
-    console.log(film,'taiheofa')
+
 
     const handleDelete = async (id) => {
       try {

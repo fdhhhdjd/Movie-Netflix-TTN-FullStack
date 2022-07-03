@@ -16,7 +16,7 @@ const ManagerUsers = () => {
     const [callback, setCallback] = state.callback;
     const [loading, setLoading] = useState(false);
     const { allUsers } = useSelector((state) => state.admin);
-    console.log(allUsers,'allUsers ')
+
     const columns = [
         { field: "_id", headerName: "ID", width: 160 },
         {
@@ -118,7 +118,7 @@ const ManagerUsers = () => {
           headerName: "Date UpdateAt",
           width: 170,
           renderCell: (params) => {
-            console.log(params);
+ 
             return (
               <div className="userListUser">
                 {moment(`${params.row.updatedAt}`).format("Do MMM YYYY")}
