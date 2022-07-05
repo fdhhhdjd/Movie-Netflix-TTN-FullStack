@@ -8,6 +8,8 @@ const initialState = {
   rating: [],
   favourite: [],
   findFilm: [],
+  allComments:[],
+  CommentsOfFilm:[],
 };
 const AdminFilmReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -42,6 +44,16 @@ const AdminFilmReducer = (state = initialState, action) => {
         loading: true,
       };
     case types.FIND_FILM_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.GET_ALL_COMMENT_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.COMMENT_OF_FILM_START:
       return {
         ...state,
         loading: true,
@@ -82,6 +94,18 @@ const AdminFilmReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         findFilm: action.payload,
+      };
+    case types.GET_ALL_COMMENT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        allComments: action.payload,
+      };
+    case types.COMMENT_OF_FILM_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        CommentsOfFilm: action.payload,
       };
 
     case types.GET_ALL_CATEGORY_FAIL:
@@ -126,6 +150,18 @@ const AdminFilmReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
+    case types.GET_ALL_COMMENT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case types.COMMENT_OF_FILM_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
 
     case types.CLEAR_ERRORS_SUCCESS:
       return {
@@ -136,6 +172,7 @@ const AdminFilmReducer = (state = initialState, action) => {
         favourite: [],
         categories: [],
         verifiedPassword: [],
+        CommentsOffilm:[],
       };
     case types.CLEAR_ERRORS_DETAIL_SUCCESS:
       return {

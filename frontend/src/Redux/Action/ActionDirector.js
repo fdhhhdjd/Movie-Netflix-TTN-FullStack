@@ -40,7 +40,6 @@ export const getDetailInfomationDirectorStart = () => ({
   }
 
   export const getDetailInfomationDirectorInitiate = (id, refreshTokens) => {
-    console.log("ttdirector",id,refreshTokens)
     return async function (dispatch) {
       try {
         dispatch(getDetailInfomationDirectorStart());
@@ -48,7 +47,6 @@ export const getDetailInfomationDirectorStart = () => ({
         const { data } = await axios.get(`/api/director/${id}`, {
           headers: { Authorization: refreshTokens },
         });
-        console.log("datadirector",data?.data)
         dispatch(getDetailInfomationDirectorSuccess(data?.data));
       } catch (error) {
         dispatch(getDetailInfomationDirectorFail(error));

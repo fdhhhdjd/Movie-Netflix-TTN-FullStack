@@ -32,7 +32,7 @@ const ChangePasswordAdmins = () => {
 
     dispatch(ChangeAdminsInitiate(token.accessToken, { ...state }));
   };
-  console.log(changePassword,'taiheo')
+
   useEffect(() => {
     if (changePassword.status === 200) {
       swal(`${changePassword.msg} 🤨`, {

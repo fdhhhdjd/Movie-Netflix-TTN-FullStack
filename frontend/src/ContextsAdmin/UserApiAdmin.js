@@ -10,7 +10,6 @@ import swal from "sweetalert";
 const UserApiAdmin = (tokens) => {
   const [call, setCall] = useState(false);
   const dispatch = useDispatch();
-  console.log(tokens);
   useEffect(() => {
     if (tokens && tokens.length > 0) {
       dispatch(ProfileAdminInitiate(tokens));

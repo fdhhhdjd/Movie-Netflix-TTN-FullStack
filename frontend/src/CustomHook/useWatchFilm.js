@@ -9,7 +9,6 @@ const useWatchFilm = () => {
   //   const state = useContext(GlobalState);
   //   const [dataRandom] = state.dataRandom;
   //   console.log(dataRandom?.seriesFilm[0]?.url_video);
-  console.log(findFilm, "film watch");
 
   return (
     <>

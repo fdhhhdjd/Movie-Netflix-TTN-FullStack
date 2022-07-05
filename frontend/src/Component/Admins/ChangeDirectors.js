@@ -20,7 +20,7 @@ const ChangeDirectors = () => {
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState(initialState);
     const { allDirectors, token } = useSelector((state) => state.admin);
-    console.log(allDirectors,'allDirectors');
+    
     const [callback, setCallback] = state.callback;
     const navigate = useNavigate();
     const { tokens } = useParams();
@@ -32,7 +32,7 @@ const ChangeDirectors = () => {
       if (tokens) {
         setOnEdit(true);
         allDirectors.forEach((product) => {
-        console.log(product,'tientai')
+
           if (product._id == tokens) {
             setUser(product);
             if (product.url === "") {
@@ -83,7 +83,7 @@ const ChangeDirectors = () => {
         toast.error(error.response.data.msg);
       }
     };
-    console.log(images, "images");
+
     const handleSubmit = async (e) => {
       e.preventDefault();
       if (!images)

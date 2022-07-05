@@ -9,7 +9,6 @@ const LoadingToRedirectsAdmins = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { profile } = useSelector((state) => ({ ...state.Admin }));
-  console.log(profile,'áđâsđá')
   useEffect(() => {
     const interval = setInterval(() => {
       setCount((currentCount) => --currentCount);

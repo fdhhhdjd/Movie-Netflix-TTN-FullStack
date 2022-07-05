@@ -169,6 +169,14 @@ export const ADD_RATING_FAIL = "ADD_RATING_FAIL";
 export const GET_FAV_START = "GET_FAV_START";
 export const GET_FAV_SUCCESS = "GET_FAV_SUCCESS";
 export const GET_FAV_FAIL = "GET_FAV_FAIL";
+//* Get all comments film
+export const GET_ALL_COMMENT_START = "GET_ALL_COMMENT_START";
+export const GET_ALL_COMMENT_SUCCESS = "GET_ALL_COMMENT_SUCCESS";
+export const GET_ALL_COMMENT_FAIL = "GET_ALL_COMMENT_FAIL";
+//* Get all comments film
+export const COMMENT_OF_FILM_START = "COMMENT_OF_FILM_START";
+export const COMMENT_OF_FILM_SUCCESS = "COMMENT_OF_FILM_SUCCESS";
+export const COMMENT_OF_FILM_FAIL = "COMMENT_OF_FILM_FAIL";
 
 //* Toggle or remove fav
 export const TOGGLE_FAV_START = "TOGGLE_FAV_START";

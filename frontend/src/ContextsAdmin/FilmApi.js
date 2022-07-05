@@ -7,18 +7,20 @@ import {
   GetAllFilmInitiate,
   GetAllRateInitiate,
   GetAllFavouriteInitiate,
+  GetAllCommentInitiate,
 } from "../Redux/Action/ActionFilmAdmin";
 const FilmApi = (tokens, callback) => {
   const [call, setCall] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     if (tokens) {
-      console.log(tokens, "tokens");
       dispatch(GetAllCategoryInitiate(tokens));
       dispatch(GetAllSeriesFilmInitiate(tokens));
       dispatch(GetAllFilmInitiate(tokens));
       dispatch(GetAllRateInitiate(tokens));
       dispatch(GetAllFavouriteInitiate(tokens));
+      dispatch(GetAllCommentInitiate(tokens));
+
     }
   }, [tokens, callback]);
   return {

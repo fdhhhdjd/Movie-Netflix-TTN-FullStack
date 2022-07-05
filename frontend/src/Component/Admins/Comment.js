@@ -17,7 +17,7 @@ const Comment = ({ filmId }) => {
 
   const handleSubmit = () => {
     if (input.trim() === "") {
-      console.log("chuoi rong khong truyen");
+
     } else {
       dispatch(addCommentInitiate(filmId, refreshTokens, input));
       commentRef.current.value = "";

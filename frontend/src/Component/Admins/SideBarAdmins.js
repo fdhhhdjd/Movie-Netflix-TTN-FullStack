@@ -36,7 +36,11 @@ const SideBarAdmins = () => {
         setActiveTab("Favourite");
       } else if (location.pathname === "/category") {
         setActiveTab("Category");
-      } else if (location.pathname === "/accountAdmin") {
+
+      } else if (location.pathname === "/commentadmin") {
+        setActiveTab("Comment");
+      }  
+      else if (location.pathname === "/accountAdmin") {
         setActiveTab("AccountAdmin");
       } else if (location.pathname === "/payment") {
         setActiveTab("Payment");
@@ -140,6 +144,17 @@ const SideBarAdmins = () => {
                 >
                   <i className="fa-solid fa-film sidebarIcon"></i>
                   Films
+                </li>
+              </Link>
+              <Link to="/commentadmin" className="link">
+                <li
+                  className={` sidebarListItem  ${
+                    activeTab === "Comment" ? "active" : ""
+                  }`}
+                  onClick={() => setActiveTab("Films")}
+                >
+                  <i className="fa-solid fa-film sidebarIcon"></i>
+                  Comment
                 </li>
               </Link>
             </ul>

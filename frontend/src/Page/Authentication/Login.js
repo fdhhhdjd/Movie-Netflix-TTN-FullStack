@@ -45,7 +45,6 @@ const Login = () => {
   const [rememberer, setRememberMe] = state.remember;
   const [token, setToken] = useState("");
   const { auth, loading, refreshTokens } = useSelector((state) => state.auth);
-  console.log(refreshTokens, "token");
   const navigate = useNavigate();
   const location = useLocation();
   const Auth = auth;

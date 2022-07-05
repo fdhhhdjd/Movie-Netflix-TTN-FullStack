@@ -50,11 +50,9 @@ const NewUsers = () => {
       } else {
         setOnEdit(false);
         setUser(initialState);
-        console.log(initialState,'int')
         setImages(false);
       }
     }, [tokens, allUsers]);
-    console.log(allUsers,'allUsers')
     const handleUpload = async (e) => {
       e.preventDefault();
       try {
@@ -83,7 +81,6 @@ const NewUsers = () => {
             Authorization: ` ${token.accessToken}`,
           },
         });
-        console.log(res,'res')
   
         setLoading(false);
         setImages(res.data);
@@ -91,7 +88,6 @@ const NewUsers = () => {
         toast.error(error.response.data.msg);
       }
     };
-    console.log(images, "images");
     const handleSubmit = async (e) => {
       e.preventDefault();
       if (!images)
@@ -140,7 +136,6 @@ const NewUsers = () => {
     const styleUpload = {
       display: images ? "block" : "none",
     };
-    console.log(user,'phone_numer')
   return (
     <>
       <GlobalStyleAmin />

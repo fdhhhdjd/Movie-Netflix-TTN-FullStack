@@ -35,9 +35,7 @@ const Modal = ({ setIsOpenModal, handleHideResult,UserHaveRating }) => {
        if(FavOfFilm)
        setFavBTn(!favBtn)
       },[FavOfFilm])
-      console.log("FavOfFilm", FavOfFilm);
-      console.log("favBtn", favBtn);
-      console.log("favFilm", favFilm);
+
       const RateOfFilm = UserHaveRating?.find(
      (pro) => pro.film._id === findFilm[0]?._id
      );

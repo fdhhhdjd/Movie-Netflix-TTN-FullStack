@@ -48,6 +48,28 @@ export const GetAllRateFail = (error) => ({
   type: types.GET_ALL_RATE_FAIL,
   payload: error,
 });
+export const GetAllCommentStart = () => ({
+  type: types.GET_ALL_COMMENT_START,
+});
+export const GetAllCommentSuccess = (token) => ({
+  type: types.GET_ALL_COMMENT_SUCCESS,
+  payload: token,
+});
+export const GetAllCommentFail = (error) => ({
+  type: types.GET_ALL_COMMENT_FAIL,
+  payload: error,
+});
+export const CommentOfFilmStart = () => ({
+  type: types.COMMENT_OF_FILM_START,
+});
+export const CommentOfFilmSuccess = (token) => ({
+  type: types.COMMENT_OF_FILM_SUCCESS,
+  payload: token,
+});
+export const CommentOfFilmFail = (error) => ({
+  type: types.COMMENT_OF_FILM_FAIL,
+  payload: error,
+});
 export const GetAllFavouriteStart = () => ({
   type: types.GET_ALL_FAVOURITE_START,
 });
@@ -152,6 +174,35 @@ export const GetAllRateInitiate = (token) => {
       dispatch(GetAllRateSuccess(data.data));
     } catch (error) {
       dispatch(GetAllRateFail(error));
+    }
+  };
+};
+export const GetAllCommentInitiate = (token) => {
+  return async function (dispatch) {
+    try {
+      dispatch(GetAllCommentStart());
+
+      const { data } = await axios.get(`/api/comment/all`, {
+        headers: { Authorization: token },
+      });
+      dispatch(GetAllCommentSuccess(data.data));
+    } catch (error) {
+      dispatch(GetAllCommentFail(error));
+    }
+  };
+};
+export const CommentOfFilmInitiate = (token,id) => {
+  return async function (dispatch) {
+    try {
+      dispatch(CommentOfFilmStart());
+
+      const { data } = await axios.get(`/api/comment/get/${id}`, {
+        headers: { Authorization: token },
+      });
+
+      dispatch(CommentOfFilmSuccess(data.data));
+    } catch (error) {
+      dispatch(CommentOfFilmFail(error));
     }
   };
 };

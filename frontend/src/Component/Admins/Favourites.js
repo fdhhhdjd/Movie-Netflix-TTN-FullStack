@@ -16,7 +16,7 @@ const Favourites = () => {
   const [callback, setCallback] = state.callback;
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  console.log(favourite,'favourite')
+
   const img =
     "https://png.pngtree.com/png-clipart/20190924/original/pngtree-businessman-user-avatar-free-vector-png-image_4827807.jpg";
 

@@ -15,7 +15,6 @@ const Categorys = () => {
   const [onEdit, setOnEdit] = useState(false);
   const [id, setID] = useState("");
   const navigate = useNavigate();
-  console.log(categories,'category')
   const createCategory = async (e) => {
     e.preventDefault();
     try {

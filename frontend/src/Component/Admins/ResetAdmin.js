@@ -17,7 +17,6 @@ const initialState = {
 const ResetAdmin = () => {
   const [state, setState] = useState(initialState);
   const { resetPassword } = useSelector((state) => state.admin);
-  console.log(resetPassword, "reset password");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { token } = useParams();

@@ -110,7 +110,6 @@ const NewDirectors = () => {
     const styleUpload = {
       display: images ? "block" : "none",
     };
-  console.log(images,"aki")
     return (
       <>
         <NewDirectorStyle />
