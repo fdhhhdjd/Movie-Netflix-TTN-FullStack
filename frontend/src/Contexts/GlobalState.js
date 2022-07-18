@@ -14,7 +14,7 @@ export const DataProvider = ({ children }) => {
   const { updateAdult, allFilmAdult } = useSelector((state) => state.adult);
   const [allCategory,setAllCategory]=useState([]);
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     const firstLogin = localStorage.getItem("firstLogin");
     if (firstLogin) {
@@ -41,5 +41,6 @@ export const DataProvider = ({ children }) => {
     AdultApi: AdultApi(refreshTokens, profile,allFilmAdult ),
     modal: [isOpenModal, setIsOpenModal],
   };
+  
   return <GlobalState.Provider value={data}>{children}</GlobalState.Provider>;
 };

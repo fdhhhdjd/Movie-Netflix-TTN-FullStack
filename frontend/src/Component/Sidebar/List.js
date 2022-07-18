@@ -54,6 +54,7 @@ const List = ({ setIsOpenModal, category, dataFilmCategory }) => {
   //   fetchData();
   // }, [category]);
   // console.log(filmByCategory,'film')
+    
   return (
     <>
       <ListStyle />

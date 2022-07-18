@@ -2,56 +2,57 @@ import {
   Close,
   FavoriteBorder,
   FavoriteOutlined,
-  PlayArrowRounded,
+  PlayArrowRounded
 } from "@material-ui/icons";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import ReactStars from "react-rating-stars-component";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { mainMovie, recMovies } from "../../imports/import";
 import { Comment, Recommend } from "../../imports/index";
-import ReactStars from "react-rating-stars-component";
 import {
   getFavInitial,
   resetCommentState,
-  toggleFavInitial,
-  ToggleFavInitiate,
+  toggleFavInitial
 } from "../../Redux/Action/ActionComment";
 import { getDetailInfomationDirectorInitiate } from "../../Redux/Action/ActionDirector";
+import {
+  RatingFilmInitiate,
+  RatingOfUserInitiate
+} from "../../Redux/Action/ActionFilmadult";
 import { CheckPaymentInitiate } from "../../Redux/Action/ActionPayment";
 import { ModalStyle } from "../../Style/StyleHome/ModalStyle";
-import { RatingFilmInitiate, RatingOfUserInitiate } from "../../Redux/Action/ActionFilmadult";
-const Modal = ({ setIsOpenModal, handleHideResult,UserHaveRating }) => {
+const Modal = ({ setIsOpenModal, handleHideResult, UserHaveRating }) => {
   const { findFilm } = useSelector((state) => state.film);
-  const { refreshTokens,profile } = useSelector((state) => state.auth);
+  const { refreshTokens, profile } = useSelector((state) => state.auth);
   const { favFilm, allfavFilm } = useSelector((state) => state.comment);
   const { checkPayment } = useSelector((state) => state.payment);
   const { ratingOfUser, ratingFilm } = useSelector((state) => state.adult);
-   const FavOfFilm = allfavFilm?.find(
-     (pro) => pro.film._id === findFilm[0]?._id
-     );
-     const [favBtn, setFavBTn] = useState(false);
-     useEffect(()=>{
-       if(FavOfFilm)
-       setFavBTn(!favBtn)
-      },[FavOfFilm])
+ 
+  const [favBtn, setFavBTn] = useState(false);
+  useEffect(() => {
+    const FavOfFilm = allfavFilm?.find(
+      (pro) => pro.film._id === findFilm[0]?._id
+    );
+    if (FavOfFilm){
+      setFavBTn(true)
+    }
+  }, [allfavFilm]);
+  useEffect(()=>{
+    
+    dispatch(getFavInitial(refreshTokens))
+  },[favFilm])
 
-      const RateOfFilm = UserHaveRating?.find(
-     (pro) => pro.film._id === findFilm[0]?._id
-     );
-     useEffect(() => {
-       if (RateOfFilm?.score) {
-         setScoreRating(RateOfFilm?.score);
-        }
-      }, [RateOfFilm?.score]); 
-      useEffect(()=>{
-        if(RateOfFilm === undefined) {
-          dispatch(RatingOfUserInitiate(refreshTokens))
-          }
+  const RateOfFilm = UserHaveRating?.find(
+    (pro) => pro.film._id === findFilm[0]?._id
+  );
+  useEffect(() => {
+    if (RateOfFilm === undefined) {
+      dispatch(RatingOfUserInitiate(refreshTokens));
+    }
+  }, [RateOfFilm]);
 
-      },[RateOfFilm])
-      const [scoreRating, setScoreRating] = useState(RateOfFilm?.score);
-      
   const Navigate = useNavigate();
   const dispatch = useDispatch();
   const countSeason = (n) => {
@@ -95,11 +96,10 @@ const Modal = ({ setIsOpenModal, handleHideResult,UserHaveRating }) => {
       });
     }
   }, []);
- 
+
   return (
     <>
       <ModalStyle />
-    
 
       <div className="modal-fade"></div>
       <motion.div
@@ -147,13 +147,14 @@ const Modal = ({ setIsOpenModal, handleHideResult,UserHaveRating }) => {
                 </button>
               )}
 
-              {favBtn ? (
+              {favBtn && (
                 <FavoriteOutlined
                   sx={{ fontSize: "2.5vw" }}
                   className="modal-icon"
                   onClick={handleToggleFav}
                 />
-              ) : (
+              )} 
+              {!favBtn &&  (
                 <FavoriteBorder
                   onClick={handleToggleFav}
                   sx={{ fontSize: "2.5vw" }}
@@ -169,17 +170,31 @@ const Modal = ({ setIsOpenModal, handleHideResult,UserHaveRating }) => {
           <div className="modal-info-fst">
             <div className="info-left">
               {/* release year, description,... */}
-              <ReactStars
-                count={5}
-                onChange={ratingChanged}
-                size={24}
-                value={scoreRating}
-                emptyIcon={<i className="far fa-star"></i>}
-                fullIcon={<i className="fa fa-star"></i>}
-                activeColor="#ffd700"
-              />
+              {RateOfFilm?.score && (
+                <ReactStars
+                  count={5}
+                  size={24}
+                  value={RateOfFilm?.score}
+                  emptyIcon={<i className="far fa-star"></i>}
+                  fullIcon={<i className="fa fa-star"></i>}
+                  activeColor="#ffd700"
+                />
+              )}
+              {!RateOfFilm?.score && (
+                <ReactStars
+                  count={5}
+                  size={24}
+                  value={0}
+                  onChange={ratingChanged}
+                  emptyIcon={<i className="far fa-star"></i>}
+                  fullIcon={<i className="fa fa-star"></i>}
+                  activeColor="#ffd700"
+                />
+              )}
+          
               <div className="wrapper">
                 {/* {[...Array(5).keys()].reverse().map((item) => {
+                  console.log('item',item)
                   return (
                     <>
             
@@ -189,9 +204,9 @@ const Modal = ({ setIsOpenModal, handleHideResult,UserHaveRating }) => {
                         name="rate"
                         value={RateOfFilm?.score}
                         id={item}
-                        onClick={() => handleRate(item + 1)}
+                        onClick={() => ratingChanged(item + 1)}
                       />
-                      <label  onClick={() => handleRate(item + 1)} for=''><i className="fa-solid fa-star"></i></label> 
+                      <label  onClick={() => ratingChanged(item + 1)} for=''><i className="fa-solid fa-star"></i></label> 
                     </>
                   );
                 })} */}
@@ -302,7 +317,6 @@ const Modal = ({ setIsOpenModal, handleHideResult,UserHaveRating }) => {
 
         <div className="modal-bot-cover"></div>
       </motion.div>
-    
     </>
   );
 };

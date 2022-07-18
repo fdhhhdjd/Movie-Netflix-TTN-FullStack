@@ -28,7 +28,7 @@ export default function ListItem({
   const handleModal = (id) => {
     dispatch(FindFilmInitiate(id, refreshTokens));
     dispatch(getCommentInitiate(id, refreshTokens));
-    // dispatch(RatingOfUserInitiate(refreshTokens))
+    dispatch(RatingOfUserInitiate(refreshTokens))
     setIsOpenModal(true);
   };
 
