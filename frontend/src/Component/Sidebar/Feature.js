@@ -35,7 +35,7 @@ const Feature = ({ type, setIsOpenModal }) => {
     <>
       <FeatureStyle />
       <div className="featured">
-        {type && (
+        {type && dataRandom && (
           <div className="category">
             <span>{type === "movie" ? "Movies" : "Series"}</span>
             <select name="genre" id="genre">
