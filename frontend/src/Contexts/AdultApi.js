@@ -18,7 +18,7 @@ const AdultApi = (refreshTokens, profile,allFilmAdult ) => {
     } else if (updateAdult?.msg == "" || profile.adult == "adult") {
       dispatch(GetAllAdultInitiate(refreshTokens));
     }
-  }, [updateAdult]);
+  }, [updateAdult,refreshTokens, profile]);
   useEffect(()=>{
     var catall=[];
     allFilmAdult.forEach(element => {
