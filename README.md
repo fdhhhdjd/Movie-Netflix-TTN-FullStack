@@ -7,10 +7,6 @@
 <a href = "mailto:nguyentientai10@gmail.com"><img src="https://img.icons8.com/fluency/48/000000/send-mass-email.png" alt="License"></a>
 </p>
 
-## Tiến độ công việc Team:
-
-https://docs.google.com/spreadsheets/d/1BBv4CXNniNjqdIE7tjrG9UM4nprd3NSVy2FX9oaWq0Q/edit#gid=0
-
 ## Web Online: https://movienetflixttn.herokuapp.com/
 
 ## Tài Khoản Donate li Cf để có động lực code cho anh em tham khảo 😄😄
